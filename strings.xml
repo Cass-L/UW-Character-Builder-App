@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Unofficial UW Character Builder</string>
+    <string name="title_activity_popup_window">PopupWindow</string>
+    <string name="title_activity_profiles_popup">ProfilesPopup</string>
+    <string name="title_activity_general_skills_info">GeneralSkillsInfo</string>
+    <string name="title_activity_general_frag_skills_info">GeneralFragSkillsInfo</string>
+    <string name="title_activity_warrior_skills_info">WarriorSkillsInfo</string>
+    <string name="title_activity_warrior_frag_skills_info">WarriorFragSkillsInfo</string>
+    <string name="title_activity_rogue_skills_info">RogueSkillsInfo</string>
+    <string name="title_activity_rogue_frag_skills_info">RogueFragSkillsInfo</string>
+    <string name="title_activity_scholar_skills_info">ScholarSkillsInfo</string>
+    <string name="title_activity_scholar_frag_skills_info">ScholarFragSkillsInfo</string>
+    <string name="title_activity_magic_info">MagicInfo</string>
+
+    <string name="title_activity_elemental_info">ElementalInfo</string>
+    <string name="title_activity_healing_info">HealingInfo</string>
+    <string name="title_activity_nature_info">NatureInfo</string>
+    <string name="title_activity_protections_info">ProtectionsInfo</string>
+    <string name="title_activity_psionics_info">PsionicsInfo</string>
+    <string name="title_activity_necromancy_info">NecromancyInfo</string>
+    <string name="title_activity_sigil_info">SigilInfo</string>
+    <string name="title_activity_wytch_info">WytchInfo</string>
+    <string name="title_activity_light_info">LightInfo</string>
+    <string name="title_activity_dark_info">DarkInfo</string>
+    <string name="title_activity_draconic_info">DraconicInfo</string>
+
+    <string name="title_activity_elemental_rituals">ElementalRituals</string>
+    <string name="title_activity_healing_rituals">HealingRituals</string>
+    <string name="title_activity_nature_rituals">NatureRituals</string>
+    <string name="title_activity_protections_rituals">ProtectionsRituals</string>
+    <string name="title_activity_psionics_rituals">PsionicsRituals</string>
+    <string name="title_activity_necromancy_rituals">NecromancyRituals</string>
+    <string name="title_activity_sigil_rituals">SigilRituals</string>
+    <string name="title_activity_wytch_rituals">WytchRituals</string>
+    <string name="title_activity_light_rituals">LightRituals</string>
+    <string name="title_activity_dark_rituals">DarkRituals</string>
+    <string name="title_activity_draconic_rituals">DraconicRituals</string>
+
+    <string name="title_activity_more_trapsmith">MoreTrapsmith</string>
+    <string name="title_activity_more_alchemy">MoreAlchemy</string>
+    <string name="title_activity_more_chemistry">MoreChemistry</string>
+    <string name="title_activity_more_blacksmith">MoreBlacksmith</string>
+    <string name="title_activity_more_artifice">MoreArtifice</string>
+    <string name="title_activity_more_scrollcraft">MoreScrollcraft</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
