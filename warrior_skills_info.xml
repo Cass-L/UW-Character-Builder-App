@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".WarriorSkillsInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Warrior Skills"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".WarriorSkillsInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+                        <TextView
+                            android:id="@+id/autoRacialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Ambidexterity"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/autoRacialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows a character to wield two one-handed weapons in combat. The player may wield a Medium or
+Simple Weapon they have proficiency with in their main hand and a Simple Weapon in their off hand."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/racialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Florentine"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfo" />
+
+                        <TextView
+                            android:id="@+id/racialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill improves a character’s training in the art of two weapon fighting. The player may now wield any one-handed weapon they have proficiency with in their main and off hand."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView847" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThrough discipline and training, your character has learned the secret of tapping into raw emotion and harnessing  it into strength defying attacks. This skill will allow the player to swing for +5 additional damage of the  character’s normal swinging type for the next 3 swings, hit or miss. The Flurry will stay active for 1 minute. If all  3 swings are not used by the end of the minute, they are lost. To activate this skill, the player must call “Flurry of  Blows”. This skill does not stack with other skills, abilities or spells, or itself. This skill is usable once per day per  purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintStart_toStartOf="@+id/textView23"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Flurry of Blows"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfo" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill will allow the character to wear multiple layers of armour and increase their Armour Points far past the  normal maximum. With this skill, the player may stack two types of armour on one location and add their AP  values. A player is still limited to the AP that their out-of-game reps allow. Armour of the same type (eg: chain on  chain) will not stack."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView34"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Heavy Armor"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/level3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill represents the character’s ability to overcome the instinct of self-preservation. A character may not  willingly accept or cause themselves 1 Body or more worth of damage without this skill, and must actively fight  any attempt to harm them, even if it is in their best interest. Without Self Mutilate, you may still enter a fight even  without armour, but you must fight back and not simply allow yourself to be injured. You may not allow yourself  to be injured, even if it is for your own good. This skill must also be purchased for a character to actively kill  themselves or to consent to their own demise."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level3InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level3InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level3InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Self Mutilate"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView106"
+                            app:layout_constraintStart_toStartOf="@+id/textView106"
+                            app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+                        <TextView
+                            android:id="@+id/level6Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows a character to properly use a shield or buckler. A shield will stop strikes from weapons only.  Shields will also block Slays, using them up without harming the shield user, even if the shield is broken by the  Slay. A shield must be held by its handle in order to be used, unless it is a buckler. A buckler is a small shield  strapped to the wrist or forearm. A buckler acts like a normal shield, but can be used while holding something in  the same hand. A buckler cannot be larger than 15 inches in diameter. Shields will not stop packet delivered or  Spellstrike attacks. Without this skill, a player may use a shield if they hold it in both hands and do not use any  other skills or abilities. A character with this skill may wield two shields at the same time, but only if both are  held by their handles, rather than strapped to the arm like a buckler."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level6InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level6InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level6InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Shield"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3Info"
+                            app:layout_constraintStart_toStartOf="@+id/level3Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level3Info" />
+
+                        <TextView
+                            android:id="@+id/level9Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to revisit ye local training ground and upgrade their Weapon Specific Specialization  +1 or Critical +2 to a Group Specialization +1 or Critical +2. This skill may only be used as an upgrade, not to  downgrade a Group skill to a Weapon Specific skill."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level9InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level9InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level9InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Weapon Refocus"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6Info"
+                            app:layout_constraintStart_toStartOf="@+id/level6Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level6Info" />
+
+                        <TextView
+                            android:id="@+id/textView113"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to properly wield the following 1-Handed weapons:  Bow, Sword, Mace, Spears, Battle Axe, and any other non-Exotic weapon with a  base damage of 2. Bows do Body damage."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView114"
+                            app:layout_constraintStart_toStartOf="@+id/textView114"
+                            app:layout_constraintTop_toBottomOf="@+id/textView114" />
+
+                        <TextView
+                            android:id="@+id/textView114"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Medium Group Proficiency"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9Info"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/level9Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level12Info" />
+
+                        <TextView
+                            android:id="@+id/level12Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to properly wield the following weapons: Dagger, Staff,  Club, Thrown Weapon, Hand-to-Hand, and any other non-Exotic weapon with a  base damage of 1."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level12InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level12InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level12InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level12InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Simple Group Proficiency"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9Info"
+                            app:layout_constraintStart_toStartOf="@+id/level9Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level9Info" />
+
+                        <TextView
+                            android:id="@+id/textView117"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to properly wield the following 2-Handed weapons: Crossbow, Sword, Axe, Mace,  Pole Arm, and any other non-Exotic weapon with a base damage of 4. Bonus damage from Strength will be  applied to Large Weapon swings at a rate of +1 damage for every 1 point of Strength, rather than the standard +1  damage for every 2 points. Strength bonuses will not increase Crossbow damage. Crossbows do Body damage."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView118"
+                            app:layout_constraintStart_toStartOf="@+id/textView118"
+                            app:layout_constraintTop_toBottomOf="@+id/textView118" />
+
+                        <TextView
+                            android:id="@+id/textView118"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Large Group Proficiency"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView113"
+                            app:layout_constraintStart_toStartOf="@+id/textView113"
+                            app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+                        <TextView
+                            android:id="@+id/textView119"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to properly wield one of the following weapons: Stiletto (1 Body damage), 2-Handed  Maul (5 damage), Bastard Sword (2 damage if wielded in one hand or 4 damage if wielded in both hands), or any  other weapon that does Body damage or is summoned through magical means. This skill can be purchased  multiple times to allow a character to become proficient in multiple Exotic Weapons. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView120"
+                            app:layout_constraintStart_toStartOf="@+id/textView120"
+                            app:layout_constraintTop_toBottomOf="@+id/textView120" />
+
+                        <TextView
+                            android:id="@+id/textView120"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Exotic Proficiency"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView117"
+                            app:layout_constraintStart_toStartOf="@+id/textView117"
+                            app:layout_constraintTop_toBottomOf="@+id/textView117" />
+
+                        <TextView
+                            android:id="@+id/textView121"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill grants the player a +1 damage bonus with a single weapon that the character is proficient in, chosen at  purchase. If purchased for Summoned Weapons it will apply to all Summoned Weapons within an individual sphere."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView122"
+                            app:layout_constraintStart_toStartOf="@+id/textView122"
+                            app:layout_constraintTop_toBottomOf="@+id/textView122" />
+
+                        <TextView
+                            android:id="@+id/textView122"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Specific Specialization +1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView119"
+                            app:layout_constraintStart_toStartOf="@+id/textView119"
+                            app:layout_constraintTop_toBottomOf="@+id/textView119" />
+
+                        <TextView
+                            android:id="@+id/textView123"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill grants the player a +1 damage bonus with any weapon from a chosen Weapon Group that the character  is proficient in, selected at purchase. This skill cannot be purchased for the Exotic weapon group."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView124"
+                            app:layout_constraintStart_toStartOf="@+id/textView124"
+                            app:layout_constraintTop_toBottomOf="@+id/textView124" />
+
+                        <TextView
+                            android:id="@+id/textView124"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Group Specialization +1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView121"
+                            app:layout_constraintStart_toStartOf="@+id/textView121"
+                            app:layout_constraintTop_toBottomOf="@+id/textView121" />
+
+                        <TextView
+                            android:id="@+id/textView125"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows a character to use one Slay or Parry, per day, with a single weapon that the character is proficient  in, chosen at purchase. Each additional purchase of Slay/Parry requires an additional purchase of the weapon  specialisation. The player chooses whether they want to use this skill as a Slay or as a Parry each time they use it.\n\n\t\tA Slay is a powerful attack which does 50 points of damage. Nothing besides Slay stacking, described below,  may change this number. Slay cannot be combined with other skills or abilities. To use a Slay, the attacker must  declare “You are not prepared!” and strike their opponent. Upon a successful hit, call “50 Slay!” A Slay is not  used up if it does not strike the target, so the defending player must declare “Slay Hit” if the strike hit  successfully. The attacker must call “Active Slay” for every subsequent swing. The Slay remains active for a  maximum of 1 minute, or until used. This skill is considered used if it hits a shield being wielded or if the target  uses a defense to stop it after being hit, but the target will take no damage. If a player has purchased multiple  Slays specific to the chosen weapon being used or Master Slays for that weapon’s Weapon Group, they may be  combined. Each additional Slay will add 50 more points of damage. The attacker must include the number of  Slays being used after the “You are not prepared!” call. Example: If the player used 3 Slays in a single swing,  they would call out “You are not prepared 3!” and, upon a successful hit, “150 Slay”. For all intents and purposes,  this combined Slay is considered a normal Slay except for the increased damage.\n\n\t\tA Parry enables the player to parry any weapon blow, as well as touch cast spells. To Parry an attack, call  “Parry”, which negates the last hit taken. Parry cannot be used in conjunction with any other skill, ability, or  magically summoned weapon. Parry cannot block Massive damage, Spellstrikes, or Surprise Attacks."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView126"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView126"
+                            app:layout_constraintTop_toBottomOf="@+id/textView850" />
+
+                        <TextView
+                            android:id="@+id/textView126"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Slay / Parry"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView123"
+                            app:layout_constraintStart_toStartOf="@+id/textView123"
+                            app:layout_constraintTop_toBottomOf="@+id/textView123" />
+
+                        <TextView
+                            android:id="@+id/textView127"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill is the same as Slay/Parry, except that it is purchased for an entire Weapon Group rather than a specific  weapon. The Slay or Parry may be used with any of the weapons within that Weapon Group."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView128"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView128"
+                            app:layout_constraintTop_toBottomOf="@+id/textView851" />
+
+                        <TextView
+                            android:id="@+id/textView128"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Slay / Parry Master"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView125"
+                            app:layout_constraintStart_toStartOf="@+id/textView125"
+                            app:layout_constraintTop_toBottomOf="@+id/textView125" />
+
+                        <TextView
+                            android:id="@+id/textView847"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Ambidexterity"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView850"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Specialization +1 (Specific or Group)"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView126" />
+
+                        <TextView
+                            android:id="@+id/textView851"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Specialization +1 Group"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView128" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

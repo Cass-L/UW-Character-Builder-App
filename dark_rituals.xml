@@ -1,0 +1,2317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".DarkRituals">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Dark Rituals"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".DarkRituals"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/centerGuideline2"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintGuide_begin="240dp"
+                            app:layout_constraintGuide_percent="0.35"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView665"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tNote: These are short descriptions of rituals commonly known in-game. Additional rituals exist but you must discover them in game. Many rituals have additional powers beyond those listed in summary! "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView671"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Creates a Dark ritual circle, identifies Dark magic, and serves as  resurrection circle for followers of that Deity."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view114" />
+
+                        <TextView
+                            android:id="@+id/textView674"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Removes one invested caster."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view115" />
+
+                        <TextView
+                            android:id="@+id/textView676"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="1/ever Spellstrike a significant amount of Dark damage."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view116" />
+
+                        <TextView
+                            android:id="@+id/textView678"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dedicates a creature to the caster's deity and gives them a  1/day &quot;Magic Bless&quot;."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view117" />
+
+                        <TextView
+                            android:id="@+id/textView680"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Send a short message to your god, they might listen if they like you."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view118" />
+
+                        <TextView
+                            android:id="@+id/textView683"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augments Bless spells to grant an increased level of protection  and more notice from your deity."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view120" />
+
+                        <TextView
+                            android:id="@+id/textView685"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augments your Church with 4 additional abilities/effects,  including but not limited to making your Altar immovable to most."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view121" />
+
+                        <TextView
+                            android:id="@+id/textView687"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Can be used to dispel blessing upon the land, protect your flock  against possession, or to create a satchel of ashes that Blinds."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view122" />
+
+                        <TextView
+                            android:id="@+id/textView689"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Replaces one arm with a shadow limb that can drain life from  targets and cannot be bound, lasts for 1 hour or until healed."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view123" />
+
+                        <TextView
+                            android:id="@+id/textView673"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Summon a Celestial being to do a task of 10 words or less."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view124" />
+
+                        <TextView
+                            android:id="@+id/textView692"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Creates a powerful weapon meant to slay a specific enemy of your Church."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view125" />
+
+                        <TextView
+                            android:id="@+id/textView694"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Extends the duration of Dark rituals by 3 months per stack, max 12 months."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view126" />
+
+                        <TextView
+                            android:id="@+id/textView696"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Investees can drain the life from a target 1/day."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView695"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toTopOf="@+id/textView695" />
+
+                        <TextView
+                            android:id="@+id/textView698"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Sacrifices a sentient being, blessed and willing sentient, or a  favored sentient for increasingly strong buffs for your flock."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view128" />
+
+                        <TextView
+                            android:id="@+id/textView703"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Silences and suffocates your target, eventually killing them.  Stays on your spirit for 10 minutes or until successfully used on a target."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view131" />
+
+                        <TextView
+                            android:id="@+id/textView705"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Suffuses an area with unholy Dark magic, causing Dark Spirits  from a Divine realm to attack and torment those nearby for 1 hour."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view132" />
+
+                        <TextView
+                            android:id="@+id/textView707"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="If you hear this and don't have a Blessing of the caster's God,  you're blinded for a short time."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view133" />
+
+                        <TextView
+                            android:id="@+id/textView709"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augments your Church with 4 additional abilities/effects,  including but not limited to granting 15 Mending if you rest for 3 hours within."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view134" />
+
+                        <TextView
+                            android:id="@+id/textView714"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="A Ritual Dark Bolt that keeping doing half of its damage 1/10  minutes for an hour, and makes the target vulnerable to possession."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view137" />
+
+                        <TextView
+                            android:id="@+id/textView716"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Allows the caster to add the Ritual prefix to a single Dark battle magic spell 1/day."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view138" />
+
+                        <TextView
+                            android:id="@+id/textView718"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Ask your Deity 3 questions, or request a miracle."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view139" />
+
+                        <TextView
+                            android:id="@+id/textView720"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Investees can perform a 10 minute mass to grant up to five  followers a flag that grants a +0 Magic threshold for 10 minutes."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view140" />
+
+                        <TextView
+                            android:id="@+id/textView722"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Creates a 10ft zone of Darkness that's very hard to see/sense  into, silences those without the right blessing, and comes with tentacles."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view141" />
+
+                        <TextView
+                            android:id="@+id/textView773"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="The caster chooses an Acolyte, they can share in 1 self-cast battle magic  spell per day and gain 1 Dark battle magic spell per day, which the caster loses."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view142" />
+
+                        <TextView
+                            android:id="@+id/textView725"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Enchants a weapon to swing Magic for day, gain strength from  Killing Blows, and comes with a Spellstrike Dark Bolt."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view143" />
+
+                        <TextView
+                            android:id="@+id/textView727"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Aura that sits on your spirit, when activated you swing +1 Dark  for an hour."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view144" />
+
+                        <TextView
+                            android:id="@+id/textView729"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Corrupt a Light/Draconic magic item and turn it into something  more suitable for a Dark worshiper."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view145" />
+
+                        <TextView
+                            android:id="@+id/textView763"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Teleport form one large shadow to another large shadow that's within your line of sight."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view146" />
+
+                        <TextView
+                            android:id="@+id/textView765"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augments your Church with 4 additional abilities/effects,  including but not limited to 1/minute Alchemical Blindness packets."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view166" />
+
+                        <TextView
+                            android:id="@+id/textView732"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Adds 1 year to the duration of Dark rituals."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView731"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toTopOf="@+id/textView731" />
+
+                        <TextView
+                            android:id="@+id/textView734"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Plant your feet and throw 10 Dark until you move, get dropped, or are dispelled."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view148" />
+
+                        <TextView
+                            android:id="@+id/textView736"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="1/day Ritual Divine Ward on the circle, note this is 1 per circle, not 1 per investee."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view149" />
+
+                        <TextView
+                            android:id="@+id/textView769"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Teleport to the Divine Realm, then back to your Dark ritual circle."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view150" />
+
+                        <TextView
+                            android:id="@+id/textView741"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Summons an Angel. Weird right?"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view152" />
+
+                        <TextView
+                            android:id="@+id/textView743"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark-based armour that lasts for 1 hour and comes with a bunch  of abilities, such as a +0 Magic threshold."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view153" />
+
+                        <TextView
+                            android:id="@+id/textView745"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark-based armour that lasts for 1 hour and comes with a bunch  of abilities, such as effectively a Karmic Ricochet for Draconic/Light."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view154" />
+
+                        <TextView
+                            android:id="@+id/textView775"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark-based armour that lasts for 1 hour and comes with a bunch  of abilities, such as a Dodge that also lets you take 3 steps OOG."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view155" />
+
+                        <TextView
+                            android:id="@+id/textView777"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augments your Church with 5 additional abilities/effects,  including but not limited to allowing Dark favored to Reset instantly within."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view171" />
+
+                        <TextView
+                            android:id="@+id/textView779"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Turns 1/ever Dark ritual effects into 1/day effects."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view172" />
+
+                        <TextView
+                            android:id="@+id/textView748"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="The Target becomes immune to Life effects for the next hour, ouch!"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view156" />
+
+                        <TextView
+                            android:id="@+id/textView750"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Stops any single packet-delivered, boffer, or touch attack. You can only have one."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view157" />
+
+                        <TextView
+                            android:id="@+id/textView781"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Everyone who hears this call and doesn't have the right Bless takes a Magic Death."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view158" />
+
+                        <TextView
+                            android:id="@+id/textView783"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Keeps a powerful enchanted weapon that anyone can use  mounted in the circle, you can break the glass over it for an hour during emergencies."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view174" />
+
+                        <TextView
+                            android:id="@+id/textView753"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Begins the process of making an exceptionally powerful Relic  enchanted with Dark magic."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view159" />
+
+                        <TextView
+                            android:id="@+id/textView755"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="This Angel is bigger than the last one."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view160" />
+
+                        <TextView
+                            android:id="@+id/textView785"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Turns a Dark ritual circle into a hoop for easy transport."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view161" />
+
+                        <TextView
+                            android:id="@+id/textView787"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="A Power Word Directed Ritual Death that turns a finalled creature into a  temporary and vengeful Dark spirit that serves the caster's Deity."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view176" />
+
+                        <TextView
+                            android:id="@+id/textView789"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Creates a tunnel of Dark magic that phases out other barriers  both magical and physical, really hurts those without the right Bless."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintTop_toBottomOf="@+id/view177" />
+
+                        <TextView
+                            android:id="@+id/textView670"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Circle"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView671"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView671" />
+
+                        <TextView
+                            android:id="@+id/textView672"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Divest Divine"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView674"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView674" />
+
+                        <TextView
+                            android:id="@+id/textView675"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Divine Strike"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView676"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView676" />
+
+                        <TextView
+                            android:id="@+id/textView677"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Declaration of Faith"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView678"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView678" />
+
+                        <TextView
+                            android:id="@+id/textView679"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Prayer"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView680"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView680" />
+
+                        <TextView
+                            android:id="@+id/textView682"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Replacemement: Greater Bless"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView683"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView683" />
+
+                        <TextView
+                            android:id="@+id/textView684"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Church Augment: Dark Lectern"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView685"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView685" />
+
+                        <TextView
+                            android:id="@+id/textView686"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Hallowing"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView687"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView687" />
+
+                        <TextView
+                            android:id="@+id/textView688"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Phantom Arm"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView689"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView689" />
+
+                        <TextView
+                            android:id="@+id/textView758"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Celestial Servant"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView673"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView673" />
+
+                        <TextView
+                            android:id="@+id/textView691"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Oath Blade"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView692"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView692" />
+
+                        <TextView
+                            android:id="@+id/textView693"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Extend: Dark"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView694"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView694" />
+
+                        <TextView
+                            android:id="@+id/textView695"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augment: Soul Rend"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view127" />
+
+                        <TextView
+                            android:id="@+id/textView697"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Sacrifice"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView698"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView698" />
+
+                        <TextView
+                            android:id="@+id/textView702"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Drown in Darkness"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView703"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView703" />
+
+                        <TextView
+                            android:id="@+id/textView704"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Desecrate"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView705"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView705" />
+
+                        <TextView
+                            android:id="@+id/textView706"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Power Word Area: Blindness"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView707"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView707" />
+
+                        <TextView
+                            android:id="@+id/textView708"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Church Augment: Dark Idol"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView709"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView709" />
+
+                        <TextView
+                            android:id="@+id/textView713"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Fire"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView714"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView714" />
+
+                        <TextView
+                            android:id="@+id/textView715"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Enhanced Dark"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView716"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView716" />
+
+                        <TextView
+                            android:id="@+id/textView717"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Beseech"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView718"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView718" />
+
+                        <TextView
+                            android:id="@+id/textView719"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augment: Dark Pennant"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView720"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView720" />
+
+                        <TextView
+                            android:id="@+id/textView721"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Circle of Obscuration"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView722"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView722" />
+
+                        <TextView
+                            android:id="@+id/textView774"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Acolyte"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView773"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView773" />
+
+                        <TextView
+                            android:id="@+id/textView724"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Relic"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView725"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView725" />
+
+                        <TextView
+                            android:id="@+id/textView726"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Aura"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView727"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView727" />
+
+                        <TextView
+                            android:id="@+id/textView728"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Twist Artifact"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView729"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView729" />
+
+                        <TextView
+                            android:id="@+id/textView764"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Shadow Stride"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView763"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView763" />
+
+                        <TextView
+                            android:id="@+id/textView766"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Church Augment: Dark Fountain"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView765"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView765" />
+
+                        <TextView
+                            android:id="@+id/textView731"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Permanence: Dark"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view147" />
+
+                        <TextView
+                            android:id="@+id/textView733"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Rain of Agony"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView734"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView734" />
+
+                        <TextView
+                            android:id="@+id/textView735"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augment: Dark Sanctum"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView736"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView736" />
+
+                        <TextView
+                            android:id="@+id/textView770"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Celestial Walk"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView769"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView769" />
+
+                        <TextView
+                            android:id="@+id/textView740"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Summon Angel"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView741"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView741" />
+
+                        <TextView
+                            android:id="@+id/textView742"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Robes"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView743"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView743" />
+
+                        <TextView
+                            android:id="@+id/textView744"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Plate"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView745"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView745" />
+
+                        <TextView
+                            android:id="@+id/textView776"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Hide"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView775"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView775" />
+
+                        <TextView
+                            android:id="@+id/textView778"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Church Augment: Dark Throne"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView777"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView777" />
+
+                        <TextView
+                            android:id="@+id/textView780"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Magify: Dark"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView779"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView779" />
+
+                        <TextView
+                            android:id="@+id/textView747"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Life Guard"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView748"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView748" />
+
+                        <TextView
+                            android:id="@+id/textView749"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Divine Intervention"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView750"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView750" />
+
+                        <TextView
+                            android:id="@+id/textView782"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Power Word Area: Death"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView781"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView781" />
+
+                        <TextView
+                            android:id="@+id/textView784"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Augment: Hearth Harbringer"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView783"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView783" />
+
+                        <TextView
+                            android:id="@+id/textView752"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="True Relic"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView753"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView753" />
+
+                        <TextView
+                            android:id="@+id/textView754"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Summer Greater Angel"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView755"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView755" />
+
+                        <TextView
+                            android:id="@+id/textView786"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Collapse Circle: Dark"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView785"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView785" />
+
+                        <TextView
+                            android:id="@+id/textView788"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Power Word Directed: Tragic Death"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView787"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView787" />
+
+                        <TextView
+                            android:id="@+id/textView790"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Corrupt Passage"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView789"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView789" />
+
+                        <TextView
+                            android:id="@+id/textView669"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView665" />
+
+                        <TextView
+                            android:id="@+id/textView681"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view119" />
+
+                        <TextView
+                            android:id="@+id/textView690"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view163" />
+
+                        <TextView
+                            android:id="@+id/textView701"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view129" />
+
+                        <TextView
+                            android:id="@+id/textView712"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view135" />
+
+                        <TextView
+                            android:id="@+id/textView723"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view170" />
+
+                        <TextView
+                            android:id="@+id/textView730"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view167" />
+
+                        <TextView
+                            android:id="@+id/textView739"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view169" />
+
+                        <TextView
+                            android:id="@+id/textView746"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view173" />
+
+                        <TextView
+                            android:id="@+id/textView751"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 10"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view175" />
+
+                        <View
+                            android:id="@+id/view114"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView669" />
+
+                        <View
+                            android:id="@+id/view115"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView671" />
+
+                        <View
+                            android:id="@+id/view116"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView674" />
+
+                        <View
+                            android:id="@+id/view117"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView676" />
+
+                        <View
+                            android:id="@+id/view118"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView678" />
+
+                        <View
+                            android:id="@+id/view119"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView680" />
+
+                        <View
+                            android:id="@+id/view120"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView681" />
+
+                        <View
+                            android:id="@+id/view121"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView683" />
+
+                        <View
+                            android:id="@+id/view122"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView685" />
+
+                        <View
+                            android:id="@+id/view123"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView687" />
+
+                        <View
+                            android:id="@+id/view124"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView689" />
+
+                        <View
+                            android:id="@+id/view163"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView673" />
+
+                        <View
+                            android:id="@+id/view125"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView690" />
+
+                        <View
+                            android:id="@+id/view126"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView692" />
+
+                        <View
+                            android:id="@+id/view127"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView694" />
+
+                        <View
+                            android:id="@+id/view128"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView695" />
+
+                        <View
+                            android:id="@+id/view129"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView698" />
+
+                        <View
+                            android:id="@+id/view131"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView701" />
+
+                        <View
+                            android:id="@+id/view132"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView703" />
+
+                        <View
+                            android:id="@+id/view133"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView705" />
+
+                        <View
+                            android:id="@+id/view134"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView707" />
+
+                        <View
+                            android:id="@+id/view135"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView709" />
+
+                        <View
+                            android:id="@+id/view137"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView712" />
+
+                        <View
+                            android:id="@+id/view138"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView714" />
+
+                        <View
+                            android:id="@+id/view139"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView716" />
+
+                        <View
+                            android:id="@+id/view140"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView718" />
+
+                        <View
+                            android:id="@+id/view141"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView720" />
+
+                        <View
+                            android:id="@+id/view142"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView722" />
+
+                        <View
+                            android:id="@+id/view170"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView773" />
+
+                        <View
+                            android:id="@+id/view143"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView723" />
+
+                        <View
+                            android:id="@+id/view144"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView725" />
+
+                        <View
+                            android:id="@+id/view145"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView727" />
+
+                        <View
+                            android:id="@+id/view146"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView729" />
+
+                        <View
+                            android:id="@+id/view166"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView763" />
+
+                        <View
+                            android:id="@+id/view167"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView765" />
+
+                        <View
+                            android:id="@+id/view147"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView730" />
+
+                        <View
+                            android:id="@+id/view148"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView731" />
+
+                        <View
+                            android:id="@+id/view149"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView734" />
+
+                        <View
+                            android:id="@+id/view150"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView736" />
+
+                        <View
+                            android:id="@+id/view169"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView769" />
+
+                        <View
+                            android:id="@+id/view152"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView739" />
+
+                        <View
+                            android:id="@+id/view153"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView741" />
+
+                        <View
+                            android:id="@+id/view154"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView743" />
+
+                        <View
+                            android:id="@+id/view155"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView745" />
+
+                        <View
+                            android:id="@+id/view171"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView775" />
+
+                        <View
+                            android:id="@+id/view172"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView777" />
+
+                        <View
+                            android:id="@+id/view173"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView779" />
+
+                        <View
+                            android:id="@+id/view156"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView746" />
+
+                        <View
+                            android:id="@+id/view157"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView748" />
+
+                        <View
+                            android:id="@+id/view158"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView750" />
+
+                        <View
+                            android:id="@+id/view174"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView781" />
+
+                        <View
+                            android:id="@+id/view175"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView783" />
+
+                        <View
+                            android:id="@+id/view159"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView751" />
+
+                        <View
+                            android:id="@+id/view160"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView753" />
+
+                        <View
+                            android:id="@+id/view161"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView755" />
+
+                        <View
+                            android:id="@+id/view176"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView785" />
+
+                        <View
+                            android:id="@+id/view177"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView787" />
+
+                        <View
+                            android:id="@+id/view178"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView789" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

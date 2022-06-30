@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".DraconicInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Draconic Sphere"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".DraconicInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView620"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Focus: Gem or rock the same colour as the Firstborn served.\n\n\t\tThe Sphere of Draconic is granted only to the most loyal and dedicated forces in any Dragon’s Army: The  Dragon Knight. Charged by his Firstborn, the proper name for Dragons, this Dragon Knight sets forth into  the world to both end the oppressive tyranny of organized religion and to further the will of the Draconic  liege. If an ability allows a Draconic spell to be cast without the incant, such as “Magic Mark of the  Firstborn”, the call will still have the Dragon’s name in it, e.g.: “Magic 'Dragon' Mark of the Firstborn”."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView623"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Divine Shield.”\nDuration: 5 days or until used\n\n\t\tDescription: Divine Shield functions like a “Shield Magic” spell against any spell from the Dark or Light  Spheres of Magic. It can be stacked with Shield Magic or Advanced Shield Magic but will have no effect  against Divine Ritual Magic. If wearing both Shield Magic and Divine Shield simultaneously and struck  with a Divine spell, the Divine Shield will always active first."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView622" />
+
+                        <TextView
+                            android:id="@+id/textView625"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Mark of the Firstborn.”\nDuration: 5 days\n\n\t\tDescription: This spell causes the symbol of the Firstborn (served by the Dragon Knight who cast it) to  appear upon the target. The target must be willing or the spell fails without affect. The mark will appear  on the cheek of the target and may be drawn to represent this. The symbol must be clearly visible and  cannot be hidden. If the Dragon Knight casts Mark of the Firstborn on themselves, it will function as a  Shield Magic versus the next divine spell to strike the Dragon Knight. The target may end this mark any  time they choose, but this may offend the Firstborn."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView624" />
+
+                        <TextView
+                            android:id="@+id/textView628"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Dragon Hide.”\nDuration: Instant\n\n\t\tDescription: This spell will grant the target an immediate repair of damaged 10 armour points. It will only repair armour pieces, not other things which might be repaired by a Blacksmith with Shaper approval. It will not work on Gargylen."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView627" />
+
+                        <TextView
+                            android:id="@+id/textView630"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to create Sign of the Firstborn.”\nDuration: 5 days\n\n\t\tDescription: Sign of the Firstborn requires the caster to place a symbol of the Dragon they serve at a  location of their choice. This symbol can be a banner, flag or simple drawing. Once cast, this symbol cannot be moved. While active, no creature with a spirit may approach within 10 feet of the symbol  unless wearing a Mark of the Firstborn. This barrier may be resisted with a Shield Magic or similar spell  and if resisted the target becomes immune to the effects of Sign of the Firstborn for 10 minutes. If the  symbol is physically moved the spell ends. The caster is not immune to the effects of the spell and must  be wearing a Mark of the Firstborn to pass."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView629" />
+
+                        <TextView
+                            android:id="@+id/textView633"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Enlightenment of the Firstborn.”\nDuration: 10 minutes\n\n\t\tDescription: This spell works like a Mark of the Firstborn but over a greater range of targets. Immediately  after casting this spell, the Dragon Knight must lead a 10 minute discussion or debate on any topic  relating to the Firstborn, their followers or the fight against Gods. After the first minute has passed the  Dragon Knight may anoint those present with their symbolic weapon of choice, bestowing onto them the  Mark of the Firstborn served. The Dragon Knight must continue the debate while bestowing the Mark and  if they stop the spell will fail and all Marks granted will become dispelled. A Dragon Knight may grant  the Mark to one target every 10 seconds or until the 10 minute duration has been reached. A maximum of  10 Marks may be granted. Dragon Knights may not force the Mark an unwilling subject or those who are  unconscious, dying or otherwise incapacitated."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView632" />
+
+                        <TextView
+                            android:id="@+id/textView635"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Scales.”\nDuration: 5 days or until used\n\n\t\tDescription: This spell will protect the caster from the next Body Damage attack that strikes them. If  stacked with a Magic Armour, Scales will always activate first. It will only protect against physical Body  attacks delivered via a weapon strike. When this defense is triggered, the caster must call “Scales!”"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView634" />
+
+                        <TextView
+                            android:id="@+id/textView638"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Shadow of the Firstborn.”\nDuration: 1 hour\n\n\t\tDescription: For the next hour after casting, the caster will become immune to all “Sense” type effects  such as “Sense Life” from Undead creatures."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView637" />
+
+                        <TextView
+                            android:id="@+id/textView640"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Strength of the Firstborn.”\nDuration: 1 hour\n\n\t\tDescription: This spell will grant the target a +3 Strength bonus for 1 hour. This spell will stack with  other strength bonuses but not itself."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView639" />
+
+                        <TextView
+                            android:id="@+id/textView642"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to inflict Dragon Fear.”\nDuration: Line of sight / 1 minute / 10 minutes\n\n\t\tDescription: This spell will cause the affected target to flee in fear. If line of sight between the target and  caster remains broken for one minute, the fear effect will end. While under the effects of fear, a victim  will do everything in their power to escape the line of sight with the caster. At first they may simply  attempt to flee, but if physically held within the fear range or are otherwise forced to confront the caster,  their reaction will escalate to violence. After the one minute duration has expired, the target will still be  unable approach or interact with the caster or come within 100 feet of them, for the next 10 minutes.  Removing or dispelling the effect of Dragon Fear will negate both the fear and the aversion that follows."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView643" />
+
+                        <TextView
+                            android:id="@+id/textView645"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Dragon’s Regeneration.”\nDuration: Concentration\n\n\t\tDescription: While uninterrupted concentration is continued by the caster, they will gain 1 Body point of  healing every 60 seconds. The 1 Body of healing will take effect at the end of each 60 second count, not  the beginning. If the caster uses any other skill or breaks concentration, the spell will end. Any person  with a Mark of the Firstborn may concentrate along with the caster to gain the benefits of this healing as  well. The caster must keep concentrating in order for others to do this, even if they are at full Body."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView644" />
+
+                        <TextView
+                            android:id="@+id/textView648"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to inflict Breath of the Firstborn. 25 Elemental 'Type'!”\nDuration: Instant\n\n\t\tDescription: This spell will do 25 points of Elemental damage. The elemental type is determined by the  caster but there is otherwise no difference in the effects. Should this spell drop the target to negative Body  points, the target will forgo their Bleed Count and directly enter their Death Count as per typical  elemental damage calls.\n\n\t\tIf their target successfully defends against this spell, the Dragon Knight can cause it to strike a second  time in an attempt to bypass defenses. The Dragon Knight may then call “Innate Echo!”, causing the  target to be instantly hit by the spell again, although they may still defend against it if possible."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView647" />
+
+                        <TextView
+                            android:id="@+id/textView650"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Dragon’s Intuition.”\nDuration: Special\n\n\t\tDescription: This spell requires 10 minutes of concentration by the caster. At the end of those 10 minutes,  the caster will gain insight into the levels of Divine energy in the surrounding lands, typically defined as a  five mile radius. It will grant a general impression of powerful Divine beings, sources of Divine energy  and concentrations of followers but will not give details beyond which God(s) are behind this influence.  For example, it may indicate a powerful Divine creature adherent to Raze moving through the area but  will not give a description of that creature, or it may state that a concentration of followers of a Cassandra are nearby but not where or who they are."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView649" />
+
+                        <TextView
+                            android:id="@+id/textView653"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Dragon’s Toughness.”\nDuration: 5 days or until used / destroyed\n\n\t\tDescription: This spell will grant 30 of temporary Body points to the caster. These extra Body points will  be counted down first when damage is taken, before the caster’s natural Body points. This spell cannot be  stacked. All lightning based attacks that strike the caster do double damage."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView652" />
+
+                        <TextView
+                            android:id="@+id/textView655"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to inflict Elemental Fragility 'type'.”\nDuration: 10 minutes\n\n\t\tDescription: This spell will cause its target to suffer x4 damage from one elemental type for 10 minutes,  chosen at casting. The caster will receive ½ damage from that element for 10 minutes."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView654" />
+
+                        <TextView
+                            android:id="@+id/textView658"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Fury of the Firstborn.”\nDuration: 10 minutes\n\n\t\tDescription: After casting Fury of the Firstborn the caster may state “Sense Bless”. Every creature with  an active Bless spell within earshot must respond “Here!” For each person that responds, the caster of  Fury of the Firstborn will gain +1 damage for 10 minutes. The caster will also gain an immunity to all  numeric Dark and Light damage for the duration of the spell. This spell may be combined with Talons of  the Firstborn and Spirit of the Firstborn to deadly effect."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView657" />
+
+                        <TextView
+                            android:id="@+id/textView666"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Life of the Firstborn.”\nDuration: 5 days\n\n\t\tDescription: This spell functions as a Contingency Life spell. Contingency spells remain on the spirit and  automatically activate when certain conditions are met. Life of the Firstborn will activate when the caster  has one second left in their Death Count. At this time, the spell will cast Life on the caster, bringing the  caster back to full Body points instantly. This spell is caster-only and cannot be stacked with itself or any other Contingency Life spell."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView662" />
+
+                        <TextView
+                            android:id="@+id/textView668"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Spirit of the Firstborn.”\nDuration: 10 minutes\n\n\t\tDescription: This spell infuses the caster with small piece of the spirit of the dragon they serve. Ethereal  draconic wings will erupt from the casters back for a brief second before vanishing, as the caster is  empowered with the might of the Firstborn on a 3-count. This spell will grant the caster +75 temporary  Body, two claws which swing for “2 Magic” and the ability to throw one packet of “50 Elemental  'type'”, with the type being the caster’s choice. If the Dragon Knight casts Talons of the Firstborn, those  claws may be used instead. Any Body Damage the Dragon Knight receives is removed from the bonus  Body points first and this Body cannot be healed. If the caster is dropped to -1 Body while the spell is  active, it will end. When Spirit of the Firstborn ends, the Dragon Knight will perform a 3-count to exit the form.\n\n\t\tIf their target successfully defends against the 50 Elemental 'type' packet, the Dragon Knight can cause  it to strike a second time in an attempt to bypass defenses. The Dragon Knight may then call “Innate  Echo!”, causing the target to be instantly hit by the 50 Elemental 'type' again, although they may still  defend against it if possible."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView667" />
+
+                        <TextView
+                            android:id="@+id/textView660"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I call upon 'Dragon' to grant Talons of the Firstborn.”\nDuration: 10 minutes\n\n\t\tDescription: This spell will change the caster’s hands into powerful talons. The talons will be claw size or  smaller. Each talon swings for 5 Magic Body, which cannot be augmented by any means, including  benefits that apply to summoned weapons, except Fury of the Firstborn. While the talons exist no other  weapons or skills which require the hands can be used. No weapon skills can be combined with the talons.  Talons of the Firstborn may be combined with Spirit of the Firstborn and Fury of the Firstborn to deadly  effect. This spell is caster only."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView659" />
+
+                        <TextView
+                            android:id="@+id/textView621"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView620" />
+
+                        <TextView
+                            android:id="@+id/textView626"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView625" />
+
+                        <TextView
+                            android:id="@+id/textView631"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView630" />
+
+                        <TextView
+                            android:id="@+id/textView636"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView635" />
+
+                        <TextView
+                            android:id="@+id/textView641"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView640" />
+
+                        <TextView
+                            android:id="@+id/textView646"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView645" />
+
+                        <TextView
+                            android:id="@+id/textView651"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView650" />
+
+                        <TextView
+                            android:id="@+id/textView656"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView655" />
+
+                        <TextView
+                            android:id="@+id/textView661"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView660" />
+
+                        <TextView
+                            android:id="@+id/textView622"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Divine Shield *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView621" />
+
+                        <TextView
+                            android:id="@+id/textView624"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Mark of the Firstborn *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView623" />
+
+                        <TextView
+                            android:id="@+id/textView627"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dragon Hide"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView626" />
+
+                        <TextView
+                            android:id="@+id/textView629"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Sign of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView628" />
+
+                        <TextView
+                            android:id="@+id/textView632"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Enlightenment of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView631" />
+
+                        <TextView
+                            android:id="@+id/textView634"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Scales *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView633" />
+
+                        <TextView
+                            android:id="@+id/textView637"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Shadow of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView636" />
+
+                        <TextView
+                            android:id="@+id/textView639"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Strength of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView638" />
+
+                        <TextView
+                            android:id="@+id/textView643"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dragon Fear"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView641" />
+
+                        <TextView
+                            android:id="@+id/textView644"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dragon's Regeneration"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView642" />
+
+                        <TextView
+                            android:id="@+id/textView647"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Breath of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView646" />
+
+                        <TextView
+                            android:id="@+id/textView649"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dragon's Intuition"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView648" />
+
+                        <TextView
+                            android:id="@+id/textView652"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dragon's Toughness"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView651" />
+
+                        <TextView
+                            android:id="@+id/textView654"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Elemental Fragility"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView653" />
+
+                        <TextView
+                            android:id="@+id/textView657"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Fury of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView656" />
+
+                        <TextView
+                            android:id="@+id/textView659"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Talons of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView658" />
+
+                        <TextView
+                            android:id="@+id/textView662"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Life of the Firstborn *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView661" />
+
+                        <TextView
+                            android:id="@+id/textView667"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spirit of the Firstborn"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView666" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

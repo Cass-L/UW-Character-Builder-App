@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".HealingInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Healing Sphere"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".HealingInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView620"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Focus: Seeds in water.\n\n\t\tBy achieving great understanding of the workings of the physical body, the Healer is able to mend wounds that  would have otherwise proven to be fatal, and in the most accomplished cases can even restore life to the dead.\n\n\t\tPotions are considered to be touch-cast spells with regards to spell defenses. If an individual is missing a body  part other than blood, when that body part is regrown through healing, the original will crumble to dust."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView623"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Recover.&quot;\nDuration: Instant\n\n\t\tDescription: This spell can only be cast on a wounded target that is at less than 2 Body. Doing so will raise their  Body points to 2. This does not function on those in their Death Counts or on Undead."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView622" />
+
+                        <TextView
+                            android:id="@+id/textView625"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to inflict Repel Undead.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell applies a repel effect to a target Lesser Undead for 10 minutes. During this time the  targeted Undead is physically pushed away from the caster if it attempts to get closer than 10 feet. The Undead  may cast spells and throw weapons or other objects at the caster. If the repelled Undead cannot retreat any further and the caster approaches the Undead within 10 feet, the spell will end. The caster must hold out one of their  hands with the palm out (as a policeman’s “stop” signal) and must maintain this gesture if the spell is to remain in  effect. This spell has no effect against the living."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView624" />
+
+                        <TextView
+                            android:id="@+id/textView628"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Cleanse.&quot;\nDuration: Instant\n\n\t\tDescription: This spell will cure any disease except those that have specific cures. It will also cure nausea and  plague. Diseases cured can be mundane and magical but the spell will not affect powerful diseases such as  lycanthropy, vampirism, etc. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView627" />
+
+                        <TextView
+                            android:id="@+id/textView630"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Cure Wounds. 5 Healing!&quot;\nDuration: Instant\n\n\t\tDescription: This spell will heal the recipient by 5 Body points. It will not add Body points beyond the target’s  maximum Body. It will heal a target out of its Bleed Count, but will have no effect on someone in their Death  Count. Cure Wounds will cause 20 points of Body damage to any Undead creature."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView629" />
+
+                        <TextView
+                            android:id="@+id/textView633"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to create Potion of Sweetwater.&quot;\nDuration: 1 year or until used\n\n\t\tDescription: This spell creates a Potion of Sweetwater, which has two possible uses. First, it will turn any liquid  (including alchemy and other potions) into pure, clean drinking water. One potion of Sweetwater will convert one  pint-sized container into water. Additional Potions of Sweetwater may be combined to change larger volumes of liquid.\n\n\t\tThe second use of Potions of Sweetwater is to store Healing spells by creating healing potions. Once a Potion of  Sweetwater has been created, any other curative spell within the Battle Magic Healing sphere of 8th level or lower  may be cast on it. Doing so will convert the Sweetwater potion into a potion with the same effect of the spell that  was cast on it. This new potion will last a year. Both the Potion of Sweetwater tag and the healing spell tag should  be affixed to the potion together. The following spells may be turned into potions this way: Recover, Cleanse,  Cure Wounds, Recuperate, Cure Serious Wounds, Bolster, Restore Limb, Cure Mortal Wounds, Heal and Purify."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView632" />
+
+                        <TextView
+                            android:id="@+id/textView635"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Recuperate.&quot;\nDuration: Special or 5 days\n\n\t\tDescription: This spell will heal 5 Body points every 5 minutes until the target reaches full health, or takes  damage to Body. The first 5 points of healing will occur after the first 5 minutes’ pass. Then every 5 minutes after  that another 5 Body will be healed. This spell has no effect on Undead. The maximum duration of Recuperation is  5 days. While under its effects the target must state “Visibly Regenerating” every minute and whenever a new  person approaches them."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView634" />
+
+                        <TextView
+                            android:id="@+id/textView638"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Cure Serious Wounds. 10 Healing!&quot;\nDuration: Instant\n\n\t\tDescription: This spell will heal the recipient by 10 Body points. It will not add Body points beyond the target’s  maximum Body. It will heal a target out of its Bleed Count, but will have no effect on someone in their Death  Count. Cure Serious Wounds will cause 40 points of Body damage to any Undead creature."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView637" />
+
+                        <TextView
+                            android:id="@+id/textView640"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant a Dawnblade.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell will allow the caster’s weapons to “Spellstrike Dawnblade. 20 Magic Body!” damage  three times within 10 minutes. These strikes will only harm Undead and have no effect against the living. This  spell is caster only."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView639" />
+
+                        <TextView
+                            android:id="@+id/textView642"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Bolster.&quot;\nDuration: 5 days\n\n\t\tDescription: This spell will heal the target 15 Body points. Additionally, any healing that exceeds the target’s  maximum Body points will grant them temporary Body points equal to the excess. These additional Body points  can be dispelled and, if damaged, the temporary Body is removed before any other Body points. Once depleted, or  after 5 days, the effect ends. These Body points cannot be healed by any means. Temporary Body point effects  from any source cannot stack. Bolster is considered a spell protection and healers may select it as pre-cast during  logistics, allowing them to enter game with 15 additional temporary Body. This spell has no effect on Undead, Gargylen, or Fauns."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView643" />
+
+                        <TextView
+                            android:id="@+id/textView645"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Restore Limb.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell will restore one severed or missing limb from the target immediately. Thereafter it will  restore another missing limb (if any) every 20 minutes until either all limbs are restored or until the duration  expires. Only limbs which were missing at the time of casting will be restored."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView644" />
+
+                        <TextView
+                            android:id="@+id/textView648"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Cure Mortal Wounds. 20 Healing!&quot;\nDuration: Instant\n\n\t\tDescription: This spell will heal the recipient by 20 Body points. It will not add Body points beyond the target’s  maximum Body. It will heal a target out of its Bleed Count, but will have no effect on someone in their Death  Count. Cure Mortal Wounds will cause 80 points of Body damage to any Undead creature."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView647" />
+
+                        <TextView
+                            android:id="@+id/textView650"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant a Peaceful Repose.&quot;\nDuration: 5 days\n\n\t\tDescription: Once cast, Peaceful Repose will remain on the target’s spirit for 5 days. If, during that time, the  target enters their Death Count, Peaceful Repose will activate at the final second of that count and will extend the  count by one additional minute. A secondary effect of Peaceful Repose is that will grant protection against any  Necromantic “Raise Undead” spells and effects once during the initial Death Count, but will not provide that  protection in the final “additional” minute of Death Count granted by the spell. If Peaceful Repose protects  against a Raise Undead spell during the first 5 minutes, it will not grant an additional minute to the Death Count.  It will only protect against “Raise Undead” effects once. When either effect is triggered, the spell will end."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView649" />
+
+                        <TextView
+                            android:id="@+id/textView653"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant a Death Ward.&quot;\nDuration: 5 days\n\n\t\tDescription: This spell will act as a defense against the next effect with “Death” in its name that strikes the  wearer. Death Ward may be stacked with other types of spell defenses and will activate automatically when the  next appropriate effect strikes the wearer."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView652" />
+
+                        <TextView
+                            android:id="@+id/textView655"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Healing Hands.&quot;\nDuration: 5 days\n\n\t\tDescription: This spell is cast on a target. The next appropriate spell that is used on that target will be spread to  anyone else holding that target’s hands. This may continue to chain to an unlimited amount of targets, as long as  they are all holding hands. Once this occurs, the spell will end. This spell may not be cast on Undead targets.  Healing transferred in this manner does not multiply if more than one person in the chain touches a single person  – the healing done will always mirror the amount provided by the original spell. Spells which may be used with  Healing Hands are: Recover, Cleanse, Cure Wounds, Recuperate, Cure Serious Wounds, Restore Limb, Cure  Mortal Wounds, Heal, Purify, and Life."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView654" />
+
+                        <TextView
+                            android:id="@+id/textView658"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Heal.&quot;\nDuration: Instant\n\n\t\tDescription: This spell will restore the target to their full Body points. It will destroy any Lesser Undead and  inflict 25 Healing/100 Magic Body damage on Greater Undead."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView657" />
+
+                        <TextView
+                            android:id="@+id/textView666"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Life.&quot;\nDuration: Instant\n\n\t\tDescription: This spell will bring one creature back from the dead so long as it is in its Death Count. It will bring  the creature back to fully Body points, removing any physical injuries, toxins, and diseases which do not normally  persist through resurrection or require a specific cure. Should the body be in more than one piece, the Spirit may  choose which piece to reform from.\n\n\t\tWhen Life is cast, the body reforms with the Spirit and all other pieces of the body elsewhere crumble to dust.  The Spirit must be present with the body or body part when Life is cast for it to take effect. Life will have no  effect on Undead, only on creatures which are living. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView662" />
+
+                        <TextView
+                            android:id="@+id/textView668"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant a Safeguard.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell requires a 10-ft diameter circle to be drawn on the ground prior to use. A rope may be  used. So long as the caster remains in the centre of the circle, Safeguard will pulse 1 Magic Healing to everyone  in the circle every second that passes. The circle is not a barrier and anyone is free to enter and exit. This healing  will inflict 4 Magic Body points of damage against Undead within the circle every second. If the caster moves  from the center of the circle, the spell will end prematurely."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView667" />
+
+                        <TextView
+                            android:id="@+id/textView660"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Healing to grant Purify.&quot;\nDuration: Instant\n\n\t\tDescription: This spell will cure the target of certain magical, alchemical and mundane ailments. Afflictions cured  are limited to silence, blindness, sleep, paralysis, and all toxins and diseases. Purify will not remove curses,  Ritual-level afflictions or effects which require numerical healing to be cured. The target must be willing for this  spell to work."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView659" />
+
+                        <TextView
+                            android:id="@+id/textView621"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView620" />
+
+                        <TextView
+                            android:id="@+id/textView626"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView625" />
+
+                        <TextView
+                            android:id="@+id/textView631"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView630" />
+
+                        <TextView
+                            android:id="@+id/textView636"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView635" />
+
+                        <TextView
+                            android:id="@+id/textView641"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView640" />
+
+                        <TextView
+                            android:id="@+id/textView646"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView645" />
+
+                        <TextView
+                            android:id="@+id/textView651"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView650" />
+
+                        <TextView
+                            android:id="@+id/textView656"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView655" />
+
+                        <TextView
+                            android:id="@+id/textView661"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView660" />
+
+                        <TextView
+                            android:id="@+id/textView622"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Recover"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView621" />
+
+                        <TextView
+                            android:id="@+id/textView624"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Repel Undead"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView623" />
+
+                        <TextView
+                            android:id="@+id/textView627"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Cleanse"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView626" />
+
+                        <TextView
+                            android:id="@+id/textView629"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Cure Wounds"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView628" />
+
+                        <TextView
+                            android:id="@+id/textView632"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Potion of Sweetwater"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView631" />
+
+                        <TextView
+                            android:id="@+id/textView634"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Recuperate"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView633" />
+
+                        <TextView
+                            android:id="@+id/textView637"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Cure Serious Wounds"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView636" />
+
+                        <TextView
+                            android:id="@+id/textView639"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dawnblade"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView638" />
+
+                        <TextView
+                            android:id="@+id/textView643"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Bolster *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView641" />
+
+                        <TextView
+                            android:id="@+id/textView644"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Restore Limb"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView642" />
+
+                        <TextView
+                            android:id="@+id/textView647"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Cure Mortal Wounds"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView646" />
+
+                        <TextView
+                            android:id="@+id/textView649"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Peaceful Repose *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView648" />
+
+                        <TextView
+                            android:id="@+id/textView652"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Death Ward *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView651" />
+
+                        <TextView
+                            android:id="@+id/textView654"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Healing Hands"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView653" />
+
+                        <TextView
+                            android:id="@+id/textView657"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Heal"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView656" />
+
+                        <TextView
+                            android:id="@+id/textView659"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Purify"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView658" />
+
+                        <TextView
+                            android:id="@+id/textView662"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Life"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView661" />
+
+                        <TextView
+                            android:id="@+id/textView667"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Safeguard"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView666" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

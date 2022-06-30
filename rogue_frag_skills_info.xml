@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".RogueFragSkillsInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Rogue Frag Skills"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".RogueFragSkillsInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+                        <TextView
+                            android:id="@+id/autoRacialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Blindfighter"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/autoRacialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tOnce per day per purchase, the character may resist a Blind effect."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/racialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Escape"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfo" />
+
+                        <TextView
+                            android:id="@+id/racialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tOnce per day per purchase, the character may break free of any physical binding. Examples of bindings  are shackles, rope, manacles, etc. Doing so requires a 10 count which may be done in silence. Escape may  not be used to free the rogue from locked areas, such as prison rooms or crows cages."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThe rogue with Riposte can use this ability against any attack that could be parried. After suffering an  attack, a character with this ability may call “Riposte!” if they are holding a weapon. Doing so not only  blocks the attack but also deals back to the original target the same damage and effects that were  Riposted, which automatically hits. Ripostes can block missile damage, but the damage is not reflected  back. The damage from a Riposte counter can be defended against with skills (Parry, Dodge, etc.) and  spells (Magic Armour, etc.) but is considered to have been a successful strike. Riposte may be used once a day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintStart_toStartOf="@+id/textView23"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Riposte"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfo" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the rogue to sneak in a devastating attack to an unprepared opponent, stunning them for  a short time. If the attack is successful, the target takes one Body, is blinded and is stunned for 5 seconds.  While stunned, a victim is unable to take any action, including blocking, moving and the use of skills,  minus the ability to call “interrupt” against killing blows. They may also interrupt any counts against  them. This skill may use the “Surprise” suffix in its damage call if the attack is delivered from behind and  between the target’s shoulder blades. To successfully deliver this attack, the rogue must strike his or her  opponent on the torso with a red hand-to-hand or claw rep. To activate this ability, the rogue must call  “Sucker Punch!” This skill cannot be stacked with any other skill and is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView34"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Sucker Punch"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/level3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows rogues access to a fundamental secret language, understood by thieves universally.  Thieves Cant is a fully coded language. It is ever changing and evolving, so it can never be permanently  broken by authorities. Rogues with this skill have dedicated themselves to learning the secrets of the code,  and as such, will always understand it. Upon purchase, the Rogue will receive an Out-of -Game decoder  which will allow them to read and write messages in Thieves Cant. This code may not be given, in written  form, to any other player. This code may change from time to time, but the rogue will always be able to  quickly decipher it. Rogues with this skill will always be updated with a new decoder packet by the  Logistics Marshal, should any change happen. Once purchase, this skill is always active."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level3InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level3InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level3InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Thieves' Cant"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView106"
+                            app:layout_constraintStart_toStartOf="@+id/textView106"
+                            app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+                        <TextView
+                            android:id="@+id/level6Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tAgility and dexterity are the tools of the rogue. By “rolling with the punches,” a rogue can tumble to take  half damage (rounded down) from one single source of their choice. The source of damage must contain a  numerical damage amount. It cannot be used to reduce Area of Effect or Massive damage. This skill has  no effect on other negative effects such as paralyze, death, head butt etc. Tumble cannot stack with any  other skill, including additional uses of tumble, nor can any other method of damage reduction be applied  prior to or after the rogue uses tumble. Half damage (rounded down) is the minimum amount of damage  the rogue can take when this skill is used. The defensive call for this ability is “Tumble!” This skill is  usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level6InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level6InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level6InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Tumble"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3Info"
+                            app:layout_constraintStart_toStartOf="@+id/level3Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level3Info" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

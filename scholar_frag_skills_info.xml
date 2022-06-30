@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".ScholarFragSkillsInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Scholar Frag Skills"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".ScholarFragSkillsInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+                        <TextView
+                            android:id="@+id/autoRacialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Combat Wizardry"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/autoRacialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tWhen a mage purchases Combat Wizardry, their spell casting is no longer interrupted by Body damage.  They may also speak while maintaining concentration. This skill is considered “always on”."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView834" />
+
+                        <TextView
+                            android:id="@+id/racialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Harvest"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfo" />
+
+                        <TextView
+                            android:id="@+id/racialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tOnce per day per purchase, when a mage casts a spell and it is blocked by a spell defense, they may call  “Harvest!” and regain that spell in memory to cast again. This ability only functions if the spell is  defended against with a magical protection like Shield Magic, or a Resist Magic natural ability or racial."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis macabre ability allows the Mortician to examine a finalled corpse to determine what led to its  demise. The skill will never identify a specific killer. It may be used to ask the following questions. When  questions refer to what ‘killed’ the corpse, this refers to the last thing that dropped the victim into their  Bleed or Death Counts, or whatever delivered the Killing Blow if one was used. Weapon damage is  considered physical means, even if it is magical damage.\n\n“Were you killed by magic, alchemy, or physical means?”\n“What was the sphere of magic/specific alchemy/weapon group that killed you?”\n“How long have you been a corpse in days?” or, if under 24 hours, “How long have you been a corpse in hours?”\n“Has your body been moved?”\n“Were you taken by Surprise?”\n\n\t\tMorticians can manipulate bodies to make future Morticians receive false information about the questions above. Additionally, Morticians can also look at a living or dead person’s mole, birthmark or third nipple and determine whether it is a natural mark or a mark created supernaturally via Wytchcraft."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView23"
+                            app:layout_constraintTop_toBottomOf="@+id/textView837" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Mortician"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfo" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tOnce per day per purchase with Refocus, when a mage casts a spell and misses their target with a spell  packet, they may call “Refocus!” and regain that spell in memory to cast again. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView34"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Refocus"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/level3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThe Spell Parry skill allows a mage to counter a spell cast at them by using up a spell of the same sphere and level that they have memorized. If a mage is targeted and affected by a spell, they may expend a spell of the same sphere and level that they have in memory and call “Spell Parry <spell name>!”, nullifying the incoming spell but losing the spell in memory in the process. For example, if a Druid has a Barkskin spell memorized and is struck by a Web spell, they may choose to sacrifice their memorized Barkskin to negate the hostile Web spell. If the mage whose spell was Spell Parried also possesses the Spell Parry skill, after hearing their spell has been countered they may also call out “Spell Parry!” and force their original spell through, bypassing the Spell Parry defense and expending another spell which they have memorised from that sphere and level. There is no limit to how often this ability may be used so long as the mage has spells in memory to counter. This ability only functions against magic spells, either cast from memory or used via a magic item. It has no effect against natural ability or monster racials by the same name. Eg: You cannot Spell Parry a spider’s web with the Nature spell."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level3InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level3InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level3InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Spell Parry"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView106"
+                            app:layout_constraintStart_toStartOf="@+id/textView106"
+                            app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+                        <TextView
+                            android:id="@+id/level6Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tSpell Versatility is a Mage skill that is tied to an existing spell slot that the character already owns. After  purchasing Spell Versatility, the mage no longer has to memorize a spell to put into that slot and may cast  spells “on the fly” from any of their spheres that can fill the slot. For example, if a mage has two spheres  and a 7th level spell slot they may choose any of those four 7th level spells to cast, so long as the slot is  unused; essentially meaning that every spell of that level that they can cast fits into the slot at once. Once  a spell has been cast from the slot it is used until the next reset like normal. This skill must be purchased per slot and is considered always functional. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level6InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level6InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level6InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Spell Versatility"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3Info"
+                            app:layout_constraintStart_toStartOf="@+id/level3Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level3Info" />
+
+                        <TextView
+                            android:id="@+id/level9Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tOnce per day per purchase, the mage may exchange one spell they have memorized for another spell at a  lower level. Example: A healer may exchange their memorized level 8 Heal spell for a level 7 Death  Ward spell. Spells may be switched with different spheres the caster knows, but they can never be equal  or higher level. To use this ability the mage must declare: “Spell Switch : 'spell being sacrificed' 'new  spell'”. The new spell must be cast within 60 seconds of Spell Switch being used or both spells are lost."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level9InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level9InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level9InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Spell Switch"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6Info"
+                            app:layout_constraintStart_toStartOf="@+id/level6Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level6Info" />
+
+                        <TextView
+                            android:id="@+id/textView834"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Self Mutilate"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView837"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Anatomy"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

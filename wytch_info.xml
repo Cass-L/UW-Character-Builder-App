@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".WytchInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Wytchcraft Sphere"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".WytchInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView620"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Focus: A mole, birthmark or third nipple.\n\n\t\tThere is no Battle Magic more sinister than Wytchcraft. To understand even the basic fundamentals of the  sphere, an aspiring Wytch must first strike a dark pact with the Demonic. Only after sacrificing part of  their own morality does a Wytch learn this powerful art. Wytchcraft can only be taught by the Demonic,  and only so because the power that fuels it comes from the hells themselves. Upon learning this sphere,  the Wytch develops a third nipple somewhere on their body. This nipple becomes the conduit that the  Demonic power of Wytchcraft comes through. Wytches do not need a Spellbook to memorise their  Wytchcraft Battle Magic spells; they draw its power from their demonic sponsor."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView623"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict a Blood Curse.&quot; \nDuration: 5 days\n\n\t\tDescription: A Wytch in possession of your blood is a terrible thing indeed. A Wytch with both your blood and True Name is something beyond terror. Once this spell is cast on a target, any additional spells cast on the same target will allow the Wytch to Echo the spell if the Wytch knows their True Name. This Echo effect will allow the caster to strike the target an additional time with the same spell if the first spell was successfully defended against in any way. This is done by calling “Echo!” immediately after the spell was defended against. This second spell happens automatically and does not require the Wytch to expend a spell slot. This Echo effect continues to occur for every spell cast by the Wytch on the target until the curse is removed. Blood Curse is a Lesser Curse.\n\n\t\tIn addition, if the Wytch possesses one liter of the target’s blood and has it on their person, any spells cast on the target of a Blood Curse will gain the Penetrating prefix – allowing the spell to ignore all non-ritual protections, all non-racial defenses and all armour. Doing so will consume one liter of the target’s blood for each use of Penetration. Penetration may be combined with the Echo effect above, but may only be used once per liter of blood possessed. The blood may be obtained prior to casting the spells and follows standard blood rules."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView622" />
+
+                        <TextView
+                            android:id="@+id/textView625"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to create a Talisman.&quot; \nDuration: 5 days\n\n\t\tDescription: This spell allows the Wytch to create a protective talisman out of any item that could be  worn as jewellery. While being worn, this talisman grants the target 5 points of Magical Armour and  wards the bearer against certain evil spirits. This armour cannot be repaired but can stack with other  physical or Magical Armour. The talisman is not destroyed when the armour is used up, but the magical  effect on it dissipates. This talisman can be worn or given freely by the Wytch and may be stacked. The  Player must attach this spell tag to the item after casting. Once the Magical Armour is consumed, the tag is to be destroyed."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView624" />
+
+                        <TextView
+                            android:id="@+id/textView628"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Blindness.&quot;\nDuration: 10 seconds\n\n\t\tDescription: With spit and malice, a Wytch may cause the target’s eyes to grow milky white, filling with  cataracts. With a successful attack, the Wytch causes blindness in the target. This will blind the target for  ten seconds, forcing the target to close their eyes OOG for the duration of the effect. Players in an unsafe  or unstable environment (e.g. fighting near a fire pit) may keep their eyes open, but must look down at  their feet and away from their attacker for the skill’s duration."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView627" />
+
+                        <TextView
+                            android:id="@+id/textView630"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Curse of Evil Eye. Power Word: Directed 'Target'.&quot;\nDuration: 1 hour\n\n\t\tDescription: One of the Wytch’s most feared powers is the Evil Eye. With a glance, the Wytch can cause  terrible luck in some and despair in others. By staring intensely at a target, the Wytch can curse those with  misfortune causing them to take an additional point of damage from all sources directed at them. This  additional damage is counted by the Wytch for all sources of damage regardless of source or where it  strikes. In order to use this spell the Wytch must be able to see the target, although it is not necessary that  the target see the Wytch. The Wytch must then incant the spell and point at the target. Although no spell  packet is required to be thrown, once the incant and point has been completed, the target is considered to  be stuck by a packet automatically. Evil Eye is considered a Gaze attack and does not require a spell  packet to use. Curse of Evil Eye is a Lesser Curse."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView629" />
+
+                        <TextView
+                            android:id="@+id/textView633"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Repulsion 'item'.&quot;\nDuration: 1 minute\n\n\t\tDescription: This spell attacks the target’s mind, and forces them to believe that an item they are holding  becomes a writhing pile of maggots, worms, and bugs. If successful, this spell will cause a target to drop  the item identified in the incant and retreat away from it at least ten feet. Nothing short of a Dispel Magic  will force a target to believe otherwise. The target cannot be forced to touch the item and will defend  himself to the best of his abilities to maintain his distance. Repulsion is considered a Fear effect and can  be resisted as such, along with standard anti-magical defenses."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView632" />
+
+                        <TextView
+                            android:id="@+id/textView635"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Curse of Weakness.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell will penetrate a victim’s muscles and bones, making them weak and feeble.  Weakness will sap the strength from a target causing a loss of -8 Strength, which lowers the target’s  weapon swings by -4 (to a minimum of 1). This effect can be stacked with multiple castings. Curse of  Weakness is a Lesser Curse."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView634" />
+
+                        <TextView
+                            android:id="@+id/textView638"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Horror.&quot;\nDuration: 10 minutes or line of sight\n\n\t\tDescription: This fear-based spell influences the mind of the target, causing it to view the Wytch as  hideous and offensive, causing the target to avoid the Wytch at all costs. Under the effect of Horror, the  target may not come within ten feet of the Wytch and, while aware the Wytch is there, will not attack the  Wytch for any reason. If the Wytch approaches the target, the target will retreat if possible. If no retreat is  possible, the spell is not broken, but the target will move away at the next opportunity. If the Wytch takes  any hostile gesture toward the target, such as attacking them or casting spells at them, the spell will end."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView637" />
+
+                        <TextView
+                            android:id="@+id/textView640"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to grant Requital.&quot;\nDuration: Instant\n\n\t\tDescription: This spell allows the Wytch to draw life energy from a distant source and use it to heal  themselves. By casting this spell, the Wytch is able to heal himself or herself of all missing Body points,  however, doing so has a cost. Every casting negatively affects the local area the Wytch is in. A mother  may deliver a stillborn baby, a calf may die, a hailstorm may destroy some crops, etc. The actual effect is  decided by plot and likely unknown to the Wytch. The negative effect will never be one that gives  irrefutable proof that the Wytch is at fault. All castings of this spell must be reported to a plot member the  next time they see one. It is not necessary to go out of game for this."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView639" />
+
+                        <TextView
+                            android:id="@+id/textView642"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to create a Contingency Sleep.&quot;\nDuration: 5 days / 10 minutes\n\n\t\tDescription: This spell allows the Wytch to imbue any non-magical object with a powerful sleep  enchantment. This enchantment will activate when a set contingency happens. At that point, the target of  the contingency will be affected by a magical (psionic) sleep. This sleep spell will drop the target into a  deep slumber for the duration of 10 minutes. The victim can be woken via Dispel Magic, Body damage or one minute of vigorous shaking. The condition of the contingency is decided by the Wytch upon casting.  Only one contingency condition may be set on the item and that condition must be activated by a creature  touching the item and possessing a spirit. The condition may not exceed ten words and must involve the  item being damaged, destroyed or consumed in some manner. Once activated, the contingency is used up  and must be cast again on the item. Some examples of Contingency: Sleep are:\n\nCondition: “The first person to bite it”\nCondition: “The first person to strike it”\nCondition: “The first person to trip it”"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView643" />
+
+                        <TextView
+                            android:id="@+id/textView645"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Curse of Tongue Rot.&quot;\nDuration: 1 hour\n\n\t\tDescription: This powerful Lesser Curse will cause the victim’s tongue to rot in their mouth, dissolving  into a disgusting black chunky liquid. The target takes one Magic Body and is silenced. If the damage is negated the target will not be silenced and the spell will fail."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView644" />
+
+                        <TextView
+                            android:id="@+id/textView648"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to grant Eye for an Eye.&quot;\nDuration: 5 days\n\n\t\tDescription: This spell envelops the Wytch in a pulsing black aura which will duplicate any physical  attack and its damage, along with its carrier effects (if any) back onto the target that struck the Wytch,  once. The damage type duplicated on the attacker will always be “Normal” damage regardless of the  damage type the attacker used, though Body damage will be returned as Body damage. Eg: If the attacker  strikes with Wytch with “10 Magic Body”, they will receive “10 Normal Body” reflected back at them,  regardless of the attacker’s armour points.\n\n\t\tEye for an Eye is considered an Advanced Defense, meaning that it may be used at any time the Wytch  chooses and does not automatically activate on the first strike. Even though the damage is duplicated back  to the target, the Wytch will still take the damage and effects of the attack by default, but may choose to  defend against it like normal in hopes of negating it, if they so desire. This spell will not duplicate spells  or abilities which do no physical damage. The source of the rebounded damage is considered to be the  Wytch, not the person striking them. To use this spell, the Wytch must state clearly “Eye for an Eye reflect!”. This spell is caster only."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView647" />
+
+                        <TextView
+                            android:id="@+id/textView650"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to create a Trap.&quot;\nDuration: 1 hour\n\n\t\tDescription: Tapping into their Demonic power, the Wytch can temporarily trap a Lesser Demonic or  Angelic creature inside a circle of blood. After casting this spell, the Wytch has one minute to spill one  Body Point worth of their own blood into the form of a circle. Once the circle is complete, the next Lesser  Demonic or Angelic creature that steps or is summoned inside will be trapped for one hour’s time. The  creature will be unable to leave the circle or cast/attack through the circle. This spell gives no control over  the trapped creature. Once a creature is successfully trapped, the Wytch has three options. 1) They may  ask the Lesser Angel/Demon one question which the Angel/Demon must answer truthfully. Once  answered, the spell immediately ends and the creature is released. 2) The Wytch may choose to banish the  Angel/Demon, sending it back to its own plane of existence for 1 year. 3) The Wytch may choose to  simply leave the Angel/Demon in the trap for the duration of the spell. Should the circle be crossed or  breached by anything or anyone, the spell will end and anything trapped inside will be freed. The Wytch  may drop this circle at any time. The circle perimeter must be represented by a rope or a similarly identifying prop."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView649" />
+
+                        <TextView
+                            android:id="@+id/textView653"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Control Lesser Demon (or) Angel.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell grants the caster control over one Lesser Angel or Demon. For the hour, the target will do anything asked of it, including sacrificing itself. The specific abilities and limitations of command  will depend upon the type of creature controlled. It has no effect against Greater Demons or Angels."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView652" />
+
+                        <TextView
+                            android:id="@+id/textView655"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to grant Dark Entrails.&quot;\nDuration: 24 hours\n\n\t\tDescription: By digging through the entrails of a living being, the Wytch can gain insight into their own  future. This spell requires a living creature with a spirit which is currently in their Bleed Count. After  casting the spell, the Wytch has one minute to find a living creature that is either bound and unable to  move or already in their Bleed Count. By digging through the flesh of the target’s stomach, the Wytch can  remove the entrails and glean from them a vision of the future. The act of reading takes ten seconds and is  considered a killing blow to the target. For the next 24 hours, the Wytch has one dodge which they may  use to avoid any one attack. This dodge ability will have no effect on surprise or AOE (Area of Effect)  attacks. The Wytch may not have more than one dodge on their spirit at a time. The defensive call is  “Dodge.”"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView654" />
+
+                        <TextView
+                            android:id="@+id/textView658"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Penetrating Curse of Pain.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell is considered both a Penetrating spell as well as a Lesser Curse. For the duration  of this spell, the target will take 5 Magic damage whenever the use a tag skill, or whenever they swing a  weapon for damage. All other actions, such as blocking attacks with a shield, drinking potions or running  away will not cause the damage to occur."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView657" />
+
+                        <TextView
+                            android:id="@+id/textView666"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to grant a Dark Pact.&quot;\nDuration: Instant\n\n\t\tDescription: With this spell, a Wytch tries to convince a dying target to strike a deal with the devil. If a target has entered their Death Count, the Wytch may cast this spell on their body. The spell itself offers to grant the target a Life spell in exchange for the target’s full True Name. The decision to accept or deny this request is done by the target’s spirit. The target may choose to deny the offer and continue on their way towards resurrection. If the target chooses to accept the offer, the target’s True Name will be revealed to the Wytch and the target automatically. No deception can be made by the target as the spell binds them to speak the truth and only the Wytch can hear the target speak. Regardless of whether or not the target consciously knows their own True Name, their spirit always knows. If the target accepts the Pact, they know that the spell has been cast on them, but not who cast it. Once the name has been revealed, the target immediately takes the effect of a Life spell and is returned to the world of the living. Once Lifed, the target who accepted the Dark Pact must write their character’s True Name on the Dark Pact spell tag and then sign it, out-of-game. This becomes the Wytch’s proof that they know the name ingame. This spell will pause the target’s Death Count. The Wytch may only cast this spell on a particular target once every 24 hours."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView662" />
+
+                        <TextView
+                            android:id="@+id/textView668"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to Shatter Your Skull.&quot;\nDuration: Instant plus 1 minute\n\n\t\tDescription: This is perhaps most powerful Battle Magic spell in a Wytch’s arsenal. By summoning the  Demonic powers of the abyss, the Wytch is able to project a massive force of Demonic Magic capable of  instantly shattering a target’s skull. Once shattered, the target immediately drops into their Bleed Count  and their body will pulse with Demonic Magic. Every ten seconds, the fallen target will pulse with  Demonic energy, dealing one Infliction to any creature touching them. This makes use of the First Aid  skill next to impossible. This starts from the moment they drop and will continue for one full minute even  if the target is healed and conscious. The target is immune to this damage."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView667" />
+
+                        <TextView
+                            android:id="@+id/textView660"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I summon a Hex to inflict Race Change: Toad.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell allows the Wytch to temporarily polymorph their target to that of an ugly, wart-covered toad. This polymorph is considered a temporary race change for the target. While in the form of a  toad, the target may not use any skills or abilities. This includes any racial abilities they may have  possessed in their previous form. The target toad has 5 Body and may only move by hopping. All items  and clothing are polymorphed with the target and cannot be accessed until the spell has expired or the  magic dispelled. Licking the toad will cause alchemical hallucinations effects similar to the Alchemy  Hallucinoid. This spell will only work on creatures with a spirit and the creature may be no larger than an Ogre."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView659" />
+
+                        <TextView
+                            android:id="@+id/textView621"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView620" />
+
+                        <TextView
+                            android:id="@+id/textView626"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView625" />
+
+                        <TextView
+                            android:id="@+id/textView631"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView630" />
+
+                        <TextView
+                            android:id="@+id/textView636"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView635" />
+
+                        <TextView
+                            android:id="@+id/textView641"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView640" />
+
+                        <TextView
+                            android:id="@+id/textView646"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView645" />
+
+                        <TextView
+                            android:id="@+id/textView651"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView650" />
+
+                        <TextView
+                            android:id="@+id/textView656"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView655" />
+
+                        <TextView
+                            android:id="@+id/textView661"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView660" />
+
+                        <TextView
+                            android:id="@+id/textView622"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Blood Curse"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView621" />
+
+                        <TextView
+                            android:id="@+id/textView624"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Talisman *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView623" />
+
+                        <TextView
+                            android:id="@+id/textView627"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Blindness"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView626" />
+
+                        <TextView
+                            android:id="@+id/textView629"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Curse of the Evil Eye"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView628" />
+
+                        <TextView
+                            android:id="@+id/textView632"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Repulsion"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView631" />
+
+                        <TextView
+                            android:id="@+id/textView634"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Curse of Weakness"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView633" />
+
+                        <TextView
+                            android:id="@+id/textView637"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Horror"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView636" />
+
+                        <TextView
+                            android:id="@+id/textView639"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requital"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView638" />
+
+                        <TextView
+                            android:id="@+id/textView643"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Contingency: Sleep *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView641" />
+
+                        <TextView
+                            android:id="@+id/textView644"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Curse of Tongue Rot"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView642" />
+
+                        <TextView
+                            android:id="@+id/textView647"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Eye for an Eye *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView646" />
+
+                        <TextView
+                            android:id="@+id/textView649"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Trap Demonic / Angelic"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView648" />
+
+                        <TextView
+                            android:id="@+id/textView652"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Control Lesser Demon / Angel"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView651" />
+
+                        <TextView
+                            android:id="@+id/textView654"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Entrails"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView653" />
+
+                        <TextView
+                            android:id="@+id/textView657"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Curse of Pain"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView656" />
+
+                        <TextView
+                            android:id="@+id/textView659"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Race Change: Toad"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView658" />
+
+                        <TextView
+                            android:id="@+id/textView662"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Pact"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView661" />
+
+                        <TextView
+                            android:id="@+id/textView667"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Shatter Your Skull"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView666" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".MagicInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Magic"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:id="@+id/scrollView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".MagicInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView608"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Spell Focus"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView610"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Spell Book"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView609" />
+
+                        <TextView
+                            android:id="@+id/textView612"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Special Notes Regarding Magic"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView611" />
+
+                        <TextView
+                            android:id="@+id/textView614"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Spell Pyramids"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView613" />
+
+                        <TextView
+                            android:id="@+id/textView616"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Core Spell Spheres"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView615" />
+
+                        <TextView
+                            android:id="@+id/textView771"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Core Rituals"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView619" />
+
+                        <TextView
+                            android:id="@+id/textView617"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Soul Frag Spell Spheres"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/psionicsButton" />
+
+                        <TextView
+                            android:id="@+id/textView772"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Soul Frag Rituals"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/psionicsRituals" />
+
+                        <TextView
+                            android:id="@+id/textView618"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Ritual Magic"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/darkButton" />
+
+                        <TextView
+                            android:id="@+id/textView609"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tEach Sphere of Magic will have a related trinket that the caster can attune, if they possess it. It is up to  the caster to find or purchase this trinket and then attune it to them. A phys rep of the Spell Focus is required, but  the item does not need a tag.\n\n\t\tAttuning a new Spell Focus requires that the caster have at least one spell still memorized, which is consumed  when the attuning starts. Which spell is used is the caster's choice. Once the spell has been burnt, the process has  started and will require ten minutes of uninterrupted concentration. Should the caster break concentration, or take  damage into Body during these ten minutes, the attuning has failed. The caster may try again so long as they have  another memorized spell. If successful, the trinket is now transformed into a Spell Focus only usable by that  caster. A caster may have multiple trinkets, but only one that is Attuned per Sphere of Magic. Attempting to  Attune a second Spell Focus from the same sphere or Attuning another caster’s Spell Focus, will remove the  original attuning and replace it on the new trinket. Attuned Spell Foci are magical in nature, never expire, are  immune the effects of Dispel Magic. However, they are not indestructible. They are as fragile as the trinket itself.  The Spell Focus does not need to be held or even visible for the caster to gain its effects, but should a Spell Focus  leave the possession of the caster for more than 1 hour, its attunement will fade. A Caster must have an attuned  Spell Focus on their person for each Sphere they wish to cast from. The specific type of Spell Focus required can  be found in the description of the Sphere of Magic."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView608" />
+
+                        <TextView
+                            android:id="@+id/textView611"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tMost spell casters will have at least one  scroll from each Sphere that they know, conveniently organized in a book, so when the time to memorize scrolls comes around, they will have something to memorize from. A spell caster may memorize his spells from any  Spellbook or scroll so long as they have previously purchased that Sphere of Magic.\n\n\t\tAs a spell caster gains levels and purchases further spell slots, they will need to find the appropriate scroll or  they’ll have nothing to memorize. Example: Shemdrick purchases his first 9th level slot but does not have the 9th level Life scroll to put in his Spellbook, therefore, Shemdrick cannot memorize the Life Spell.\n\n- A spell caster may memorize from any Spellbook or scrolls provided he has purchased that Sphere of  Magic.\n- A player must have a suitable phys-rep for their Spellbook.\n- Elemental scrolls are created with all 4 Elemental Magic types (fire, ice, lightning and stone). While  casting from the scroll, the reader may choose any Magic type. Memorizing from the scroll limits the  Mage to his attuned type.\n- If a spell caster loses their Spellbook they lose all the scrolls inside and must begin collecting them again."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView610" />
+
+                        <TextView
+                            android:id="@+id/textView613"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- All characters may begin each event with a full set of any spell-protections that they can cast. This applies  to the caster only, not any other character. These protections are limited to spells with an (*) in their  description.\n\n- No creature may have more than one version of the same spell on their person at one time, unless the spell  description actually states otherwise. This rule includes two of the same spells from different Spheres.  Furthermore, a spell will only affect one target unless otherwise stated.\n\n- All spell defenses are visible as a flash when they go off and it is obvious to anyone watching that a  defense has gone off, unless it is otherwise stated in the description. It is not possible to fake having your  Shield Magic go off. When a defense goes off, the subject of the attack must state the appropriate spell  defense loudly and clearly.\n\n- Any creature which is not affected by a spell for any reason must state “Resist” when struck by the spell  in question. If the creature is entirely immune to the spell, they must state “No Effect”.\n\n- If a target is affected by any spell whose effects are visible, the target is required to inform anyone, upon  being asked, what effect is visible. Otherwise, they have no obligation to do so."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView612" />
+
+                        <TextView
+                            android:id="@+id/textView615"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- In order to open up a spell slot for purchase, a character must have already purchased two spell slots from  the level below it. A second spell slot of the same level would require the character to have purchased  three spell slots of the level below it. This pattern continues until they are 5 spell slots wide. The  exception to this rule is level 1 spell slots.\n\n- If a character has two more spell slots at a certain level than they have at the next level up, they must next  purchase a spell slot of the higher level. For example, if a character has three level 1 spell slots and one  level 2 spell slot, the next spell slot they purchase must be of level 2. The next spell slot after that must be  level 3. Only then can they purchase their next level 1 spell slot. Level 9 spell slots are an exception to  this rule, as there are no level 10 spell slots.\n\n- You may not exceed 5 spells slots wide, on any circle (level) until your entire pyramid is full. This means  5 spell slots wide up to your 9th circle.\n\n- Once you have a column pyramid of 5 wide and 9th circle high, you may expand outwards to a maximum  of 10 wide. You may ignore the need to build in a pyramid but must still purchase the lower circle spell  slot in order to purchase a spell slot from the circle above it. You may never have a higher number of  circle spell slots than you do lower circle spell slots. Example: you may have eight 1 level spells or seven  1st level spells and seven 2nd level spells, but you may not have seven 1 level spells and eight 2nd level spells.\n\n- The highest level spell slot available is 9th level. For more powerful magic beyond that, see the section on Ritual Magic."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView614" />
+
+                        <TextView
+                            android:id="@+id/textView619"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tAny character that has learned a 9th circle spell may learn Ritual Magic of the appropriate Sphere. Advanced  Spheres of Ritual Magic may also be encountered, though these schools require other Ritual Magics as pre-requisites. Ritual spell slots are purchased in order: the 1st level slot is purchased, then the 2nd, then the 3rd, and so  on up to 10. Ritual Magic is an advanced form of magic which is both highly powerful and highly dangerous. As  these rituals are so complex, they are recorded on powerful scrolls which cannot be copied by any means short of  Ritual Magic itself. It is not possible to remember these rituals after having witnessed one in order to duplicate it. In addition to the scroll, Ritual Magic requires Catalysts, which are in-game items with a specific ‘Catalyst’ tag. \n\n\t\tAll Ritual Magic cast on a spirit will persist through resurrection unless the ritual is explicitly exempted from this rule.\n\n\t\tAll Ritual Magics have their own duration which may be altered using further Ritual Magics. Furthermore, Ritual  Magics are exempt from rules concerning stacking and defense limitations. Casting Ritual Magic also brings with  it the dangers of ritual failure and backlash, some of the side effects of which can be deadly."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView854" />
+
+                        <Button
+                            android:id="@+id/elementalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Elemental"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toStartOf="@+id/healingButton"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView856"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/elementalRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Elemental"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toStartOf="@+id/healingRituals"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView771"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/necromancyButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Necromancy"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalButton"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalButton"
+                            app:layout_constraintTop_toBottomOf="@+id/textView853"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/necromancyRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Necromancy"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalRituals"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/textView855"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/wytchButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Wytchcraft"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalButton"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalButton"
+                            app:layout_constraintTop_toBottomOf="@+id/necromancyButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/wytchRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Wytchcraft"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalRituals"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/necromancyRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/darkButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Dark"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalButton"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalButton"
+                            app:layout_constraintTop_toBottomOf="@+id/wytchButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/darkRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Dark"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalRituals"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/wytchRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/sigilButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Sigil"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingButton"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingButton"
+                            app:layout_constraintTop_toTopOf="@+id/necromancyButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/sigilRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Sigil"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingRituals"
+                            app:layout_constraintStart_toStartOf="@+id/healingRituals"
+                            app:layout_constraintTop_toTopOf="@+id/necromancyRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/lightButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Light"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingButton"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingButton"
+                            app:layout_constraintTop_toBottomOf="@+id/wytchButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/lightRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Light"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingRituals"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/draconicRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/draconicButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Draconic"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingButton"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingButton"
+                            app:layout_constraintTop_toBottomOf="@+id/necromancyButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/draconicRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Draconic"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingRituals"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/necromancyRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/natureButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Nature"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalButton"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalButton"
+                            app:layout_constraintTop_toBottomOf="@+id/elementalButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/natureRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Nature"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/elementalRituals"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/elementalRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/psionicsButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Psionics"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/natureButton"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/elementalButton"
+                            app:layout_constraintTop_toBottomOf="@+id/protectionsButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/psionicsRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Psionics"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/natureRituals"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/natureRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/natureRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/protectionsButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Protections"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingButton"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingButton"
+                            app:layout_constraintTop_toBottomOf="@+id/elementalButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/protectionsRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Protections"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintEnd_toEndOf="@+id/healingRituals"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/healingRituals"
+                            app:layout_constraintTop_toBottomOf="@+id/elementalRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/healingButton"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="24dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Healing"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/elementalButton"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/elementalButton"
+                            app:layout_constraintTop_toTopOf="@+id/elementalButton"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/healingRituals"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="24dp"
+                            android:backgroundTint="#AF0101"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Healing"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/elementalRituals"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/elementalRituals"
+                            app:layout_constraintTop_toTopOf="@+id/elementalRituals"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <TextView
+                            android:id="@+id/textView853"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Teacher or Lead Shaper Approval"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView617" />
+
+                        <TextView
+                            android:id="@+id/textView855"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Teacher or Lead Shaper Approval"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView772" />
+
+                        <TextView
+                            android:id="@+id/textView854"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires 1 x Level 9 Slot and Read Ritual Magic"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView618" />
+
+                        <TextView
+                            android:id="@+id/textView856"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Read Magic and Read Advanced Magic (spells above level 5)"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView616" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

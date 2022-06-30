@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".WarriorFragSkillsInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Warrior Frag Skills"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".WarriorFragSkillsInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+                        <TextView
+                            android:id="@+id/autoRacialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Battlefield Repair"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/autoRacialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tWith this skill a Warrior can repair any recently destroyed or shattered shield so long as they have access  to the wreckage. If given the destroyed remains, (represented OOG by the OOG shield rep) and the shield  was destroyed within the last hour, a Warrior can perform a Battlefield Repair on it. A repair in this  manner takes 1 minute for every 10 threshold the shield had. If the repair is interrupted or an hour passes  since its destruction and the shield is not fully repaired, the skill will fail and be used for the day. Use of  this skill will not pause the time limit in which it can be used nor will it partially repair a destroyed shield  (in other words once work begins it must be completed to its conclusion). Lastly, this skill may be used to  restore 1 “resist” on a Master Crafted shield. This is done by the same method and with the same  restrictions as repairing a destroyed shield, including the time limit. Master crafted shields which do not  have their resists repaired within the time limit will lose that resist forever. If a master crafted shield loses  its final resist and is then destroyed, that final resist will be lost as both the shield and the resist cannot be  repaired simultaneously. This skill is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/racialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Cripple"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfo" />
+
+                        <TextView
+                            android:id="@+id/racialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the warrior to attack a target’s limb with a devastating crippling attack. If the attack is  successful, Cripple does one Body to the target and cripples the struck limb for 5 seconds. If the limb is a  target’s arm, they will be disarmed of any items they are holding and unable to use that arm. Shields or  items strapped to the arm or unable to be dropped will be considered useless and any damage taken to  those items will instead be taken by the target. A crippled leg denies the target the ability to move for the  duration of the ability. Cripple must be delivered by a melee weapon attack and must strike a limb to be  successful. The damage call for this ability is “Cripple!” If the weapon’s damage type is not normal, the  damage type precedes “Cripple”. There is no numerical value for this attack, so when determining if the  75 attack is stopped by a threshold, only the damage threshold type is taken into account. For example, a  “Silver Cripple” will breach a +2 Silver threshold, but not a Magic one. Cripple cannot be stacked with  any other ability and is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis powerful ability attempts to separate the head from the body of a target and kill them in a single shot.  Decapitate can only be used with a melee weapon that the warrior is capable of Slaying with. In order to  use this skill a warrior must declare: “You are not prepared!”, then strike their opponent. The strike must  hit the torso (not limbs) of their target. The damage call for this skill is “10 Body Decapitate”. If the  target’s Body is damaged by the attack then they are decapitated, immediately falling into their Death  Count. Creatures with no discernible heads are immune to this attack. Unlike a Slay, Decapitate does not  remain active if you miss the initial strike. The numerical damage cannot be changed, but the damage  type may be altered with spells and effects. For example: if you have a +2 Magic sword, you still only  swing for 10 damage, but the call would be “10 Magic Body Decapitate”. This skill is usable once per day  per purchase and requires 1 Slay purchase for every purchase of Decapitate."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView23"
+                            app:layout_constraintTop_toBottomOf="@+id/textView848" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Decapitate"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfo" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the warrior to temporarily blind a target by throwing dirt in their eyes. This is a packetdelivered attack and will not be successful if used with a weapon or if touch cast. The warrior must first touch a packet to the ground then successfully hit the target. The call for this ability is “Physical Dirt in the Eye!” Dirt in the Eye will blind the target for ten seconds forcing the target to close their eyes OOG for the duration of the effect. Players in an unsafe or unstable environment (e.g. fighting near a fire pit) may keep their eyes open but must look down at their feet and away from their attacker for the skill’s duration. This skill cannot be stacked with any other ability or spell and is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView34"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Dirt in the Eye"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/level3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tA combat skill for warriors, to activate this ability the player must successfully strike the target’s leg with  a weapon and call &quot;1 Body trip!” If successful, the target must 'fall' (safely) to the ground. The target may  stand up again as soon as they have touched their torso to the ground. Like Hamstring, the damage cannot  be increased unless you use multiple Trips at the same time; however the damage type is based on the  weapon used. Usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level3InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level3InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level3InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Trip"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView106"
+                            app:layout_constraintStart_toStartOf="@+id/textView106"
+                            app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+                        <TextView
+                            android:id="@+id/level6Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill enables a warrior to plant one foot, call “Whirlwind of Blows” and gain +5 damage to their  swings. This effect continues indefinitely so long as one foot remains planted. The planted foot may  swivel, but the skill ends if the planted foot is moved or raised. This skill may stack with other skills,  abilities or spells (such as Hamstring and Dismember) unless otherwise stated in their descriptions. This  skill is usable once per day per purchase and requires 1 Flurry of Blows purchase for every purchase of  Whirlwind of Blows."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6InfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/level6InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView849" />
+
+                        <TextView
+                            android:id="@+id/level6InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Whirlwind of Blows"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3Info"
+                            app:layout_constraintStart_toStartOf="@+id/level3Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level3Info" />
+
+                        <TextView
+                            android:id="@+id/textView848"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Slay / Parry"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/textView849"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Flurry of Blows"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/level6InfoTitle" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

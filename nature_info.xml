@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".NatureInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Nature Sphere"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".NatureInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView620"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Focus: Tree bark wrapped around a root.\n\n\t\tDrawing from the very essence of the land itself, Nature casters focus the energies of the land into formidable  Magic. This Sphere is the meat of a Druid's diet, although it is not unheard of to see it in the hands of other scholars."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView623"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to create Goodberry.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell will transform up to three pieces of non-Magical fruit into health-giving Goodberries. The  caster must have at least one to three pieces of edible fruit, no bigger than a grape, at the time of casting. These  Goodberries will last 1 hour, or until eaten. Each Goodberry will bring an unconscious person currently in their  Bleed Count to 1 Body point immediately if ingested. Be mindful if the target has food allergies and never feed  anybody anything if they are not aware of what it is, nor should you place items in people's mouths OOG."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView622" />
+
+                        <TextView
+                            android:id="@+id/textView625"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Snare.&quot;\nDuration: Line of sight\n\n\t\tDescription: This spell causes a magical vine to emerge from the ground and wrap itself tightly around the target's  right foot, forcing the target to keep that foot upon the ground, unable to move. The vines may be cut through  with a two minute count. The Snare may be ripped free from by the victim if a +2 or greater strength is used. This  however, will cause them to take 2 points of damage straight to Body regardless of threshold. It takes three seconds to rip free from the Snare. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView624" />
+
+                        <TextView
+                            android:id="@+id/textView628"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Charm Animal.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell will act as a Charm spell against any natural animal. During the spell's duration, the  Charmed animal will respond to the caster as if it was a “friend”, pack member or master. The exact relationship  will depend on the animal in question, for example a wolf would consider the caster a member of its pack, a  soldier ant will see the caster as worker ant, and other animals may see the caster as a parent or cub. The type of  relationship that appears upon casting is random."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView627" />
+
+                        <TextView
+                            android:id="@+id/textView630"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Repel.&quot;\nDuration: Concentration\n\n\t\tDescription: This spell causes the target to be pushed away from the caster to a distance of 10 feet. The target may  throw spells, weapons, or other objects at the caster, but may not cross the 10 foot boundary by any means  (phasing, teleporting, etc.) so long as the caster maintains concentration. The caster must hold out one of their  hands with the palm out (as a policeman’s “stop” signal) and must maintain this gesture if the spell is to remain in  effect. While doing this, the caster may move freely but may not engage in combat or use any skill, ability, or spell. If a repelled creature cannot retreat any further and the caster approaches the creature within the ten feet, the  spell will fail and is lost. Note that some creatures that possess the ability “Innate Repel” may use both hands on two separate targets."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView629" />
+
+                        <TextView
+                            android:id="@+id/textView633"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Claws.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell causes the target to grow a vicious set of claws. These claws act as natural weapons,  cannot be disarmed and grant the natural ability to use them. They swing for 2 Normal and may be used to block,  as well as attack. Strength bonuses, either natural or spell-granted, will add to the damage as well, but other  enhancers do not affect the damage of the Claws. If this spell is cast on another the caster is responsible for  providing the weapon reps or the spell fails, likewise if the claw reps are dropped the spell will end. Magic may  be cast while claws are active, however spells cannot be touch-cast through the claws. You may temporarily  release a claw rep in order to cast spells via packets. The Claws spell is stackable. If a second set is cast while the  first is still active, the duration will not reset but the claws will gain +1 damage and become silver. If a third set is  cast while the second is still active, they again another +1 damage and become magical. Additional castings will  each add another +1, but the duration will always be equal to the original casting."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView632" />
+
+                        <TextView
+                            android:id="@+id/textView635"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Moonlight Mantle.&quot;\nDuration: 5 days or until used\n\n\t\tDescription: This spell envelops the target in an invisible cloak of Magical Body points, providing an additional 6  Body points. For all intents and purposes, these Body points behave entirely like real Body points except for the  fact that they can be dispelled. Once they are gone, they cannot be healed and the spell ends. There are no flashes or any other perceptual indications that a Moonlight Mantle is present in combat. Such mantles count as Body  when the recipient is struck by effects that bypass armour.\n\n\t\tAdditionally, a Moonlight Mantle may be intentionally used-up in order to heal a target victim (as per Healing  Magic). The Mantle will heal an amount in Body points equal to how many points remain within the Mantle. The  Mantle may not be partially used in this manner; it is all or nothing. Once the Mantle has been used to heal  someone the spell is terminated and the Mantle is gone. The incant to transfer a Moonlight Mantle is “Transfer Moonlight Mantle” and may only be touch-cast."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView634" />
+
+                        <TextView
+                            android:id="@+id/textView638"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Bind.&quot;\nDuration: Line of sight\n\n\t\tDescription: This spell causes the target to have their hands pulled to their side and be bound there by a glowing  white band of Druidic energy one inch in thickness. The band is impervious to damage from weapons or spells,  but it may be negated with a Dispel Magic (which will also affect the person who is bound). The Bind may be cut  through with a 4 minute count. The bound target may rip free from the Bind with +4 Strength or greater. Doing so  will cause the target to take 4 points of damage straight to Body regardless of threshold. It takes three seconds to  rip free. While bound, a person may walk, run, and otherwise move freely. They cannot however, use their hands  in any means and therefore cannot cast, fight, or use the vast majority of their skills. The Magic of the Bind also  shorts out any attempts by the target to touch cast on themselves, but Magic items may be used. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView637" />
+
+                        <TextView
+                            android:id="@+id/textView640"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Root Lance. 15 Normal!&quot;\nDuration: Instant\n\n\t\tDescription: This spell will cause a sharp, barbed root to tear from the ground and up into the target’s body. This  packet-delivered attack will cause 15 points of Normal damage upon a successful strike and if damages the target  into Body it will also affect them with a Magic Snare. Root Lance cannot be cast upon stone floors, inside man-made buildings or wherever there is no dirt, earth or soil. This is considered a physical attack and is defended  against with protections such as Magic Armour. If the Spellstrikes a shield, it is negated as per other physical  attacks and may even be parried."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView639" />
+
+                        <TextView
+                            android:id="@+id/textView642"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Regeneration.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This healing spell will restore 1 Body point per minute for a period of 10 minutes. The first Body  point is healed 60 seconds after the spell is cast, the next 60 after that, etc. Although this spell will not give the  target more Body points than their maximum, if during the 10 minutes the target reaches full Body and is  wounded again, the regeneration will continue for the remaining duration. Regeneration will still continue to work  if the target drops into their Bleed Count but not the target’s Death Count. While under its effects the target must  state “Visibly Regenerating” every minute that they heal a Body point from the spell and whenever a new person approaches them."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView643" />
+
+                        <TextView
+                            android:id="@+id/textView645"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Swarm.&quot;\nDuration: Indefinite (special)\n\n\t\tDescription: This spell surrounds the target with a swarm of biting insects. These insects will cause the target to  be unable to cast spells. Any damage calls from the target will be at -1 the normal damage, to a minimum of 1  damage, and every 10 seconds the target will take 1 Body damage. These effects will continue until the target (or  an ally) spends ten seconds batting away the insects. Multiple targets swatting will not lower this count. This spell  has no effect against non-living targets, such as Undead, golems and incorporeal Spirits. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView644" />
+
+                        <TextView
+                            android:id="@+id/textView648"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Release.&quot;\nDuration: Instant\n\n\t\tDescription: This spell will immediately release the target from any magical or natural bindings that are  physically constricting the target in any manner. All bindings will be removed, even if more than one has been  applied. It does not function against “man-made” bindings such as manacles, nooses or chains and will not open doors."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView647" />
+
+                        <TextView
+                            android:id="@+id/textView650"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Strength of the Bear.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell will grant its target +3 Strength for an hour. This strength bonus will stack with any other  strength bonus the target may have, but cannot be stacked with itself."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView649" />
+
+                        <TextView
+                            android:id="@+id/textView653"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Barkskin.&quot;\nDuration: 5 days or until used\n\n\t\tDescription: This spell gives the target 40 points of Magical armour. This armour is Magical in nature and may  not be Refit. Magical armour is removed before physical armour. While the target has Barkskin on their spirit,  they suffer from a x2 vulnerability to Fire damage. If the armour is Breached the remaining fire damage will carry over to the target."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView652" />
+
+                        <TextView
+                            android:id="@+id/textView655"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Web.&quot;\nDuration: Line of sight\n\n\t\tDescription: This spell creates a Magical Web that immobilizes the target from the neck down. Creatures so trapped are unable to do anything with the exception of talking, reading, and skills that require no movement.  Trapped creatures may also activate Magical items if the items are touching them, though few items would be  beneficial, for the victim cannot use their hands to direct the activated item by throwing packets. Creatures with a  Strength bonus of +6 may rip free from the web, taking three seconds and doing 6 Body in the process regardless  of threshold; otherwise they may be cut out which takes 6 minutes of time to completely remove the sticky  strands. Webbed creatures cannot be moved."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView654" />
+
+                        <TextView
+                            android:id="@+id/textView658"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Nature’s Restoration.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell affects any living creature which can be put to sleep. The creature must be willing unless  they are a normal animal, in which case the spell works regardless. If successful, the spell puts the target into a  restorative sleep for 10 minutes. If the target sleeps for the full 10 minutes, they are completely healed, cured of  any diseases or toxins and may re-grow one lost limb. While asleep, any diseases or toxins in their system will be  paused and will resume as normal after the target wakes up prematurely. Physicians may operate on the target  without waking them. This spell does not halt a Bleed Count or a Death Count. The target may be awoken by any  means that will wake someone from a magical sleep."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView657" />
+
+                        <TextView
+                            android:id="@+id/textView666"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Faerie Fire.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell causes an aura of light to instantly be  created around the struck target. The light emanates from the  victim, thereby following them wherever they go, lasting 10  minutes in duration. The light inflicts the cumulative effects of  x2 damage from all attacks, the inability to be healed in any  form, and also causes blindness. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView662" />
+
+                        <TextView
+                            android:id="@+id/textView668"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to grant Suspension.&quot;\nDuration: 5 days\n\n\t\tDescription: Suspension places a target that is in their Death  Count in a state of suspended animation until the spell has ended  or until the caster wishes to terminate the spell. Dispel Magic  will continue the Death Count where it left off. This spell does  not make the target immune to magic, so a Life spell will work on it."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView667" />
+
+                        <TextView
+                            android:id="@+id/textView660"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I invoke Nature to inflict Polymorph Other 'Type'.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell will briefly turn its target (and all their possessions) into a small animal in size and  appearance. The caster may choose what kind of animal in 'Type', but it should be roughly the size of a chicken  or a small dog. This, understandably, causes the mind of the target to become muddled. The target must sit down  for the duration of the spell and can use no skills. The target may interrupt killing blows, and other forcible  gestures that require a count, but cannot otherwise move or defend themselves. The target will keep their normal  Body but for the duration of the spell they will have no armour. This spell only works on living creatures. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView659" />
+
+                        <TextView
+                            android:id="@+id/textView621"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView620" />
+
+                        <TextView
+                            android:id="@+id/textView626"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView625" />
+
+                        <TextView
+                            android:id="@+id/textView631"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView630" />
+
+                        <TextView
+                            android:id="@+id/textView636"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView635" />
+
+                        <TextView
+                            android:id="@+id/textView641"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView640" />
+
+                        <TextView
+                            android:id="@+id/textView646"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView645" />
+
+                        <TextView
+                            android:id="@+id/textView651"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView650" />
+
+                        <TextView
+                            android:id="@+id/textView656"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView655" />
+
+                        <TextView
+                            android:id="@+id/textView661"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView660" />
+
+                        <TextView
+                            android:id="@+id/textView622"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Goodberry"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView621" />
+
+                        <TextView
+                            android:id="@+id/textView624"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Snare"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView623" />
+
+                        <TextView
+                            android:id="@+id/textView627"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Charm Animal"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView626" />
+
+                        <TextView
+                            android:id="@+id/textView629"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Repel"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView628" />
+
+                        <TextView
+                            android:id="@+id/textView632"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Claws"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView631" />
+
+                        <TextView
+                            android:id="@+id/textView634"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Moonlight Mantle *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView633" />
+
+                        <TextView
+                            android:id="@+id/textView637"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Bind"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView636" />
+
+                        <TextView
+                            android:id="@+id/textView639"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Root Lance"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView638" />
+
+                        <TextView
+                            android:id="@+id/textView643"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Regeneration"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView641" />
+
+                        <TextView
+                            android:id="@+id/textView644"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Swarm"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView642" />
+
+                        <TextView
+                            android:id="@+id/textView647"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Release"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView646" />
+
+                        <TextView
+                            android:id="@+id/textView649"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Strength of the Bear"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView648" />
+
+                        <TextView
+                            android:id="@+id/textView652"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Barkskin *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView651" />
+
+                        <TextView
+                            android:id="@+id/textView654"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Web"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView653" />
+
+                        <TextView
+                            android:id="@+id/textView657"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Nature's Restoration"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView656" />
+
+                        <TextView
+                            android:id="@+id/textView659"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Polymorph Other"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView658" />
+
+                        <TextView
+                            android:id="@+id/textView662"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Faerie Fire"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView661" />
+
+                        <TextView
+                            android:id="@+id/textView667"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Suspension"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView666" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

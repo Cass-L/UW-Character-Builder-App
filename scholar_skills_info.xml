@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".ScholarSkillsInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Scholar Skills"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".ScholarSkillsInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+                        <TextView
+                            android:id="@+id/autoRacialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Mysticism"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/autoRacialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThe art of the Mystic is one that has both amazed and frightened the unaware since the dawn of time. Those with  the power of mysticism are people who through either luck (or curse) of birth, careful study or some combination  thereof, have found themselves with the ability to tap into the ether of the Deadlands around them. A Mystic  excels in the contacting of lost spirits or ghosts to ask for, coerce, steal, or outright force their aid. A powerful  Mystic can walk the lands of the Dead.\n\n\t\tMysticism skills must be purchased in order of level and no level may be purchased more than once. A Mystic  who finds themselves close to final death finds themselves with easier access to the Deadlands. If a Mystic has no  free deaths left on their character card, they will be given two additional uses of any one skill of their choice that  they have purchased in the Mysticism skill tree. A Mystic with one free death will receive one additional use.  These free uses will be given out as once per event tags at logistics. Death mid event does not grant you additional  uses until your next logistics.\n\nLevel 1: Dead Sight\nThis power allows the Mystic to peer through the thin veil between the Deadlands and the lands of the living,  viewing the lost souls as they wander. The ability is always active and will allow the mystic to view lost spirits  and ghosts which are normally invisible to the mundane eye. This does not allow verbal communication, nor does  it bind or force the ghost to acknowledge the Mystic’s presence. Dead Sight is used by allowing the Mystic to see  NPCs wearing orange glow sticks. Lastly, Dead Sight also allows the Mystic to see and identify Spirits that are  resurrecting inside a resurrection circle, Henge or similar location.\n\nUnfortunately, opening one’s self to the Spirit world does have its disadvantages. Ghosts, spirits and other  creatures from beyond the veil that cannot normally affect the world of the living, may have some degree of  influence over the Mystic. Staring into the void, as they say, causes the void to stare back into you.\n\nLevel 2: Augury\nThis skill allows the Mystic to consult with the Spirits of the dead via a medium of their choosing and to request  insight into a specific future or past event. This medium may be anything the Mystic chooses ie: reading the stars,  entrails, bones, tea leaves, etc. and must be properly role-played for at least 10 minutes.\n\nSpirits of the dead are not always willing to give away their secrets and, more often than not, the answer a Mystic  receives will be cryptic and clouded in mystery. It is said that the more direct the question is, the less likely it will  be to receive a clear response. Rather than ask, “Who created the Lich on the Ridge?” a clever Mystic might ask,  “Where might I find somebody who knows information on the Lich on the Ridge?” Rarely will any Augury ever  reveal information about a crime or wrongdoing committed by another player character, nor will it ever ‘give’ you  the answers to any current plotline. Augury should be used as a tool for roleplaying and at most, story hints, not as  a replacement for honest detective work.\n\nThis ability is usable once per day and requires a Shaper to marshal the results. If there is no Shaper available at  the time, the augury may still be performed and the answer will arrive at a later time, through a dream or vision.\n\nLevel 3: Eyes of the Soul\nThis ability allows the Mystic to touch the eyes of a corpse or person who has recently Resurrected and attempt to  lure that lost Spirit into retelling how it died. Any corpse that has suffered final death, or any living creature that  has died within the last 5 days, may be touched with Eyes of the Soul, as long as it has not already been the target  of Eyes of the Soul (for that death). Once used, Eyes of the Soul gives the Mystic a 1 in 10 chance to ‘remember’ the last minute of the target’s death, but sacrifices that Mystic’s eyes in the process. This manifests in total  blindness for the Mystic for the duration of 1 hour once the answer has been delivered. Nothing short of Ritual  magic or Chemistry will restore their sight. Shortly after use of this power the Mystic should, when convenient,  find a Shaper to marshal the 1 in 10 chance, the result of which is kept secret from the Mystic. Within 12 hours a  Shaper shall find the Mystic to deliver the blindness effect and, if applicable, the answer. This ability is usable  once per day.\n\nLevel 4: Foresight\nUsing their fortune-telling medium, a Mystic can encourage the spirits to aid them by providing a subconscious  vision of a danger in the near future. After a 10 minute reading of the Mystic’s choice (tarot cards, casting of  runes, reading of entrails etc.) the Mystic can implant into the subconscious of a target, or themselves, some small  foresight about upcoming danger. A target with the power of a Foresight reading can call a defense of the  appropriate type (call: “Foresight!”) to the first trap they are subjected to or ignore the Surprise attack prefix for  the first Surprise attack to strike them, which ever happens first. This reading will last 24 hours and does not  disappear at reset. Only one Foresight effect can be on a target at a time. This ability is usable once per day. \n\nLevel 5: Manifest\nA Mystic with Manifest has obtained power within the Deadlands. When the Mystic has died and begun their  Death Count, they may rise up as a spirit, visible to all those around them, for the remainder of their Death Count.  In this state the Mystic cannot speak, make noise, move more than 10 feet away from their corpse or interact  physically with anything in the living world. They can frantically wave their arms and move about in an attempt  to grab the attention of those that might see them. During this time, they can also inform those around them, Out-of-Game, that they see a translucent glowing spirit, recognizable as their character. Furthermore, while in this  state a Mystic may also speak and hear other ghosts in the area but only in whispers. However, this state also puts  the Mystic in great potential danger.\n\nAs a ghost, the Mystic is subjected to any detrimental effects that may happen as a result of being in the  Deadlands. This may include possession, assault from other malicious ghosts or spirits and other unimaginable horrors. Should the Mystic become the target of a Life spell, their spirit is immediately sucked back into their  body and any benefits from Manifest end. This ability is usable once per day.\n\nLevel 6: Grim Counsel\nThe Mystic now possesses the ability to speak directly to a spirit or ghost. They may hear spirits in whispers and  may whisper back to them if the spirit is roaming the land of the living. In the Deadlands, a Mystic may speak to  and hear the spirit in a normal speaking voice. This part of the ability is considered always active.\n\nIn addition, the Mystic may use their Augury in conjunction with Grim Counsel to attempt to receive the vision  from a specific spirit. The Mystic must inform the Shaper marshalling the Augury that they possess Grim Counsel  and the name or approximate description of the Spirit they wish to receive the vision from. This can make a vision  clearer or completely skewed, depending on who the Mystic chooses. This part of the ability is usable once per  day.\n\nLevel 7: Seance\nThe Mystic is now skilled enough to gather other mystically inclined individuals together to make contact with a  spirit from the Deadlands. The Mystic must use a crystal ball and several other Mystics to use this ability. The  crystal ball must be repped, but does not require a tag. By sitting in a circle around the crystal ball and holding  hands, the Mystic using Séance can attempt to summon forth a specific spirit to answer 3 questions. This starts at  a base 1 in 10 chance. Every Level 2 or higher Mystic increases the odds by +1 in their favor. Each additional  Mystic must have a free use of Augury to participate. After a 5 minute RP rite of the lead Mystic’s choosing, the  Shaper presiding will marshal the result. The rite must start by naming the spirit they wish to summon and must  include all Mystics involved chanting the same phrase three times. Success will summon the spirit, bound within  the circle of held hands. If the linked hands should sever, the spirit will immediately return to the Deadlands.  While present, the spirit will be compelled to answer the next 3 questions spoken to it by the lead Mystic as  truthfully as it is able within the next 10 minutes. Upon completion of the third question, or at the end of the 10  minutes, the spirit will depart. During the 10 minutes, all Mystics involved in the Séance will hear the faint  whispers of the dead who walk the Deadlands, pleading with them for their lives or raging against their own deaths.\nFailure in the initial odds could cause the spirit to become malicious, possess one of the Mystics, or not appear at  all. This is decided by the presiding Shaper. Regardless of whether the Séance succeeds or fails, all Mystics  involved in the Séance will lose one use of Augury as if it had been expended. This ability is usable once per day.\n\nLevel 8: Unfetter\nA Mystic who has delved this deep into the Deadlands is no longer is tied as tightly to their mortal coil. They may  use Manifest without the 10-foot restriction to their body so long as they remain within line-of-sight of their  corpse. In order to do so, they must leave behind a large white cloth with the words: “You see 'Character  Name'’s body” written upon it noticeably in some fashion. While the Mystic is using Manifest, that cloth  represents their body. All tagged items, except those which are spirit-linked, must be placed on top of the cloth to  represent them being in the possession of the body. As with Manifest, an orange glow stick should be worn and  visible by the spirit as it travels the mortal plane. Anything living that comes within 10 feet of the Mystic will feel  an unnatural chill. Be warned however – as time passes in the Deadlands the visage of the spirit will turn from  living to Undead. After 1 minute, the spirit’s skin will begin to fall off, their hair will fall out and they will slowly  become skeletal, though in appearance only. If a Mystic using Unfetter spends more than the duration of their  Death Count within the Deadlands, their spirit will succumb, causing the Mystic to be ejected back into the mortal world. If at any time the Mystic receives a Life affect their spirit will rush back into their corpse and return to life  as normal. This ability is considered always active.\n\nLevel 9: Haunt\nThis ability allows the Mystic to attempt to have a spirit choose their home as their connection to the mortal  realm. The home must be an unmoving structure. The Mystic must expend a use of Séance and Augury to begin  this rite and a Shaper should be present to witness it. First, a doll must be placed at or above the entrance to the home and must remain there while the Haunt is active, although it may be replaced if taken away. The Mystic then must prepare any number of tagged items in a bowl inside their home (tent, cabin, etc.) while chanting to the  Deadlands. They must explain to the spirits why they have chosen each item and its significance. The Mystic may  attempt to summon a good-natured spirit they know by providing a name. Otherwise, the spirit summoned will be  random. Gifts of significance to a specific spirit are best, whereas gifts of good will, beauty, or quality are best for  generic spirits. Within 12 hours the presiding Shaper will determine whether or not the offering is appropriate to  the spirit in question. If the offering is accepted, the domicile will be haunted by the spirit. All uses of Séance  performed within the haunted home will have their odds increased by an additional +1 in their favor. Other small  acts may occur: The Mystic may find their house cleaned seemingly by itself from time to time, or perhaps an  intruder will be scared away, or increased success in ritual magic casting will occur. All further effects are purely  RP based and are decided by the presiding Shaper.\n\nIf the spirit finds the offerings offensive, the opposite will happen. The home will become haunted by a malicious  poltergeist that seeks to make the Mystic miserable for disturbing its afterlife. No Mystic abilities may be used  within the home and bad luck shall befall those within its walls. Again, these further effects are RP based and  decided by the presiding Shaper.\n\nA Haunt will last 1 year before the spirit is pulled back into the Deadlands. At all times during a Haunt, the barely  audible laughter of children can be heard inside the home, as their spirits play from within the Deadlands. A  Haunt may be ended early by casting an Exorcism spell into the home the spirit is haunting. This act is considered  hostile by the spirit and, while it will send them back to the Deadlands, it may have repercussions later. This  ability is usable once per day, but only one Haunt may be active per Mystic at any time.\n\nLevel 10: Betwixt and Between\nMystics of this level of skill are the mediums of legend. Their sight into the Deadlands and mastery of the  spiritual arts are unmatched. Their very spiritual presence is caught in an endless cycle between life and death.\n\nThe Mystic gains immunity to Forget effects and has a 50% chance of remembering their deaths. Ghosts and other  spirits will now treat and view them as if they were a spirit themselves, even if they still walk in the land of the  living. They will be more inclined to speak with the Mystic, but are in no way compelled or forced to.\n\nThe Mystic has also gained mastery over the borders of the living and the dead. A Mystic of this caliber has  learned to slow the rate at which their spirit fades into the afterlife, effectively doubling the time of their Death  Count. This extra time will only function while the Mystic is actively using the ability Manifest and only if they  hold a lantern, to symbolically ward off the touch of death. If the Mystic ends Manifest, any remaining time on  Betwixt and Between will be lost and the Mystic must resurrect. \n\n\t\tThese abilities are considered always on."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/racialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Demonic/Angelic Arts"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfo" />
+
+                        <TextView
+                            android:id="@+id/racialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tDemonic/Angelic Arts allow the user to identify and recognize the various holy and unholy creatures that exist on  all the planes of the Heavens and Hells. This skill may only be used to answer the following questions:\n\n“Are you a Demonic/Angelic creature?”\n“What kind of Demon/Angel are you?”\n“Are you a greater or lesser  Demon/Angel?”\nAngelic only: “Which God do you serve, if any?”\nDemonic only: “Are you currently under contract?”\n\n\t\tThese questions are asked out of game, not to the Demon or Angel directly. They represent the player’s  knowledge of the subject. If a character with this skill overhears a question and answer, they know the answer as  well. Many Demonic and Angelic creatures possess great intelligence. They are very crafty and often devious.  They may devise ways to hide from identification by Demonic/Angelic Arts.\n\n\t\tCharacters with Demonic/Angelic Arts take 2 less damage (to a minimum of 1) from attacks by their identified  target no matter the type of attack. Only one target may be active at a time. To change targets, the user may ask  one of the questions above, or simply state “Demonic/Angelic Arts 1, 2, 3” if the new target has already been identified"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tNecromantic Arts allows a user to recognize and identify whether or not standard identifiable signs of Undeath  are present in an individual. It will not verify that something is alive, only whether or not it is Undead. This skill  may only be used to answer the following questions:\n\n “Are you Undead?”\n “What kind of Undead are you?”\n “Are you greater or lesser Undead?”\n “How much damage have you taken (only to Undead)?”\n\n\t\tCharacters with Necromantic Arts take 1 less damage (to a minimum of 1) from attacks by their identified target  no matter the type of attack. Only one target may be active at a time. To change targets, the user may ask one of  the questions above, or simply state “Necromantic Arts 1, 2, 3” if the new target has already been identified."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintStart_toStartOf="@+id/textView23"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Necromantic Arts"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfo" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows a user to check an individual’s vital signs. Anatomy can be used on any living creature to glean information about their health and physical state. To use Anatomy, the player must place both hands on the torso of the target, call out “Anatomy 1, Anatomy 2, Anatomy 3”, and then ask the player, out of game, one of the  following questions. The only questions that can be asked are:\n\n“Are you alive?”\n“Are you in your bleed count?”\n“Are you in your death count?”\n“Are you paralysed?”\n“Are you asleep?”\n“Are you unconscious?”\n“Is there  alcohol in your system?”\n“Is there a toxin in your system?”\n“Is there a non-Magical disease in your system?”\n“How much damage have you taken?”\n\n\t\tThis skill is usable at will."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView34"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Anatomy"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/level3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tAllows the user to bind wounds sufficiently to stop bleeding and heal some minor wounds. The process takes 1  minute to use and as long as it is being used, the target’s Bleed Count is halted. All living entities are considered  valid targets of this skill. If First Aid is interrupted during the process, or if the wounded target moves or is moved  in any way, the skill fails and the wounded target must continue their Bleed Count from where they left off. First  Aid may be attempted again if the interruptions have ceased and the target made immobile. After a successful 1  minute of First Aid, the wounded target is healed to zero Body, bringing them to unconsciousness and halting their bleeding.\n\n\t\tFirst Aid also allows the character to bandage a target, healing a minor amount of damage. For this portion of the  skill, the player must carry with them real phys-reps to use as bandages (strips of cloth will do). The process of bandaging a target will heal the target by one Body for each minute of bandaging up to the maximum allowed by  their physician level. If the user has no levels in physician, then they may only heal one Body. A target in their  Bleed Count cannot be bandaged.\n\n\t\tThe bandaging of the target, after the bandaging is done, is only for aesthetic purposes and the bandages can be  removed and returned whenever the target wishes. The player cannot bandage the same target more than once a  day, although the target may receive bandages from another player. If the player does not bandage the target for  their maximum allowed by their Physician level, the remainder is lost for the day. It will not affect Undead in any  way, with the exception that a player with Necromantic Arts may use this skill to heal Risen in Undead form. A  player can only activate First Aid on one person at a time. You must be touching the torso of the target to First Aid them. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3InfoTitle"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/level3InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView838" />
+
+                        <TextView
+                            android:id="@+id/level3InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="First Aid"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView106"
+                            app:layout_constraintStart_toStartOf="@+id/textView106"
+                            app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+                        <TextView
+                            android:id="@+id/level6Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tAfter having mastered the art of Anatomy and First Aid, a character is ready to uncover the secrets of the living  body. This skill gives a character a much broader depth understanding of the workings of First Aid and  emergency surgery. The Physician skill grants its users a number of abilities based on the level of Physician they  possess. In order to utilize the higher levels of medicine, the Physician must carry with them a doctor’s bag and  medical tools of the trade. These do not require a tag. Every level of Physician will increase the amount of Body  healed through First Aid bandaging by one, to a maximum of 11. If they have Demonic/Angelic Arts, they can  use their skills on Demons and Angels. If they have Necromantic Arts, they can use their skills on Risen in their  Undead form. If they have Tradesman (Veterinarian), they can use their skills on Animals.\n\nLevel 1: Barber\nThe Physician may perform First Aid on a moving target and as soon as First Aid has started, extends the Bleed  Count of that target by an extra 1 minute. \n\nLevel 2: Pharmacist\nThe Physician may identify the type of non-Magical disease afflicting a target and cure it. Curing a non-Magical  disease requires 1 minute of roleplaying to accomplish and cannot be used on a specific patient more than once  every 5 days.\n\nLevel 3: Physicker\nThe Physician may identify the type of toxin poisoning a target and purge the toxin from the target’s system. The  process takes 1 minute to complete and the target must be lying down, unmoving for the skill to succeed. If the  physician is interrupted, either they or the target takes damage, or the target moves, the skill fails and cannot be  attempted again for 5 days. If the target resurrects, the skill can be attempted again. If successful, this skill will  purge any alcohol or Alchemical toxin from the target’s system. This skill is usable once per patient every 5 days.\n\nLevel 4: Doctor\nThis Physician has mastered the art of medieval medicine. At this level the Physician can perform minor surgeries  such as setting broken limbs, bloodletting, and removal of foreign objects. The Physician can now use Anatomy  to check for foreign objects within a patient. A surgery can only be performed on a willing or unconscious target. A willing target may be conscious during surgery if they have Self Mutilate. The Physician may render a willing  target unconscious for the surgery. Minor surgeries take 10 uninterrupted minutes to perform and will leave the  patient unconscious for 30 minutes after the surgery. Surgeries can only be performed once per patient every 5  days. Further attempts at surgery will act as a Killing Blow towards the target. If the target resurrects, another  surgery can be attempted normally.\n\nThe Physician has also learned a thing or two about death. Given enough time, a Physician can extend a dying  target’s Death Count by an additional 5 minutes on top of the amount of time already remaining. This requires 1  minute of role-played CPR which will not pause the Death Count. Neither the Physician nor the patient can be  moved during CPR.\n\nLevel 5: Surgeon\nAt this level, the Physician can now consider themselves an expert on the subjects of medicine. A Physician is  able to perform major surgeries on any living target, including the re-attachment lost limbs (if the limb is present),  removal of foreign life forms such as parasitic eggs, and organ transplants. The Physician can now use Anatomy  to check for foreign life forms within a patient. The same rules apply for major surgeries as minor ones.\n\nLevel 6: Stasis Director\nIntensive Care: At this point the physician with the aid of a fellow physician may postpone death indefinitely. The two physicians  must actively role play keeping the patient’s vitals in check. The patient’s Death Count continues to count down  from the extended five minutes, but will stop one second before dissipation as long as the physicians remain  65 working, uninterrupted. If either physician is interrupted, the patient may not be extended again until their next  Death Count.\n\nThis skill is an extension of CPR with further roleplay, thus this skill may be used concurrently with Doctor if its  conditions are met. The procedure may be handed off to another level 6 physician or greater on a ten second count  of “transfer” role play as long as the nurse physician remains active. The assisting physician requires a minimum  physician level of one and acts as a nurse. This is usable once per death per person.\n\nLevel 7: Vital Warden\nBody Cast: The physician now gains the ability to perform a major surgery which restores all the targets hit points. This  follows all the rules of a standard major surgery.\n\nLevel 8: War Surgeon\nFocused Physician: The physician has experienced more than their fair share of blood and gore and the stresses associated with  dealing with the wounded. As such, they may work more quickly when healing their patient without assistance. The physician now bandages at a rate of 2 points per minute when working alone, maintaining surgical focus. All  other standard bandaging rules apply.\n\nLevel 9: Specialist\nMultitask: Through countless medical endeavors, the physician has finally mastered the ability to watch over their patients’ vitals and perform concentration intense tasks.\n\nThe physician may now use intensive care single-handedly as well as perform anatomy checks while using any  other physician skill.\n\nLevel 10: Master Physician\nExperienced Hands: At this point the physician has become a true master of the skill, performing their art with utmost grace and speed.  Because of this great skill the patient needs far less time to recover, and their body is left strong enough that the  physician may take further medical action with lessened risk.\n\nThe total time it takes the physician to perform major and minor surgeries, and the period of unconsciousness in  the patient is now halved. The patient may also have a second surgery performed upon them within five days by  the same physician, but is rendered unconscious for 30 minutes and upon awaking receives -2 strength for an  hour. The first must be complete successfully before the second one may be performed. If interrupted, a second  surgery acts as a Killing Blow as usual.\n\nAdditional Requirements: To gain these benefits, the physician must be in an environment with adequate lighting  and have a surface free of debris for the patient to lie on."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6InfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/level6InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView839" />
+
+                        <TextView
+                            android:id="@+id/level6InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Physician"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3Info"
+                            app:layout_constraintStart_toStartOf="@+id/level3Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level3Info" />
+
+                        <TextView
+                            android:id="@+id/level9Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the character to read and write. Without this skill, you are illiterate. Without this skill a person  can only know the letters to their own name and can count on their fingers."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level9InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level9InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level9InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Read and Write"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6Info"
+                            app:layout_constraintStart_toStartOf="@+id/level6Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level6Info" />
+
+                        <TextView
+                            android:id="@+id/textView113"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill is the same as Read Magic, except that it allows the user to cast Battle Magic spells from spell level 5 to level 9."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView114"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView114"
+                            app:layout_constraintTop_toBottomOf="@+id/textView841" />
+
+                        <TextView
+                            android:id="@+id/textView114"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Read Advanced Magic"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9Info"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/level9Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level12Info" />
+
+                        <TextView
+                            android:id="@+id/level12Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the user to cast Battle Magic spells from scrolls. They are limited to casting only Battle Magic  from spell level 1 to level 4. To activate the scroll, the caster must have enough light to properly read the scroll.  They must then read and speak the incantation of the spell. When used, a Battle Magic scroll is consumed and destroyed."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level12InfoTitle"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/level12InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView840" />
+
+                        <TextView
+                            android:id="@+id/level12InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Read Magic"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9Info"
+                            app:layout_constraintStart_toStartOf="@+id/level9Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level9Info" />
+
+                        <TextView
+                            android:id="@+id/textView117"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the user to read Ritual Magic scrolls."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView118"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView118"
+                            app:layout_constraintTop_toBottomOf="@+id/textView842" />
+
+                        <TextView
+                            android:id="@+id/textView846"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill demonstrates an advanced understanding of ritual magics. The player may now cast rituals from the  Advanced Spheres, including Enchantment, which do not have Battle Magic spells."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView118"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView118"
+                            app:layout_constraintTop_toBottomOf="@+id/textView845" />
+
+                        <TextView
+                            android:id="@+id/textView118"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Read Ritual Magic"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView113"
+                            app:layout_constraintStart_toStartOf="@+id/textView113"
+                            app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+                        <TextView
+                            android:id="@+id/textView844"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Advanced Ritual Casting"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView113"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView113"
+                            app:layout_constraintTop_toBottomOf="@+id/textView117" />
+
+                        <TextView
+                            android:id="@+id/textView119"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill will allow an Elementalist to attune themselves to an additional Element. This additional attunement  may be chosen when casting spells that require one. Example: A Fire Elementalist may purchase Elemental  attunement and choose Ice. The Elementalist can now choose between Ice or Fire when casting spells that require  an Elemental type such as “'type' Strike.” This skill can be purchased multiple times to grant access to additional  Elements. The four elements are Fire, Ice, Stone and Lightning."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView120"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView120"
+                            app:layout_constraintTop_toBottomOf="@+id/textView843" />
+
+                        <TextView
+                            android:id="@+id/textView120"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Elemental Attunement"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView117"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView117"
+                            app:layout_constraintTop_toBottomOf="@+id/textView846" />
+
+                        <TextView
+                            android:id="@+id/textView838"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Anatomy"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/level3InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView839"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires First Aid"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/level6InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView840"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Read and Write"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/level12InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView841"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Read Magic"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView114" />
+
+                        <TextView
+                            android:id="@+id/textView842"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Read Advanced Magic"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView118" />
+
+                        <TextView
+                            android:id="@+id/textView845"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires 1 x Ritual Slot"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView844" />
+
+                        <TextView
+                            android:id="@+id/textView843"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Elemental Sphere"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView120" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

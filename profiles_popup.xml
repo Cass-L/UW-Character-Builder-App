@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".ProfilesPopup">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Profiles"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".ProfilesPopup"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/centerGuideline5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.28" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/centerGuideline6"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".56" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/centerGuideline3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".84" />
+
+                        <TextView
+                            android:id="@+id/profile1Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/profile2Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile1Name" />
+
+                        <TextView
+                            android:id="@+id/profile3Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile2Name" />
+
+                        <TextView
+                            android:id="@+id/profile4Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile3Name" />
+
+                        <TextView
+                            android:id="@+id/profile5Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile4Name" />
+
+                        <TextView
+                            android:id="@+id/profile6Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile5Name" />
+
+                        <TextView
+                            android:id="@+id/profile7Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile6Name" />
+
+                        <TextView
+                            android:id="@+id/profile8Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile7Name" />
+
+                        <TextView
+                            android:id="@+id/profile9Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile8Name" />
+
+                        <TextView
+                            android:id="@+id/profile10Name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race\nClass\n0 Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile9Name" />
+
+                        <Button
+                            android:id="@+id/profile1Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile1Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile1Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile2Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile2Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile2Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile3Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile3Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile3Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile4Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile4Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile4Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile5Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile5Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile5Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile6Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile6Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile6Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile7Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile7Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile7Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile8Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile8Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile8Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile9Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile9Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile9Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile10Save"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Save"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile10Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/profile10Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile1Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile1Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile1Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile2Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile2Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile2Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile3Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile3Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile3Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile4Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile4Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile4Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile5Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile5Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile5Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile6Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile6Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile6Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile7Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile7Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile7Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile8Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile8Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile8Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile9Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile9Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile9Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/profile10Load"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="#AF0101"
+                            android:text="Load"
+                            android:textColor="#E6E6E6"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile10Name"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/profile10Name"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile1Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile1Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile1Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile2Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile2Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile2Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile3Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile3Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile3Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile4Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile4Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile4Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile5Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile5Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile5Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile6Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile6Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile6Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile7Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile7Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile7Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile8Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile8Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile8Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile9Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile9Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile9Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/profile10Delete"
+                            android:layout_width="36dp"
+                            android:layout_height="31dp"
+                            android:background="#00FFFFFF"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/profile10Name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline3"
+                            app:layout_constraintTop_toTopOf="@+id/profile10Name"
+                            app:srcCompat="@android:drawable/ic_menu_delete"
+                            app:tint="#AF0101"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

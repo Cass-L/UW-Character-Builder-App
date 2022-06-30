@@ -1,6 +1,7 @@
 package uwbuilder.underworld.characterbuilder
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +9,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
+import androidx.core.view.get
 import uwbuilder.underworld.characterbuilder.R.*
 
 //Other Value Calls
-var characterRace = "Choose a race"
-var characterClass = "Choose a class"
-var characterVocation = "Choose a vocation"
+var characterRace = "Race"
+var characterCulture = "Culture"
+var characterClass = "Class"
+var characterVocation = "Vocation"
 
 //Int Value calls
 var levelInt: Int = 1
@@ -83,8 +86,10 @@ var groupProfLrgInt: Int = 0
 var profExoticInt: Int = 0
 var groupSpecInt: Int = 0
 var specificSpecInt: Int = 0
+var specTotal: Int = 0
 var slayParryInt: Int = 0
 var slayParryMstrInt: Int = 0
+var slayTotal: Int = 0
 var battlefieldRepairInt: Int = 0
 var crippleInt: Int = 0
 var decapitateInt: Int = 0
@@ -104,8 +109,10 @@ var garroteInt: Int = 0
 var sapInt: Int = 0
 var vitalBlowInt: Int = 0
 var dodgeInt: Int = 0
+var dodgeTotal: Int = 0
 var specificCritInt: Int = 0
 var groupCritInt: Int = 0
+var critTotal: Int = 0
 var executeInt: Int = 0
 var executeMstrInt: Int = 0
 var blindfighterInt: Int = 0
@@ -133,6 +140,7 @@ var readWriteInt: Int = 0
 var readMagicInt: Int = 0
 var rdAdvMagicInt: Int = 0
 var rdRitualMagicInt: Int = 0
+var advRitualInt: Int = 0
 var eleAttuneInt: Int = 0
 var combatWizInt: Int = 0
 var harvestInt: Int = 0
@@ -187,13 +195,9 @@ var slot7Int: Int = 0
 var slot8Int: Int = 0
 var slot9Int: Int = 0
 var ritualInt: Int = 0
+var autoSlotInt: Int = 0
 
 //General Skills (Cost/SelectFrags)
-var raceFragCost = 0
-var cultureFragCost = 0
-var vocationFragCost = 0
-var favoredCost = 0
-var favoredFragCost = 0
 
 var level3Cost = 0
 var level3Select = 0
@@ -235,7 +239,6 @@ var intuitionCost = 0
 var intuitionSelect = 0
 var lootingCost = 0
 var lootingSelect = 0
-var paragonCost = 0
 var paragonSelect = 0
 var possumCost = 0
 var possumSelect = 0
@@ -359,6 +362,8 @@ var rdAdvMagicCost = 0
 var rdAdvMagicSelect = 0
 var rdRitualMagicCost = 0
 var rdRitualMagicSelect = 0
+var advRitualCost = 0
+var advRitualSelect = 0
 var eleAttuneCost = 0
 var eleAttuneSelect = 0
 var combatWizCost = 0
@@ -371,7 +376,7 @@ var refocusCost = 0
 var refocusSelect = 0
 var spellParryCost = 0
 var spellParrySelect = 0
-//Spell Versatility
+var spellVersSkillSelect = 0
 var spellSwitchCost = 0
 var spellSwitchSelect = 0
 
@@ -415,6 +420,7 @@ var slot9Cost = 0
 var slot9Select = 0
 var ritualCost = 0
 var ritualSelect = 0
+var autoSlotSelect = 0
 
 
 class MainActivity : AppCompatActivity() {
@@ -422,6 +428,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
+
+        var load = intent.getStringExtra("load")
 
         //Text View IDs
 //Top Section
@@ -435,6 +443,7 @@ class MainActivity : AppCompatActivity() {
         var characterFree = findViewById<EditText>(id.freeNumEntry)
         var characterSpent = findViewById<EditText>(id.spentNumEntry)
         var characterFrags = findViewById<EditText>(id.fragsNumEntry)
+
 //General Skills
         val level3Name = findViewById<TextView>(id.level3Name)
         val level3CP = findViewById<TextView>(id.level3CP)
@@ -444,6 +453,8 @@ class MainActivity : AppCompatActivity() {
         val level9CP = findViewById<TextView>(id.level9CP)
         val level12Name = findViewById<TextView>(id.level12Name)
         val level12CP = findViewById<TextView>(id.level12CP)
+        val autoRacial = findViewById<TextView>(id.autoRacial)
+        val racialDis = findViewById<TextView>(id.racialDis)
         val racialName = findViewById<TextView>(id.racialName)
         val racialCP = findViewById<TextView>(id.racialCP)
         val bodyText = findViewById<TextView>(id.bodyText)
@@ -464,7 +475,6 @@ class MainActivity : AppCompatActivity() {
         val intuitionCP = findViewById<TextView>(id.intuitionCP)
         val lootingCP = findViewById<TextView>(id.lootingCP)
         val paragonSlotText = findViewById<TextView>(id.paragonSlotText)
-        val paragonCP = findViewById<TextView>(id.paragonCP)
         val possumCP = findViewById<TextView>(id.possumCP)
         val teacherCP = findViewById<TextView>(id.teacherCP)
 
@@ -540,6 +550,7 @@ class MainActivity : AppCompatActivity() {
         val readMagicCP = findViewById<TextView>(id.readMagicCP)
         val rdAdvMagicCP = findViewById<TextView>(id.rdAdvMagicCP)
         val rdRitualMagicCP = findViewById<TextView>(id.rdRitualMagicCP)
+        val advRitualCP = findViewById<TextView>(id.advRitualCP)
         val eleAttuneCP = findViewById<TextView>(id.eleAttuneCP)
         val combatWizCP = findViewById<TextView>(id.combatWizCP)
         val harvestCP = findViewById<TextView>(id.harvestCP)
@@ -584,42 +595,82 @@ class MainActivity : AppCompatActivity() {
 //Button and Spinner View Id
 //Top Section
         val resetButton = findViewById<Button>(id.resetButton)
+        val summaryButton = findViewById<Button>(id.summaryButton)
+        val profilesButton = findViewById<Button>(id.profilesButton)
+        val blanketUp = findViewById<ImageButton>(id.blanketUp)
+        val blanketDn = findViewById<ImageButton>(id.blanketDn)
+        val generalInfoButton = findViewById<ImageButton>(id.generalInfoButton)
+        val generalFragInfoButton = findViewById<ImageButton>(id.generalFragInfoButton)
+        val warriorInfoButton = findViewById<ImageButton>(id.warriorInfoButton)
+        val warriorFragInfoButton = findViewById<ImageButton>(id.warriorFragInfoButton)
+        val rogueInfoButton = findViewById<ImageButton>(id.rogueInfoButton)
+        val rogueFragInfoButton = findViewById<ImageButton>(id.rogueFragInfoButton)
+        val scholarInfoButton = findViewById<ImageButton>(id.scholarInfoButton)
+        val scholarFragInfoButton = findViewById<ImageButton>(id.scholarFragInfoButton)
+        val magicInfoButton = findViewById<ImageButton>(id.magicInfoButton)
         val raceSpinner = findViewById<Spinner>(id.raceSpinner)
         val fragSpinner = findViewById<Spinner>(id.fragSpinner)
         val cultureCheck: CheckBox = findViewById(id.cultureCheck)
         val classSpinner = findViewById<Spinner>(id.classSpinner)
         val vocationSpinner = findViewById<Spinner>(id.vocationSpinner)
 
-        val zeroBuyList = arrayOf("0")
-        val zeroBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, zeroBuyList)
-        val oneBuyList = arrayOf("0","1")
-        val oneBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, oneBuyList)
-        val twoBuyList = arrayOf("0","1","2")
-        val twoBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, twoBuyList)
-        val threeBuyList = arrayOf("0","1","2","3")
-        val threeBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, threeBuyList)
-        val fourBuyList = arrayOf("0","1","2","3","4")
-        val fourBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, fourBuyList)
-        val fiveBuyList = arrayOf("0","1","2","3","4","5")
-        val fiveBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, fiveBuyList)
-        val sixBuyList = arrayOf("0","1","2","3","4","5","6")
-        val sixBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sixBuyList)
-        val sevenBuyList = arrayOf("0","1","2","3","4","5","6","7")
-        val sevenBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sevenBuyList)
-        val eightBuyList = arrayOf("0","1","2","3","4","5","6","7","8")
-        val eightBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, eightBuyList)
-        val nineBuyList = arrayOf("0","1","2","3","4","5","6","7","8","9")
-        val nineBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nineBuyList)
-        val tenBuyList = arrayOf("0","1","2","3","4","5","6","7","8","9","10")
-        val tenBuyListArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tenBuyList)
-        val sphereList = arrayOf("None","Elemental","Healing","Nature","Protections","Psionics","*Necromancy","*Sigil","*Wytchcraft")
-        val sphereArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sphereList)
-        val lightSphereList = arrayOf("None","Elemental","Healing","Nature","Protections","Psionics","*Necromancy","*Sigil","*Wytchcraft","Light")
-        val lightSphereArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, lightSphereList)
-        val darkSphereList = arrayOf("None","Elemental","Healing","Nature","Protections","Psionics","*Necromancy","*Sigil","*Wytchcraft","Dark")
-        val darkSphereArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, darkSphereList)
-        val draconicSphereList = arrayOf("None","Elemental","Healing","Nature","Protections","Psionics","*Necromancy","*Sigil","*Wytchcraft","Draconic")
-        val draconicSphereArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, draconicSphereList)
+        val popupSkillList = arrayOf("")
+        val popupSkillListAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, popupSkillList)
+        val oneBuyList = arrayOf("0", "1")
+        val oneBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, oneBuyList)
+        val twoBuyList = arrayOf("0", "1", "2")
+        val twoBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, twoBuyList)
+        val threeBuyList = arrayOf("0", "1", "2", "3")
+        val threeBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, threeBuyList)
+        val fourBuyList = arrayOf("0", "1", "2", "3", "4")
+        val fourBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, fourBuyList)
+        val fiveBuyList = arrayOf("0", "1", "2", "3", "4", "5")
+        val fiveBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, fiveBuyList)
+        val sixBuyList = arrayOf("0", "1", "2", "3", "4", "5", "6")
+        val sixBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, sixBuyList)
+        val sevenBuyList = arrayOf("0", "1", "2", "3", "4", "5", "6", "7")
+        val sevenBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, sevenBuyList)
+        val eightBuyList = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8")
+        val eightBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, eightBuyList)
+        val nineBuyList = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+        val nineBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, nineBuyList)
+        val tenBuyList = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+        val tenBuyListArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, tenBuyList)
+        val sphereList = arrayOf(
+            "None", "Elemental", "Healing", "Nature", "Protections", "Psionics", "*Necromancy",
+            "*Sigil", "*Wytchcraft"
+        )
+        val sphereArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, sphereList)
+        val lightSphereList = arrayOf(
+            "None", "Elemental", "Healing", "Nature", "Protections", "Psionics", "*Necromancy",
+            "*Sigil", "*Wytchcraft", "Light"
+        )
+        val lightSphereArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, lightSphereList)
+        val darkSphereList = arrayOf(
+            "None", "Elemental", "Healing", "Nature", "Protections", "Psionics", "*Necromancy",
+            "*Sigil", "*Wytchcraft", "Dark"
+        )
+        val darkSphereArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, darkSphereList)
+        val draconicSphereList = arrayOf(
+            "None", "Elemental", "Healing", "Nature", "Protections", "Psionics", "*Necromancy",
+            "*Sigil", "*Wytchcraft", "Draconic"
+        )
+        val draconicSphereArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, draconicSphereList)
 //General Skills
         val level3Spinner = findViewById<Spinner>(id.level3Spinner)
         level3Spinner.isEnabled = false
@@ -631,6 +682,7 @@ class MainActivity : AppCompatActivity() {
         level12Spinner.isEnabled = false
         val racialSpinner = findViewById<Spinner>(id.racialSpinner)
         val bodySpinner = findViewById<Spinner>(id.bodySpinner)
+        bodySpinner.adapter = oneBuyListArrayAdapter
         val strengthSpinner = findViewById<Spinner>(id.strengthSpinner)
         val trapsmithSpinner = findViewById<Spinner>(id.trapsmithSpinner)
         val tradesmanSpinner = findViewById<Spinner>(id.tradesmanSpinner)
@@ -693,7 +745,6 @@ class MainActivity : AppCompatActivity() {
         executeMstrSpinner.isEnabled = false
         val blindfighterSpinner = findViewById<Spinner>(id.blindfighterSpinner)
         val escapeSpinner = findViewById<Spinner>(id.escapeSpinner)
-        escapeSpinner.isEnabled = false
         val riposteSpinner = findViewById<Spinner>(id.riposteSpinner)
         val suckerPunchSpinner = findViewById<Spinner>(id.suckerPunchSpinner)
         val thievesCantSpinner = findViewById<Spinner>(id.thievesCantSpinner)
@@ -714,6 +765,8 @@ class MainActivity : AppCompatActivity() {
         rdAdvMagicSpinner.isEnabled = false
         val rdRitualMagicSpinner = findViewById<Spinner>(id.rdRitualMagicSpinner)
         rdRitualMagicSpinner.isEnabled = false
+        val advRitualSpinner = findViewById<Spinner>(id.advRitualSpinner)
+        advRitualSpinner.isEnabled = false
         val eleAttuneSpinner = findViewById<Spinner>(id.eleAttuneSpinner)
         eleAttuneSpinner.isEnabled = false
         val combatWizSpinner = findViewById<Spinner>(id.combatWizSpinner)
@@ -762,6 +815,8 @@ class MainActivity : AppCompatActivity() {
         slot9Spinner.isEnabled = false
         val ritualSpinner = findViewById<Spinner>(id.ritualSpinner)
         ritualSpinner.isEnabled = false
+        val autoSlotSpinner = findViewById<Spinner>(id.autoSlotsSpinner)
+        autoSlotSpinner.isEnabled = false
 
         //Reset Button
         resetButton.setOnClickListener() {
@@ -781,7 +836,9 @@ class MainActivity : AppCompatActivity() {
             vocationFragsInt = 0
             favoredInt = 0
             favoredFragsInt = 0
-            
+
+            characterVocation = "Vocation"
+
             characterBlankets.setText("0")
 
             calculateLevelbyBlankets()
@@ -801,12 +858,278 @@ class MainActivity : AppCompatActivity() {
             characterFrags.setText("" + characterFragsInt)
         }
 
+        //Profiles Button
+        profilesButton.setOnClickListener() {
+            val intent = Intent(this, ProfilesPopup::class.java)
+
+            //Character values
+            intent.putExtra("characterRace", characterRace)
+            intent.putExtra("characterCulture", characterCulture)
+            intent.putExtra("cultureFragsInt", cultureFragsInt)
+            intent.putExtra("characterClass", characterClass)
+            intent.putExtra("characterVocation", characterVocation)
+            intent.putExtra("levelInt", levelInt)
+            intent.putExtra("hpInt", hpInt)
+            intent.putExtra("blanketsInt", blanketsInt)
+            intent.putExtra("cpInt", cpInt)
+            intent.putExtra("freeInt", freeInt)
+            intent.putExtra("characterSpentInt", characterSpentInt)
+            intent.putExtra("characterFragsInt", characterFragsInt)
+
+            //General Skills
+            val autoRacialSkill = autoRacial.text.toString()
+            intent.putExtra("autoRacialSkill", autoRacialSkill)
+            val racialDisSkill = racialDis.text.toString()
+            intent.putExtra("racialDisSkill", racialDisSkill)
+            val racialSkill = racialName.text.toString()
+            intent.putExtra("racialSkill", racialSkill)
+            intent.putExtra("racialSelect", racialSelect)
+            intent.putExtra("bodySelect", bodySelect)
+            intent.putExtra("strengthSelect", strengthSelect)
+            val level3Skill = level3Name.text.toString()
+            intent.putExtra("level3Skill", level3Skill)
+            intent.putExtra("level3Select", level3Select)
+            val level6Skill = level6Name.text.toString()
+            intent.putExtra("level6Skill", level6Skill)
+            intent.putExtra("level6Select", level6Select)
+            val level9Skill = level9Name.text.toString()
+            intent.putExtra("level9Skill", level9Skill)
+            intent.putExtra("level9Select", level9Select)
+            val level12Skill = level12Name.text.toString()
+            intent.putExtra("level12Skill", level12Skill)
+            intent.putExtra("level12Select", level12Select)
+            intent.putExtra("trapsmithSelect", trapsmithSelect)
+            intent.putExtra("tradesmanSelect", tradesmanSelect)
+            intent.putExtra("alchemySelect", alchemySelect)
+            intent.putExtra("chemistrySelect", chemistrySelect)
+            intent.putExtra("blacksmithingSelect", blacksmithingSelect)
+            intent.putExtra("artificeSelect", artificeSelect)
+            intent.putExtra("scrollcraftingSelect", scrollcraftingSelect)
+            intent.putExtra("coldHandsSelect", coldHandsSelect)
+            intent.putExtra("createAlcoholSelect", createAlcoholSelect)
+            intent.putExtra("heavyDrinkerSelect", heavyDrinkerSelect)
+            intent.putExtra("hindsightSelect", hindsightSelect)
+            intent.putExtra("intuitionSelect", intuitionSelect)
+            intent.putExtra("lootingSelect", lootingSelect)
+            intent.putExtra("paragonSelect", paragonSelect)
+            intent.putExtra("possumSelect", possumSelect)
+            intent.putExtra("teacherSelect", teacherSelect)
+            //Warrior Skills
+            intent.putExtra("ambidexteritySelect", ambidexteritySelect)
+            intent.putExtra("florentineSelect", florentineSelect)
+            intent.putExtra("flurrySelect", flurrySelect)
+            intent.putExtra("heavyArmorSelect", heavyArmorSelect)
+            intent.putExtra("shieldSelect", shieldSelect)
+            intent.putExtra("selfMutilateSelect", selfMutilateSelect)
+            intent.putExtra("weapRefocusSelect", weapRefocusSelect)
+            intent.putExtra("groupProfMedSelect", groupProfMedSelect)
+            intent.putExtra("groupProfLrgSelect", groupProfLrgSelect)
+            intent.putExtra("profExoticSelect", profExoticSelect)
+            intent.putExtra("groupSpecSelect", groupSpecSelect)
+            intent.putExtra("specificSpecSelect", specificSpecSelect)
+            intent.putExtra("slayParrySelect", slayParrySelect)
+            intent.putExtra("slayParryMstrSelect", slayParryMstrSelect)
+            intent.putExtra("battlefieldRepairSelect", battlefieldRepairSelect)
+            intent.putExtra("crippleSelect", crippleSelect)
+            intent.putExtra("decapitateSelect", decapitateSelect)
+            intent.putExtra("dirtEyeSelect", dirtEyeSelect)
+            intent.putExtra("tripSelect", tripSelect)
+            intent.putExtra("whirlBlowsSelect", whirlBlowsSelect)
+            //Rogue Skills
+            intent.putExtra("garroteSelect", garroteSelect)
+            intent.putExtra("sapSelect", sapSelect)
+            intent.putExtra("vitalBlowSelect", vitalBlowSelect)
+            intent.putExtra("dodgeSelect", dodgeSelect)
+            intent.putExtra("specificCritSelect", specificCritSelect)
+            intent.putExtra("groupCritSelect", groupCritSelect)
+            intent.putExtra("executeSelect", executeSelect)
+            intent.putExtra("executeMstrSelect", executeMstrSelect)
+            intent.putExtra("blindfighterSelect", blindfighterSelect)
+            intent.putExtra("escapeSelect", escapeSelect)
+            intent.putExtra("riposteSelect", riposteSelect)
+            intent.putExtra("suckerPunchSelect", suckerPunchSelect)
+            intent.putExtra("thievesCantSelect", thievesCantSelect)
+            intent.putExtra("tumbleSelect", tumbleSelect)
+            //Scholar Skills
+            intent.putExtra("mysticismSelect", mysticismSelect)
+            intent.putExtra("demAngArtsSelect", demAngArtsSelect)
+            intent.putExtra("necroArtsSelect", necroArtsSelect)
+            intent.putExtra("anatomySelect", anatomySelect)
+            intent.putExtra("firstAidSelect", firstAidSelect)
+            intent.putExtra("physicianSelect", physicianSelect)
+            intent.putExtra("readWriteSelect", readWriteSelect)
+            intent.putExtra("readMagicSelect", readMagicSelect)
+            intent.putExtra("rdAdvMagicSelect", rdAdvMagicSelect)
+            intent.putExtra("rdRitualMagicSelect", rdRitualMagicSelect)
+            intent.putExtra("advRitualSelect", advRitualSelect)
+            intent.putExtra("eleAttuneSelect", eleAttuneSelect)
+            intent.putExtra("combatWizSelect", combatWizSelect)
+            intent.putExtra("harvestSelect", harvestSelect)
+            intent.putExtra("morticianSelect", morticianSelect)
+            intent.putExtra("refocusSelect", refocusSelect)
+            intent.putExtra("spellParrySelect", spellParrySelect)
+            intent.putExtra("spellVersSkillSelect", spellVersSkillSelect)
+            intent.putExtra("spellSwitchSelect", spellSwitchSelect)
+            intent.putExtra("sphereSelect1", sphereSelect1)
+            intent.putExtra("sphereSelect2", sphereSelect2)
+            intent.putExtra("sphereSelect3", sphereSelect3)
+            intent.putExtra("slot1Select", slot1Select)
+            intent.putExtra("slot2Select", slot2Select)
+            intent.putExtra("slot3Select", slot3Select)
+            intent.putExtra("slot4Select", slot4Select)
+            intent.putExtra("slot5Select", slot5Select)
+            intent.putExtra("slot6Select", slot6Select)
+            intent.putExtra("slot7Select", slot7Select)
+            intent.putExtra("slot8Select", slot8Select)
+            intent.putExtra("slot9Select", slot9Select)
+            intent.putExtra("ritualSelect", ritualSelect)
+
+            startActivity(intent)
+
+        }
+
+        //Summary Button
+        summaryButton.setOnClickListener() {
+            val intent = Intent(this, PopupWindow::class.java)
+
+            //Character values
+            intent.putExtra("characterRace", characterRace)
+            intent.putExtra("characterCulture", characterCulture)
+            intent.putExtra("cultureFragsInt", cultureFragsInt)
+            intent.putExtra("characterClass", characterClass)
+            intent.putExtra("characterVocation", characterVocation)
+            intent.putExtra("levelInt", levelInt)
+            intent.putExtra("hpInt", hpInt)
+            intent.putExtra("blanketsInt", blanketsInt)
+            intent.putExtra("cpInt", cpInt)
+            intent.putExtra("freeInt", freeInt)
+            intent.putExtra("characterSpentInt", characterSpentInt)
+            intent.putExtra("characterFragsInt", characterFragsInt)
+
+            //General Skills
+            val level3Skill = level3Name.text.toString()
+            intent.putExtra("level3Skill", level3Skill)
+            intent.putExtra("level3Select", level3Select)
+            val level6Skill = level6Name.text.toString()
+            intent.putExtra("level6Skill", level6Skill)
+            intent.putExtra("level6Select", level6Select)
+            val level9Skill = level9Name.text.toString()
+            intent.putExtra("level9Skill", level9Skill)
+            intent.putExtra("level9Select", level9Select)
+            val level12Skill = level12Name.text.toString()
+            intent.putExtra("level12Skill", level12Skill)
+            intent.putExtra("level12Select", level12Select)
+            val autoRacialSkill = autoRacial.text.toString()
+            intent.putExtra("autoRacialSkill", autoRacialSkill)
+            val racialDisSkill = racialDis.text.toString()
+            intent.putExtra("racialDisSkill", racialDisSkill)
+            val racialSkill = racialName.text.toString()
+            intent.putExtra("racialSkill", racialSkill)
+            intent.putExtra("racialSelect", racialSelect)
+            intent.putExtra("bodySelect", bodySelect)
+            intent.putExtra("strengthSelect", strengthSelect)
+            intent.putExtra("trapsmithSelect", trapsmithSelect)
+            intent.putExtra("tradesmanSelect", tradesmanSelect)
+            intent.putExtra("alchemySelect", alchemySelect)
+            intent.putExtra("chemistrySelect", chemistrySelect)
+            intent.putExtra("blacksmithingSelect", blacksmithingSelect)
+            intent.putExtra("artificeSelect", artificeSelect)
+            intent.putExtra("scrollcraftingSelect", scrollcraftingSelect)
+            intent.putExtra("coldHandsSelect", coldHandsSelect)
+            intent.putExtra("createAlcoholSelect", createAlcoholSelect)
+            intent.putExtra("heavyDrinkerSelect", heavyDrinkerSelect)
+            intent.putExtra("hindsightSelect", hindsightSelect)
+            intent.putExtra("intuitionSelect", intuitionSelect)
+            intent.putExtra("lootingSelect", lootingSelect)
+            intent.putExtra("paragonSelect", paragonSelect)
+            intent.putExtra("possumSelect", possumSelect)
+            intent.putExtra("teacherSelect", teacherSelect)
+            //Warrior Skills
+            intent.putExtra("ambidexteritySelect", ambidexteritySelect)
+            intent.putExtra("florentineSelect", florentineSelect)
+            intent.putExtra("flurrySelect", flurrySelect)
+            intent.putExtra("heavyArmorSelect", heavyArmorSelect)
+            intent.putExtra("shieldSelect", shieldSelect)
+            intent.putExtra("selfMutilateSelect", selfMutilateSelect)
+            intent.putExtra("weapRefocusSelect", weapRefocusSelect)
+            intent.putExtra("groupProfMedSelect", groupProfMedSelect)
+            intent.putExtra("groupProfLrgSelect", groupProfLrgSelect)
+            intent.putExtra("profExoticSelect", profExoticSelect)
+            intent.putExtra("groupSpecSelect", groupSpecSelect)
+            intent.putExtra("specificSpecSelect", specificSpecSelect)
+            intent.putExtra("slayParrySelect", slayParrySelect)
+            intent.putExtra("slayParryMstrSelect", slayParryMstrSelect)
+            intent.putExtra("battlefieldRepairSelect", battlefieldRepairSelect)
+            intent.putExtra("crippleSelect", crippleSelect)
+            intent.putExtra("decapitateSelect", decapitateSelect)
+            intent.putExtra("dirtEyeSelect", dirtEyeSelect)
+            intent.putExtra("tripSelect", tripSelect)
+            intent.putExtra("whirlBlowsSelect", whirlBlowsSelect)
+            //Rogue Skills
+            intent.putExtra("garroteSelect", garroteSelect)
+            intent.putExtra("sapSelect", sapSelect)
+            intent.putExtra("vitalBlowSelect", vitalBlowSelect)
+            intent.putExtra("dodgeSelect", dodgeSelect)
+            intent.putExtra("specificCritSelect", specificCritSelect)
+            intent.putExtra("groupCritSelect", groupCritSelect)
+            intent.putExtra("executeSelect", executeSelect)
+            intent.putExtra("executeMstrSelect", executeMstrSelect)
+            intent.putExtra("blindfighterSelect", blindfighterSelect)
+            intent.putExtra("escapeSelect", escapeSelect)
+            intent.putExtra("riposteSelect", riposteSelect)
+            intent.putExtra("suckerPunchSelect", suckerPunchSelect)
+            intent.putExtra("thievesCantSelect", thievesCantSelect)
+            intent.putExtra("tumbleSelect", tumbleSelect)
+            //Scholar Skills
+            intent.putExtra("mysticismSelect", mysticismSelect)
+            intent.putExtra("demAngArtsSelect", demAngArtsSelect)
+            intent.putExtra("necroArtsSelect", necroArtsSelect)
+            intent.putExtra("anatomySelect", anatomySelect)
+            intent.putExtra("firstAidSelect", firstAidSelect)
+            intent.putExtra("physicianSelect", physicianSelect)
+            intent.putExtra("readWriteSelect", readWriteSelect)
+            intent.putExtra("readMagicSelect", readMagicSelect)
+            intent.putExtra("rdAdvMagicSelect", rdAdvMagicSelect)
+            intent.putExtra("rdRitualMagicSelect", rdRitualMagicSelect)
+            intent.putExtra("advRitualSelect", advRitualSelect)
+            intent.putExtra("eleAttuneSelect", eleAttuneSelect)
+            intent.putExtra("combatWizSelect", combatWizSelect)
+            intent.putExtra("harvestSelect", harvestSelect)
+            intent.putExtra("morticianSelect", morticianSelect)
+            intent.putExtra("refocusSelect", refocusSelect)
+            intent.putExtra("spellParrySelect", spellParrySelect)
+            intent.putExtra("spellVersSkillSelect", spellVersSkillSelect)
+            intent.putExtra("spellSwitchSelect", spellSwitchSelect)
+            intent.putExtra("sphereSelect1", sphereSelect1)
+            intent.putExtra("sphereSelect2", sphereSelect2)
+            intent.putExtra("sphereSelect3", sphereSelect3)
+            intent.putExtra("slot1Select", slot1Select)
+            intent.putExtra("slot2Select", slot2Select)
+            intent.putExtra("slot3Select", slot3Select)
+            intent.putExtra("slot4Select", slot4Select)
+            intent.putExtra("slot5Select", slot5Select)
+            intent.putExtra("slot6Select", slot6Select)
+            intent.putExtra("slot7Select", slot7Select)
+            intent.putExtra("slot8Select", slot8Select)
+            intent.putExtra("slot9Select", slot9Select)
+            intent.putExtra("ritualSelect", ritualSelect)
+
+            startActivity(intent)
+
+        }
+
         //Spinners for Top Section
+        val sharedcultureFragsInt = intent.getIntExtra("cultureFragsInt", 0)
+        if (sharedcultureFragsInt == 100) {
+            cultureFragsInt = 100
+            cultureCheck.isChecked = true
+        }
 
         //Spinner for Races
         val raceList = arrayOf(
             "No Selection", "Savar'Aving", "Gargylen", "Mountain Dwarf", "Dark Elf", "High Elf",
-            "Wild Elf", "Wood Fae", "Orc", "Ajaunti", "Einher", "Hobling", "Human", "*Frag Race*")
+            "Wild Elf", "Wood Fae", "Orc", "Ajaunti", "Einher", "Hobling", "Human", "*Frag Race*"
+        )
         val raceArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, raceList)
         raceSpinner.adapter = raceArrayAdapter
         raceSpinner.onItemSelectedListener = object :
@@ -818,7 +1141,9 @@ class MainActivity : AppCompatActivity() {
                     fragText.visibility = View.VISIBLE
                     fragSpinner.visibility = View.VISIBLE
 
-                    racialName.setText("Racial Skill")
+                    autoRacial.setText("Automatic Racial")
+                    racialDis.setText("Racial Disadvantage")
+                    racialName.setText("Purchased Racial")
 
                     cultureText.text = "Culture"
                     cultureText.visibility = View.GONE
@@ -840,11 +1165,15 @@ class MainActivity : AppCompatActivity() {
                     if (raceSelection == "Savar'Aving") {
                         characterRace = raceSelection
 
-                        cultureCheck.isChecked = false
-                        cultureFragsInt = 0
-                        calculateFragCost()
-                        characterFrags.setText("" + characterFragsInt)
+                        if (sharedcultureFragsInt == 0) {
+                            cultureCheck.isChecked = false
+                            cultureFragsInt = 0
+                            calculateFragCost()
+                            characterFrags.setText("" + characterFragsInt)
+                        }
 
+                        autoRacial.setText("Natural Claws")
+                        racialDis.setText("Plagued")
                         racialName.setText("Cat-Like Reflexes")
 
                         cultureText.text = "Taliss Pride Culture"
@@ -854,10 +1183,13 @@ class MainActivity : AppCompatActivity() {
                         cultureCheck.setOnClickListener({
                             if (cultureCheck.isChecked == true) {
                                 cultureFragsInt = 100
+                                characterCulture = "Taliss Pride Culture"
                                 racialName.setText("Redeemer's Claws")
                             }
                             else {
                                 characterRace = raceSelection
+                                characterCulture = "Culture"
+
 
                                 cultureFragsInt = 0
                                 racialName.setText("Cat-Like Reflexes")
@@ -873,6 +1205,8 @@ class MainActivity : AppCompatActivity() {
                         calculateFragCost()
                         characterFrags.setText("" + characterFragsInt)
 
+                        autoRacial.setText("Alternative Healing")
+                        racialDis.setText("Healing Limitations")
                         racialName.setText("Stone Skin")
 
                         cultureCheck.isChecked = false
@@ -886,6 +1220,8 @@ class MainActivity : AppCompatActivity() {
                         calculateFragCost()
                         characterFrags.setText("" + characterFragsInt)
 
+                        autoRacial.setText("Resist Toxin")
+                        racialDis.setText("Gas Globe and Magic Item Restriction")
                         racialName.setText("Racial Body Bonus")
 
                         cultureCheck.isChecked = false
@@ -895,11 +1231,15 @@ class MainActivity : AppCompatActivity() {
                     else if (raceSelection == "Dark Elf") {
                         characterRace = raceSelection
 
-                        cultureCheck.isChecked = false
-                        cultureFragsInt = 0
-                        calculateFragCost()
-                        characterFrags.setText("" + characterFragsInt)
+                        if (sharedcultureFragsInt == 0) {
+                            cultureCheck.isChecked = false
+                            cultureFragsInt = 0
+                            calculateFragCost()
+                            characterFrags.setText("" + characterFragsInt)
+                        }
 
+                        autoRacial.setText("Natural Chemist")
+                        racialDis.setText("Diurnal Vulnerability")
                         racialName.setText("Spite Blood")
 
                         cultureText.text = "House Mortuus Culture"
@@ -909,10 +1249,12 @@ class MainActivity : AppCompatActivity() {
                         cultureCheck.setOnClickListener({
                             if (cultureCheck.isChecked == true) {
                                 cultureFragsInt = 100
+                                characterCulture = "House Mortuus Culture"
                                 racialName.setText("Control Lesser Undead")
                             }
                             else {
                                 characterRace = raceSelection
+                                characterCulture = "Culture"
 
                                 cultureFragsInt = 0
                                 racialName.setText("Spite Blood")
@@ -928,6 +1270,8 @@ class MainActivity : AppCompatActivity() {
                         calculateFragCost()
                         characterFrags.setText("" + characterFragsInt)
 
+                        autoRacial.setText("Magical Aptitude")
+                        racialDis.setText("Death's Doors")
                         racialName.setText("Resist Psionics")
 
                         cultureCheck.isChecked = false
@@ -937,11 +1281,15 @@ class MainActivity : AppCompatActivity() {
                     else if (raceSelection == "Wild Elf") {
                         characterRace = raceSelection
 
-                        cultureCheck.isChecked = false
-                        cultureFragsInt = 0
-                        calculateFragCost()
-                        characterFrags.setText("" + characterFragsInt)
+                        if (sharedcultureFragsInt == 0) {
+                            cultureCheck.isChecked = false
+                            cultureFragsInt = 0
+                            calculateFragCost()
+                            characterFrags.setText("" + characterFragsInt)
+                        }
 
+                        autoRacial.setText("Chosen Enemy")
+                        racialDis.setText("Armor Restriction")
                         racialName.setText("Nature's Cache")
 
                         cultureText.text = "Kraken Tribe Culture"
@@ -951,10 +1299,12 @@ class MainActivity : AppCompatActivity() {
                         cultureCheck.setOnClickListener({
                             if (cultureCheck.isChecked == true) {
                                 cultureFragsInt = 100
+                                characterCulture = "Kraken Tribe Culture"
                                 racialName.setText("Freedom of Movement")
                             }
                             else {
                                 characterRace = raceSelection
+                                characterCulture = "Culture"
 
                                 cultureFragsInt = 0
                                 racialName.setText("Nature's Cache")
@@ -970,6 +1320,8 @@ class MainActivity : AppCompatActivity() {
                         calculateFragCost()
                         characterFrags.setText("" + characterFragsInt)
 
+                        autoRacial.setText("Lust for Life")
+                        racialDis.setText("Iron Aversion")
                         racialName.setText("Charm Break")
 
                         cultureCheck.isChecked = false
@@ -979,11 +1331,15 @@ class MainActivity : AppCompatActivity() {
                     else if (raceSelection == "Orc") {
                         characterRace = raceSelection
 
-                        cultureCheck.isChecked = false
-                        cultureFragsInt = 0
-                        calculateFragCost()
-                        characterFrags.setText("" + characterFragsInt)
+                        if (sharedcultureFragsInt == 0) {
+                            cultureCheck.isChecked = false
+                            cultureFragsInt = 0
+                            calculateFragCost()
+                            characterFrags.setText("" + characterFragsInt)
+                        }
 
+                        autoRacial.setText("Immune to Fear")
+                        racialDis.setText("Charmable")
                         racialName.setText("Orcish Constitution")
 
                         cultureText.text = "Ebon Khan Culture"
@@ -993,10 +1349,12 @@ class MainActivity : AppCompatActivity() {
                         cultureCheck.setOnClickListener({
                             if (cultureCheck.isChecked == true) {
                                 cultureFragsInt = 100
+                                characterCulture = "Ebon Khan Culture"
                                 racialName.setText("Brood Constitution")
                             }
                             else {
                                 characterRace = raceSelection
+                                characterCulture = "Culture"
 
                                 cultureFragsInt = 0
                                 racialName.setText("Orcish Constitution")
@@ -1008,11 +1366,15 @@ class MainActivity : AppCompatActivity() {
                     else if (raceSelection == "Ajaunti") {
                         characterRace = raceSelection
 
-                        cultureCheck.isChecked = false
-                        cultureFragsInt = 0
-                        calculateFragCost()
-                        characterFrags.setText("" + characterFragsInt)
+                        if (sharedcultureFragsInt == 0) {
+                            cultureCheck.isChecked = false
+                            cultureFragsInt = 0
+                            calculateFragCost()
+                            characterFrags.setText("" + characterFragsInt)
+                        }
 
+                        autoRacial.setText("Eyes of the Mother")
+                        racialDis.setText("Lost in Memories")
                         racialName.setText("Ancestor's Wisdom")
 
                         cultureText.text = "Clan Vinatore Culture"
@@ -1022,10 +1384,12 @@ class MainActivity : AppCompatActivity() {
                         cultureCheck.setOnClickListener({
                             if (cultureCheck.isChecked == true) {
                                 cultureFragsInt = 100
+                                characterCulture = "Clan Vinatore Culture"
                                 racialName.setText("Spirit Hook")
                             }
                             else {
                                 characterRace = raceSelection
+                                characterCulture = "Culture"
 
                                 cultureFragsInt = 0
                                 racialName.setText("Ancestor's Wisdom")
@@ -1037,11 +1401,15 @@ class MainActivity : AppCompatActivity() {
                     else if (raceSelection == "Einher") {
                         characterRace = raceSelection
 
-                        cultureCheck.isChecked = false
-                        cultureFragsInt = 0
-                        calculateFragCost()
-                        characterFrags.setText("" + characterFragsInt)
+                        if (sharedcultureFragsInt == 0) {
+                            cultureCheck.isChecked = false
+                            cultureFragsInt = 0
+                            calculateFragCost()
+                            characterFrags.setText("" + characterFragsInt)
+                        }
 
+                        autoRacial.setText("Resist Cold")
+                        racialDis.setText("Hell's Embrace")
                         racialName.setText("Berserker Rage")
 
                         cultureText.text = "True Berserker Culture"
@@ -1051,10 +1419,12 @@ class MainActivity : AppCompatActivity() {
                         cultureCheck.setOnClickListener({
                             if (cultureCheck.isChecked == true) {
                                 cultureFragsInt = 100
+                                characterCulture = "True Berserker Culture"
                                 racialName.setText("Berserker Poison")
                             }
                             else {
                                 characterRace = raceSelection
+                                characterCulture = "Culture"
 
                                 cultureFragsInt = 0
                                 racialName.setText("Berserker Rage")
@@ -1070,7 +1440,9 @@ class MainActivity : AppCompatActivity() {
                         calculateFragCost()
                         characterFrags.setText("" + characterFragsInt)
 
-                        racialName.setText("Taunt")
+                        autoRacial.setText("Taunt")
+                        racialDis.setText("Small Size")
+                        racialName.setText("Racial Dodge")
 
                         cultureCheck.isChecked = false
                         cultureText.visibility = View.GONE
@@ -1084,19 +1456,26 @@ class MainActivity : AppCompatActivity() {
                         calculateFragCost()
                         characterFrags.setText("" + characterFragsInt)
 
-                        racialName.setText("Body Point Bonus")
+                        autoRacial.setText("Character Point Bonus")
+                        racialDis.setText("No Disadvantage")
+                        racialName.setText("No Purchased Racial")
 
                         cultureCheck.isChecked = false
                         cultureText.visibility = View.GONE
                         cultureCheck.visibility = View.GONE
                     }
                     else {
+                        characterRace = "Race"
+
                         cultureText.text = "Culture"
+                        characterCulture = "Culture"
                         cultureText.visibility = View.GONE
                         cultureCheck.visibility = View.GONE
                         cultureCheck.isChecked = false
 
-                        racialName.setText("Racial Skill")
+                        autoRacial.setText("Automatic Racial")
+                        racialDis.setText("Racial Disadvantage")
+                        racialName.setText("Purchased Racial")
 
                         cultureFragsInt = 0
                         calculateFragCost()
@@ -1104,8 +1483,17 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
+                if (characterRace == "Human"){
+                    racialSpinner.isEnabled = false
+                    racialSpinner.setSelection(0)
+                    racialInt = 0
+                }
+                else {
+                    racialSpinner.isEnabled = true
+                }
+
                 //Body Point Bonus and Strength Spinners in Race
-                when (characterRace){
+                when (characterRace) {
                     "Gargylen" -> {
                         bodySpinner.adapter = twoBuyListArrayAdapter
                         bodyText.visibility = View.VISIBLE
@@ -1225,7 +1613,8 @@ class MainActivity : AppCompatActivity() {
         val fragList = arrayOf(
             "No Selection", "Am'rath", "Faun", "Minotaur", "Kobold", "Ogre", "Squamata", "Avian",
             "Draconian", "Fire Elf", "Goblin", "Risen", "Wolven", "Yokai", "Carnal Fae", "Faceless",
-            "Gnome", "Ice Elf", "Sidhe", "Vulcan Dwarf")
+            "Gnome", "Ice Elf", "Sidhe", "Vulcan Dwarf"
+        )
         val fragArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, fragList)
         fragSpinner.adapter = fragArrayAdapter
         fragSpinner.onItemSelectedListener = object :
@@ -1235,127 +1624,255 @@ class MainActivity : AppCompatActivity() {
                 val fragSelection: String = fragSpinner.selectedItem.toString()
                 if (fragSelection == "No Selection") {
                     raceFragsInt = 0
+                    autoRacial.setText("Automatic Racial")
+                    racialDis.setText("Racial Disadvantage")
+                    racialName.setText("Purchased Racial")
                 }
                 //Uncommon Races
-                else if (fragSelection == "Am'rath"){
+                else if (fragSelection == "Am'rath") {
                     characterRace = fragSelection
-
                     raceFragsInt = 75
+
+                    autoRacial.setText("Simple Weapon Damage Bonus")
+                    racialDis.setText("Simple Weapon Restriction")
                     racialName.setText("Clobber")
                 }
-                else if (fragSelection == "Faun"){
+                else if (fragSelection == "Faun") {
                     characterRace = fragSelection
-
                     raceFragsInt = 75
+
+                    autoRacial.setText("Companion")
+                    racialDis.setText("Restriction to Nature Healing")
                     racialName.setText("Forest Revival")
                 }
-                else if (fragSelection == "Minotaur"){
+                else if (fragSelection == "Minotaur") {
                     characterRace = fragSelection
-
                     raceFragsInt = 75
+
+                    if (levelInt <= 5) {
+                        autoRacial.setText("Enhanced Strength +1")
+                    }
+                    else if (levelInt >= 6 && levelInt <= 10) {
+                        autoRacial.setText("Enhanced Strength +2")
+                    }
+                    else if (levelInt >= 11 && levelInt <= 15) {
+                        autoRacial.setText("Enhanced Strength +3")
+                    }
+                    else if (levelInt >= 16 && levelInt <= 20) {
+                        autoRacial.setText("Enhanced Strength +4")
+                    }
+                    else if (levelInt >= 21 && levelInt <= 25) {
+                        autoRacial.setText("Enhanced Strength +5")
+                    }
+                    else if (levelInt >= 26 && levelInt <= 30) {
+                        autoRacial.setText("Enhanced Strength +6")
+                    }
+                    else {
+                        autoRacial.setText("Automatic Racial")
+                    }
+
+                    racialDis.setText("Fae Susceptability")
                     racialName.setText("Fae Ward")
                 }
-                else if (fragSelection == "Kobold"){
+                else if (fragSelection == "Kobold") {
                     characterRace = fragSelection
-
                     raceFragsInt = 75
+
+                    if (levelInt <= 2) {
+                        autoRacial.setText("1 x Innate Sap")
+                    }
+                    else if (levelInt >= 3 && levelInt <= 4) {
+                        autoRacial.setText("2 x Innate Sap")
+                    }
+                    else if (levelInt >= 5 && levelInt <= 6) {
+                        autoRacial.setText("3 x Innate Sap")
+                    }
+                    else if (levelInt >= 7 && levelInt <= 8) {
+                        autoRacial.setText("4 x Innate Sap")
+                    }
+                    else if (levelInt >= 9 && levelInt <= 10) {
+                        autoRacial.setText("5 x Innate Sap")
+                    }
+                    else if (levelInt >= 11 && levelInt <= 12) {
+                        autoRacial.setText("6 x Innate Sap")
+                    }
+                    else if (levelInt >= 13 && levelInt <= 14) {
+                        autoRacial.setText("7 x Innate Sap")
+                    }
+                    else if (levelInt >= 15 && levelInt <= 16) {
+                        autoRacial.setText("8 x Innate Sap")
+                    }
+                    else if (levelInt >= 16 && levelInt <= 18) {
+                        autoRacial.setText("9 x Innate Sap")
+                    }
+                    else if (levelInt >= 19) {
+                        autoRacial.setText("10 x Innate Sap")
+                    }
+                    else {
+                        autoRacial.setText("Automatic Racial")
+                    }
+
+                    racialDis.setText("Frailty")
                     racialName.setText("KABOOM!")
                 }
-                else if (fragSelection == "Ogre"){
+                else if (fragSelection == "Ogre") {
                     characterRace = fragSelection
-
                     raceFragsInt = 75
+
+                    autoRacial.setText("Ogre Constitution")
+                    racialDis.setText("Untempered Rage")
                     racialName.setText("Ogre Smash")
                 }
-                else if (fragSelection == "Squamata"){
+                else if (fragSelection == "Squamata") {
                     characterRace = fragSelection
-
                     raceFragsInt = 75
+
+                    autoRacial.setText("Seal Pores")
+                    racialDis.setText("Soft Underbelly")
                     racialName.setText("Tongue Pierce")
                 }
                 //Rare Races
-                else if (fragSelection == "Avian"){
+                else if (fragSelection == "Avian") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    autoRacial.setText("Spirit Anchor")
+                    racialDis.setText("Shadow Mark")
                     racialName.setText("Create Goggles")
                 }
-                else if (fragSelection == "Draconian"){
+                else if (fragSelection == "Draconian") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    if (levelInt <= 3) {
+                        autoRacial.setText("Natural Threshold +1")
+                    }
+                    else if (levelInt >= 4 && levelInt <= 6) {
+                        autoRacial.setText("Natural Threshold +2")
+                    }
+                    else if (levelInt >= 7 && levelInt <= 9) {
+                        autoRacial.setText("Natural Threshold +3")
+                    }
+                    else if (levelInt >= 10 && levelInt <= 12) {
+                        autoRacial.setText("Natural Threshold +4")
+                    }
+                    else if (levelInt >= 13 && levelInt <= 15) {
+                        autoRacial.setText("Natural Threshold +5")
+                    }
+                    else if (levelInt >= 16 && levelInt <= 18) {
+                        autoRacial.setText("Natural Threshold +6")
+                    }
+                    else if (levelInt >= 19 && levelInt <= 21) {
+                        autoRacial.setText("Natural Threshold +7")
+                    }
+                    else if (levelInt >= 22 && levelInt <= 24) {
+                        autoRacial.setText("Natural Threshold +8")
+                    }
+                    else if (levelInt >= 25 && levelInt <= 27) {
+                        autoRacial.setText("Natural Threshold +9")
+                    }
+                    else if (levelInt >= 28 && levelInt <= 30) {
+                        autoRacial.setText("Natural Threshold +10")
+                    }
+                    else {
+                        autoRacial.setText("Automatic Racial")
+                    }
+
+                    racialDis.setText("Weak Spirit")
                     racialName.setText("Reflect Divine")
                 }
-                else if (fragSelection == "Fire Elf"){
+                else if (fragSelection == "Fire Elf") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    autoRacial.setText("Resist Fire")
+                    racialDis.setText("Armor Restriction")
                     racialName.setText("Endurance")
                 }
-                else if (fragSelection == "Goblin"){
+                else if (fragSelection == "Goblin") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    autoRacial.setText("Parasites")
+                    racialDis.setText("Parasites")
                     racialName.setText("Amorphic Mucus")
                 }
-                else if (fragSelection == "Risen"){
+                else if (fragSelection == "Risen") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    autoRacial.setText("Dual Race")
+                    racialDis.setText("Dual Race")
                     racialName.setText("Spirit Skinning")
                 }
-                else if (fragSelection == "Wolven"){
+                else if (fragSelection == "Wolven") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    autoRacial.setText("Sense Undead")
+                    racialDis.setText("Vulnerability to Fire")
                     racialName.setText("Natural Hide")
                 }
-                else if (fragSelection == "Yokai"){
+                else if (fragSelection == "Yokai") {
                     characterRace = fragSelection
-
                     raceFragsInt = 150
+
+                    autoRacial.setText("Foxfire")
+                    racialDis.setText("The Stranger Within")
                     racialName.setText("Enemy of my Enemy")
                 }
                 //Obscure Races
-                else if (fragSelection == "Carnal Fae"){
+                else if (fragSelection == "Carnal Fae") {
                     characterRace = fragSelection
-
                     raceFragsInt = 250
+
+                    autoRacial.setText("Destroy Light")
+                    racialDis.setText("Vulnerability to Iron")
                     racialName.setText("Greater Resist Magic")
                 }
-                else if (fragSelection == "Faceless"){
+                else if (fragSelection == "Faceless") {
                     characterRace = fragSelection
-
                     raceFragsInt = 250
+
+                    autoRacial.setText("Permanent Non-Detection")
+                    racialDis.setText("Demonic Spirit")
                     racialName.setText("Unmasked")
                 }
-                else if (fragSelection == "Gnome"){
+                else if (fragSelection == "Gnome") {
                     characterRace = fragSelection
-
                     raceFragsInt = 250
+
+                    autoRacial.setText("Scavenger")
+                    racialDis.setText("Psychosomatic Static")
                     racialName.setText("Gnomish Device")
                 }
-                else if (fragSelection == "Ice Elf"){
+                else if (fragSelection == "Ice Elf") {
                     characterRace = fragSelection
-
                     raceFragsInt = 250
+
+                    autoRacial.setText("Scion of Suffering")
+                    racialDis.setText("Pandora's Touch")
                     racialName.setText("Memories in Flesh")
                 }
-                else if (fragSelection == "Sidhe"){
+                else if (fragSelection == "Sidhe") {
                     characterRace = fragSelection
-
                     raceFragsInt = 250
+
+                    autoRacial.setText("Formless Casting")
+                    racialDis.setText("No Death Count")
                     racialName.setText("Magic Echo")
                 }
-                else if (fragSelection == "Vulcan Dwarf"){
+                else if (fragSelection == "Vulcan Dwarf") {
                     characterRace = fragSelection
-
                     raceFragsInt = 250
+
+                    autoRacial.setText("Volcanic Skin")
+                    racialDis.setText("Crippling Vulnerability to Cold")
                     racialName.setText("Endure Fire")
                 }
 
                 //Body Point Bonus and Strength Spinners in Frag Race
-                when (characterRace){
+                when (characterRace) {
                     "Gargylen" -> {
                         bodySpinner.adapter = twoBuyListArrayAdapter
                         bodyText.visibility = View.VISIBLE
@@ -1452,14 +1969,20 @@ class MainActivity : AppCompatActivity() {
                 characterFrags.setText("" + characterFragsInt)
 
             } //fragSpinner onSelected
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         } //fragSpinner
 
         //Spinner for Class
+        val sharedcharacterClass = intent.getStringExtra("characterClass")
+        println("CHARACTER CLASS IS $sharedcharacterClass")
+        val sharedcharacterVocation = intent.getStringExtra("characterVocation")
+        println("CHARACTER VOCATION IS $sharedcharacterVocation")
         val classList = arrayOf(
             "No Selection", "Mercenary", "Ranger", "Templar", "Assassin", "Nightblade",
-            "Witch Hunter", "Druid", "Mage", "Bard")
+            "Witch Hunter", "Druid", "Mage", "Bard"
+        )
         val classArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, classList)
         classSpinner.adapter = classArrayAdapter
         classSpinner.onItemSelectedListener = object :
@@ -1467,730 +1990,886 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                 //Changes at Class Selection
-                val classSelection: String = classSpinner.selectedItem.toString()
-                val vocationSelection: String = vocationSpinner.selectedItem.toString()
+                val classSelection = classSpinner.selectedItem.toString()
+                val vocationSelection = vocationSpinner.selectedItem.toString()
 
-                if (classSelection != "No Selection"){
-                    vocationText.visibility = View.VISIBLE
-                    vocationSpinner.visibility = View.VISIBLE
-                }
-                else{
-                    vocationText.visibility = View.GONE
-                    vocationSpinner.visibility = View.GONE
-                }
+                    if (classSelection != "No Selection") {
+                        vocationText.visibility = View.VISIBLE
+                        vocationSpinner.visibility = View.VISIBLE
+                        autoSlotSpinner.isEnabled = true
+                    }
+                    else {
+                        vocationText.visibility = View.GONE
+                        vocationSpinner.visibility = View.GONE
+                        vocationSpinner.setSelection(0)
+                        characterVocation = "Vocation"
+                        autoSlotSpinner.isEnabled = false
+                        autoSlotSpinner.setSelection(0)
+                    }
 
-                if (vocationSelection != "None"){      //Set Occupational names
-                    //Do Nothing
-                }
-                else if (classSelection =="Mercenary"){
-                    level3Name.text = "Hamstring"
-                    level6Name.text = "Headbutt"
-                    level9Name.text = "Dismember"
-                    level12Name.text = "Razor's Edge"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Ranger"){
-                    level3Name.text = "Detoxify"
-                    level6Name.text = "Trailblazing"
-                    level9Name.text = "Nature's Grasp"
-                    level12Name.text = "Call of the Hunt"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Templar"){
-                    level3Name.text = "Burn Slot"
-                    level6Name.text = "Scroll Harvest"
-                    level9Name.text = "Weapon Break"
-                    level12Name.text = "Weapon Conduit"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Assassin"){
-                    level3Name.text = "Shiv"
-                    level6Name.text = "Silent Strike"
-                    level9Name.text = "Spirit Sever"
-                    level12Name.text = "Penetration"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Nightblade"){
-                    level3Name.text = "Feint"
-                    level6Name.text = "Duplicate Key"
-                    level9Name.text = "Dim"
-                    level12Name.text = "Passwall"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Witch Hunter"){
-                    level3Name.text = "Witch Mark"
-                    level6Name.text = "Twist of the Tongue"
-                    level9Name.text = "Karmic Ricochet"
-                    level12Name.text = "Counter Magic"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Druid"){
-                    level3Name.text = "Create Grove"
-                    level6Name.text = "Forest Meld"
-                    level9Name.text = "Totem"
-                    level12Name.text = "Henge"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Mage"){
-                    level3Name.text = "Id. Magic Item"
-                    level6Name.text = "Mana Harvest"
-                    level9Name.text = "Create Familiar"
-                    level12Name.text = "Power Nexus"
-                    characterClass = classSelection
-                }
-                else if (classSelection == "Bard"){
-                    level3Name.text = "S. of Aversion"
-                    level6Name.text = "S. of Love"
-                    level9Name.text = "S. of Intermission"
-                    level12Name.text = "S. of Heroism"
-                    characterClass = classSelection
-                }
+                if (vocationSelection != "Dread Knight" || vocationSelection != "Paladin" || vocationSelection != "Darkweaver" || vocationSelection != "Lightweaver" || vocationSelection != "Dragon Knight") {
+                    if (vocationSelection != "None") {      //Set Occupational names
+                        //Do Nothing
+                    }
+                    else if (classSelection == "Mercenary") {
+                        level3Name.text = "Hamstring"
+                        level6Name.text = "Headbutt"
+                        level9Name.text = "Dismember"
+                        level12Name.text = "Razor's Edge"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Ranger") {
+                        level3Name.text = "Detoxify"
+                        level6Name.text = "Trailblazing"
+                        level9Name.text = "Nature's Grasp"
+                        level12Name.text = "Call of the Hunt"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Templar") {
+                        level3Name.text = "Burn Slot"
+                        level6Name.text = "Scroll Harvest"
+                        level9Name.text = "Weapon Break"
+                        level12Name.text = "Weapon Conduit"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Assassin") {
+                        level3Name.text = "Shiv"
+                        level6Name.text = "Silent Strike"
+                        level9Name.text = "Spirit Sever"
+                        level12Name.text = "Penetration"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Nightblade") {
+                        level3Name.text = "Feint"
+                        level6Name.text = "Duplicate Key"
+                        level9Name.text = "Dim"
+                        level12Name.text = "Passwall"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Witch Hunter") {
+                        level3Name.text = "Witch Mark"
+                        level6Name.text = "Twist of the Tongue"
+                        level9Name.text = "Karmic Ricochet"
+                        level12Name.text = "Counter Magic"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Druid") {
+                        level3Name.text = "Create Grove"
+                        level6Name.text = "Forest Meld"
+                        level9Name.text = "Totem"
+                        level12Name.text = "Henge"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Mage") {
+                        level3Name.text = "Id. Magic Item"
+                        level6Name.text = "Mana Harvest"
+                        level9Name.text = "Create Familiar"
+                        level12Name.text = "Power Nexus"
+                        characterClass = classSelection
+                    }
+                    else if (classSelection == "Bard") {
+                        level3Name.text = "S. of Aversion"
+                        level6Name.text = "S. of Love"
+                        level9Name.text = "S. of Intermission"
+                        level12Name.text = "S. of Heroism"
+                        characterClass = classSelection
+                    }
 
-                if (classSelection == "Mercenary") {    //Start CP set
-                    characterClass = "Mercenary"
+                    if (classSelection == "Mercenary") {    //Start CP set
+                        characterClass = "Mercenary"
 
-                    //Mercenary CP text
-                    //General Skills
-                    trapsmithCP.text = "75"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "80"
-                    chemistryCP.text = "90"
-                    blacksmithingCP.text = "65"
-                    artificeCP.text = "75"
-                    scrollcraftingCP.text = "75"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "20"
-                    florentineCP.text = "40"
-                    flurryCP.text = "40"
-                    heavyArmorCP.text = "15"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "50"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "40"
-                    groupProfLrgCP.text = "70"
-                    profExoticCP.text = "100"
-                    groupSpecCP.text = "120"
-                    specificSpecCP.text = "100"
-                    slayParryCP.text = "100"
-                    slayParryMstrCP.text = "120"
-                    //Rogue Skills
-                    garroteCP.text = "100"
-                    sapCP.text = "55"
-                    vitalBlowCP.text = "85"
-                    dodgeCP.text = "170"
-                    specificCritCP.text = "150"
-                    groupCritCP.text = "170"
-                    executeCP.text = "170"
-                    executeMstrCP.text = "190"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "75"
-                    necroArtsCP.text = "75"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "70"
-                    readMagicCP.text = "45"
-                    rdAdvMagicCP.text = "50"
-                    rdRitualMagicCP.text = "90"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "100"
-                    sphere2CP.text = "200"
-                    sphere3CP.text = "300"
-                    slot1CP.text = "30"
-                    slot2CP.text = "40"
-                    slot3CP.text = "80"
-                    slot4CP.text = "100"
-                    slot5CP.text = "100"
-                    slot6CP.text = "120"
-                    slot7CP.text = "120"
-                    slot8CP.text = "150"
-                    slot9CP.text = "150"
-                    ritualCP.text = "40"
-                }
-                else if (classSelection == "Ranger") {
-                    characterClass = "Ranger"
+                        //Mercenary CP text
+                        //General Skills
+                        trapsmithCP.text = "75"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "80"
+                        chemistryCP.text = "90"
+                        blacksmithingCP.text = "65"
+                        artificeCP.text = "75"
+                        scrollcraftingCP.text = "75"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "20"
+                        florentineCP.text = "40"
+                        flurryCP.text = "40"
+                        heavyArmorCP.text = "15"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "50"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "40"
+                        groupProfLrgCP.text = "70"
+                        profExoticCP.text = "100"
+                        groupSpecCP.text = "120"
+                        specificSpecCP.text = "100"
+                        slayParryCP.text = "100"
+                        slayParryMstrCP.text = "120"
+                        //Rogue Skills
+                        garroteCP.text = "100"
+                        sapCP.text = "55"
+                        vitalBlowCP.text = "85"
+                        dodgeCP.text = "170"
+                        specificCritCP.text = "150"
+                        groupCritCP.text = "170"
+                        executeCP.text = "170"
+                        executeMstrCP.text = "190"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "75"
+                        necroArtsCP.text = "75"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "70"
+                        readMagicCP.text = "45"
+                        rdAdvMagicCP.text = "50"
+                        rdRitualMagicCP.text = "90"
+                        advRitualCP.text = "300"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "100"
+                        sphere2CP.text = "200"
+                        sphere3CP.text = "300"
+                        slot1CP.text = "30"
+                        slot2CP.text = "40"
+                        slot3CP.text = "80"
+                        slot4CP.text = "100"
+                        slot5CP.text = "100"
+                        slot6CP.text = "120"
+                        slot7CP.text = "120"
+                        slot8CP.text = "150"
+                        slot9CP.text = "150"
+                        ritualCP.text = "40"
+                    }
+                    else if (classSelection == "Ranger") {
+                        characterClass = "Ranger"
 
-                    //Ranger CP text
-                    //General Skills
-                    trapsmithCP.text = "65"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "50"
-                    chemistryCP.text = "60"
-                    blacksmithingCP.text = "65"
-                    artificeCP.text = "75"
-                    scrollcraftingCP.text = "75"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "30"
-                    florentineCP.text = "40"
-                    flurryCP.text = "50"
-                    heavyArmorCP.text = "20"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "75"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "40"
-                    groupProfLrgCP.text = "70"
-                    profExoticCP.text = "100"
-                    groupSpecCP.text = "140"
-                    specificSpecCP.text = "120"
-                    slayParryCP.text = "120"
-                    slayParryMstrCP.text = "140"
-                    //Rogue Skills
-                    garroteCP.text = "85"
-                    sapCP.text = "45"
-                    vitalBlowCP.text = "65"
-                    dodgeCP.text = "140"
-                    specificCritCP.text = "125"
-                    groupCritCP.text = "145"
-                    executeCP.text = "130"
-                    executeMstrCP.text = "150"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "75"
-                    necroArtsCP.text = "75"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "60"
-                    readMagicCP.text = "35"
-                    rdAdvMagicCP.text = "45"
-                    rdRitualMagicCP.text = "80"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "100"
-                    sphere2CP.text = "200"
-                    sphere3CP.text = "300"
-                    slot1CP.text = "30"
-                    slot2CP.text = "30"
-                    slot3CP.text = "60"
-                    slot4CP.text = "60"
-                    slot5CP.text = "90"
-                    slot6CP.text = "90"
-                    slot7CP.text = "120"
-                    slot8CP.text = "120"
-                    slot9CP.text = "150"
-                    ritualCP.text = "30"
-                }
-                else if (classSelection == "Templar") {
-                    characterClass = "Templar"
+                        //Ranger CP text
+                        //General Skills
+                        trapsmithCP.text = "65"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "50"
+                        chemistryCP.text = "60"
+                        blacksmithingCP.text = "65"
+                        artificeCP.text = "75"
+                        scrollcraftingCP.text = "75"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "30"
+                        florentineCP.text = "40"
+                        flurryCP.text = "50"
+                        heavyArmorCP.text = "20"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "75"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "40"
+                        groupProfLrgCP.text = "70"
+                        profExoticCP.text = "100"
+                        groupSpecCP.text = "140"
+                        specificSpecCP.text = "120"
+                        slayParryCP.text = "120"
+                        slayParryMstrCP.text = "140"
+                        //Rogue Skills
+                        garroteCP.text = "85"
+                        sapCP.text = "45"
+                        vitalBlowCP.text = "65"
+                        dodgeCP.text = "140"
+                        specificCritCP.text = "125"
+                        groupCritCP.text = "145"
+                        executeCP.text = "130"
+                        executeMstrCP.text = "150"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "75"
+                        necroArtsCP.text = "75"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "60"
+                        readMagicCP.text = "35"
+                        rdAdvMagicCP.text = "45"
+                        rdRitualMagicCP.text = "80"
+                        advRitualCP.text = "300"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "100"
+                        sphere2CP.text = "200"
+                        sphere3CP.text = "300"
+                        slot1CP.text = "30"
+                        slot2CP.text = "30"
+                        slot3CP.text = "60"
+                        slot4CP.text = "60"
+                        slot5CP.text = "90"
+                        slot6CP.text = "90"
+                        slot7CP.text = "120"
+                        slot8CP.text = "120"
+                        slot9CP.text = "150"
+                        ritualCP.text = "30"
+                    }
+                    else if (classSelection == "Templar") {
+                        characterClass = "Templar"
 
-                    //Templar CP text
-                    //General Skills
-                    trapsmithCP.text = "75"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "70"
-                    chemistryCP.text = "80"
-                    blacksmithingCP.text = "70"
-                    artificeCP.text = "80"
-                    scrollcraftingCP.text = "40"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "35"
-                    florentineCP.text = "45"
-                    flurryCP.text = "55"
-                    heavyArmorCP.text = "20"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "60"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "40"
-                    groupProfLrgCP.text = "70"
-                    profExoticCP.text = "100"
-                    groupSpecCP.text = "150"
-                    specificSpecCP.text = "130"
-                    slayParryCP.text = "130"
-                    slayParryMstrCP.text = "150"
-                    //Rogue Skills
-                    garroteCP.text = "120"
-                    sapCP.text = "50"
-                    vitalBlowCP.text = "75"
-                    dodgeCP.text = "150"
-                    specificCritCP.text = "130"
-                    groupCritCP.text = "150"
-                    executeCP.text = "150"
-                    executeMstrCP.text = "170"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "60"
-                    necroArtsCP.text = "60"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "45"
-                    readMagicCP.text = "20"
-                    rdAdvMagicCP.text = "30"
-                    rdRitualMagicCP.text = "50"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "75"
-                    sphere2CP.text = "175"
-                    sphere3CP.text = "275"
-                    slot1CP.text = "10"
-                    slot2CP.text = "10"
-                    slot3CP.text = "20"
-                    slot4CP.text = "30"
-                    slot5CP.text = "40"
-                    slot6CP.text = "50"
-                    slot7CP.text = "60"
-                    slot8CP.text = "70"
-                    slot9CP.text = "80"
-                    ritualCP.text = "30"
-                }
-                else if (classSelection == "Assassin") {
-                    characterClass = "Assassin"
+                        //Templar CP text
+                        //General Skills
+                        trapsmithCP.text = "75"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "70"
+                        chemistryCP.text = "80"
+                        blacksmithingCP.text = "70"
+                        artificeCP.text = "80"
+                        scrollcraftingCP.text = "40"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "35"
+                        florentineCP.text = "45"
+                        flurryCP.text = "55"
+                        heavyArmorCP.text = "20"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "60"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "40"
+                        groupProfLrgCP.text = "70"
+                        profExoticCP.text = "100"
+                        groupSpecCP.text = "150"
+                        specificSpecCP.text = "130"
+                        slayParryCP.text = "130"
+                        slayParryMstrCP.text = "150"
+                        //Rogue Skills
+                        garroteCP.text = "120"
+                        sapCP.text = "50"
+                        vitalBlowCP.text = "75"
+                        dodgeCP.text = "150"
+                        specificCritCP.text = "130"
+                        groupCritCP.text = "150"
+                        executeCP.text = "150"
+                        executeMstrCP.text = "170"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "60"
+                        necroArtsCP.text = "60"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "45"
+                        readMagicCP.text = "20"
+                        rdAdvMagicCP.text = "30"
+                        rdRitualMagicCP.text = "50"
+                        advRitualCP.text = "275"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "75"
+                        sphere2CP.text = "175"
+                        sphere3CP.text = "275"
+                        slot1CP.text = "10"
+                        slot2CP.text = "10"
+                        slot3CP.text = "20"
+                        slot4CP.text = "30"
+                        slot5CP.text = "40"
+                        slot6CP.text = "50"
+                        slot7CP.text = "60"
+                        slot8CP.text = "70"
+                        slot9CP.text = "80"
+                        ritualCP.text = "30"
+                    }
+                    else if (classSelection == "Assassin") {
+                        characterClass = "Assassin"
 
-                    //Assassin CP text
-                    //General Skills
-                    trapsmithCP.text = "55"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "40"
-                    chemistryCP.text = "50"
-                    blacksmithingCP.text = "90"
-                    artificeCP.text = "100"
-                    scrollcraftingCP.text = "75"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "30"
-                    florentineCP.text = "65"
-                    flurryCP.text = "65"
-                    heavyArmorCP.text = "45"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "120"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "50"
-                    groupProfLrgCP.text = "100"
-                    profExoticCP.text = "130"
-                    groupSpecCP.text = "150"
-                    specificSpecCP.text = "130"
-                    slayParryCP.text = "150"
-                    slayParryMstrCP.text = "170"
-                    //Rogue Skills
-                    garroteCP.text = "60"
-                    sapCP.text = "35"
-                    vitalBlowCP.text = "55"
-                    dodgeCP.text = "120"
-                    specificCritCP.text = "100"
-                    groupCritCP.text = "120"
-                    executeCP.text = "100"
-                    executeMstrCP.text = "120"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "75"
-                    necroArtsCP.text = "75"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "70"
-                    readMagicCP.text = "40"
-                    rdAdvMagicCP.text = "50"
-                    rdRitualMagicCP.text = "90"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "100"
-                    sphere2CP.text = "200"
-                    sphere3CP.text = "300"
-                    slot1CP.text = "40"
-                    slot2CP.text = "60"
-                    slot3CP.text = "80"
-                    slot4CP.text = "100"
-                    slot5CP.text = "100"
-                    slot6CP.text = "120"
-                    slot7CP.text = "120"
-                    slot8CP.text = "150"
-                    slot9CP.text = "150"
-                    ritualCP.text = "40"
-                }
-                else if (classSelection == "Nightblade") {
-                    characterClass = "Nightblade"
+                        //Assassin CP text
+                        //General Skills
+                        trapsmithCP.text = "55"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "40"
+                        chemistryCP.text = "50"
+                        blacksmithingCP.text = "90"
+                        artificeCP.text = "100"
+                        scrollcraftingCP.text = "75"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "30"
+                        florentineCP.text = "65"
+                        flurryCP.text = "65"
+                        heavyArmorCP.text = "45"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "120"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "50"
+                        groupProfLrgCP.text = "100"
+                        profExoticCP.text = "130"
+                        groupSpecCP.text = "150"
+                        specificSpecCP.text = "130"
+                        slayParryCP.text = "150"
+                        slayParryMstrCP.text = "170"
+                        //Rogue Skills
+                        garroteCP.text = "60"
+                        sapCP.text = "35"
+                        vitalBlowCP.text = "55"
+                        dodgeCP.text = "120"
+                        specificCritCP.text = "100"
+                        groupCritCP.text = "120"
+                        executeCP.text = "100"
+                        executeMstrCP.text = "120"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "75"
+                        necroArtsCP.text = "75"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "70"
+                        readMagicCP.text = "40"
+                        rdAdvMagicCP.text = "50"
+                        rdRitualMagicCP.text = "90"
+                        advRitualCP.text = "300"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "100"
+                        sphere2CP.text = "200"
+                        sphere3CP.text = "300"
+                        slot1CP.text = "40"
+                        slot2CP.text = "60"
+                        slot3CP.text = "80"
+                        slot4CP.text = "100"
+                        slot5CP.text = "100"
+                        slot6CP.text = "120"
+                        slot7CP.text = "120"
+                        slot8CP.text = "150"
+                        slot9CP.text = "150"
+                        ritualCP.text = "40"
+                    }
+                    else if (classSelection == "Nightblade") {
+                        characterClass = "Nightblade"
 
-                    //Nightblade CP text
-                    //General Skills
-                    trapsmithCP.text = "45"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "40"
-                    chemistryCP.text = "50"
-                    blacksmithingCP.text = "80"
-                    artificeCP.text = "90"
-                    scrollcraftingCP.text = "50"
-                    lootingCP.text = "10"
-                    //Warrior Skills
-                    ambidexterityCP.text = "40"
-                    florentineCP.text = "70"
-                    flurryCP.text = "75"
-                    heavyArmorCP.text = "40"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "110"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "50"
-                    groupProfLrgCP.text = "100"
-                    profExoticCP.text = "130"
-                    groupSpecCP.text = "170"
-                    specificSpecCP.text = "150"
-                    slayParryCP.text = "170"
-                    slayParryMstrCP.text = "190"
-                    //Rogue Skills
-                    garroteCP.text = "85"
-                    sapCP.text = "35"
-                    vitalBlowCP.text = "50"
-                    dodgeCP.text = "100"
-                    specificCritCP.text = "120"
-                    groupCritCP.text = "140"
-                    executeCP.text = "120"
-                    executeMstrCP.text = "150"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "75"
-                    necroArtsCP.text = "75"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "55"
-                    readMagicCP.text = "25"
-                    rdAdvMagicCP.text = "35"
-                    rdRitualMagicCP.text = "60"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "75"
-                    sphere2CP.text = "175"
-                    sphere3CP.text = "275"
-                    slot1CP.text = "20"
-                    slot2CP.text = "20"
-                    slot3CP.text = "40"
-                    slot4CP.text = "40"
-                    slot5CP.text = "60"
-                    slot6CP.text = "60"
-                    slot7CP.text = "80"
-                    slot8CP.text = "80"
-                    slot9CP.text = "100"
-                    ritualCP.text = "20"
-                }
-                else if (classSelection == "Witch Hunter") {
-                    characterClass = "Witch Hunter"
+                        //Nightblade CP text
+                        //General Skills
+                        trapsmithCP.text = "45"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "40"
+                        chemistryCP.text = "50"
+                        blacksmithingCP.text = "80"
+                        artificeCP.text = "90"
+                        scrollcraftingCP.text = "50"
+                        lootingCP.text = "10"
+                        //Warrior Skills
+                        ambidexterityCP.text = "40"
+                        florentineCP.text = "70"
+                        flurryCP.text = "75"
+                        heavyArmorCP.text = "40"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "110"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "50"
+                        groupProfLrgCP.text = "100"
+                        profExoticCP.text = "130"
+                        groupSpecCP.text = "170"
+                        specificSpecCP.text = "150"
+                        slayParryCP.text = "170"
+                        slayParryMstrCP.text = "190"
+                        //Rogue Skills
+                        garroteCP.text = "85"
+                        sapCP.text = "35"
+                        vitalBlowCP.text = "50"
+                        dodgeCP.text = "100"
+                        specificCritCP.text = "120"
+                        groupCritCP.text = "140"
+                        executeCP.text = "120"
+                        executeMstrCP.text = "150"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "75"
+                        necroArtsCP.text = "75"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "55"
+                        readMagicCP.text = "25"
+                        rdAdvMagicCP.text = "35"
+                        rdRitualMagicCP.text = "60"
+                        advRitualCP.text = "275"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "75"
+                        sphere2CP.text = "175"
+                        sphere3CP.text = "275"
+                        slot1CP.text = "20"
+                        slot2CP.text = "20"
+                        slot3CP.text = "40"
+                        slot4CP.text = "40"
+                        slot5CP.text = "60"
+                        slot6CP.text = "60"
+                        slot7CP.text = "80"
+                        slot8CP.text = "80"
+                        slot9CP.text = "100"
+                        ritualCP.text = "20"
+                    }
+                    else if (classSelection == "Witch Hunter") {
+                        characterClass = "Witch Hunter"
 
-                    //Witch Hunter CP text
-                    //General Skills
-                    trapsmithCP.text = "65"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "50"
-                    chemistryCP.text = "60"
-                    blacksmithingCP.text = "80"
-                    artificeCP.text = "90"
-                    scrollcraftingCP.text = "45"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "45"
-                    florentineCP.text = "70"
-                    flurryCP.text = "75"
-                    heavyArmorCP.text = "45"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "95"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "50"
-                    groupProfLrgCP.text = "100"
-                    profExoticCP.text = "130"
-                    groupSpecCP.text = "170"
-                    specificSpecCP.text = "150"
-                    slayParryCP.text = "170"
-                    slayParryMstrCP.text = "190"
-                    //Rogue Skills
-                    garroteCP.text = "65"
-                    sapCP.text = "35"
-                    vitalBlowCP.text = "65"
-                    dodgeCP.text = "130"
-                    specificCritCP.text = "130"
-                    groupCritCP.text = "150"
-                    executeCP.text = "130"
-                    executeMstrCP.text = "150"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "60"
-                    necroArtsCP.text = "60"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "45"
-                    readMagicCP.text = "25"
-                    rdAdvMagicCP.text = "35"
-                    rdRitualMagicCP.text = "60"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "75"
-                    sphere2CP.text = "175"
-                    sphere3CP.text = "275"
-                    slot1CP.text = "10"
-                    slot2CP.text = "10"
-                    slot3CP.text = "20"
-                    slot4CP.text = "30"
-                    slot5CP.text = "30"
-                    slot6CP.text = "40"
-                    slot7CP.text = "50"
-                    slot8CP.text = "50"
-                    slot9CP.text = "60"
-                    ritualCP.text = "20"
-                }
-                else if (classSelection == "Druid") {
-                    characterClass = "Druid"
+                        //Witch Hunter CP text
+                        //General Skills
+                        trapsmithCP.text = "65"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "50"
+                        chemistryCP.text = "60"
+                        blacksmithingCP.text = "80"
+                        artificeCP.text = "90"
+                        scrollcraftingCP.text = "45"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "45"
+                        florentineCP.text = "70"
+                        flurryCP.text = "75"
+                        heavyArmorCP.text = "45"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "95"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "50"
+                        groupProfLrgCP.text = "100"
+                        profExoticCP.text = "130"
+                        groupSpecCP.text = "170"
+                        specificSpecCP.text = "150"
+                        slayParryCP.text = "170"
+                        slayParryMstrCP.text = "190"
+                        //Rogue Skills
+                        garroteCP.text = "65"
+                        sapCP.text = "35"
+                        vitalBlowCP.text = "65"
+                        dodgeCP.text = "130"
+                        specificCritCP.text = "130"
+                        groupCritCP.text = "150"
+                        executeCP.text = "130"
+                        executeMstrCP.text = "150"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "60"
+                        necroArtsCP.text = "60"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "45"
+                        readMagicCP.text = "25"
+                        rdAdvMagicCP.text = "35"
+                        rdRitualMagicCP.text = "60"
+                        advRitualCP.text = "275"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "75"
+                        sphere2CP.text = "175"
+                        sphere3CP.text = "275"
+                        slot1CP.text = "10"
+                        slot2CP.text = "10"
+                        slot3CP.text = "20"
+                        slot4CP.text = "30"
+                        slot5CP.text = "30"
+                        slot6CP.text = "40"
+                        slot7CP.text = "50"
+                        slot8CP.text = "50"
+                        slot9CP.text = "60"
+                        ritualCP.text = "20"
+                    }
+                    else if (classSelection == "Druid") {
+                        characterClass = "Druid"
 
-                    //Druid CP text
-                    //General Skills
-                    trapsmithCP.text = "75"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "40"
-                    chemistryCP.text = "50"
-                    blacksmithingCP.text = "100"
-                    artificeCP.text = "110"
-                    scrollcraftingCP.text = "45"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "75"
-                    florentineCP.text = "110"
-                    flurryCP.text = "100"
-                    heavyArmorCP.text = "60"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "140"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "80"
-                    groupProfLrgCP.text = "130"
-                    profExoticCP.text = "150"
-                    groupSpecCP.text = "200"
-                    specificSpecCP.text = "180"
-                    slayParryCP.text = "200"
-                    slayParryMstrCP.text = "220"
-                    //Rogue Skills
-                    garroteCP.text = "150"
-                    sapCP.text = "60"
-                    vitalBlowCP.text = "100"
-                    dodgeCP.text = "200"
-                    specificCritCP.text = "180"
-                    groupCritCP.text = "200"
-                    executeCP.text = "200"
-                    executeMstrCP.text = "220"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "60"
-                    necroArtsCP.text = "60"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "50"
-                    readMagicCP.text = "15"
-                    rdAdvMagicCP.text = "25"
-                    rdRitualMagicCP.text = "40"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "50"
-                    sphere2CP.text = "175"
-                    sphere3CP.text = "225"
-                    slot1CP.text = "10"
-                    slot2CP.text = "10"
-                    slot3CP.text = "20"
-                    slot4CP.text = "20"
-                    slot5CP.text = "30"
-                    slot6CP.text = "30"
-                    slot7CP.text = "40"
-                    slot8CP.text = "40"
-                    slot9CP.text = "50"
-                    ritualCP.text = "10"
-                }
-                else if (classSelection == "Mage") {
-                    characterClass = "Mage"
+                        //Druid CP text
+                        //General Skills
+                        trapsmithCP.text = "75"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "40"
+                        chemistryCP.text = "50"
+                        blacksmithingCP.text = "100"
+                        artificeCP.text = "110"
+                        scrollcraftingCP.text = "45"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "75"
+                        florentineCP.text = "110"
+                        flurryCP.text = "100"
+                        heavyArmorCP.text = "60"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "140"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "80"
+                        groupProfLrgCP.text = "130"
+                        profExoticCP.text = "150"
+                        groupSpecCP.text = "200"
+                        specificSpecCP.text = "180"
+                        slayParryCP.text = "200"
+                        slayParryMstrCP.text = "220"
+                        //Rogue Skills
+                        garroteCP.text = "150"
+                        sapCP.text = "60"
+                        vitalBlowCP.text = "100"
+                        dodgeCP.text = "200"
+                        specificCritCP.text = "180"
+                        groupCritCP.text = "200"
+                        executeCP.text = "200"
+                        executeMstrCP.text = "220"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "60"
+                        necroArtsCP.text = "60"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "50"
+                        readMagicCP.text = "15"
+                        rdAdvMagicCP.text = "25"
+                        rdRitualMagicCP.text = "40"
+                        advRitualCP.text = "225"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "50"
+                        sphere2CP.text = "175"
+                        sphere3CP.text = "225"
+                        slot1CP.text = "10"
+                        slot2CP.text = "10"
+                        slot3CP.text = "20"
+                        slot4CP.text = "20"
+                        slot5CP.text = "30"
+                        slot6CP.text = "30"
+                        slot7CP.text = "40"
+                        slot8CP.text = "40"
+                        slot9CP.text = "50"
+                        ritualCP.text = "10"
+                    }
+                    else if (classSelection == "Mage") {
+                        characterClass = "Mage"
 
-                    //Mage CP text
-                    //General Skills
-                    trapsmithCP.text = "85"
-                    tradesmanCP.text = "40"
-                    alchemyCP.text = "60"
-                    chemistryCP.text = "70"
-                    blacksmithingCP.text = "110"
-                    artificeCP.text = "120"
-                    scrollcraftingCP.text = "35"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "75"
-                    florentineCP.text = "110"
-                    flurryCP.text = "125"
-                    heavyArmorCP.text = "65"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "140"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "80"
-                    groupProfLrgCP.text = "130"
-                    profExoticCP.text = "150"
-                    groupSpecCP.text = "250"
-                    specificSpecCP.text = "230"
-                    slayParryCP.text = "250"
-                    slayParryMstrCP.text = "270"
-                    //Rogue Skills
-                    garroteCP.text = "150"
-                    sapCP.text = "60"
-                    vitalBlowCP.text = "120"
-                    dodgeCP.text = "250"
-                    specificCritCP.text = "230"
-                    groupCritCP.text = "250"
-                    executeCP.text = "250"
-                    executeMstrCP.text = "270"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "55"
-                    necroArtsCP.text = "55"
-                    anatomyCP.text = "40"
-                    firstAidCP.text = "60"
-                    physicianCP.text = "45"
-                    readWriteCP.text = "40"
-                    readMagicCP.text = "15"
-                    rdAdvMagicCP.text = "25"
-                    rdRitualMagicCP.text = "40"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "25"
-                    sphere2CP.text = "150"
-                    sphere3CP.text = "200"
-                    slot1CP.text = "10"
-                    slot2CP.text = "10"
-                    slot3CP.text = "20"
-                    slot4CP.text = "20"
-                    slot5CP.text = "30"
-                    slot6CP.text = "30"
-                    slot7CP.text = "40"
-                    slot8CP.text = "40"
-                    slot9CP.text = "50"
-                    ritualCP.text = "10"
-                }
-                else if (classSelection == "Bard") {
-                    characterClass = "Bard"
+                        //Mage CP text
+                        //General Skills
+                        trapsmithCP.text = "85"
+                        tradesmanCP.text = "40"
+                        alchemyCP.text = "60"
+                        chemistryCP.text = "70"
+                        blacksmithingCP.text = "110"
+                        artificeCP.text = "120"
+                        scrollcraftingCP.text = "35"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "75"
+                        florentineCP.text = "110"
+                        flurryCP.text = "125"
+                        heavyArmorCP.text = "65"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "140"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "80"
+                        groupProfLrgCP.text = "130"
+                        profExoticCP.text = "150"
+                        groupSpecCP.text = "250"
+                        specificSpecCP.text = "230"
+                        slayParryCP.text = "250"
+                        slayParryMstrCP.text = "270"
+                        //Rogue Skills
+                        garroteCP.text = "150"
+                        sapCP.text = "60"
+                        vitalBlowCP.text = "120"
+                        dodgeCP.text = "250"
+                        specificCritCP.text = "230"
+                        groupCritCP.text = "250"
+                        executeCP.text = "250"
+                        executeMstrCP.text = "270"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "55"
+                        necroArtsCP.text = "55"
+                        anatomyCP.text = "40"
+                        firstAidCP.text = "60"
+                        physicianCP.text = "45"
+                        readWriteCP.text = "40"
+                        readMagicCP.text = "15"
+                        rdAdvMagicCP.text = "25"
+                        rdRitualMagicCP.text = "40"
+                        advRitualCP.text = "200"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "25"
+                        sphere2CP.text = "150"
+                        sphere3CP.text = "200"
+                        slot1CP.text = "10"
+                        slot2CP.text = "10"
+                        slot3CP.text = "20"
+                        slot4CP.text = "20"
+                        slot5CP.text = "30"
+                        slot6CP.text = "30"
+                        slot7CP.text = "40"
+                        slot8CP.text = "40"
+                        slot9CP.text = "50"
+                        ritualCP.text = "10"
+                    }
+                    else if (classSelection == "Bard") {
+                        characterClass = "Bard"
 
-                    //Bard CP text
-                    //General Skills
-                    trapsmithCP.text = "75"
-                    tradesmanCP.text = "35"
-                    alchemyCP.text = "50"
-                    chemistryCP.text = "60"
-                    blacksmithingCP.text = "85"
-                    artificeCP.text = "95"
-                    scrollcraftingCP.text = "35"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "75"
-                    florentineCP.text = "110"
-                    flurryCP.text = "125"
-                    heavyArmorCP.text = "65"
-                    selfMutilateCP.text = "15"
-                    shieldCP.text = "140"
-                    weapRefocusCP.text = "40"
-                    groupProfMedCP.text = "80"
-                    groupProfLrgCP.text = "130"
-                    profExoticCP.text = "150"
-                    groupSpecCP.text = "250"
-                    specificSpecCP.text = "230"
-                    slayParryCP.text = "250"
-                    slayParryMstrCP.text = "270"
-                    //Rogue Skills
-                    garroteCP.text = "95"
-                    sapCP.text = "40"
-                    vitalBlowCP.text = "75"
-                    dodgeCP.text = "80"
-                    specificCritCP.text = "130"
-                    groupCritCP.text = "150"
-                    executeCP.text = "150"
-                    executeMstrCP.text = "170"
-                    //Scholar Skills
-                    mysticismCP.text = "50"
-                    demAngArtsCP.text = "50"
-                    necroArtsCP.text = "55"
-                    anatomyCP.text = "35"
-                    firstAidCP.text = "55"
-                    physicianCP.text = "40"
-                    readWriteCP.text = "40"
-                    readMagicCP.text = "25"
-                    rdAdvMagicCP.text = "35"
-                    rdRitualMagicCP.text = "50"
-                    eleAttuneCP.text = "25"
-                    //Spheres and Slots
-                    sphere1CP.text = "50"
-                    sphere2CP.text = "175"
-                    sphere3CP.text = "225"
-                    slot1CP.text = "10"
-                    slot2CP.text = "10"
-                    slot3CP.text = "20"
-                    slot4CP.text = "30"
-                    slot5CP.text = "30"
-                    slot6CP.text = "40"
-                    slot7CP.text = "60"
-                    slot8CP.text = "70"
-                    slot9CP.text = "80"
-                    ritualCP.text = "30"
+                        //Bard CP text
+                        //General Skills
+                        trapsmithCP.text = "75"
+                        tradesmanCP.text = "35"
+                        alchemyCP.text = "50"
+                        chemistryCP.text = "60"
+                        blacksmithingCP.text = "85"
+                        artificeCP.text = "95"
+                        scrollcraftingCP.text = "35"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "75"
+                        florentineCP.text = "110"
+                        flurryCP.text = "125"
+                        heavyArmorCP.text = "65"
+                        selfMutilateCP.text = "15"
+                        shieldCP.text = "140"
+                        weapRefocusCP.text = "40"
+                        groupProfMedCP.text = "80"
+                        groupProfLrgCP.text = "130"
+                        profExoticCP.text = "150"
+                        groupSpecCP.text = "250"
+                        specificSpecCP.text = "230"
+                        slayParryCP.text = "250"
+                        slayParryMstrCP.text = "270"
+                        //Rogue Skills
+                        garroteCP.text = "95"
+                        sapCP.text = "40"
+                        vitalBlowCP.text = "75"
+                        dodgeCP.text = "80"
+                        specificCritCP.text = "130"
+                        groupCritCP.text = "150"
+                        executeCP.text = "150"
+                        executeMstrCP.text = "170"
+                        //Scholar Skills
+                        mysticismCP.text = "50"
+                        demAngArtsCP.text = "50"
+                        necroArtsCP.text = "55"
+                        anatomyCP.text = "35"
+                        firstAidCP.text = "55"
+                        physicianCP.text = "40"
+                        readWriteCP.text = "40"
+                        readMagicCP.text = "25"
+                        rdAdvMagicCP.text = "35"
+                        rdRitualMagicCP.text = "50"
+                        advRitualCP.text = "225"
+                        eleAttuneCP.text = "25"
+                        //Spheres and Slots
+                        sphere1CP.text = "50"
+                        sphere2CP.text = "175"
+                        sphere3CP.text = "225"
+                        slot1CP.text = "10"
+                        slot2CP.text = "10"
+                        slot3CP.text = "20"
+                        slot4CP.text = "30"
+                        slot5CP.text = "30"
+                        slot6CP.text = "40"
+                        slot7CP.text = "60"
+                        slot8CP.text = "70"
+                        slot9CP.text = "80"
+                        ritualCP.text = "30"
+                    }
+                    else {
+                        vocationSpinner.setSelection(0)
+                        characterClass = "Class"
+
+                        level3Name.text = "Level 3 Skill"
+                        level6Name.text = "Level 6 Skill"
+                        level9Name.text = "Level 9 Skill"
+                        level12Name.text = "Level 12 Skill"
+
+                        //No Class CP text
+                        //General Skills
+                        trapsmithCP.text = "0"
+                        tradesmanCP.text = "0"
+                        alchemyCP.text = "0"
+                        chemistryCP.text = "0"
+                        blacksmithingCP.text = "0"
+                        artificeCP.text = "0"
+                        scrollcraftingCP.text = "0"
+                        lootingCP.text = "15"
+                        //Warrior Skills
+                        ambidexterityCP.text = "0"
+                        florentineCP.text = "0"
+                        flurryCP.text = "0"
+                        heavyArmorCP.text = "0"
+                        selfMutilateCP.text = "0"
+                        shieldCP.text = "0"
+                        weapRefocusCP.text = "0"
+                        groupProfMedCP.text = "0"
+                        groupProfLrgCP.text = "0"
+                        profExoticCP.text = "0"
+                        groupSpecCP.text = "0"
+                        specificSpecCP.text = "0"
+                        slayParryCP.text = "0"
+                        slayParryMstrCP.text = "0"
+                        //Rogue Skills
+                        garroteCP.text = "0"
+                        sapCP.text = "0"
+                        vitalBlowCP.text = "0"
+                        dodgeCP.text = "0"
+                        specificCritCP.text = "0"
+                        groupCritCP.text = "0"
+                        executeCP.text = "0"
+                        executeMstrCP.text = "0"
+                        //Scholar Skills
+                        mysticismCP.text = "0"
+                        demAngArtsCP.text = "0"
+                        necroArtsCP.text = "0"
+                        anatomyCP.text = "0"
+                        firstAidCP.text = "0"
+                        physicianCP.text = "0"
+                        readWriteCP.text = "0"
+                        readMagicCP.text = "0"
+                        rdAdvMagicCP.text = "0"
+                        rdRitualMagicCP.text = "0"
+                        advRitualCP.text = "0"
+                        eleAttuneCP.text = "0"
+                        //Spheres and Slots
+                        sphere1CP.text = "0"
+                        sphere2CP.text = "0"
+                        sphere3CP.text = "0"
+                        slot1CP.text = "0"
+                        slot2CP.text = "0"
+                        slot3CP.text = "0"
+                        slot4CP.text = "0"
+                        slot5CP.text = "0"
+                        slot6CP.text = "0"
+                        slot7CP.text = "0"
+                        slot8CP.text = "0"
+                        slot9CP.text = "0"
+                        ritualCP.text = "0"
+                    }
+
+
+                if (characterClass == "Nightblade") {
+                    level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
+
+                    dodgeTotal = groupCritSelect + specificCritSelect + level3Select
+
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
                 }
                 else {
-                    vocationSpinner.setSelection(0)
-                    characterClass = "Choose a class"
+                    dodgeTotal = groupCritSelect + specificCritSelect
 
-                    level3Name.text = "Level 3 Skill"
-                    level6Name.text = "Level 6 Skill"
-                    level9Name.text = "Level 9 Skill"
-                    level12Name.text = "Level 12 Skill"
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
 
-                    //No Class CP text
-                    //General Skills
-                    trapsmithCP.text = "0"
-                    tradesmanCP.text = "0"
-                    alchemyCP.text = "0"
-                    chemistryCP.text = "0"
-                    blacksmithingCP.text = "0"
-                    artificeCP.text = "0"
-                    scrollcraftingCP.text = "0"
-                    lootingCP.text = "15"
-                    //Warrior Skills
-                    ambidexterityCP.text = "0"
-                    florentineCP.text = "0"
-                    flurryCP.text = "0"
-                    heavyArmorCP.text = "0"
-                    selfMutilateCP.text = "0"
-                    shieldCP.text = "0"
-                    weapRefocusCP.text = "0"
-                    groupProfMedCP.text = "0"
-                    groupProfLrgCP.text = "0"
-                    profExoticCP.text = "0"
-                    groupSpecCP.text = "0"
-                    specificSpecCP.text = "0"
-                    slayParryCP.text = "0"
-                    slayParryMstrCP.text = "0"
-                    //Rogue Skills
-                    garroteCP.text = "0"
-                    sapCP.text = "0"
-                    vitalBlowCP.text = "0"
-                    dodgeCP.text = "0"
-                    specificCritCP.text = "0"
-                    groupCritCP.text = "0"
-                    executeCP.text = "0"
-                    executeMstrCP.text = "0"
-                    //Scholar Skills
-                    mysticismCP.text = "0"
-                    demAngArtsCP.text = "0"
-                    necroArtsCP.text = "0"
-                    anatomyCP.text = "0"
-                    firstAidCP.text = "0"
-                    physicianCP.text = "0"
-                    readWriteCP.text = "0"
-                    readMagicCP.text = "0"
-                    rdAdvMagicCP.text = "0"
-                    rdRitualMagicCP.text = "0"
-                    eleAttuneCP.text = "0"
-                    //Spheres and Slots
-                    sphere1CP.text = "0"
-                    sphere2CP.text = "0"
-                    sphere3CP.text = "0"
-                    slot1CP.text = "0"
-                    slot2CP.text = "0"
-                    slot3CP.text = "0"
-                    slot4CP.text = "0"
-                    slot5CP.text = "0"
-                    slot6CP.text = "0"
-                    slot7CP.text = "0"
-                    slot8CP.text = "0"
-                    slot9CP.text = "0"
-                    ritualCP.text = "0"
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
                 }
 
                 //CP and Frag Check and Math
@@ -2207,6 +2886,7 @@ class MainActivity : AppCompatActivity() {
                 racialSelect = Integer.parseInt(racialSpinner.selectedItem.toString())
                 if (bodySpinner.getVisibility() == View.VISIBLE) {
                     bodyCost = Integer.parseInt(bodyCP.text.toString())
+                    println("BODY SELECT 2890 IS $bodySelect")
                     bodySelect = Integer.parseInt(bodySpinner.selectedItem.toString())
                 }
                 if (strengthSpinner.getVisibility() == View.VISIBLE) {
@@ -2226,7 +2906,8 @@ class MainActivity : AppCompatActivity() {
                 artificeCost = Integer.parseInt(artificeCP.text.toString())
                 artificeSelect = Integer.parseInt(artificeSpinner.selectedItem.toString())
                 scrollcraftingCost = Integer.parseInt(scrollcraftingCP.text.toString())
-                scrollcraftingSelect = Integer.parseInt(scrollcraftingSpinner.selectedItem.toString())
+                scrollcraftingSelect =
+                    Integer.parseInt(scrollcraftingSpinner.selectedItem.toString())
                 coldHandsCost = Integer.parseInt(coldHandsCP.text.toString())
                 coldHandsFragCost = Integer.parseInt(coldHandsFrags.text.toString())
                 coldHandsSelect = Integer.parseInt(coldHandsSpinner.selectedItem.toString())
@@ -2284,7 +2965,8 @@ class MainActivity : AppCompatActivity() {
                 slayParryMstrSelect = Integer.parseInt(slayParryMstrSpinner.selectedItem.toString())
                 battlefieldRepairCost = Integer.parseInt(battlefieldRepairCP.text.toString())
                 battlefieldRepairFragCost = Integer.parseInt(battlefieldRepairFrags.text.toString())
-                battlefieldRepairSelect = Integer.parseInt(battlefieldRepairSpinner.selectedItem.toString())
+                battlefieldRepairSelect =
+                    Integer.parseInt(battlefieldRepairSpinner.selectedItem.toString())
                 crippleCost = Integer.parseInt(crippleCP.text.toString())
                 crippleFragCost = Integer.parseInt(crippleFrags.text.toString())
                 crippleSelect = Integer.parseInt(crippleSpinner.selectedItem.toString())
@@ -2356,6 +3038,8 @@ class MainActivity : AppCompatActivity() {
                 rdAdvMagicSelect = Integer.parseInt(rdAdvMagicSpinner.selectedItem.toString())
                 rdRitualMagicCost = Integer.parseInt(rdRitualMagicCP.text.toString())
                 rdRitualMagicSelect = Integer.parseInt(rdRitualMagicSpinner.selectedItem.toString())
+                advRitualCost = Integer.parseInt(advRitualCP.text.toString())
+                advRitualSelect = Integer.parseInt(advRitualSpinner.selectedItem.toString())
                 eleAttuneCost = Integer.parseInt(eleAttuneCP.text.toString())
                 eleAttuneSelect = Integer.parseInt(eleAttuneSpinner.selectedItem.toString())
                 combatWizCost = Integer.parseInt(combatWizCP.text.toString())
@@ -2380,16 +3064,64 @@ class MainActivity : AppCompatActivity() {
                 //Spheres and Slots
                 sphere1Cost = Integer.parseInt(sphere1CP.text.toString())
                 sphereSelect1 = sphere1Spinner.selectedItem.toString()
-                if (sphereSelect1 == "*Sigil"){ sphere1FragCost = 100 } else if (sphereSelect1 == "*Wytchcraft") { sphere1FragCost = 100 } else if (sphereSelect1 == "*Necromancy") { sphere1FragCost = 100 } else { sphere1FragCost = 0 }
-                if (sphereSelect1 != "None") { sphere1Select = 1 } else { sphere1Select = 0 }
+                if (sphereSelect1 == "*Sigil") {
+                    sphere1FragCost = 100
+                }
+                else if (sphereSelect1 == "*Wytchcraft") {
+                    sphere1FragCost = 100
+                }
+                else if (sphereSelect1 == "*Necromancy") {
+                    sphere1FragCost = 100
+                }
+                else {
+                    sphere1FragCost = 0
+                }
+                if (sphereSelect1 != "None") {
+                    sphere1Select = 1
+                }
+                else {
+                    sphere1Select = 0
+                }
                 sphere2Cost = Integer.parseInt(sphere2CP.text.toString())
                 sphereSelect2 = sphere2Spinner.selectedItem.toString()
-                if (sphereSelect2 == "*Sigil"){ sphere2FragCost = 100 } else if (sphereSelect2 == "*Wytchcraft") { sphere2FragCost = 100 } else if (sphereSelect2 == "*Necromancy") { sphere2FragCost = 100 } else { sphere2FragCost = 0 }
-                if (sphereSelect2 != "None") { sphere2Select = 1 } else { sphere2Select = 0 }
+                if (sphereSelect2 == "*Sigil") {
+                    sphere2FragCost = 100
+                }
+                else if (sphereSelect2 == "*Wytchcraft") {
+                    sphere2FragCost = 100
+                }
+                else if (sphereSelect2 == "*Necromancy") {
+                    sphere2FragCost = 100
+                }
+                else {
+                    sphere2FragCost = 0
+                }
+                if (sphereSelect2 != "None") {
+                    sphere2Select = 1
+                }
+                else {
+                    sphere2Select = 0
+                }
                 sphere3Cost = Integer.parseInt(sphere3CP.text.toString())
                 sphereSelect3 = sphere3Spinner.selectedItem.toString()
-                if (sphereSelect3 == "*Sigil"){ sphere3FragCost = 100 } else if (sphereSelect3 == "*Wytchcraft") { sphere3FragCost = 100 } else if (sphereSelect3 == "*Necromancy") { sphere3FragCost = 100 } else { sphere3FragCost = 0 }
-                if (sphereSelect3 != "None") { sphere3Select = 1 } else { sphere3Select = 0 }
+                if (sphereSelect3 == "*Sigil") {
+                    sphere3FragCost = 100
+                }
+                else if (sphereSelect3 == "*Wytchcraft") {
+                    sphere3FragCost = 100
+                }
+                else if (sphereSelect3 == "*Necromancy") {
+                    sphere3FragCost = 100
+                }
+                else {
+                    sphere3FragCost = 0
+                }
+                if (sphereSelect3 != "None") {
+                    sphere3Select = 1
+                }
+                else {
+                    sphere3Select = 0
+                }
                 slot1Cost = Integer.parseInt(slot1CP.text.toString())
                 slot1Select = Integer.parseInt(slot1Spinner.selectedItem.toString())
                 slot2Cost = Integer.parseInt(slot2CP.text.toString())
@@ -2424,6 +3156,7 @@ class MainActivity : AppCompatActivity() {
                 characterFree.setText("" + freeInt)
                 characterSpent.setText("" + characterSpentInt)
                 characterFrags.setText("" + characterFragsInt)
+                }
 
             }//Class Spinner Selected
 
@@ -2435,15 +3168,22 @@ class MainActivity : AppCompatActivity() {
         val vocationList = arrayOf(
             "None", "Archer", "Artisan", "Battle Mage", "Brew Master", "Bounty Hunter", "Shaman",
             "Stalwart", "Swashbuckler", "Undead Hunter", "Dread Knight", "Paladin", "Darkweaver",
-            "Lightweaver", "Dragon Knight")
+            "Lightweaver", "Dragon Knight"
+        )
         val vocationArrayAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, vocationList)
         vocationSpinner.adapter = vocationArrayAdapter
         vocationSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val vocationSelection: String = vocationSpinner.selectedItem.toString()
-                val classSelection: String = classSpinner.selectedItem.toString()
+                val classSelection = classSpinner.selectedItem.toString()
+                val vocationSelection = vocationSpinner.selectedItem.toString()
+                println("CLASS SELECT IS $classSelection")
+                println("VOCATION SELECT IS $vocationSelection")
+
+                sphereSelect1 = sphere1Spinner.selectedItem.toString()
+                sphereSelect2 = sphere2Spinner.selectedItem.toString()
+                sphereSelect3 = sphere3Spinner.selectedItem.toString()
 
                 if (classSelection != "No Selection") {
                     vocationText.visibility = View.VISIBLE
@@ -2453,7 +3193,7 @@ class MainActivity : AppCompatActivity() {
                     vocationText.visibility = View.GONE
                     vocationSpinner.visibility = View.GONE
                     vocationSpinner.setSelection(0)
-                    characterVocation = "Choose a vocation"
+                    characterVocation = "Vocation"
                 }
 
                 if (classSelection == "Mercenary") {
@@ -2505,6 +3245,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "45"
                     rdAdvMagicCP.text = "50"
                     rdRitualMagicCP.text = "90"
+                    advRitualCP.text = "300"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "100"
@@ -2570,6 +3311,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "20"
                     rdAdvMagicCP.text = "30"
                     rdRitualMagicCP.text = "50"
+                    advRitualCP.text = "300"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "75"
@@ -2635,6 +3377,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "20"
                     rdAdvMagicCP.text = "30"
                     rdRitualMagicCP.text = "50"
+                    advRitualCP.text = "275"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "75"
@@ -2700,6 +3443,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "40"
                     rdAdvMagicCP.text = "50"
                     rdRitualMagicCP.text = "90"
+                    advRitualCP.text = "300"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "100"
@@ -2765,6 +3509,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "25"
                     rdAdvMagicCP.text = "35"
                     rdRitualMagicCP.text = "60"
+                    advRitualCP.text = "275"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "75"
@@ -2830,6 +3575,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "25"
                     rdAdvMagicCP.text = "35"
                     rdRitualMagicCP.text = "60"
+                    advRitualCP.text = "275"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "75"
@@ -2895,6 +3641,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "15"
                     rdAdvMagicCP.text = "25"
                     rdRitualMagicCP.text = "40"
+                    advRitualCP.text = "225"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "50"
@@ -2960,6 +3707,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "15"
                     rdAdvMagicCP.text = "25"
                     rdRitualMagicCP.text = "40"
+                    advRitualCP.text = "200"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "25"
@@ -3025,6 +3773,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "25"
                     rdAdvMagicCP.text = "35"
                     rdRitualMagicCP.text = "50"
+                    advRitualCP.text = "225"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "50"
@@ -3041,10 +3790,10 @@ class MainActivity : AppCompatActivity() {
                     slot9CP.text = "80"
                     ritualCP.text = "30"
                 }
-                if (vocationSelection == "None"){
+                if (vocationSelection == "None") {
                     characterClass = classSelection
+                    characterVocation = "Vocation"
 
-                    classSpinner.isEnabled = true
                     vocationFragsInt = 0
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3052,55 +3801,55 @@ class MainActivity : AppCompatActivity() {
                     sphere2Spinner.adapter = sphereArrayAdapter
                     sphere3Spinner.adapter = sphereArrayAdapter
 
-                    if (classSelection =="Mercenary"){
+                    if (classSelection == "Mercenary") {
                         level3Name.text = "Hamstring"
                         level6Name.text = "Headbutt"
                         level9Name.text = "Dismember"
                         level12Name.text = "Razor's Edge"
                     }
-                    else if (classSelection == "Ranger"){
+                    else if (classSelection == "Ranger") {
                         level3Name.text = "Detoxify"
                         level6Name.text = "Trailblazing"
                         level9Name.text = "Nature's Grasp"
                         level12Name.text = "Call of the Hunt"
                     }
-                    else if (classSelection == "Templar"){
+                    else if (classSelection == "Templar") {
                         level3Name.text = "Burn Slot"
                         level6Name.text = "Scroll Harvest"
                         level9Name.text = "Weapon Break"
                         level12Name.text = "Weapon Conduit"
                     }
-                    else if (classSelection == "Assassin"){
+                    else if (classSelection == "Assassin") {
                         level3Name.text = "Shiv"
                         level6Name.text = "Silent Strike"
                         level9Name.text = "Spirit Sever"
                         level12Name.text = "Penetration"
                     }
-                    else if (classSelection == "Nightblade"){
+                    else if (classSelection == "Nightblade") {
                         level3Name.text = "Feint"
                         level6Name.text = "Duplicate Key"
                         level9Name.text = "Dim"
                         level12Name.text = "Passwall"
                     }
-                    else if (classSelection == "Witch Hunter"){
+                    else if (classSelection == "Witch Hunter") {
                         level3Name.text = "Witch Mark"
                         level6Name.text = "Twist of the Tongue"
                         level9Name.text = "Karmic Ricochet"
                         level12Name.text = "Counter Magic"
                     }
-                    else if (classSelection == "Druid"){
+                    else if (classSelection == "Druid") {
                         level3Name.text = "Create Grove"
                         level6Name.text = "Forest Meld"
                         level9Name.text = "Totem"
                         level12Name.text = "Henge"
                     }
-                    else if (classSelection == "Mage"){
+                    else if (classSelection == "Mage") {
                         level3Name.text = "Id. Magic Item"
                         level6Name.text = "Mana Harvest"
                         level9Name.text = "Create Familiar"
                         level12Name.text = "Power Nexus"
                     }
-                    else if (classSelection == "Bard"){
+                    else if (classSelection == "Bard") {
                         level3Name.text = "S. of Aversion"
                         level6Name.text = "S. of Love"
                         level9Name.text = "S. of Intermission"
@@ -3108,7 +3857,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 else if (vocationSelection == "Archer") {
-                    classSpinner.isEnabled = true
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3117,14 +3865,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Arrow Dodge"
                     level6Name.text = "Stand and Deliver"
                     level9Name.text = "Maim"
                     level12Name.text = "Death Arrow"
                 }
-                else if (vocationSelection == "Artisan"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Artisan") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3133,14 +3881,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Treasure Hunter"
                     level6Name.text = "Bribe"
                     level9Name.text = "Magnum Opus"
                     level12Name.text = "Vault"
                 }
-                else if (vocationSelection == "Battle Mage"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Battle Mage") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3149,14 +3897,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Amulet"
                     level6Name.text = "Maximize"
                     level9Name.text = "Twin Spell"
                     level12Name.text = "Wizard Staff"
                 }
-                else if (vocationSelection == "Brew Master"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Brew Master") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3165,14 +3913,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Iron Gut"
                     level6Name.text = "Mixologist"
                     level9Name.text = "Firebreathing"
                     level12Name.text = "Drunken Master"
                 }
-                else if (vocationSelection == "Bounty Hunter"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Bounty Hunter") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3181,14 +3929,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Mercy"
                     level6Name.text = "Bola"
                     level9Name.text = "Smoke Bomb"
                     level12Name.text = "Impale"
                 }
-                else if (vocationSelection == "Shaman"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Shaman") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3197,14 +3945,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Rite of Weaving"
                     level6Name.text = "Rite of War"
                     level9Name.text = "Rite of Vision"
                     level12Name.text = "Monolith"
                 }
-                else if (vocationSelection == "Stalwart"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Stalwart") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3213,14 +3961,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Shield Parry"
                     level6Name.text = "Conviction"
                     level9Name.text = "Fortress"
                     level12Name.text = "Imbue Shield"
                 }
-                else if (vocationSelection == "Swashbuckler"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Swashbuckler") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3229,14 +3977,14 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Finesse"
                     level6Name.text = "En Garde!"
                     level9Name.text = "Prise de Fer"
                     level12Name.text = "Aegis"
                 }
-                else if (vocationSelection == "Undead Hunter"){
-                    classSpinner.isEnabled = true
+                else if (vocationSelection == "Undead Hunter") {
                     vocationFragsInt = 150
                     favoredFragsInt = 0
                     favoredInt = 0
@@ -3245,6 +3993,7 @@ class MainActivity : AppCompatActivity() {
                     sphere3Spinner.adapter = sphereArrayAdapter
 
                     characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Hunter's Focus"
                     level6Name.text = "Hunter's Attrition"
@@ -3253,12 +4002,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 //Favoured Vocations
                 else if (vocationSelection == "Dread Knight") {
-                    classSpinner.isEnabled = false
                     vocationFragsInt = 0
                     favoredFragsInt = 250
                     favoredInt = 50
 
-                    characterClass = "Dread Knight"
+                    characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Harbringer's Blade"
                     level6Name.text = "Unholy Ring"
@@ -3310,6 +4059,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "30"
                     rdAdvMagicCP.text = "50"
                     rdRitualMagicCP.text = "50"
+                    advRitualCP.text = "275"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "50"
@@ -3330,12 +4080,12 @@ class MainActivity : AppCompatActivity() {
                     ritualCP.text = "30"
                 }
                 else if (vocationSelection == "Paladin") {
-                    classSpinner.isEnabled = false
                     vocationFragsInt = 0
                     favoredFragsInt = 250
                     favoredInt = 50
 
-                    characterClass = "Paladin"
+                    characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Defender"
                     level6Name.text = "Holy Ring"
@@ -3387,6 +4137,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "30"
                     rdAdvMagicCP.text = "50"
                     rdRitualMagicCP.text = "50"
+                    advRitualCP.text = "275"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "50"
@@ -3407,12 +4158,12 @@ class MainActivity : AppCompatActivity() {
                     ritualCP.text = "30"
                 }
                 else if (vocationSelection == "Darkweaver") {
-                    classSpinner.isEnabled = false
                     vocationFragsInt = 0
                     favoredFragsInt = 250
                     favoredInt = 50
 
-                    characterClass = "Darkweaver"
+                    characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Unholy Altar"
                     level6Name.text = "Sacred Bond"
@@ -3464,6 +4215,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "15"
                     rdAdvMagicCP.text = "25"
                     rdRitualMagicCP.text = "40"
+                    advRitualCP.text = "200"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1CP.text = "50"
@@ -3484,12 +4236,12 @@ class MainActivity : AppCompatActivity() {
                     ritualCP.text = "10"
                 }
                 else if (vocationSelection == "Lightweaver") {
-                    classSpinner.isEnabled = false
                     vocationFragsInt = 0
                     favoredFragsInt = 250
                     favoredInt = 50
 
-                    characterClass = "Lightweaver"
+                    characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Holy Altar"
                     level6Name.text = "Sacred Bond"
@@ -3541,6 +4293,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "15"
                     rdAdvMagicCP.text = "25"
                     rdRitualMagicCP.text = "40"
+                    advRitualCP.text = "200"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1Spinner.adapter = lightSphereArrayAdapter
@@ -3561,12 +4314,12 @@ class MainActivity : AppCompatActivity() {
                     ritualCP.text = "10"
                 }
                 else if (vocationSelection == "Dragon Knight") {
-                    classSpinner.isEnabled = false
                     vocationFragsInt = 0
                     favoredFragsInt = 250
                     favoredInt = 50
 
-                    characterClass = "Dragon Knight"
+                    characterClass = classSelection
+                    characterVocation = vocationSelection
 
                     level3Name.text = "Draconic Shrine"
                     level6Name.text = "Draconic Covenant"
@@ -3618,6 +4371,7 @@ class MainActivity : AppCompatActivity() {
                     readMagicCP.text = "15"
                     rdAdvMagicCP.text = "25"
                     rdRitualMagicCP.text = "40"
+                    advRitualCP.text = "200"
                     eleAttuneCP.text = "25"
                     //Spheres and Slots
                     sphere1Spinner.adapter = draconicSphereArrayAdapter
@@ -3636,6 +4390,190 @@ class MainActivity : AppCompatActivity() {
                     slot8CP.text = "40"
                     slot9CP.text = "50"
                     ritualCP.text = "10"
+                }
+
+                if (vocationSelection != "Dread Knight" || vocationSelection != "Paladin" || vocationSelection != "Darkweaver" || vocationSelection != "Lightweaver" || vocationSelection != "Dragon Knight") {
+                if (characterClass == "Nightblade") {
+                    level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
+
+                    dodgeTotal = groupCritSelect + specificCritSelect + level3Select
+
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                }
+                else {
+                    dodgeTotal = groupCritSelect + specificCritSelect
+
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                }
+                }
+
+                when (sphereSelect1) {
+                    "None" -> sphere1Spinner.setSelection(0)
+                    "Elemental" -> sphere1Spinner.setSelection(1)
+                    "Healing" -> sphere1Spinner.setSelection(2)
+                    "Nature" -> sphere1Spinner.setSelection(3)
+                    "Protections" -> sphere1Spinner.setSelection(4)
+                    "Psionics" -> sphere1Spinner.setSelection(5)
+                    "*Necromancy" -> sphere1Spinner.setSelection(6)
+                    "*Sigil" -> sphere1Spinner.setSelection(7)
+                    "*Wytchcraft" -> sphere1Spinner.setSelection(8)
+                    "Dark" -> sphere1Spinner.setSelection(9)
+                    "Light" -> sphere1Spinner.setSelection(9)
+                    "Draconic" -> sphere1Spinner.setSelection(9)
+                }
+                when (sphereSelect2) {
+                    "None" -> sphere2Spinner.setSelection(0)
+                    "Elemental" -> sphere2Spinner.setSelection(1)
+                    "Healing" -> sphere2Spinner.setSelection(2)
+                    "Nature" -> sphere2Spinner.setSelection(3)
+                    "Protections" -> sphere2Spinner.setSelection(4)
+                    "Psionics" -> sphere2Spinner.setSelection(5)
+                    "*Necromancy" -> sphere2Spinner.setSelection(6)
+                    "*Sigil" -> sphere2Spinner.setSelection(7)
+                    "*Wytchcraft" -> sphere2Spinner.setSelection(8)
+                    "Dark" -> sphere2Spinner.setSelection(9)
+                    "Light" -> sphere2Spinner.setSelection(9)
+                    "Draconic" -> sphere2Spinner.setSelection(9)
+                }
+                when (sphereSelect3) {
+                    "None" -> sphere3Spinner.setSelection(0)
+                    "Elemental" -> sphere3Spinner.setSelection(1)
+                    "Healing" -> sphere3Spinner.setSelection(2)
+                    "Nature" -> sphere3Spinner.setSelection(3)
+                    "Protections" -> sphere3Spinner.setSelection(4)
+                    "Psionics" -> sphere3Spinner.setSelection(5)
+                    "*Necromancy" -> sphere3Spinner.setSelection(6)
+                    "*Sigil" -> sphere3Spinner.setSelection(7)
+                    "*Wytchcraft" -> sphere3Spinner.setSelection(8)
+                    "Dark" -> sphere3Spinner.setSelection(9)
+                    "Light" -> sphere3Spinner.setSelection(9)
+                    "Draconic" -> sphere3Spinner.setSelection(9)
                 }
 
                 //CP and Frag Check and Math
@@ -3800,6 +4738,8 @@ class MainActivity : AppCompatActivity() {
                 rdAdvMagicSelect = Integer.parseInt(rdAdvMagicSpinner.selectedItem.toString())
                 rdRitualMagicCost = Integer.parseInt(rdRitualMagicCP.text.toString())
                 rdRitualMagicSelect = Integer.parseInt(rdRitualMagicSpinner.selectedItem.toString())
+                advRitualCost = Integer.parseInt(advRitualCP.text.toString())
+                advRitualSelect = Integer.parseInt(advRitualSpinner.selectedItem.toString())
                 eleAttuneCost = Integer.parseInt(eleAttuneCP.text.toString())
                 eleAttuneSelect = Integer.parseInt(eleAttuneSpinner.selectedItem.toString())
                 combatWizCost = Integer.parseInt(combatWizCP.text.toString())
@@ -3824,16 +4764,64 @@ class MainActivity : AppCompatActivity() {
                 //Spheres and Slots
                 sphere1Cost = Integer.parseInt(sphere1CP.text.toString())
                 sphereSelect1 = sphere1Spinner.selectedItem.toString()
-                if (sphereSelect1 == "*Sigil"){ sphere1FragCost = 100 } else if (sphereSelect1 == "*Wytchcraft") { sphere1FragCost = 100 } else if (sphereSelect1 == "*Necromancy") { sphere1FragCost = 100 } else { sphere1FragCost = 0 }
-                if (sphereSelect1 != "None") { sphere1Select = 1 } else { sphere1Select = 0 }
+                if (sphereSelect1 == "*Sigil") {
+                    sphere1FragCost = 100
+                }
+                else if (sphereSelect1 == "*Wytchcraft") {
+                    sphere1FragCost = 100
+                }
+                else if (sphereSelect1 == "*Necromancy") {
+                    sphere1FragCost = 100
+                }
+                else {
+                    sphere1FragCost = 0
+                }
+                if (sphereSelect1 != "None") {
+                    sphere1Select = 1
+                }
+                else {
+                    sphere1Select = 0
+                }
                 sphere2Cost = Integer.parseInt(sphere2CP.text.toString())
                 sphereSelect2 = sphere2Spinner.selectedItem.toString()
-                if (sphereSelect2 == "*Sigil"){ sphere2FragCost = 100 } else if (sphereSelect2 == "*Wytchcraft") { sphere2FragCost = 100 } else if (sphereSelect2 == "*Necromancy") { sphere2FragCost = 100 } else { sphere2FragCost = 0 }
-                if (sphereSelect2 != "None") { sphere2Select = 1 } else { sphere2Select = 0 }
+                if (sphereSelect2 == "*Sigil") {
+                    sphere2FragCost = 100
+                }
+                else if (sphereSelect2 == "*Wytchcraft") {
+                    sphere2FragCost = 100
+                }
+                else if (sphereSelect2 == "*Necromancy") {
+                    sphere2FragCost = 100
+                }
+                else {
+                    sphere2FragCost = 0
+                }
+                if (sphereSelect2 != "None") {
+                    sphere2Select = 1
+                }
+                else {
+                    sphere2Select = 0
+                }
                 sphere3Cost = Integer.parseInt(sphere3CP.text.toString())
                 sphereSelect3 = sphere3Spinner.selectedItem.toString()
-                if (sphereSelect3 == "*Sigil"){ sphere3FragCost = 100 } else if (sphereSelect3 == "*Wytchcraft") { sphere3FragCost = 100 } else if (sphereSelect3 == "*Necromancy") { sphere3FragCost = 100 } else { sphere3FragCost = 0 }
-                if (sphereSelect3 != "None") { sphere3Select = 1 } else { sphere3Select = 0 }
+                if (sphereSelect3 == "*Sigil") {
+                    sphere3FragCost = 100
+                }
+                else if (sphereSelect3 == "*Wytchcraft") {
+                    sphere3FragCost = 100
+                }
+                else if (sphereSelect3 == "*Necromancy") {
+                    sphere3FragCost = 100
+                }
+                else {
+                    sphere3FragCost = 0
+                }
+                if (sphereSelect3 != "None") {
+                    sphere3Select = 1
+                }
+                else {
+                    sphere3Select = 0
+                }
                 slot1Cost = Integer.parseInt(slot1CP.text.toString())
                 slot1Select = Integer.parseInt(slot1Spinner.selectedItem.toString())
                 slot2Cost = Integer.parseInt(slot2CP.text.toString())
@@ -3877,15 +4865,17 @@ class MainActivity : AppCompatActivity() {
 
         //Blanket Box
 
-        characterBlankets.addTextChangedListener(object: TextWatcher {
+        characterBlankets.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun afterTextChanged(p0: Editable?) {
                 val characterBlanketsStr = characterBlankets.editableText.toString()
 
-                if (characterBlanketsStr != ""){
+                if (characterBlanketsStr != "") {
                     blanketsInt = Integer.parseInt(characterBlanketsStr)
 
                     calculateLevelbyBlankets()
@@ -4025,9 +5015,237 @@ class MainActivity : AppCompatActivity() {
                     racialInt = 0
                 }
 
+                if (characterRace == "Minotaur") {
+                    if (levelInt <= 5) {
+                        autoRacial.setText("Enhanced Strength +1")
+                    }
+                    else if (levelInt >= 6 && levelInt <= 10) {
+                        autoRacial.setText("Enhanced Strength +2")
+                    }
+                    else if (levelInt >= 11 && levelInt <= 15) {
+                        autoRacial.setText("Enhanced Strength +3")
+                    }
+                    else if (levelInt >= 16 && levelInt <= 20) {
+                        autoRacial.setText("Enhanced Strength +4")
+                    }
+                    else if (levelInt >= 21 && levelInt <= 25) {
+                        autoRacial.setText("Enhanced Strength +5")
+                    }
+                    else if (levelInt >= 26 && levelInt <= 30) {
+                        autoRacial.setText("Enhanced Strength +6")
+                    }
+                    else {
+                        autoRacial.setText("Automatic Racial")
+                    }
+                }
+                if (characterRace == "Kobold") {
+                    if (levelInt <= 2) {
+                        autoRacial.setText("1 x Innate Sap")
+                    }
+                    else if (levelInt >= 3 && levelInt <= 4) {
+                        autoRacial.setText("2 x Innate Sap")
+                    }
+                    else if (levelInt >= 5 && levelInt <= 6) {
+                        autoRacial.setText("3 x Innate Sap")
+                    }
+                    else if (levelInt >= 7 && levelInt <= 8) {
+                        autoRacial.setText("4 x Innate Sap")
+                    }
+                    else if (levelInt >= 9 && levelInt <= 10) {
+                        autoRacial.setText("5 x Innate Sap")
+                    }
+                    else if (levelInt >= 11 && levelInt <= 12) {
+                        autoRacial.setText("6 x Innate Sap")
+                    }
+                    else if (levelInt >= 13 && levelInt <= 14) {
+                        autoRacial.setText("7 x Innate Sap")
+                    }
+                    else if (levelInt >= 15 && levelInt <= 16) {
+                        autoRacial.setText("8 x Innate Sap")
+                    }
+                    else if (levelInt >= 16 && levelInt <= 18) {
+                        autoRacial.setText("9 x Innate Sap")
+                    }
+                    else if (levelInt >= 19) {
+                        autoRacial.setText("10 x Innate Sap")
+                    }
+                    else {
+                        autoRacial.setText("Automatic Racial")
+                    }
+                }
+                if (characterRace == "Draconian") {
+                    if (levelInt <= 3) {
+                        autoRacial.setText("Natural Threshold +1")
+                    }
+                    else if (levelInt >= 4 && levelInt <= 6) {
+                        autoRacial.setText("Natural Threshold +2")
+                    }
+                    else if (levelInt >= 7 && levelInt <= 9) {
+                        autoRacial.setText("Natural Threshold +3")
+                    }
+                    else if (levelInt >= 10 && levelInt <= 12) {
+                        autoRacial.setText("Natural Threshold +4")
+                    }
+                    else if (levelInt >= 13 && levelInt <= 15) {
+                        autoRacial.setText("Natural Threshold +5")
+                    }
+                    else if (levelInt >= 16 && levelInt <= 18) {
+                        autoRacial.setText("Natural Threshold +6")
+                    }
+                    else if (levelInt >= 19 && levelInt <= 21) {
+                        autoRacial.setText("Natural Threshold +7")
+                    }
+                    else if (levelInt >= 22 && levelInt <= 24) {
+                        autoRacial.setText("Natural Threshold +8")
+                    }
+                    else if (levelInt >= 25 && levelInt <= 27) {
+                        autoRacial.setText("Natural Threshold +9")
+                    }
+                    else if (levelInt >= 28 && levelInt <= 30) {
+                        autoRacial.setText("Natural Threshold +10")
+                    }
+                    else {
+                        autoRacial.setText("Automatic Racial")
+                    }
+                }
+
             }
         })
 
+        //Blanket Up / Down Buttons
+        blanketUp.setOnClickListener() {
+            var characterBlanketsStr = characterBlankets.editableText.toString()
+            if (characterBlanketsStr == ""){
+                characterBlanketsStr = "0"
+            }
+
+            if (blanketsInt <= 230) {
+                blanketsInt = Integer.parseInt(characterBlanketsStr)
+                blanketsInt = blanketsInt + 1
+                characterBlanketsStr = "$blanketsInt"
+            }
+            characterBlankets.setText(characterBlanketsStr)
+
+            level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
+            level6Select = Integer.parseInt(level6Spinner.selectedItem.toString())
+            level9Select = Integer.parseInt(level9Spinner.selectedItem.toString())
+            level12Select = Integer.parseInt(level12Spinner.selectedItem.toString())
+
+            if (levelInt >= 3) {
+                level3Spinner.isEnabled = true
+            }
+            else {
+                level3Spinner.isEnabled = false
+                level3Spinner.setSelection(0)
+                level3Int = 0
+            }
+
+            if (level3Select > 0 && levelInt >= 6) {
+                level6Spinner.isEnabled = true
+            }
+            else {
+                level6Spinner.isEnabled = false
+                level6Spinner.setSelection(0)
+                level6Int = 0
+            }
+
+            if (level6Select > 0 && levelInt >= 9) {
+                level9Spinner.isEnabled = true
+            }
+            else {
+                level9Spinner.isEnabled = false
+                level9Spinner.setSelection(0)
+                level9Int = 0
+            }
+
+            if (level9Select > 0 && levelInt >= 12) {
+                level12Spinner.isEnabled = true
+            }
+            else {
+                level12Spinner.isEnabled = false
+                level12Spinner.setSelection(0)
+                level12Int = 0
+            }
+
+        }
+
+        blanketDn.setOnClickListener() {
+            var characterBlanketsStr = characterBlankets.editableText.toString()
+            if (characterBlanketsStr == ""){
+                characterBlanketsStr = "0"
+            }
+
+            if (blanketsInt >= 1) {
+                blanketsInt = Integer.parseInt(characterBlanketsStr)
+                blanketsInt = blanketsInt - 1
+                characterBlanketsStr = "$blanketsInt"
+            }
+            characterBlankets.setText(characterBlanketsStr)
+
+            level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
+            level6Select = Integer.parseInt(level6Spinner.selectedItem.toString())
+            level9Select = Integer.parseInt(level9Spinner.selectedItem.toString())
+            level12Select = Integer.parseInt(level12Spinner.selectedItem.toString())
+
+            if (levelInt >= 3) {
+                level3Spinner.isEnabled = true
+            }
+            else {
+                level3Spinner.isEnabled = false
+                level3Spinner.setSelection(0)
+                level3Int = 0
+            }
+
+            if (level3Select > 0 && levelInt >= 6) {
+                level6Spinner.isEnabled = true
+            }
+            else {
+                level6Spinner.isEnabled = false
+                level6Spinner.setSelection(0)
+                level6Int = 0
+            }
+
+            if (level6Select > 0 && levelInt >= 9) {
+                level9Spinner.isEnabled = true
+            }
+            else {
+                level9Spinner.isEnabled = false
+                level9Spinner.setSelection(0)
+                level9Int = 0
+            }
+
+            if (level9Select > 0 && levelInt >= 12) {
+                level12Spinner.isEnabled = true
+            }
+            else {
+                level12Spinner.isEnabled = false
+                level12Spinner.setSelection(0)
+                level12Int = 0
+            }
+
+        }
+
+        //General Skill Info Button
+        generalInfoButton.setOnClickListener() {
+            val intent = Intent(this, GeneralSkillsInfo::class.java)
+
+            intent.putExtra("characterRace", characterRace)
+            intent.putExtra("characterCulture", characterCulture)
+            intent.putExtra("cultureFragsInt", cultureFragsInt)
+            intent.putExtra("characterClass", characterClass)
+            intent.putExtra("characterVocation", characterVocation)
+
+            startActivity(intent)
+
+        }
+
+        //General Frag Skill Info Button
+        generalFragInfoButton.setOnClickListener() {
+            val intent = Intent(this, GeneralFragSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
 
         //General Skill Spinners
 
@@ -4038,6 +5256,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(level3CP.text.toString())
                 val skillSelect = Integer.parseInt(level3Spinner.selectedItem.toString())
+                level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
 
                 if (skillSelect > 0 && levelInt >= 6) {
                     level6Spinner.isEnabled = true
@@ -4048,80 +5267,82 @@ class MainActivity : AppCompatActivity() {
                     level6Int = 0
                 }
 
+                if (characterVocation == "Dread Knight" || characterVocation == "Paladin") {
+                    calculateHP()
+                    characterHP.setText("" + hpInt)
+                }
+
                 if (characterClass == "Nightblade") {
-                    specificCritSelect = Integer.parseInt(specificCritSpinner.selectedItem.toString())
+                    specificCritSelect =
+                        Integer.parseInt(specificCritSpinner.selectedItem.toString())
                     groupCritSelect = Integer.parseInt(groupCritSpinner.selectedItem.toString())
                     dodgeSelect = Integer.parseInt(dodgeSpinner.selectedItem.toString())
 
-                    if (dodgeSelect > skillSelect) {
-                        if (skillSelect > specificCritSelect && skillSelect > groupCritSelect) {
-                            dodgeSelect = skillSelect
-                        }
-                        else {
-                            if (specificCritSelect > groupCritSelect) {
-                                dodgeSelect = specificCritSelect
-                            } else if (groupCritSelect > specificCritSelect)
-                                dodgeSelect = groupCritSelect
-                        }
+                    dodgeTotal = skillSelect + groupCritSelect + specificCritSelect
+
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
                         dodgeSpinner.setSelection(dodgeSelect)
                     }
 
-                    if (skillSelect > specificCritSelect && skillSelect > groupCritSelect) {
-                        if (skillSelect == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (skillSelect == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
                 }
 
@@ -4131,6 +5352,7 @@ class MainActivity : AppCompatActivity() {
 
                 characterFree.setText("" + freeInt)
                 characterSpent.setText("" + characterSpentInt)
+
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -4144,6 +5366,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(level6CP.text.toString())
                 val skillSelect = Integer.parseInt(level6Spinner.selectedItem.toString())
+                level6Select = Integer.parseInt(level6Spinner.selectedItem.toString())
 
                 if (skillSelect > 0 && levelInt >= 9) {
                     level9Spinner.isEnabled = true
@@ -4172,6 +5395,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(level9CP.text.toString())
                 val skillSelect = Integer.parseInt(level9Spinner.selectedItem.toString())
+                level9Select = Integer.parseInt(level9Spinner.selectedItem.toString())
 
                 if (skillSelect > 0 && levelInt >= 12) {
                     level12Spinner.isEnabled = true
@@ -4200,6 +5424,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(level12CP.text.toString())
                 val skillSelect = Integer.parseInt(level12Spinner.selectedItem.toString())
+                level12Select = Integer.parseInt(level12Spinner.selectedItem.toString())
 
                 level12Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -4219,6 +5444,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(racialCP.text.toString())
                 val skillSelect = Integer.parseInt(racialSpinner.selectedItem.toString())
+                racialSelect = Integer.parseInt(racialSpinner.selectedItem.toString())
 
                 racialInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -4240,6 +5466,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(bodyCP.text.toString())
                 val skillSelect = Integer.parseInt(bodySpinner.selectedItem.toString())
+                bodySelect = Integer.parseInt(bodySpinner.selectedItem.toString())
 
                 bodyHP = 5 * skillSelect
 
@@ -4263,6 +5490,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(strengthCP.text.toString())
                 val skillSelect = Integer.parseInt(strengthSpinner.selectedItem.toString())
+                strengthSelect = Integer.parseInt(strengthSpinner.selectedItem.toString())
 
                 strengthInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -4285,15 +5513,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(trapsmithCP.text.toString())
                 val skillSelect = Integer.parseInt(trapsmithSpinner.selectedItem.toString())
-
-                if (skillSelect < 5) {
-                        escapeSpinner.isEnabled = false
-                        escapeSpinner.setSelection(0)
-                        escapeInt = 0
-                }
-                else{
-                    escapeSpinner.isEnabled = true
-                }
+                trapsmithSelect = Integer.parseInt(trapsmithSpinner.selectedItem.toString())
 
                 trapsmithInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -4313,6 +5533,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(tradesmanCP.text.toString())
                 val skillSelect = Integer.parseInt(tradesmanSpinner.selectedItem.toString())
+                tradesmanSelect = Integer.parseInt(tradesmanSpinner.selectedItem.toString())
 
                 //Math
                 tradesmanInt = cpCost * skillSelect
@@ -4333,6 +5554,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(alchemyCP.text.toString())
                 val skillSelect = Integer.parseInt(alchemySpinner.selectedItem.toString())
+                alchemySelect = Integer.parseInt(alchemySpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     10 -> {
@@ -4364,6 +5586,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(chemistryCP.text.toString())
                 val skillSelect = Integer.parseInt(chemistrySpinner.selectedItem.toString())
+                chemistrySelect = Integer.parseInt(chemistrySpinner.selectedItem.toString())
 
                 //Math
                 chemistryInt = cpCost * skillSelect
@@ -4384,6 +5607,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(blacksmithingCP.text.toString())
                 val skillSelect = Integer.parseInt(blacksmithingSpinner.selectedItem.toString())
+                blacksmithingSelect = Integer.parseInt(blacksmithingSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     10 -> {
@@ -4415,6 +5639,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(artificeCP.text.toString())
                 val skillSelect = Integer.parseInt(artificeSpinner.selectedItem.toString())
+                artificeSelect = Integer.parseInt(artificeSpinner.selectedItem.toString())
 
                 //Math
                 artificeInt = cpCost * skillSelect
@@ -4435,6 +5660,8 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(scrollcraftingCP.text.toString())
                 val skillSelect = Integer.parseInt(scrollcraftingSpinner.selectedItem.toString())
+                scrollcraftingSelect =
+                    Integer.parseInt(scrollcraftingSpinner.selectedItem.toString())
 
                 scrollcraftingInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -4458,6 +5685,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(coldHandsCP.text.toString())
                 val fragCost = Integer.parseInt(coldHandsFrags.text.toString())
                 val skillSelect = Integer.parseInt(coldHandsSpinner.selectedItem.toString())
+                coldHandsSelect = Integer.parseInt(coldHandsSpinner.selectedItem.toString())
 
                 //Math
                 coldHandsInt = cpCost * skillSelect
@@ -4483,6 +5711,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(createAlcoholCP.text.toString())
                 val fragCost = Integer.parseInt(createAlcoholFrags.text.toString())
                 val skillSelect = Integer.parseInt(createAlcoholSpinner.selectedItem.toString())
+                createAlcoholSelect = Integer.parseInt(createAlcoholSpinner.selectedItem.toString())
 
                 //Math
                 createAlcoholInt = cpCost * skillSelect
@@ -4508,6 +5737,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(heavyDrinkerCP.text.toString())
                 val fragCost = Integer.parseInt(heavyDrinkerFrags.text.toString())
                 val skillSelect = Integer.parseInt(heavyDrinkerSpinner.selectedItem.toString())
+                heavyDrinkerSelect = Integer.parseInt(heavyDrinkerSpinner.selectedItem.toString())
 
                 //Math
                 heavyDrinkerInt = cpCost * skillSelect
@@ -4533,6 +5763,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(hindsightCP.text.toString())
                 val fragCost = Integer.parseInt(hindsightFrags.text.toString())
                 val skillSelect = Integer.parseInt(hindsightSpinner.selectedItem.toString())
+                hindsightSelect = Integer.parseInt(hindsightSpinner.selectedItem.toString())
 
                 //Math
                 hindsightInt = cpCost * skillSelect
@@ -4558,6 +5789,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(intuitionCP.text.toString())
                 val fragCost = Integer.parseInt(intuitionFrags.text.toString())
                 val skillSelect = Integer.parseInt(intuitionSpinner.selectedItem.toString())
+                intuitionSelect = Integer.parseInt(intuitionSpinner.selectedItem.toString())
 
                 //Math
                 intuitionInt = cpCost * skillSelect
@@ -4583,6 +5815,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(lootingCP.text.toString())
                 val fragCost = Integer.parseInt(lootingFrags.text.toString())
                 val skillSelect = Integer.parseInt(lootingSpinner.selectedItem.toString())
+                lootingSelect = Integer.parseInt(lootingSpinner.selectedItem.toString())
 
                 //Math
                 lootingInt = cpCost * skillSelect
@@ -4605,7 +5838,7 @@ class MainActivity : AppCompatActivity() {
         paragonSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val paragonSelect = Integer.parseInt(paragonSpinner.selectedItem.toString())
+                paragonSelect = Integer.parseInt(paragonSpinner.selectedItem.toString())
 
                 if (paragonSelect == 1) {
                     paragonSlotText.visibility = View.VISIBLE
@@ -4662,6 +5895,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(possumCP.text.toString())
                 val fragCost = Integer.parseInt(possumFrags.text.toString())
                 val skillSelect = Integer.parseInt(possumSpinner.selectedItem.toString())
+                possumSelect = Integer.parseInt(possumSpinner.selectedItem.toString())
 
                 //Math
                 possumInt = cpCost * skillSelect
@@ -4684,12 +5918,21 @@ class MainActivity : AppCompatActivity() {
         teacherSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val cpCost = Integer.parseInt(teacherCP.text.toString())
+                var cpCost = Integer.parseInt(teacherCP.text.toString())
                 val fragCost = Integer.parseInt(teacherFrags.text.toString())
                 val skillSelect = Integer.parseInt(teacherSpinner.selectedItem.toString())
+                teacherSelect = Integer.parseInt(teacherSpinner.selectedItem.toString())
 
-                //Math
-                teacherInt = cpCost * skillSelect
+                if (skillSelect == 0) {
+                    teacherCP.setText("15")
+                    cpCost = 0
+                }
+                else {
+                    teacherCP.setText("0")
+                    cpCost = 15
+                }
+
+                teacherInt = cpCost
                 calculateSpentCP()
                 calculateFreeCP()
 
@@ -4705,6 +5948,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Warrior Skill Info Button
+        warriorInfoButton.setOnClickListener() {
+            val intent = Intent(this, WarriorSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
+
+        //Warrior Frag Skill Info Button
+        warriorFragInfoButton.setOnClickListener() {
+            val intent = Intent(this, WarriorFragSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
         //Warrior Skill Spinners
 
         //Spinner for Ambidexterity Skill
@@ -4714,6 +5972,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(ambidexterityCP.text.toString())
                 val skillSelect = Integer.parseInt(ambidexteritySpinner.selectedItem.toString())
+                ambidexteritySelect = Integer.parseInt(ambidexteritySpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -4742,6 +6001,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(florentineCP.text.toString())
                 val skillSelect = Integer.parseInt(florentineSpinner.selectedItem.toString())
+                florentineSelect = Integer.parseInt(florentineSpinner.selectedItem.toString())
 
                 //Math
                 florentineInt = cpCost * skillSelect
@@ -4762,9 +6022,9 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(flurryCP.text.toString())
                 val skillSelect = Integer.parseInt(flurrySpinner.selectedItem.toString())
-
                 whirlBlowsSelect = Integer.parseInt(whirlBlowsSpinner.selectedItem.toString())
-                if (whirlBlowsSelect > skillSelect){
+
+                if (whirlBlowsSelect > skillSelect) {
                     whirlBlowsSelect = skillSelect
                 }
 
@@ -4853,6 +6113,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(heavyArmorCP.text.toString())
                 val skillSelect = Integer.parseInt(heavyArmorSpinner.selectedItem.toString())
+                heavyArmorSelect = Integer.parseInt(heavyArmorSpinner.selectedItem.toString())
 
                 //Math
                 heavyArmorInt = cpCost * skillSelect
@@ -4873,6 +6134,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(selfMutilateCP.text.toString())
                 val skillSelect = Integer.parseInt(selfMutilateSpinner.selectedItem.toString())
+                selfMutilateSelect = Integer.parseInt(selfMutilateSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -4902,6 +6164,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(shieldCP.text.toString())
                 val skillSelect = Integer.parseInt(shieldSpinner.selectedItem.toString())
+                shieldSelect = Integer.parseInt(shieldSpinner.selectedItem.toString())
 
                 //Math
                 shieldInt = cpCost * skillSelect
@@ -4922,6 +6185,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(weapRefocusCP.text.toString())
                 val skillSelect = Integer.parseInt(weapRefocusSpinner.selectedItem.toString())
+                weapRefocusSelect = Integer.parseInt(weapRefocusSpinner.selectedItem.toString())
 
                 //Math
                 weapRefocusInt = cpCost * skillSelect
@@ -4942,6 +6206,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(groupProfMedCP.text.toString())
                 val skillSelect = Integer.parseInt(groupProfMedSpinner.selectedItem.toString())
+                groupProfMedSelect = Integer.parseInt(groupProfMedSpinner.selectedItem.toString())
 
                 groupProfMedInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -4961,6 +6226,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(groupProfLrgCP.text.toString())
                 val skillSelect = Integer.parseInt(groupProfLrgSpinner.selectedItem.toString())
+                groupProfLrgSelect = Integer.parseInt(groupProfLrgSpinner.selectedItem.toString())
 
                 //Math
                 groupProfLrgInt = cpCost * skillSelect
@@ -4981,6 +6247,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(profExoticCP.text.toString())
                 val skillSelect = Integer.parseInt(profExoticSpinner.selectedItem.toString())
+                profExoticSelect = Integer.parseInt(profExoticSpinner.selectedItem.toString())
 
                 //Math
                 profExoticInt = cpCost * skillSelect
@@ -5001,133 +6268,76 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(specificSpecCP.text.toString())
                 val skillSelect = Integer.parseInt(specificSpecSpinner.selectedItem.toString())
+                specificSpecSelect = Integer.parseInt(specificSpecSpinner.selectedItem.toString())
 
                 groupSpecSelect = Integer.parseInt(groupSpecSpinner.selectedItem.toString())
                 slayParrySelect = Integer.parseInt(slayParrySpinner.selectedItem.toString())
 
-                if (slayParrySelect > skillSelect) {
-                    if (skillSelect >= groupSpecSelect) {
-                        slayParrySelect = skillSelect
-                    }
-                    else if (skillSelect <= groupSpecSelect) {
-                        slayParrySelect = groupSpecSelect
-                    }
+                specTotal = skillSelect + groupSpecSelect
+
+                if (specTotal >= 11) {
+                    specTotal = 10
+                }
+
+                if (slayParrySelect > specTotal) {
+                    slayParrySelect = specTotal
                     slayParrySpinner.setSelection(slayParrySelect)
                 }
 
-                if (skillSelect >= groupSpecSelect) {
-                    if (skillSelect == 0) {
-                        slayParrySpinner.isEnabled = false
-                        slayParrySpinner.setSelection(0)
-                        slayParryInt = 0
-                    }
-                    if (skillSelect == 1) {
-                        slayParrySpinner.adapter = oneBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 2) {
-                        slayParrySpinner.adapter = twoBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 3) {
-                        slayParrySpinner.adapter = threeBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 4) {
-                        slayParrySpinner.adapter = fourBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 5) {
-                        slayParrySpinner.adapter = fiveBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 6) {
-                        slayParrySpinner.adapter = sixBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 7) {
-                        slayParrySpinner.adapter = sevenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 8) {
-                        slayParrySpinner.adapter = eightBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 9) {
-                        slayParrySpinner.adapter = nineBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (skillSelect == 10) {
-                        slayParrySpinner.adapter = tenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
+                if (specTotal == 0) {
+                    slayParrySpinner.isEnabled = false
+                    slayParrySpinner.setSelection(0)
+                    slayParryInt = 0
                 }
-                else if (skillSelect <= groupSpecSelect) {
-                    if (groupSpecSelect == 0) {
-                        slayParrySpinner.isEnabled = false
-                        slayParrySpinner.setSelection(0)
-                        slayParryInt = 0
-                    }
-                    else if (groupSpecSelect == 1) {
-                        slayParrySpinner.adapter = oneBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 2) {
-                        slayParrySpinner.adapter = twoBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 3) {
-                        slayParrySpinner.adapter = threeBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 4) {
-                        slayParrySpinner.adapter = fourBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 5) {
-                        slayParrySpinner.adapter = fiveBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 6) {
-                        slayParrySpinner.adapter = sixBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 7) {
-                        slayParrySpinner.adapter = sevenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 8) {
-                        slayParrySpinner.adapter = eightBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 9) {
-                        slayParrySpinner.adapter = nineBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (groupSpecSelect == 10) {
-                        slayParrySpinner.adapter = tenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
+                else if (specTotal == 1) {
+                    slayParrySpinner.adapter = oneBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 2) {
+                    slayParrySpinner.adapter = twoBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 3) {
+                    slayParrySpinner.adapter = threeBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 4) {
+                    slayParrySpinner.adapter = fourBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 5) {
+                    slayParrySpinner.adapter = fiveBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 6) {
+                    slayParrySpinner.adapter = sixBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 7) {
+                    slayParrySpinner.adapter = sevenBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 8) {
+                    slayParrySpinner.adapter = eightBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 9) {
+                    slayParrySpinner.adapter = nineBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 10) {
+                    slayParrySpinner.adapter = tenBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
                 }
 
                 specificSpecInt = cpCost * skillSelect
@@ -5148,18 +6358,20 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(groupSpecCP.text.toString())
                 val skillSelect = Integer.parseInt(groupSpecSpinner.selectedItem.toString())
+                groupSpecSelect = Integer.parseInt(groupSpecSpinner.selectedItem.toString())
 
                 specificSpecSelect = Integer.parseInt(specificSpecSpinner.selectedItem.toString())
                 slayParrySelect = Integer.parseInt(slayParrySpinner.selectedItem.toString())
                 slayParryMstrSelect = Integer.parseInt(slayParryMstrSpinner.selectedItem.toString())
 
-                if (slayParrySelect > skillSelect && slayParrySelect > specificSpecSelect) {
-                    if (skillSelect >= specificSpecSelect) {
-                        slayParrySelect = skillSelect
-                    }
-                    else if (skillSelect <= specificSpecSelect) {
-                        slayParrySelect = specificSpecSelect
-                    }
+                specTotal = skillSelect + specificSpecSelect
+
+                if (specTotal >= 11) {
+                    specTotal = 10
+                }
+
+                if (slayParrySelect > specTotal) {
+                    slayParrySelect = specTotal
                     slayParrySpinner.setSelection(slayParrySelect)
                 }
 
@@ -5168,208 +6380,116 @@ class MainActivity : AppCompatActivity() {
                     slayParrySpinner.setSelection(slayParryMstrSelect)
                 }
 
-                if (skillSelect >= specificSpecSelect) {
-                    if (skillSelect == 0){
-                        slayParrySpinner.isEnabled = false
-                        slayParrySpinner.setSelection(0)
-                        slayParryInt = 0
-                        slayParryMstrSpinner.isEnabled = false
-                        slayParryMstrSpinner.setSelection(0)
-                        slayParryMstrInt = 0
-                    }
-                    else if (skillSelect == 1) {
-                        slayParrySpinner.adapter = oneBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = oneBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        slayParrySpinner.adapter = twoBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = twoBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        slayParrySpinner.adapter = threeBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = threeBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        slayParrySpinner.adapter = fourBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = fourBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        slayParrySpinner.adapter = fiveBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = fiveBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        slayParrySpinner.adapter = sixBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = sixBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        slayParrySpinner.adapter = sevenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = sevenBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        slayParrySpinner.adapter = eightBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = eightBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        slayParrySpinner.adapter = nineBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = nineBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        slayParrySpinner.adapter = tenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                        slayParryMstrSpinner.adapter = tenBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
+                if (specTotal == 0) {
+                    slayParrySpinner.isEnabled = false
+                    slayParrySpinner.setSelection(0)
+                    slayParryInt = 0
                 }
-                else if (skillSelect <= specificSpecSelect) {
-                    if (specificSpecSelect == 0) {
-                        slayParrySpinner.isEnabled = false
-                        slayParrySpinner.setSelection(0)
-                        slayParryInt = 0
-                    }
-                    else if (specificSpecSelect == 1) {
-                        slayParrySpinner.adapter = oneBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 2) {
-                        slayParrySpinner.adapter = twoBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 3) {
-                        slayParrySpinner.adapter = threeBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 4) {
-                        slayParrySpinner.adapter = fourBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 5) {
-                        slayParrySpinner.adapter = fiveBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 6) {
-                        slayParrySpinner.adapter = sixBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 7) {
-                        slayParrySpinner.adapter = sevenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 8) {
-                        slayParrySpinner.adapter = eightBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 9) {
-                        slayParrySpinner.adapter = nineBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
-                    else if (specificSpecSelect == 10) {
-                        slayParrySpinner.adapter = tenBuyListArrayAdapter
-                        slayParrySpinner.isEnabled = true
-                        slayParrySpinner.setSelection(slayParrySelect)
-                    }
+                else if (specTotal == 1) {
+                    slayParrySpinner.adapter = oneBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 2) {
+                    slayParrySpinner.adapter = twoBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 3) {
+                    slayParrySpinner.adapter = threeBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 4) {
+                    slayParrySpinner.adapter = fourBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 5) {
+                    slayParrySpinner.adapter = fiveBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 6) {
+                    slayParrySpinner.adapter = sixBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 7) {
+                    slayParrySpinner.adapter = sevenBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 8) {
+                    slayParrySpinner.adapter = eightBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 9) {
+                    slayParrySpinner.adapter = nineBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
+                else if (specTotal == 10) {
+                    slayParrySpinner.adapter = tenBuyListArrayAdapter
+                    slayParrySpinner.isEnabled = true
+                    slayParrySpinner.setSelection(slayParrySelect)
+                }
 
-                    if (skillSelect == 0) {
-                        slayParryMstrSpinner.isEnabled = false
-                        slayParryMstrSpinner.setSelection(0)
-                        slayParryMstrInt = 0
-                    }
-                    else if (skillSelect == 1) {
-                        slayParryMstrSpinner.adapter = oneBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        slayParryMstrSpinner.adapter = twoBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        slayParryMstrSpinner.adapter = threeBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        slayParryMstrSpinner.adapter = fourBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        slayParryMstrSpinner.adapter = fiveBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        slayParryMstrSpinner.adapter = sixBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        slayParryMstrSpinner.adapter = sevenBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        slayParryMstrSpinner.adapter = eightBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        slayParryMstrSpinner.adapter = nineBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        slayParryMstrSpinner.adapter = tenBuyListArrayAdapter
-                        slayParryMstrSpinner.isEnabled = true
-                        slayParryMstrSpinner.setSelection(slayParryMstrSelect)
-                    }
+                if (skillSelect == 0) {
+                    slayParryMstrSpinner.isEnabled = false
+                    slayParryMstrSpinner.setSelection(0)
+                    slayParryMstrInt = 0
+                }
+                else if (skillSelect == 1) {
+                    slayParryMstrSpinner.adapter = oneBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 2) {
+                    slayParryMstrSpinner.adapter = twoBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 3) {
+                    slayParryMstrSpinner.adapter = threeBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 4) {
+                    slayParryMstrSpinner.adapter = fourBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 5) {
+                    slayParryMstrSpinner.adapter = fiveBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 6) {
+                    slayParryMstrSpinner.adapter = sixBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 7) {
+                    slayParryMstrSpinner.adapter = sevenBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 8) {
+                    slayParryMstrSpinner.adapter = eightBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 9) {
+                    slayParryMstrSpinner.adapter = nineBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
+                }
+                else if (skillSelect == 10) {
+                    slayParryMstrSpinner.adapter = tenBuyListArrayAdapter
+                    slayParryMstrSpinner.isEnabled = true
+                    slayParryMstrSpinner.setSelection(slayParryMstrSelect)
                 }
 
                 groupSpecInt = cpCost * skillSelect
@@ -5390,133 +6510,76 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slayParryCP.text.toString())
                 val skillSelect = Integer.parseInt(slayParrySpinner.selectedItem.toString())
+                slayParrySelect = Integer.parseInt(slayParrySpinner.selectedItem.toString())
 
                 decapitateSelect = Integer.parseInt(decapitateSpinner.selectedItem.toString())
                 slayParryMstrSelect = Integer.parseInt(slayParryMstrSpinner.selectedItem.toString())
 
-                if (decapitateSelect > skillSelect) {
-                    if (skillSelect >= slayParryMstrSelect) {
-                        decapitateSelect = skillSelect
-                    }
-                    else if (skillSelect <= slayParryMstrSelect) {
-                        decapitateSelect = slayParryMstrSelect
-                    }
-                    decapitateSpinner.setSelection(decapitateSelect)
+                slayTotal = skillSelect + slayParryMstrSelect
+
+                if (slayTotal >= 11) {
+                    slayTotal = 10
                 }
 
-                if (skillSelect >= slayParryMstrSelect) {
-                    if (skillSelect == 0){
-                        decapitateSpinner.isEnabled = false
-                        decapitateSpinner.setSelection(0)
-                        decapitateInt = 0
-                    }
-                    if (skillSelect == 1) {
-                        decapitateSpinner.adapter = oneBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        decapitateSpinner.adapter = twoBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        decapitateSpinner.adapter = threeBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        decapitateSpinner.adapter = fourBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        decapitateSpinner.adapter = fiveBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        decapitateSpinner.adapter = sixBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        decapitateSpinner.adapter = sevenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        decapitateSpinner.adapter = eightBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        decapitateSpinner.adapter = nineBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        decapitateSpinner.adapter = tenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
+                if (decapitateSelect > slayTotal) {
+                    decapitateSelect = slayTotal
+                    slayParrySpinner.setSelection(decapitateSelect)
                 }
-                else if (skillSelect <= slayParryMstrSelect) {
-                    if (slayParryMstrSelect == 0){
-                        decapitateSpinner.isEnabled = false
-                        decapitateSpinner.setSelection(0)
-                        decapitateInt = 0
-                    }
-                    if (slayParryMstrSelect == 1) {
-                        decapitateSpinner.adapter = oneBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 2) {
-                        decapitateSpinner.adapter = twoBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 3) {
-                        decapitateSpinner.adapter = threeBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 4) {
-                        decapitateSpinner.adapter = fourBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 5) {
-                        decapitateSpinner.adapter = fiveBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 6) {
-                        decapitateSpinner.adapter = sixBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 7) {
-                        decapitateSpinner.adapter = sevenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 8) {
-                        decapitateSpinner.adapter = eightBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 9) {
-                        decapitateSpinner.adapter = nineBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParryMstrSelect == 10) {
-                        decapitateSpinner.adapter = tenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
+
+                if (slayTotal == 0) {
+                    decapitateSpinner.isEnabled = false
+                    decapitateSpinner.setSelection(0)
+                    decapitateInt = 0
+                }
+                else if (slayTotal == 1) {
+                    decapitateSpinner.adapter = oneBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 2) {
+                    decapitateSpinner.adapter = twoBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 3) {
+                    decapitateSpinner.adapter = threeBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 4) {
+                    decapitateSpinner.adapter = fourBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 5) {
+                    decapitateSpinner.adapter = fiveBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 6) {
+                    decapitateSpinner.adapter = sixBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 7) {
+                    decapitateSpinner.adapter = sevenBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 8) {
+                    decapitateSpinner.adapter = eightBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 9) {
+                    decapitateSpinner.adapter = nineBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 10) {
+                    decapitateSpinner.adapter = tenBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
                 }
 
                 slayParryInt = cpCost * skillSelect
@@ -5537,133 +6600,76 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slayParryMstrCP.text.toString())
                 val skillSelect = Integer.parseInt(slayParryMstrSpinner.selectedItem.toString())
+                slayParryMstrSelect = Integer.parseInt(slayParryMstrSpinner.selectedItem.toString())
 
                 decapitateSelect = Integer.parseInt(decapitateSpinner.selectedItem.toString())
                 slayParrySelect = Integer.parseInt(slayParrySpinner.selectedItem.toString())
 
-                if (decapitateSelect > skillSelect) {
-                    if (skillSelect >= slayParrySelect) {
-                        decapitateSelect = skillSelect
-                    }
-                    else if (skillSelect <= slayParrySelect) {
-                        decapitateSelect = slayParrySelect
-                    }
-                    decapitateSpinner.setSelection(decapitateSelect)
+                slayTotal = skillSelect + slayParrySelect
+
+                if (slayTotal >= 11) {
+                    slayTotal = 10
                 }
 
-                if (skillSelect >= slayParrySelect) {
-                    if (skillSelect == 0){
-                        decapitateSpinner.isEnabled = false
-                        decapitateSpinner.setSelection(0)
-                        decapitateInt = 0
-                    }
-                    if (skillSelect == 1) {
-                        decapitateSpinner.adapter = oneBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        decapitateSpinner.adapter = twoBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        decapitateSpinner.adapter = threeBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        decapitateSpinner.adapter = fourBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        decapitateSpinner.adapter = fiveBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        decapitateSpinner.adapter = sixBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        decapitateSpinner.adapter = sevenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        decapitateSpinner.adapter = eightBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        decapitateSpinner.adapter = nineBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        decapitateSpinner.adapter = tenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
+                if (decapitateSelect > slayTotal) {
+                    decapitateSelect = slayTotal
+                    slayParrySpinner.setSelection(decapitateSelect)
                 }
-                else if (skillSelect <= slayParrySelect) {
-                    if (slayParrySelect == 0){
-                        decapitateSpinner.isEnabled = false
-                        decapitateSpinner.setSelection(0)
-                        decapitateInt = 0
-                    }
-                    if (slayParrySelect == 1) {
-                        decapitateSpinner.adapter = oneBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 2) {
-                        decapitateSpinner.adapter = twoBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 3) {
-                        decapitateSpinner.adapter = threeBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 4) {
-                        decapitateSpinner.adapter = fourBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 5) {
-                        decapitateSpinner.adapter = fiveBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 6) {
-                        decapitateSpinner.adapter = sixBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 7) {
-                        decapitateSpinner.adapter = sevenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 8) {
-                        decapitateSpinner.adapter = eightBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 9) {
-                        decapitateSpinner.adapter = nineBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
-                    else if (slayParrySelect == 10) {
-                        decapitateSpinner.adapter = tenBuyListArrayAdapter
-                        decapitateSpinner.isEnabled = true
-                        decapitateSpinner.setSelection(decapitateSelect)
-                    }
+
+                if (slayTotal == 0) {
+                    decapitateSpinner.isEnabled = false
+                    decapitateSpinner.setSelection(0)
+                    decapitateInt = 0
+                }
+                else if (slayTotal == 1) {
+                    decapitateSpinner.adapter = oneBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 2) {
+                    decapitateSpinner.adapter = twoBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 3) {
+                    decapitateSpinner.adapter = threeBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 4) {
+                    decapitateSpinner.adapter = fourBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 5) {
+                    decapitateSpinner.adapter = fiveBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 6) {
+                    decapitateSpinner.adapter = sixBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 7) {
+                    decapitateSpinner.adapter = sevenBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 8) {
+                    decapitateSpinner.adapter = eightBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 9) {
+                    decapitateSpinner.adapter = nineBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
+                }
+                else if (slayTotal == 10) {
+                    decapitateSpinner.adapter = tenBuyListArrayAdapter
+                    decapitateSpinner.isEnabled = true
+                    decapitateSpinner.setSelection(decapitateSelect)
                 }
 
                 slayParryMstrInt = cpCost * skillSelect
@@ -5688,6 +6694,8 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(battlefieldRepairCP.text.toString())
                 val fragCost = Integer.parseInt(battlefieldRepairFrags.text.toString())
                 val skillSelect = Integer.parseInt(battlefieldRepairSpinner.selectedItem.toString())
+                battlefieldRepairSelect =
+                    Integer.parseInt(battlefieldRepairSpinner.selectedItem.toString())
 
                 //Math
                 battlefieldRepairInt = cpCost * skillSelect
@@ -5713,6 +6721,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(crippleCP.text.toString())
                 val fragCost = Integer.parseInt(crippleFrags.text.toString())
                 val skillSelect = Integer.parseInt(crippleSpinner.selectedItem.toString())
+                crippleSelect = Integer.parseInt(crippleSpinner.selectedItem.toString())
 
                 //Math
                 crippleInt = cpCost * skillSelect
@@ -5738,6 +6747,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(decapitateCP.text.toString())
                 val fragCost = Integer.parseInt(decapitateFrags.text.toString())
                 val skillSelect = Integer.parseInt(decapitateSpinner.selectedItem.toString())
+                decapitateSelect = Integer.parseInt(decapitateSpinner.selectedItem.toString())
 
                 decapitateInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -5762,6 +6772,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(dirtEyeCP.text.toString())
                 val fragCost = Integer.parseInt(dirtEyeFrags.text.toString())
                 val skillSelect = Integer.parseInt(dirtEyeSpinner.selectedItem.toString())
+                dirtEyeSelect = Integer.parseInt(dirtEyeSpinner.selectedItem.toString())
 
                 //Math
                 dirtEyeInt = cpCost * skillSelect
@@ -5787,6 +6798,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(tripCP.text.toString())
                 val fragCost = Integer.parseInt(tripFrags.text.toString())
                 val skillSelect = Integer.parseInt(tripSpinner.selectedItem.toString())
+                tripSelect = Integer.parseInt(tripSpinner.selectedItem.toString())
 
                 //Math
                 tripInt = cpCost * skillSelect
@@ -5812,6 +6824,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(whirlBlowsCP.text.toString())
                 val fragCost = Integer.parseInt(whirlBlowsFrags.text.toString())
                 val skillSelect = Integer.parseInt(whirlBlowsSpinner.selectedItem.toString())
+                whirlBlowsSelect = Integer.parseInt(whirlBlowsSpinner.selectedItem.toString())
 
                 //Math
                 whirlBlowsInt = cpCost * skillSelect
@@ -5830,6 +6843,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Rogue Skill Info Button
+        rogueInfoButton.setOnClickListener() {
+            val intent = Intent(this, RogueSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
+
+        //Rogue Frag Skill Info Button
+        rogueFragInfoButton.setOnClickListener() {
+            val intent = Intent(this, RogueFragSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
+
         //Rogue Skill Spinners
 
         //Spinner for Garrote Skill
@@ -5839,6 +6868,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(garroteCP.text.toString())
                 val skillSelect = Integer.parseInt(garroteSpinner.selectedItem.toString())
+                garroteSelect = Integer.parseInt(garroteSpinner.selectedItem.toString())
 
                 //Math
                 garroteInt = cpCost * skillSelect
@@ -5859,6 +6889,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(sapCP.text.toString())
                 val skillSelect = Integer.parseInt(sapSpinner.selectedItem.toString())
+                sapSelect = Integer.parseInt(sapSpinner.selectedItem.toString())
 
                 //Math
                 sapInt = cpCost * skillSelect
@@ -5879,6 +6910,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(vitalBlowCP.text.toString())
                 val skillSelect = Integer.parseInt(vitalBlowSpinner.selectedItem.toString())
+                vitalBlowSelect = Integer.parseInt(vitalBlowSpinner.selectedItem.toString())
 
                 //Math
                 vitalBlowInt = cpCost * skillSelect
@@ -5899,6 +6931,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(dodgeCP.text.toString())
                 val skillSelect = Integer.parseInt(dodgeSpinner.selectedItem.toString())
+                dodgeSelect = Integer.parseInt(dodgeSpinner.selectedItem.toString())
 
                 dodgeInt = cpCost * skillSelect
                 calculateSpentCP()
@@ -5918,6 +6951,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(specificCritCP.text.toString())
                 val skillSelect = Integer.parseInt(specificCritSpinner.selectedItem.toString())
+                specificCritSelect = Integer.parseInt(specificCritSpinner.selectedItem.toString())
 
                 groupCritSelect = Integer.parseInt(groupCritSpinner.selectedItem.toString())
                 dodgeSelect = Integer.parseInt(dodgeSpinner.selectedItem.toString())
@@ -5927,391 +6961,207 @@ class MainActivity : AppCompatActivity() {
                 if (characterClass == "Nightblade") {
                     level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
 
-                    if (dodgeSelect > skillSelect) {
-                        if (skillSelect > groupCritSelect && skillSelect > level3Select) {
-                            dodgeSelect = skillSelect
-                        }
-                        else {
-                            if (groupCritSelect >= level3Select) {
-                                dodgeSelect = groupCritSelect
-                            } else if (level3Select >= groupCritSelect)
-                                dodgeSelect = level3Select
-                        }
+                    dodgeTotal = skillSelect + groupCritSelect + level3Select
+
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
                         dodgeSpinner.setSelection(dodgeSelect)
                     }
 
-                    if (skillSelect > groupCritSelect && skillSelect > level3Select) {
-                        if (skillSelect == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (skillSelect == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
                     }
-                    else if (skillSelect <= groupCritSelect && skillSelect <= level3Select && groupCritSelect >= level3Select) {
-                        if (groupCritSelect == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (groupCritSelect == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (groupCritSelect == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
-                    else if (skillSelect <= groupCritSelect && skillSelect <= level3Select && groupCritSelect <= level3Select) {
-                        if (level3Select == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (level3Select == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
-                } // End if (characterClass == "Nightblade")
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                }
+                else {
+                    dodgeTotal = skillSelect + groupCritSelect
 
-                if (dodgeSelect > skillSelect) {
-                    if (skillSelect >= groupCritSelect) {
-                        dodgeSelect = skillSelect
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
                     }
-                    else if (skillSelect <= groupCritSelect) {
-                        dodgeSelect = groupCritSelect
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
-                    dodgeSpinner.setSelection(dodgeSelect)
+
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
                 }
 
-                if (executeSelect > skillSelect) {
-                    if (skillSelect >= groupCritSelect) {
-                        executeSelect = skillSelect
-                    }
-                    else if (skillSelect <= groupCritSelect) {
-                        executeSelect = groupCritSelect
-                    }
+                critTotal = skillSelect + groupCritSelect
+
+                if (critTotal >= 11) {
+                    critTotal = 10
+                }
+
+                if (executeSelect > critTotal) {
+                    executeSelect = critTotal
                     executeSpinner.setSelection(executeSelect)
                 }
 
-                if (skillSelect >= groupCritSelect) {
-                    if (skillSelect == 0){
-                        dodgeSpinner.isEnabled = false
-                        dodgeSpinner.setSelection(0)
-                        dodgeInt = 0
-                        executeSpinner.isEnabled = false
-                        executeSpinner.setSelection(0)
-                        executeInt = 0
-                    }
-                    if (skillSelect == 1) {
-                        dodgeSpinner.adapter = oneBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = oneBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        dodgeSpinner.adapter = twoBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = twoBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        dodgeSpinner.adapter = threeBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = threeBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        dodgeSpinner.adapter = fourBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fourBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fiveBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        dodgeSpinner.adapter = sixBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sixBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sevenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        dodgeSpinner.adapter = eightBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = eightBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        dodgeSpinner.adapter = nineBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = nineBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        dodgeSpinner.adapter = tenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = tenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
+                if (critTotal == 0) {
+                    executeSpinner.isEnabled = false
+                    executeSpinner.setSelection(0)
+                    executeInt = 0
                 }
-                else if (skillSelect <= groupCritSelect) {
-                    if (groupCritSelect == 0){
-                        dodgeSpinner.isEnabled = false
-                        dodgeSpinner.setSelection(0)
-                        dodgeInt = 0
-                        executeSpinner.isEnabled = false
-                        executeSpinner.setSelection(0)
-                        executeInt = 0
-                    }
-                    if (groupCritSelect == 1) {
-                        dodgeSpinner.adapter = oneBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = oneBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 2) {
-                        dodgeSpinner.adapter = twoBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = twoBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 3) {
-                        dodgeSpinner.adapter = threeBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = threeBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 4) {
-                        dodgeSpinner.adapter = fourBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fourBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 5) {
-                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fiveBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 6) {
-                        dodgeSpinner.adapter = sixBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sixBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 7) {
-                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sevenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 8) {
-                        dodgeSpinner.adapter = eightBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = eightBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 9) {
-                        dodgeSpinner.adapter = nineBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = nineBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (groupCritSelect == 10) {
-                        dodgeSpinner.adapter = tenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = tenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
+                else if (critTotal == 1) {
+                    executeSpinner.adapter = oneBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 2) {
+                    executeSpinner.adapter = twoBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 3) {
+                    executeSpinner.adapter = threeBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 4) {
+                    executeSpinner.adapter = fourBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 5) {
+                    executeSpinner.adapter = fiveBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 6) {
+                    executeSpinner.adapter = sixBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 7) {
+                    executeSpinner.adapter = sevenBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 8) {
+                    executeSpinner.adapter = eightBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 9) {
+                    executeSpinner.adapter = nineBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 10) {
+                    executeSpinner.adapter = tenBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
                 }
 
                 specificCritInt = cpCost * skillSelect
@@ -6332,6 +7182,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(groupCritCP.text.toString())
                 val skillSelect = Integer.parseInt(groupCritSpinner.selectedItem.toString())
+                groupCritSelect = Integer.parseInt(groupCritSpinner.selectedItem.toString())
 
                 specificCritSelect = Integer.parseInt(specificCritSpinner.selectedItem.toString())
                 dodgeSelect = Integer.parseInt(dodgeSpinner.selectedItem.toString())
@@ -6341,210 +7192,207 @@ class MainActivity : AppCompatActivity() {
                 if (characterClass == "Nightblade") {
                     level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
 
-                    if (dodgeSelect > skillSelect) {
-                        if (skillSelect > specificCritSelect && skillSelect > level3Select) {
-                            dodgeSelect = skillSelect
-                        }
-                        else {
-                            if (specificCritSelect >= level3Select) {
-                                dodgeSelect = specificCritSelect
-                            } else if (level3Select >= specificCritSelect)
-                                dodgeSelect = level3Select
-                        }
+                    dodgeTotal = skillSelect + specificCritSelect + level3Select
+
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
+                    }
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
                         dodgeSpinner.setSelection(dodgeSelect)
                     }
 
-                    if (skillSelect > specificCritSelect && skillSelect > level3Select) {
-                        if (skillSelect == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (skillSelect == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (skillSelect == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
                     }
-                    else if (skillSelect <= specificCritSelect && skillSelect <= level3Select && specificCritSelect >= level3Select) {
-                        if (specificCritSelect == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (specificCritSelect == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (specificCritSelect == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
-                    else if (skillSelect <= specificCritSelect && skillSelect <= level3Select && specificCritSelect <= level3Select) {
-                        if (level3Select == 0){
-                            dodgeSpinner.isEnabled = false
-                            dodgeSpinner.setSelection(0)
-                            dodgeInt = 0
-                        }
-                        if (level3Select == 1) {
-                            dodgeSpinner.adapter = oneBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 2) {
-                            dodgeSpinner.adapter = twoBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 3) {
-                            dodgeSpinner.adapter = threeBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 4) {
-                            dodgeSpinner.adapter = fourBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 5) {
-                            dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 6) {
-                            dodgeSpinner.adapter = sixBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 7) {
-                            dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 8) {
-                            dodgeSpinner.adapter = eightBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 9) {
-                            dodgeSpinner.adapter = nineBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
-                        else if (level3Select == 10) {
-                            dodgeSpinner.adapter = tenBuyListArrayAdapter
-                            dodgeSpinner.isEnabled = true
-                            dodgeSpinner.setSelection(dodgeSelect)
-                        }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
-                } // End if (characterClass == "Nightblade")
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                }
+                else {
+                    dodgeTotal = skillSelect + specificCritSelect
 
-                if (executeSelect > skillSelect) {
-                    if (skillSelect >= specificCritSelect) {
-                        executeSelect = skillSelect
+                    if (dodgeTotal >= 11) {
+                        dodgeTotal = 10
                     }
-                    else if (skillSelect <= specificCritSelect) {
-                        executeSelect = specificCritSelect
+
+                    if (dodgeSelect > dodgeTotal) {
+                        dodgeSelect = dodgeTotal
+                        dodgeSpinner.setSelection(dodgeSelect)
                     }
+
+                    if (dodgeTotal == 0) {
+                        dodgeSpinner.isEnabled = false
+                        dodgeSpinner.setSelection(0)
+                        dodgeInt = 0
+                    }
+                    else if (dodgeTotal == 1) {
+                        dodgeSpinner.adapter = oneBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 2) {
+                        dodgeSpinner.adapter = twoBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 3) {
+                        dodgeSpinner.adapter = threeBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 4) {
+                        dodgeSpinner.adapter = fourBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 5) {
+                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 6) {
+                        dodgeSpinner.adapter = sixBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 7) {
+                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 8) {
+                        dodgeSpinner.adapter = eightBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 9) {
+                        dodgeSpinner.adapter = nineBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                    else if (dodgeTotal == 10) {
+                        dodgeSpinner.adapter = tenBuyListArrayAdapter
+                        dodgeSpinner.isEnabled = true
+                        dodgeSpinner.setSelection(dodgeSelect)
+                    }
+                }
+
+                critTotal = skillSelect + specificCritSelect
+
+                if (critTotal >= 11) {
+                    critTotal = 10
+                }
+
+                if (executeSelect > critTotal) {
+                    executeSelect = critTotal
                     executeSpinner.setSelection(executeSelect)
                 }
 
-                if (dodgeSelect > skillSelect) {
-                    if (skillSelect >= specificCritSelect) {
-                        dodgeSelect = skillSelect
-                    }
-                    else if (skillSelect <= specificCritSelect) {
-                        dodgeSelect = specificCritSelect
-                    }
-                    dodgeSpinner.setSelection(dodgeSelect)
+                if (critTotal == 0) {
+                    executeSpinner.isEnabled = false
+                    executeSpinner.setSelection(0)
+                    executeInt = 0
+                }
+                else if (critTotal == 1) {
+                    executeSpinner.adapter = oneBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 2) {
+                    executeSpinner.adapter = twoBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 3) {
+                    executeSpinner.adapter = threeBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 4) {
+                    executeSpinner.adapter = fourBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 5) {
+                    executeSpinner.adapter = fiveBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 6) {
+                    executeSpinner.adapter = sixBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 7) {
+                    executeSpinner.adapter = sevenBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 8) {
+                    executeSpinner.adapter = eightBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 9) {
+                    executeSpinner.adapter = nineBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
+                }
+                else if (critTotal == 10) {
+                    executeSpinner.adapter = tenBuyListArrayAdapter
+                    executeSpinner.isEnabled = true
+                    executeSpinner.setSelection(executeSelect)
                 }
 
                 if (executeMstrSelect > skillSelect) {
@@ -6552,274 +7400,60 @@ class MainActivity : AppCompatActivity() {
                     executeMstrSpinner.setSelection(executeMstrSelect)
                 }
 
-                if (skillSelect > specificCritSelect) {
-                    if (skillSelect == 0){
-                        dodgeSpinner.isEnabled = false
-                        dodgeSpinner.setSelection(0)
-                        dodgeInt = 0
-                        executeSpinner.isEnabled = false
-                        executeSpinner.setSelection(0)
-                        executeInt = 0
-                        executeMstrSpinner.isEnabled = false
-                        executeMstrSpinner.setSelection(0)
-                        executeMstrInt = 0
-                    }
-                    if (skillSelect == 1) {
-                        dodgeSpinner.adapter = oneBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = oneBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = oneBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        dodgeSpinner.adapter = twoBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = twoBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = twoBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        dodgeSpinner.adapter = threeBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = threeBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = threeBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        dodgeSpinner.adapter = fourBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fourBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = fourBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fiveBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = fiveBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        dodgeSpinner.adapter = sixBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sixBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = sixBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sevenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = sevenBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        dodgeSpinner.adapter = eightBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = eightBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = eightBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        dodgeSpinner.adapter = nineBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = nineBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = nineBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        dodgeSpinner.adapter = tenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = tenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                        executeMstrSpinner.adapter = tenBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
+                if (skillSelect == 0) {
+                    executeMstrSpinner.isEnabled = false
+                    executeMstrSpinner.setSelection(0)
+                    executeMstrInt = 0
                 }
-                else if (skillSelect <= specificCritSelect) {
-                    if (specificCritSelect == 0){
-                        dodgeSpinner.isEnabled = false
-                        dodgeSpinner.setSelection(0)
-                        dodgeInt = 0
-                        executeSpinner.isEnabled = false
-                        executeSpinner.setSelection(0)
-                        executeInt = 0
-                    }
-                    if (specificCritSelect == 1) {
-                        dodgeSpinner.adapter = oneBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = oneBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 2) {
-                        dodgeSpinner.adapter = twoBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = twoBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 3) {
-                        dodgeSpinner.adapter = threeBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = threeBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 4) {
-                        dodgeSpinner.adapter = fourBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fourBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 5) {
-                        dodgeSpinner.adapter = fiveBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = fiveBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 6) {
-                        dodgeSpinner.adapter = sixBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sixBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 7) {
-                        dodgeSpinner.adapter = sevenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = sevenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 8) {
-                        dodgeSpinner.adapter = eightBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = eightBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 9) {
-                        dodgeSpinner.adapter = nineBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = nineBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-                    else if (specificCritSelect == 10) {
-                        dodgeSpinner.adapter = tenBuyListArrayAdapter
-                        dodgeSpinner.isEnabled = true
-                        dodgeSpinner.setSelection(dodgeSelect)
-                        executeSpinner.adapter = tenBuyListArrayAdapter
-                        executeSpinner.isEnabled = true
-                        executeSpinner.setSelection(executeSelect)
-                    }
-
-                    if (skillSelect == 0){
-                        executeMstrSpinner.isEnabled = false
-                        executeMstrSpinner.setSelection(0)
-                        executeMstrInt = 0
-                    }
-                    if (skillSelect == 1) {
-                        executeMstrSpinner.adapter = oneBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 2) {
-                        executeMstrSpinner.adapter = twoBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 3) {
-                        executeMstrSpinner.adapter = threeBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 4) {
-                        executeMstrSpinner.adapter = fourBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 5) {
-                        executeMstrSpinner.adapter = fiveBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 6) {
-                        executeMstrSpinner.adapter = sixBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 7) {
-                        executeMstrSpinner.adapter = sevenBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 8) {
-                        executeMstrSpinner.adapter = eightBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 9) {
-                        executeMstrSpinner.adapter = nineBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
-                    else if (skillSelect == 10) {
-                        executeMstrSpinner.adapter = tenBuyListArrayAdapter
-                        executeMstrSpinner.isEnabled = true
-                        executeMstrSpinner.setSelection(executeMstrSelect)
-                    }
+                else if (skillSelect == 1) {
+                    executeMstrSpinner.adapter = oneBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 2) {
+                    executeMstrSpinner.adapter = twoBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 3) {
+                    executeMstrSpinner.adapter = threeBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 4) {
+                    executeMstrSpinner.adapter = fourBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 5) {
+                    executeMstrSpinner.adapter = fiveBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 6) {
+                    executeMstrSpinner.adapter = sixBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 7) {
+                    executeMstrSpinner.adapter = sevenBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 8) {
+                    executeMstrSpinner.adapter = eightBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 9) {
+                    executeMstrSpinner.adapter = nineBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
+                }
+                else if (skillSelect == 10) {
+                    executeMstrSpinner.adapter = tenBuyListArrayAdapter
+                    executeMstrSpinner.isEnabled = true
+                    executeMstrSpinner.setSelection(executeMstrSelect)
                 }
 
                 groupCritInt = cpCost * skillSelect
@@ -6840,6 +7474,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(executeCP.text.toString())
                 val skillSelect = Integer.parseInt(executeSpinner.selectedItem.toString())
+                executeSelect = Integer.parseInt(executeSpinner.selectedItem.toString())
 
                 //Math
                 executeInt = cpCost * skillSelect
@@ -6860,6 +7495,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(executeMstrCP.text.toString())
                 val skillSelect = Integer.parseInt(executeMstrSpinner.selectedItem.toString())
+                executeMstrSelect = Integer.parseInt(executeMstrSpinner.selectedItem.toString())
 
                 //Math
                 executeMstrInt = cpCost * skillSelect
@@ -6884,6 +7520,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(blindfighterCP.text.toString())
                 val fragCost = Integer.parseInt(blindfighterFrags.text.toString())
                 val skillSelect = Integer.parseInt(blindfighterSpinner.selectedItem.toString())
+                blindfighterSelect = Integer.parseInt(blindfighterSpinner.selectedItem.toString())
 
                 //Math
                 blindfighterInt = cpCost * skillSelect
@@ -6909,6 +7546,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(escapeCP.text.toString())
                 val fragCost = Integer.parseInt(escapeFrags.text.toString())
                 val skillSelect = Integer.parseInt(escapeSpinner.selectedItem.toString())
+                escapeSelect = Integer.parseInt(escapeSpinner.selectedItem.toString())
 
                 //Math
                 escapeInt = cpCost * skillSelect
@@ -6934,6 +7572,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(riposteCP.text.toString())
                 val fragCost = Integer.parseInt(riposteFrags.text.toString())
                 val skillSelect = Integer.parseInt(riposteSpinner.selectedItem.toString())
+                riposteSelect = Integer.parseInt(riposteSpinner.selectedItem.toString())
 
                 //Math
                 riposteInt = cpCost * skillSelect
@@ -6959,6 +7598,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(suckerPunchCP.text.toString())
                 val fragCost = Integer.parseInt(suckerPunchFrags.text.toString())
                 val skillSelect = Integer.parseInt(suckerPunchSpinner.selectedItem.toString())
+                suckerPunchSelect = Integer.parseInt(suckerPunchSpinner.selectedItem.toString())
 
                 //Math
                 suckerPunchInt = cpCost * skillSelect
@@ -6984,6 +7624,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(thievesCantCP.text.toString())
                 val fragCost = Integer.parseInt(thievesCantFrags.text.toString())
                 val skillSelect = Integer.parseInt(thievesCantSpinner.selectedItem.toString())
+                thievesCantSelect = Integer.parseInt(thievesCantSpinner.selectedItem.toString())
 
                 //Math
                 thievesCantInt = cpCost * skillSelect
@@ -7009,6 +7650,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(tumbleCP.text.toString())
                 val fragCost = Integer.parseInt(tumbleFrags.text.toString())
                 val skillSelect = Integer.parseInt(tumbleSpinner.selectedItem.toString())
+                tumbleSelect = Integer.parseInt(tumbleSpinner.selectedItem.toString())
 
                 //Math
                 tumbleInt = cpCost * skillSelect
@@ -7027,6 +7669,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Scholar Skill Info Button
+        scholarInfoButton.setOnClickListener() {
+            val intent = Intent(this, ScholarSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
+
+        //Scholar Frag Skill Info Button
+        scholarFragInfoButton.setOnClickListener() {
+            val intent = Intent(this, ScholarFragSkillsInfo::class.java)
+
+            startActivity(intent)
+
+        }
+
         //Scholar Skill Spinners
 
         //Spinner for Mysticism Skill
@@ -7036,6 +7694,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(mysticismCP.text.toString())
                 val skillSelect = Integer.parseInt(mysticismSpinner.selectedItem.toString())
+                mysticismSelect = Integer.parseInt(mysticismSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -7065,6 +7724,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(demAngArtsCP.text.toString())
                 val skillSelect = Integer.parseInt(demAngArtsSpinner.selectedItem.toString())
+                demAngArtsSelect = Integer.parseInt(demAngArtsSpinner.selectedItem.toString())
 
                 //Math
                 demAngArtsInt = cpCost * skillSelect
@@ -7085,6 +7745,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(necroArtsCP.text.toString())
                 val skillSelect = Integer.parseInt(necroArtsSpinner.selectedItem.toString())
+                necroArtsSelect = Integer.parseInt(necroArtsSpinner.selectedItem.toString())
 
                 //Math
                 necroArtsInt = cpCost * skillSelect
@@ -7105,6 +7766,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(anatomyCP.text.toString())
                 val skillSelect = Integer.parseInt(anatomySpinner.selectedItem.toString())
+                anatomySelect = Integer.parseInt(anatomySpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -7143,6 +7805,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(firstAidCP.text.toString())
                 val skillSelect = Integer.parseInt(firstAidSpinner.selectedItem.toString())
+                firstAidSelect = Integer.parseInt(firstAidSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -7171,6 +7834,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(physicianCP.text.toString())
                 val skillSelect = Integer.parseInt(physicianSpinner.selectedItem.toString())
+                physicianSelect = Integer.parseInt(physicianSpinner.selectedItem.toString())
 
                 //Math
                 physicianInt = cpCost * skillSelect
@@ -7191,6 +7855,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(readWriteCP.text.toString())
                 val skillSelect = Integer.parseInt(readWriteSpinner.selectedItem.toString())
+                readWriteSelect = Integer.parseInt(readWriteSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -7219,6 +7884,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(readMagicCP.text.toString())
                 val skillSelect = Integer.parseInt(readMagicSpinner.selectedItem.toString())
+                readMagicSelect = Integer.parseInt(readMagicSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -7265,6 +7931,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(rdAdvMagicCP.text.toString())
                 val skillSelect = Integer.parseInt(rdAdvMagicSpinner.selectedItem.toString())
+                rdAdvMagicSelect = Integer.parseInt(rdAdvMagicSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> {
@@ -7293,15 +7960,16 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(rdRitualMagicCP.text.toString())
                 val skillSelect = Integer.parseInt(rdRitualMagicSpinner.selectedItem.toString())
+                rdRitualMagicSelect = Integer.parseInt(rdRitualMagicSpinner.selectedItem.toString())
 
                 slot9Select = Integer.parseInt(slot9Spinner.selectedItem.toString())
 
-                if (skillSelect == 0 || slot9Select == 0){
+                if (skillSelect == 0 || slot9Select == 0) {
                     ritualSpinner.isEnabled = false
                     ritualSpinner.setSelection(0)
                     ritualInt = 0
                 }
-                else{
+                else {
                     ritualSpinner.isEnabled = true
                 }
 
@@ -7316,15 +7984,37 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
+        //Spinner for Advanced Ritual Casting Skills
+        advRitualSpinner.adapter = tenBuyListArrayAdapter
+        advRitualSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val cpCost = Integer.parseInt(advRitualCP.text.toString())
+                val skillSelect = Integer.parseInt(advRitualSpinner.selectedItem.toString())
+                advRitualSelect = Integer.parseInt(advRitualSpinner.selectedItem.toString())
+
+                advRitualInt = cpCost * skillSelect
+                calculateSpentCP()
+                calculateFreeCP()
+
+                characterFree.setText("" + freeInt)
+                characterSpent.setText("" + characterSpentInt)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
         //Spinner for Elemental Attunement Skill
-        val eleSkillLevelList = arrayOf("0","1","2","3")
-        val eleSkillLevelArrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, eleSkillLevelList)
+        val eleSkillLevelList = arrayOf("0", "1", "2", "3")
+        val eleSkillLevelArrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, eleSkillLevelList)
         eleAttuneSpinner.adapter = eleSkillLevelArrayAdapter
         eleAttuneSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(eleAttuneCP.text.toString())
                 val skillSelect = Integer.parseInt(eleAttuneSpinner.selectedItem.toString())
+                eleAttuneSelect = Integer.parseInt(eleAttuneSpinner.selectedItem.toString())
 
                 //Math
                 eleAttuneInt = cpCost * skillSelect
@@ -7349,6 +8039,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(combatWizCP.text.toString())
                 val fragCost = Integer.parseInt(combatWizFrags.text.toString())
                 val skillSelect = Integer.parseInt(combatWizSpinner.selectedItem.toString())
+                combatWizSelect = Integer.parseInt(combatWizSpinner.selectedItem.toString())
 
                 //Math
                 combatWizInt = cpCost * skillSelect
@@ -7374,6 +8065,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(harvestCP.text.toString())
                 val fragCost = Integer.parseInt(harvestFrags.text.toString())
                 val skillSelect = Integer.parseInt(harvestSpinner.selectedItem.toString())
+                harvestSelect = Integer.parseInt(harvestSpinner.selectedItem.toString())
 
                 //Math
                 harvestInt = cpCost * skillSelect
@@ -7399,6 +8091,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(morticianCP.text.toString())
                 val fragCost = Integer.parseInt(morticianFrags.text.toString())
                 val skillSelect = Integer.parseInt(morticianSpinner.selectedItem.toString())
+                morticianSelect = Integer.parseInt(morticianSpinner.selectedItem.toString())
 
                 //Math
                 morticianInt = cpCost * skillSelect
@@ -7424,6 +8117,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(refocusCP.text.toString())
                 val fragCost = Integer.parseInt(refocusFrags.text.toString())
                 val skillSelect = Integer.parseInt(refocusSpinner.selectedItem.toString())
+                refocusSelect = Integer.parseInt(refocusSpinner.selectedItem.toString())
 
                 //Math
                 refocusInt = cpCost * skillSelect
@@ -7449,6 +8143,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(spellParryCP.text.toString())
                 val fragCost = Integer.parseInt(spellParryFrags.text.toString())
                 val skillSelect = Integer.parseInt(spellParrySpinner.selectedItem.toString())
+                spellParrySelect = Integer.parseInt(spellParrySpinner.selectedItem.toString())
 
                 //Math
                 spellParryInt = cpCost * skillSelect
@@ -7467,7 +8162,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //Spinner for Spell Versatility Skill
-        var spellVersSkillSelect = 0
         spellVersSpinner.adapter = tenBuyListArrayAdapter
         spellVersSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
@@ -8153,6 +8847,7 @@ class MainActivity : AppCompatActivity() {
                 val cpCost = Integer.parseInt(spellSwitchCP.text.toString())
                 val fragCost = Integer.parseInt(spellSwitchFrags.text.toString())
                 val skillSelect = Integer.parseInt(spellSwitchSpinner.selectedItem.toString())
+                spellSwitchSelect = Integer.parseInt(spellSwitchSpinner.selectedItem.toString())
 
                 //Math
                 spellSwitchInt = cpCost * skillSelect
@@ -8175,26 +8870,51 @@ class MainActivity : AppCompatActivity() {
 
         //Sphere Spinners
 
+        //Magic Info Button
+        magicInfoButton.setOnClickListener() {
+            val intent = Intent(this, MagicInfo::class.java)
+
+            startActivity(intent)
+
+        }
+
+        val sharedsphereSelect1 = intent.getStringExtra("sphereSelect1")
+        val sharedsphereSelect2 = intent.getStringExtra("sphereSelect2")
+        val sharedsphereSelect3 = intent.getStringExtra("sphereSelect3")
+
         //Spinner for Sphere 1 Skill
+        println("LOADED SPHERE IS $sharedsphereSelect1")
         sphere1Spinner.adapter = sphereArrayAdapter
         sphere1Spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                println ("SPHERE SPINNER 1 ACTIVATED")
                 val cpCost = Integer.parseInt(sphere1CP.text.toString())
-                val sphereSelect = sphere1Spinner.selectedItem.toString()
-                var fragCost = 0
-
-                if (sphereSelect == "None") {
-                        sphere2Spinner.isEnabled = false
-                        sphere2Spinner.setSelection(0)
-                        sphere2Int = 0
-                }
-                else {
-                        sphere2Spinner.isEnabled = true
-                }
-
+                var sphereSelect = sphere1Spinner.selectedItem.toString()
+                println("sharedsphereSelect1 IN SPINNER IS $sharedsphereSelect1")
+                println("SPHERE SELECT IS $sphereSelect")
+                sphereSelect1 = sphere1Spinner.selectedItem.toString()
                 sphereSelect2 = sphere2Spinner.selectedItem.toString()
                 sphereSelect3 = sphere3Spinner.selectedItem.toString()
+                var fragCost = 0
+
+                if (load == "true") {
+                    sphereSelect = "$sharedsphereSelect1"
+                    sphereSelect1 = "$sharedsphereSelect1"
+                    sphereSelect2 = "$sharedsphereSelect2"
+                    sphereSelect3 = "$sharedsphereSelect3"
+                }
+
+                 if (sphereSelect == "None") {
+                    sphere2Spinner.isEnabled = false
+                    sphere2Spinner.setSelection(0)
+                    sphere2Int = 0
+                }
+                else {
+                    sphere2Spinner.isEnabled = true
+                }
+
+
 
                 if (sphereSelect == "Elemental" || sphereSelect2 == "Elemental" || sphereSelect3 == "Elemental") {
                     eleAttuneSpinner.isEnabled = true
@@ -8206,22 +8926,22 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sphereSelect != "None") {
-                    if (sphereSelect == "*Sigil"){
+                    if (sphereSelect == "*Sigil") {
                         fragCost = 100
                     }
-                    else if (sphereSelect == "*Wytchcraft"){
+                    else if (sphereSelect == "*Wytchcraft") {
                         fragCost = 100
                     }
-                    else if (sphereSelect == "*Necromancy"){
+                    else if (sphereSelect == "*Necromancy") {
                         fragCost = 100
                     }
-                    else{
+                    else {
                         fragCost = 0
                     }
 
                     sphere1Int = cpCost
                 }
-                else{
+                else {
                     sphere1Int = 0
                 }
 
@@ -8255,8 +8975,9 @@ class MainActivity : AppCompatActivity() {
                     slot9Spinner.isEnabled = false
                     slot9Spinner.setSelection(0)
                     slot9Int = 0
+                    autoSlotSpinner.setSelection(0)
                 }
-                else{
+                else {
                     slot1Spinner.isEnabled = true
                     slot2Spinner.isEnabled = true
                     slot3Spinner.isEnabled = true
@@ -8288,8 +9009,18 @@ class MainActivity : AppCompatActivity() {
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(sphere2CP.text.toString())
-                val sphereSelect = sphere2Spinner.selectedItem.toString()
+                var sphereSelect = sphere2Spinner.selectedItem.toString()
+                sphereSelect1 = sphere1Spinner.selectedItem.toString()
+                sphereSelect2 = sphere2Spinner.selectedItem.toString()
+                sphereSelect3 = sphere3Spinner.selectedItem.toString()
                 var fragCost = 0
+
+                if (load == "true") {
+                    sphereSelect = "$sharedsphereSelect2"
+                    sphereSelect1 = "$sharedsphereSelect1"
+                    sphereSelect2 = "$sharedsphereSelect2"
+                    sphereSelect3 = "$sharedsphereSelect3"
+                }
 
                 if (sphereSelect == "None") {
                     sphere3Spinner.isEnabled = false
@@ -8299,9 +9030,6 @@ class MainActivity : AppCompatActivity() {
                 else {
                     sphere3Spinner.isEnabled = true
                 }
-
-                sphereSelect1 = sphere1Spinner.selectedItem.toString()
-                sphereSelect3 = sphere3Spinner.selectedItem.toString()
 
                 if (sphereSelect == "Elemental" || sphereSelect1 == "Elemental" || sphereSelect3 == "Elemental") {
                     eleAttuneSpinner.isEnabled = true
@@ -8313,22 +9041,22 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sphereSelect != "None") {
-                    if (sphereSelect == "*Sigil"){
+                    if (sphereSelect == "*Sigil") {
                         fragCost = 100
                     }
-                    else if (sphereSelect == "*Wytchcraft"){
+                    else if (sphereSelect == "*Wytchcraft") {
                         fragCost = 100
                     }
-                    else if (sphereSelect == "*Necromancy"){
+                    else if (sphereSelect == "*Necromancy") {
                         fragCost = 100
                     }
-                    else{
+                    else {
                         fragCost = 0
                     }
 
                     sphere2Int = cpCost
                 }
-                else{
+                else {
                     sphere2Int = 0
                 }
 
@@ -8352,11 +9080,18 @@ class MainActivity : AppCompatActivity() {
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(sphere3CP.text.toString())
-                val sphereSelect = sphere3Spinner.selectedItem.toString()
-                var fragCost = 0
-
+                var sphereSelect = sphere3Spinner.selectedItem.toString()
                 sphereSelect1 = sphere1Spinner.selectedItem.toString()
                 sphereSelect2 = sphere2Spinner.selectedItem.toString()
+                sphereSelect3 = sphere3Spinner.selectedItem.toString()
+                var fragCost = 0
+
+                if (load == "true") {
+                    sphereSelect = "$sharedsphereSelect3"
+                    sphereSelect1 = "$sharedsphereSelect1"
+                    sphereSelect2 = "$sharedsphereSelect2"
+                    sphereSelect3 = "$sharedsphereSelect3"
+                }
 
                 if (sphereSelect == "Elemental" || sphereSelect1 == "Elemental" || sphereSelect2 == "Elemental") {
                     eleAttuneSpinner.isEnabled = true
@@ -8368,22 +9103,22 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sphereSelect != "None") {
-                    if (sphereSelect == "*Sigil"){
+                    if (sphereSelect == "*Sigil") {
                         fragCost = 100
                     }
-                    else if (sphereSelect == "*Wytchcraft"){
+                    else if (sphereSelect == "*Wytchcraft") {
                         fragCost = 100
                     }
-                    else if (sphereSelect == "*Necromancy"){
+                    else if (sphereSelect == "*Necromancy") {
                         fragCost = 100
                     }
-                    else{
+                    else {
                         fragCost = 0
                     }
 
                     sphere3Int = cpCost
                 }
-                else{
+                else {
                     sphere3Int = 0
                 }
 
@@ -8411,6 +9146,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot1CP.text.toString())
                 val skillSelect = Integer.parseInt(slot1Spinner.selectedItem.toString())
+                slot1Select = Integer.parseInt(slot1Spinner.selectedItem.toString())
 
                 slot1Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8430,6 +9166,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot2CP.text.toString())
                 val skillSelect = Integer.parseInt(slot2Spinner.selectedItem.toString())
+                slot2Select = Integer.parseInt(slot2Spinner.selectedItem.toString())
 
                 slot2Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8449,6 +9186,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot3CP.text.toString())
                 val skillSelect = Integer.parseInt(slot3Spinner.selectedItem.toString())
+                slot3Select = Integer.parseInt(slot3Spinner.selectedItem.toString())
 
                 slot3Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8468,6 +9206,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot4CP.text.toString())
                 val skillSelect = Integer.parseInt(slot4Spinner.selectedItem.toString())
+                slot4Select = Integer.parseInt(slot4Spinner.selectedItem.toString())
 
                 slot4Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8487,6 +9226,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot5CP.text.toString())
                 val skillSelect = Integer.parseInt(slot5Spinner.selectedItem.toString())
+                slot5Select = Integer.parseInt(slot5Spinner.selectedItem.toString())
 
                 slot5Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8506,6 +9246,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot6CP.text.toString())
                 val skillSelect = Integer.parseInt(slot6Spinner.selectedItem.toString())
+                slot6Select = Integer.parseInt(slot6Spinner.selectedItem.toString())
 
                 slot6Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8525,6 +9266,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot7CP.text.toString())
                 val skillSelect = Integer.parseInt(slot7Spinner.selectedItem.toString())
+                slot7Select = Integer.parseInt(slot7Spinner.selectedItem.toString())
 
                 slot7Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8544,6 +9286,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot8CP.text.toString())
                 val skillSelect = Integer.parseInt(slot8Spinner.selectedItem.toString())
+                slot8Select = Integer.parseInt(slot8Spinner.selectedItem.toString())
 
                 slot8Int = cpCost * skillSelect
                 calculateSpentCP()
@@ -8563,15 +9306,16 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(slot9CP.text.toString())
                 val skillSelect = Integer.parseInt(slot9Spinner.selectedItem.toString())
+                slot9Select = Integer.parseInt(slot9Spinner.selectedItem.toString())
 
                 rdRitualMagicSelect = Integer.parseInt(rdRitualMagicSpinner.selectedItem.toString())
 
-                if (skillSelect == 0 || rdRitualMagicSelect == 0){
+                if (skillSelect == 0 || rdRitualMagicSelect == 0) {
                     ritualSpinner.isEnabled = false
                     ritualSpinner.setSelection(0)
                     ritualInt = 0
                 }
-                else{
+                else {
                     ritualSpinner.isEnabled = true
                 }
 
@@ -8593,6 +9337,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val cpCost = Integer.parseInt(ritualCP.text.toString())
                 val skillSelect = Integer.parseInt(ritualSpinner.selectedItem.toString())
+                ritualSelect = Integer.parseInt(ritualSpinner.selectedItem.toString())
 
                 when (skillSelect) {
                     0 -> ritualInt = 0
@@ -8600,12 +9345,27 @@ class MainActivity : AppCompatActivity() {
                     2 -> ritualInt = (cpCost * skillSelect) + (cpCost)
                     3 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2)
                     4 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3)
-                    5 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4)
-                    6 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5)
-                    7 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6)
-                    8 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6) + (cpCost * 7)
-                    9 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6) + (cpCost * 7) + (cpCost * 8)
-                    10 -> ritualInt = (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6) + (cpCost * 7) + (cpCost * 8) + (cpCost * 9)
+                    5 -> ritualInt =
+                        (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4)
+                    6 -> ritualInt =
+                        (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5)
+                    7 -> ritualInt =
+                        (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6)
+                    8 -> ritualInt =
+                        (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6) + (cpCost * 7)
+                    9 -> ritualInt =
+                        (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6) + (cpCost * 7) + (cpCost * 8)
+                    10 -> ritualInt =
+                        (cpCost * skillSelect) + (cpCost) + (cpCost * 2) + (cpCost * 3) + (cpCost * 4) + (cpCost * 5) + (cpCost * 6) + (cpCost * 7) + (cpCost * 8) + (cpCost * 9)
+                }
+
+                if (skillSelect == 0) {
+                    advRitualSpinner.isEnabled = false
+                    advRitualSpinner.setSelection(0)
+                    advRitualInt = 0
+                }
+                else {
+                    advRitualSpinner.isEnabled = true
                 }
 
                 calculateSpentCP()
@@ -8618,1928 +9378,2531 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
+        //Spinner for Auto Pyramid
+        autoSlotSpinner.adapter = nineBuyListArrayAdapter
+        autoSlotSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                autoSlotSelect = Integer.parseInt(autoSlotSpinner.selectedItem.toString())
 
 
-    }// override fun onCreate
+                if (sphereSelect1 == "None") {
+                    slot1Spinner.isEnabled = false
+                    slot1Spinner.setSelection(0)
+                    slot1Int = 0
+                    slot2Spinner.isEnabled = false
+                    slot2Spinner.setSelection(0)
+                    slot2Int = 0
+                    slot3Spinner.isEnabled = false
+                    slot3Spinner.setSelection(0)
+                    slot3Int = 0
+                    slot4Spinner.isEnabled = false
+                    slot4Spinner.setSelection(0)
+                    slot4Int = 0
+                    slot5Spinner.isEnabled = false
+                    slot5Spinner.setSelection(0)
+                    slot5Int = 0
+                    slot6Spinner.isEnabled = false
+                    slot6Spinner.setSelection(0)
+                    slot6Int = 0
+                    slot7Spinner.isEnabled = false
+                    slot7Spinner.setSelection(0)
+                    slot7Int = 0
+                    slot8Spinner.isEnabled = false
+                    slot8Spinner.setSelection(0)
+                    slot8Int = 0
+                    slot9Spinner.isEnabled = false
+                    slot9Spinner.setSelection(0)
+                    slot9Int = 0
+                }
+                else {
+                    slot1Spinner.isEnabled = true
+                    slot2Spinner.isEnabled = true
+                    slot3Spinner.isEnabled = true
+                    slot4Spinner.isEnabled = true
+                    slot5Spinner.isEnabled = true
+                    slot6Spinner.isEnabled = true
+                    slot7Spinner.isEnabled = true
+                    slot8Spinner.isEnabled = true
+                    slot9Spinner.isEnabled = true
+                }
 
-    fun paragonCalc() {
-        val paragonSlotSpinner = findViewById<Spinner>(id.paragonSlotSpinner)
-        val slot1CP = findViewById<TextView>(id.slot1CP)
-        val slot2CP = findViewById<TextView>(id.slot2CP)
-        val slot3CP = findViewById<TextView>(id.slot3CP)
-        val slot4CP = findViewById<TextView>(id.slot4CP)
-        val slot5CP = findViewById<TextView>(id.slot5CP)
-        val slot6CP = findViewById<TextView>(id.slot6CP)
-        val slot7CP = findViewById<TextView>(id.slot7CP)
-        val slot8CP = findViewById<TextView>(id.slot8CP)
-        val slot9CP = findViewById<TextView>(id.slot9CP)
+                when (autoSlotSelect) {
+                    0 -> {
+                        slot1Spinner.setSelection(0)
+                        slot2Spinner.setSelection(0)
+                        slot3Spinner.setSelection(0)
+                        slot4Spinner.setSelection(0)
+                        slot5Spinner.setSelection(0)
+                        slot6Spinner.setSelection(0)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    1 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(1)
+                        slot2Spinner.setSelection(0)
+                        slot3Spinner.setSelection(0)
+                        slot4Spinner.setSelection(0)
+                        slot5Spinner.setSelection(0)
+                        slot6Spinner.setSelection(0)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    2 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(2)
+                        slot2Spinner.setSelection(1)
+                        slot3Spinner.setSelection(0)
+                        slot4Spinner.setSelection(0)
+                        slot5Spinner.setSelection(0)
+                        slot6Spinner.setSelection(0)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    3 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(3)
+                        slot2Spinner.setSelection(2)
+                        slot3Spinner.setSelection(1)
+                        slot4Spinner.setSelection(0)
+                        slot5Spinner.setSelection(0)
+                        slot6Spinner.setSelection(0)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    4 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(4)
+                        slot2Spinner.setSelection(3)
+                        slot3Spinner.setSelection(2)
+                        slot4Spinner.setSelection(1)
+                        slot5Spinner.setSelection(0)
+                        slot6Spinner.setSelection(0)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    5 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        rdAdvMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(5)
+                        slot2Spinner.setSelection(4)
+                        slot3Spinner.setSelection(3)
+                        slot4Spinner.setSelection(2)
+                        slot5Spinner.setSelection(1)
+                        slot6Spinner.setSelection(0)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    6 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        rdAdvMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(5)
+                        slot2Spinner.setSelection(5)
+                        slot3Spinner.setSelection(4)
+                        slot4Spinner.setSelection(3)
+                        slot5Spinner.setSelection(2)
+                        slot6Spinner.setSelection(1)
+                        slot7Spinner.setSelection(0)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    7 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        rdAdvMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(5)
+                        slot2Spinner.setSelection(5)
+                        slot3Spinner.setSelection(5)
+                        slot4Spinner.setSelection(4)
+                        slot5Spinner.setSelection(3)
+                        slot6Spinner.setSelection(2)
+                        slot7Spinner.setSelection(1)
+                        slot8Spinner.setSelection(0)
+                        slot9Spinner.setSelection(0)
+                    }
+                    8 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        rdAdvMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(5)
+                        slot2Spinner.setSelection(5)
+                        slot3Spinner.setSelection(5)
+                        slot4Spinner.setSelection(5)
+                        slot5Spinner.setSelection(4)
+                        slot6Spinner.setSelection(3)
+                        slot7Spinner.setSelection(2)
+                        slot8Spinner.setSelection(1)
+                        slot9Spinner.setSelection(0)
+                    }
+                    9 -> {
+                        readWriteSpinner.setSelection(1)
+                        readMagicSpinner.setSelection(1)
+                        rdAdvMagicSpinner.setSelection(1)
+                        slot1Spinner.setSelection(5)
+                        slot2Spinner.setSelection(5)
+                        slot3Spinner.setSelection(5)
+                        slot4Spinner.setSelection(5)
+                        slot5Spinner.setSelection(5)
+                        slot6Spinner.setSelection(4)
+                        slot7Spinner.setSelection(3)
+                        slot8Spinner.setSelection(2)
+                        slot9Spinner.setSelection(1)
+                    }
+                }
 
-        val skillSelect = Integer.parseInt(paragonSlotSpinner.selectedItem.toString())
-        var slotCost1 = Integer.parseInt(slot1CP.text.toString())
-        var slotCost2 = Integer.parseInt(slot2CP.text.toString())
-        var slotCost3 = Integer.parseInt(slot3CP.text.toString())
-        var slotCost4 = Integer.parseInt(slot4CP.text.toString())
-        var slotCost5 = Integer.parseInt(slot5CP.text.toString())
-        var slotCost6 = Integer.parseInt(slot6CP.text.toString())
-        var slotCost7 = Integer.parseInt(slot7CP.text.toString())
-        var slotCost8 = Integer.parseInt(slot8CP.text.toString())
-        var slotCost9 = Integer.parseInt(slot9CP.text.toString())
+                calculateSpentCP()
+                calculateFreeCP()
 
-        if (paragonFragsInt == 100){
-            if (skillSelect == 0){
+                characterFree.setText("" + freeInt)
+                characterSpent.setText("" + characterSpentInt)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+            }
+
+        if (load == "true") {
+
+            //Load Race
+            val sharedcharacterRace = intent.getStringExtra("characterRace")
+            when (sharedcharacterRace) {
+                "Race" -> raceSpinner.setSelection(0)
+                "Savar'Aving" -> raceSpinner.setSelection(1)
+                "Gargylen" -> raceSpinner.setSelection(2)
+                "Mountain Dwarf" -> raceSpinner.setSelection(3)
+                "Dark Elf" -> raceSpinner.setSelection(4)
+                "High Elf" -> raceSpinner.setSelection(5)
+                "Wild Elf" -> raceSpinner.setSelection(6)
+                "Wood Fae" -> raceSpinner.setSelection(7)
+                "Orc" -> raceSpinner.setSelection(8)
+                "Ajaunti" -> raceSpinner.setSelection(9)
+                "Einher" -> raceSpinner.setSelection(10)
+                "Hobling" -> raceSpinner.setSelection(11)
+                "Human" -> raceSpinner.setSelection(12)
+
+                "Am'rath" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(1)
+                }
+                "Faun" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(2)
+                }
+                "Minotaur" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(3)
+                }
+                "Kobold" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(4)
+                }
+                "Ogre" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(5)
+                }
+                "Squamata" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(6)
+                }
+                "Avian" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(7)
+                }
+                "Draconian" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(8)
+                }
+                "Fire Elf" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(9)
+                }
+                "Goblin" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(10)
+                }
+                "Risen" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(11)
+                }
+                "Wolven" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(12)
+                }
+                "Yokai" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(13)
+                }
+                "Carnal Fae" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(14)
+                }
+                "Faceless" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(15)
+                }
+                "Gnome" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(16)
+                }
+                "Ice Elf" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(17)
+                }
+                "Sidhe" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(18)
+                }
+                "Vulcan Dwarf" -> {
+                    raceSpinner.setSelection(13)
+                    fragSpinner.setSelection(19)
+                }
+            }
+
+            //Load Culture
+            if (sharedcultureFragsInt == 100) {
+                cultureCheck.isChecked = true
+                cultureFragsInt = 100
+                calculateFragCost()
+                characterFrags.setText("" + characterFragsInt)
+
+                if (sharedcharacterRace == "Savar'Aving") {
+                    characterCulture = "Taliss Pride Culture"
+                    racialName.setText("Redeemer's Claws")
+                }
+                else if (sharedcharacterRace == "Dark Elf") {
+                    characterCulture = "House Mortuus Culture"
+                    racialName.setText("Control Lesser Undead")
+                }
+                else if (sharedcharacterRace == "Wild Elf") {
+                    characterCulture = "Kraken Culture"
+                    racialName.setText("Freedom of Movement")
+                }
+                else if (sharedcharacterRace == "Orc") {
+                    characterCulture = "Ebon Khan Culture"
+                    racialName.setText("Brood Constitution")
+                }
+                else if (sharedcharacterRace == "Ajaunti") {
+                    characterCulture = "Clan Vinatore Culture"
+                    racialName.setText("Spirit Hook")
+                }
+                else if (sharedcharacterRace == "Einher") {
+                    characterCulture = "True Berserker Culture"
+                    racialName.setText("Berserker Poison")
+                }
+            }
+            else {
+                cultureCheck.isChecked = false
+            }
+
+            //Load Class
+            println("LOADED CHARACTER CLASS IS $sharedcharacterClass")
+            when (sharedcharacterClass) {
+                "Class" -> classSpinner.setSelection(0)
+                "Mercenary" -> classSpinner.setSelection(1)
+                "Ranger" -> classSpinner.setSelection(2)
+                "Templar" -> classSpinner.setSelection(3)
+                "Assassin" -> classSpinner.setSelection(4)
+                "Nightblade" -> classSpinner.setSelection(5)
+                "Witch Hunter" -> classSpinner.setSelection(6)
+                "Druid" -> classSpinner.setSelection(7)
+                "Mage" -> classSpinner.setSelection(8)
+                "Bard" -> classSpinner.setSelection(9)
+            }
+
+            //Load Vocation
+            println("LOADED CHARACTER VOCATION IS $sharedcharacterVocation")
+            when (sharedcharacterVocation) {
+                "Vocation" -> vocationSpinner.setSelection(0)
+                "Archer" -> vocationSpinner.setSelection(1)
+                "Artisan" -> vocationSpinner.setSelection(2)
+                "Battle Mage" -> vocationSpinner.setSelection(3)
+                "Brew Master" -> vocationSpinner.setSelection(4)
+                "Bounty Hunter" -> vocationSpinner.setSelection(5)
+                "Shaman" -> vocationSpinner.setSelection(6)
+                "Stalwart" -> vocationSpinner.setSelection(7)
+                "Swashbuckler" -> vocationSpinner.setSelection(8)
+                "Undead Hunter" -> vocationSpinner.setSelection(9)
+                "Dread Knight" -> vocationSpinner.setSelection(10)
+                "Paladin" -> vocationSpinner.setSelection(11)
+                "Darkweaver" -> vocationSpinner.setSelection(12)
+                "Lightweaver" -> vocationSpinner.setSelection(13)
+                "Dragon Knight" -> vocationSpinner.setSelection(14)
+            }
+
+            //Load Blankets
+            val sharedblanketsInt = intent.getIntExtra("blanketsInt", 0)
+            characterBlankets.setText("$sharedblanketsInt")
+
+            //Load General Skills
+            val sharedracialSelect = intent.getIntExtra("racialSelect", 0)
+            racialSpinner.setSelection(sharedracialSelect)
+            val sharedbodySelect = intent.getIntExtra("bodySelect", 0)
+            bodySpinner.setSelection(sharedbodySelect)
+            val sharedstrengthSelect = intent.getIntExtra("strengthSelect", 0)
+            strengthSpinner.setSelection(sharedstrengthSelect)
+            val sharedlevel3Skill = intent.getStringExtra("level3Skill")
+            val sharedlevel3Select = intent.getIntExtra("level3Select", 0)
+            level3Spinner.setSelection(sharedlevel3Select)
+            val sharedlevel6Skill = intent.getStringExtra("level6Skill")
+            val sharedlevel6Select = intent.getIntExtra("level6Select", 0)
+            level6Spinner.setSelection(sharedlevel6Select)
+            val sharedlevel9Skill = intent.getStringExtra("level9Skill")
+            val sharedlevel9Select = intent.getIntExtra("level9Select", 0)
+            level9Spinner.setSelection(sharedlevel9Select)
+            val sharedlevel12Skill = intent.getStringExtra("level12Skill")
+            val sharedlevel12Select = intent.getIntExtra("level12Select", 0)
+            level12Spinner.setSelection(sharedlevel12Select)
+            val sharedtrapsmithSelect = intent.getIntExtra("trapsmithSelect", 0)
+            trapsmithSpinner.setSelection(sharedtrapsmithSelect)
+            val sharedtradesmanSelect = intent.getIntExtra("tradesmanSelect", 0)
+            tradesmanSpinner.setSelection(sharedtradesmanSelect)
+            val sharedalchemySelect = intent.getIntExtra("alchemySelect", 0)
+            alchemySpinner.setSelection(sharedalchemySelect)
+            val sharedchemistrySelect = intent.getIntExtra("chemistrySelect", 0)
+            chemistrySpinner.setSelection(sharedchemistrySelect)
+            val sharedblacksmithingSelect = intent.getIntExtra("blacksmithingSelect", 0)
+            blacksmithingSpinner.setSelection(sharedblacksmithingSelect)
+            val sharedartificeSelect = intent.getIntExtra("artificeSelect", 0)
+            artificeSpinner.setSelection(sharedartificeSelect)
+            val sharedscrollcraftingSelect = intent.getIntExtra("scrollcraftingSelect", 0)
+            scrollcraftingSpinner.setSelection(sharedscrollcraftingSelect)
+            val sharedcoldHandsSelect = intent.getIntExtra("coldHandsSelect", 0)
+            coldHandsSpinner.setSelection(sharedcoldHandsSelect)
+            val sharedcreateAlcoholSelect = intent.getIntExtra("createAlcoholSelect", 0)
+            createAlcoholSpinner.setSelection(sharedcreateAlcoholSelect)
+            val sharedheavyDrinkerSelect = intent.getIntExtra("heavyDrinkerSelect", 0)
+            heavyDrinkerSpinner.setSelection(sharedheavyDrinkerSelect)
+            val sharedhindsightSelect = intent.getIntExtra("hindsightSelect", 0)
+            hindsightSpinner.setSelection(sharedhindsightSelect)
+            val sharedintuitionSelect = intent.getIntExtra("intuitionSelect", 0)
+            intuitionSpinner.setSelection(sharedintuitionSelect)
+            val sharedlootingSelect = intent.getIntExtra("lootingSelect", 0)
+            lootingSpinner.setSelection(sharedlootingSelect)
+            val sharedparagonSelect = intent.getIntExtra("paragonSelect", 0)
+            paragonSpinner.setSelection(sharedparagonSelect)
+            val sharedpossumSelect = intent.getIntExtra("possumSelect", 0)
+            possumSpinner.setSelection(sharedpossumSelect)
+            val sharedteacherSelect = intent.getIntExtra("teacherSelect", 0)
+            teacherSpinner.setSelection(sharedteacherSelect)
+
+            //Load Warrior Skills
+            val sharedambidexteritySelect = intent.getIntExtra("ambidexteritySelect", 0)
+            ambidexteritySpinner.setSelection(sharedambidexteritySelect)
+            val sharedflorentineSelect = intent.getIntExtra("florentineSelect", 0)
+            florentineSpinner.setSelection(sharedflorentineSelect)
+            val sharedflurrySelect = intent.getIntExtra("flurrySelect", 0)
+            flurrySpinner.setSelection(sharedflurrySelect)
+            val sharedheavyArmorSelect = intent.getIntExtra("heavyArmorSelect", 0)
+            heavyArmorSpinner.setSelection(sharedheavyArmorSelect)
+            val sharedshieldSelect = intent.getIntExtra("shieldSelect", 0)
+            shieldSpinner.setSelection(sharedshieldSelect)
+            val sharedselfMutilateSelect = intent.getIntExtra("selfMutilateSelect", 0)
+            selfMutilateSpinner.setSelection(sharedselfMutilateSelect)
+            val sharedweapRefocusSelect = intent.getIntExtra("weapRefocusSelect", 0)
+            weapRefocusSpinner.setSelection(sharedweapRefocusSelect)
+            val sharedgroupProfMedSelect = intent.getIntExtra("groupProfMedSelect", 0)
+            groupProfMedSpinner.setSelection(sharedgroupProfMedSelect)
+            val sharedgroupProfLrgSelect = intent.getIntExtra("groupProfLrgSelect", 0)
+            groupProfLrgSpinner.setSelection(sharedgroupProfLrgSelect)
+            val sharedprofExoticSelect = intent.getIntExtra("profExoticSelect", 0)
+            profExoticSpinner.setSelection(sharedprofExoticSelect)
+            val sharedgroupSpecSelect = intent.getIntExtra("groupSpecSelect", 0)
+            groupSpecSpinner.setSelection(sharedgroupSpecSelect)
+            val sharedspecificSpecSelect = intent.getIntExtra("specificSpecSelect", 0)
+            specificSpecSpinner.setSelection(sharedspecificSpecSelect)
+            val sharedslayParrySelect = intent.getIntExtra("slayParrySelect", 0)
+            slayParrySpinner.setSelection(sharedslayParrySelect)
+            val sharedslayParryMstrSelect = intent.getIntExtra("slayParryMstrSelect", 0)
+            slayParryMstrSpinner.setSelection(sharedslayParryMstrSelect)
+            val sharedbattlefieldRepairSelect = intent.getIntExtra("battlefieldRepairSelect", 0)
+            battlefieldRepairSpinner.setSelection(sharedbattlefieldRepairSelect)
+            val sharedcrippleSelect = intent.getIntExtra("crippleSelect", 0)
+            crippleSpinner.setSelection(sharedcrippleSelect)
+            val shareddecapitateSelect = intent.getIntExtra("decapitateSelect", 0)
+            decapitateSpinner.setSelection(shareddecapitateSelect)
+            val shareddirtEyeSelect = intent.getIntExtra("dirtEyeSelect", 0)
+            dirtEyeSpinner.setSelection(shareddirtEyeSelect)
+            val sharedtripSelect = intent.getIntExtra("tripSelect", 0)
+            tripSpinner.setSelection(sharedtripSelect)
+            val sharedwhirlBlowsSelect = intent.getIntExtra("whirlBlowsSelect", 0)
+            whirlBlowsSpinner.setSelection(sharedwhirlBlowsSelect)
+
+            //Load Rogue Skills
+            val sharedgarroteSelect = intent.getIntExtra("garroteSelect", 0)
+            garroteSpinner.setSelection(sharedgarroteSelect)
+            val sharedsapSelect = intent.getIntExtra("sapSelect", 0)
+            sapSpinner.setSelection(sharedsapSelect)
+            val sharedvitalBlowSelect = intent.getIntExtra("vitalBlowSelect", 0)
+            vitalBlowSpinner.setSelection(sharedvitalBlowSelect)
+            val shareddodgeSelect = intent.getIntExtra("dodgeSelect", 0)
+            dodgeSpinner.setSelection(shareddodgeSelect)
+            val sharedspecificCritSelect = intent.getIntExtra("specificCritSelect", 0)
+            specificCritSpinner.setSelection(sharedspecificCritSelect)
+            val sharedgroupCritSelect = intent.getIntExtra("groupCritSelect", 0)
+            groupCritSpinner.setSelection(sharedgroupCritSelect)
+            val sharedexecuteSelect = intent.getIntExtra("executeSelect", 0)
+            executeSpinner.setSelection(sharedexecuteSelect)
+            val sharedexecuteMstrSelect = intent.getIntExtra("executeMstrSelect", 0)
+            executeMstrSpinner.setSelection(sharedexecuteMstrSelect)
+            val sharedblindfighterSelect = intent.getIntExtra("blindfighterSelect", 0)
+            blindfighterSpinner.setSelection(sharedblindfighterSelect)
+            val sharedescapeSelect = intent.getIntExtra("escapeSelect", 0)
+            escapeSpinner.setSelection(sharedescapeSelect)
+            val sharedriposteSelect = intent.getIntExtra("riposteSelect", 0)
+            riposteSpinner.setSelection(sharedriposteSelect)
+            val sharedsuckerPunchSelect = intent.getIntExtra("suckerPunchSelect", 0)
+            suckerPunchSpinner.setSelection(sharedsuckerPunchSelect)
+            val sharedthievesCantSelect = intent.getIntExtra("thievesCantSelect", 0)
+            thievesCantSpinner.setSelection(sharedthievesCantSelect)
+            val sharedtumbleSelect = intent.getIntExtra("tumbleSelect", 0)
+            tumbleSpinner.setSelection(sharedtumbleSelect)
+
+            //Load Scholar Skills
+            val sharedmysticismSelect = intent.getIntExtra("mysticismSelect", 0)
+            mysticismSpinner.setSelection(sharedmysticismSelect)
+            val shareddemAngArtsSelect = intent.getIntExtra("demAngArtsSelect", 0)
+            demAngArtsSpinner.setSelection(shareddemAngArtsSelect)
+            val sharednecroArtsSelect = intent.getIntExtra("necroArtsSelect", 0)
+            necroArtsSpinner.setSelection(sharednecroArtsSelect)
+            val sharedanatomySelect = intent.getIntExtra("anatomySelect", 0)
+            anatomySpinner.setSelection(sharedanatomySelect)
+            val sharedfirstAidSelect = intent.getIntExtra("firstAidSelect", 0)
+            firstAidSpinner.setSelection(sharedfirstAidSelect)
+            val sharedphysicianSelect = intent.getIntExtra("physicianSelect", 0)
+            physicianSpinner.setSelection(sharedphysicianSelect)
+            val sharedreadWriteSelect = intent.getIntExtra("readWriteSelect", 0)
+            readWriteSpinner.setSelection(sharedreadWriteSelect)
+            val sharedreadMagicSelect = intent.getIntExtra("readMagicSelect", 0)
+            readMagicSpinner.setSelection(sharedreadMagicSelect)
+            val sharedrdAdvMagicSelect = intent.getIntExtra("rdAdvMagicSelect", 0)
+            rdAdvMagicSpinner.setSelection(sharedrdAdvMagicSelect)
+            val sharedrdRitualMagicSelect = intent.getIntExtra("rdRitualMagicSelect", 0)
+            rdRitualMagicSpinner.setSelection(sharedrdRitualMagicSelect)
+            val sharedadvRitualSelect = intent.getIntExtra("advRitualSelect", 0)
+            advRitualSpinner.setSelection(sharedadvRitualSelect)
+            val sharedeleAttuneSelect = intent.getIntExtra("eleAttuneSelect", 0)
+            eleAttuneSpinner.setSelection(sharedeleAttuneSelect)
+            val sharedcombatWizSelect = intent.getIntExtra("combatWizSelect", 0)
+            combatWizSpinner.setSelection(sharedcombatWizSelect)
+            val sharedharvestSelect = intent.getIntExtra("harvestSelect", 0)
+            harvestSpinner.setSelection(sharedharvestSelect)
+            val sharedmorticianSelect = intent.getIntExtra("morticianSelect", 0)
+            morticianSpinner.setSelection(sharedmorticianSelect)
+            val sharedrefocusSelect = intent.getIntExtra("refocusSelect", 0)
+            refocusSpinner.setSelection(sharedrefocusSelect)
+            val sharedspellParrySelect = intent.getIntExtra("spellParrySelect", 0)
+            spellParrySpinner.setSelection(sharedspellParrySelect)
+            val sharedspellVersSkillSelect = intent.getIntExtra("spellVersSkillSelect", 0)
+            spellVersSpinner.setSelection(sharedspellVersSkillSelect)
+            val sharedspellSwitchSelect = intent.getIntExtra("spellSwitchSelect", 0)
+            spellSwitchSpinner.setSelection(sharedspellSwitchSelect)
+            println("sharedsphereSelect1 IN LOAD IS $sharedsphereSelect1")
+            when (sharedsphereSelect1) {
+                "None" -> sphere1Spinner.setSelection(0)
+                "Elemental" -> sphere1Spinner.setSelection(1)
+                "Healing" -> sphere1Spinner.setSelection(2)
+                "Nature" -> sphere1Spinner.setSelection(3)
+                "Protections" -> sphere1Spinner.setSelection(4)
+                "Psionics" -> sphere1Spinner.setSelection(5)
+                "*Necromancy" -> sphere1Spinner.setSelection(6)
+                "*Sigil" -> sphere1Spinner.setSelection(7)
+                "*Wytchcraft" -> sphere1Spinner.setSelection(8)
+                "Dark" -> { sphere1Spinner.adapter = darkSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+                "Light" -> { sphere1Spinner.adapter = lightSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+                "Draconic" -> { sphere1Spinner.adapter = draconicSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+            }
+            when (sharedsphereSelect2) {
+                "None" -> sphere2Spinner.setSelection(0)
+                "Elemental" -> sphere2Spinner.setSelection(1)
+                "Healing" -> sphere2Spinner.setSelection(2)
+                "Nature" -> sphere2Spinner.setSelection(3)
+                "Protections" -> sphere2Spinner.setSelection(4)
+                "Psionics" -> sphere2Spinner.setSelection(5)
+                "*Necromancy" -> sphere2Spinner.setSelection(6)
+                "*Sigil" -> sphere2Spinner.setSelection(7)
+                "*Wytchcraft" -> sphere2Spinner.setSelection(8)
+                "Dark" -> { sphere2Spinner.adapter = darkSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+                "Light" -> { sphere2Spinner.adapter = lightSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+                "Draconic" -> { sphere2Spinner.adapter = draconicSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+            }
+            when (sharedsphereSelect3) {
+                "None" -> sphere3Spinner.setSelection(0)
+                "Elemental" -> sphere3Spinner.setSelection(1)
+                "Healing" -> sphere3Spinner.setSelection(2)
+                "Nature" -> sphere3Spinner.setSelection(3)
+                "Protections" -> sphere3Spinner.setSelection(4)
+                "Psionics" -> sphere3Spinner.setSelection(5)
+                "*Necromancy" -> sphere3Spinner.setSelection(6)
+                "*Sigil" -> sphere3Spinner.setSelection(7)
+                "*Wytchcraft" -> sphere3Spinner.setSelection(8)
+                "Dark" -> { sphere3Spinner.adapter = darkSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+                "Light" -> { sphere3Spinner.adapter = lightSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+                "Draconic" -> { sphere3Spinner.adapter = draconicSphereArrayAdapter
+                    sphere1Spinner.setSelection(9)
+                }
+            }
+            val sharedslot1Select = intent.getIntExtra("slot1Select", 0)
+            slot1Spinner.setSelection(sharedslot1Select)
+            val sharedslot2Select = intent.getIntExtra("slot2Select", 0)
+            slot2Spinner.setSelection(sharedslot2Select)
+            val sharedslot3Select = intent.getIntExtra("slot3Select", 0)
+            slot3Spinner.setSelection(sharedslot3Select)
+            val sharedslot4Select = intent.getIntExtra("slot4Select", 0)
+            slot4Spinner.setSelection(sharedslot4Select)
+            val sharedslot5Select = intent.getIntExtra("slot5Select", 0)
+            slot5Spinner.setSelection(sharedslot5Select)
+            val sharedslot6Select = intent.getIntExtra("slot6Select", 0)
+            slot6Spinner.setSelection(sharedslot6Select)
+            val sharedslot7Select = intent.getIntExtra("slot7Select", 0)
+            slot7Spinner.setSelection(sharedslot7Select)
+            val sharedslot8Select = intent.getIntExtra("slot8Select", 0)
+            slot8Spinner.setSelection(sharedslot8Select)
+            val sharedslot9Select = intent.getIntExtra("slot9Select", 0)
+            slot9Spinner.setSelection(sharedslot9Select)
+            val sharedritualSelect = intent.getIntExtra("ritualSelect", 0)
+            ritualSpinner.setSelection(sharedritualSelect)
+
+            load = "false"
+
+        }//End Load True
+
+        }// override fun onCreate
+
+        fun paragonCalc() {
+            val paragonSlotSpinner = findViewById<Spinner>(id.paragonSlotSpinner)
+            val slot1CP = findViewById<TextView>(id.slot1CP)
+            val slot2CP = findViewById<TextView>(id.slot2CP)
+            val slot3CP = findViewById<TextView>(id.slot3CP)
+            val slot4CP = findViewById<TextView>(id.slot4CP)
+            val slot5CP = findViewById<TextView>(id.slot5CP)
+            val slot6CP = findViewById<TextView>(id.slot6CP)
+            val slot7CP = findViewById<TextView>(id.slot7CP)
+            val slot8CP = findViewById<TextView>(id.slot8CP)
+            val slot9CP = findViewById<TextView>(id.slot9CP)
+
+            val skillSelect = Integer.parseInt(paragonSlotSpinner.selectedItem.toString())
+            var slotCost1 = Integer.parseInt(slot1CP.text.toString())
+            var slotCost2 = Integer.parseInt(slot2CP.text.toString())
+            var slotCost3 = Integer.parseInt(slot3CP.text.toString())
+            var slotCost4 = Integer.parseInt(slot4CP.text.toString())
+            var slotCost5 = Integer.parseInt(slot5CP.text.toString())
+            var slotCost6 = Integer.parseInt(slot6CP.text.toString())
+            var slotCost7 = Integer.parseInt(slot7CP.text.toString())
+            var slotCost8 = Integer.parseInt(slot8CP.text.toString())
+            var slotCost9 = Integer.parseInt(slot9CP.text.toString())
+
+            if (paragonFragsInt == 100) {
+                if (skillSelect == 0) {
+                    paragonInt = 0
+                }
+                else if (skillSelect == 1) {
+                    paragonInt = slotCost1 + 10
+                }
+                else if (skillSelect == 2) {
+                    paragonInt = slotCost2 + 10
+                }
+                else if (skillSelect == 3) {
+                    paragonInt = slotCost3 + 10
+                }
+                else if (skillSelect == 4) {
+                    paragonInt = slotCost4 + 10
+                }
+                else if (skillSelect == 5) {
+                    paragonInt = slotCost5 + 10
+                }
+                else if (skillSelect == 6) {
+                    paragonInt = slotCost6 + 10
+                }
+                else if (skillSelect == 7) {
+                    paragonInt = slotCost7 + 10
+                }
+                else if (skillSelect == 8) {
+                    paragonInt = slotCost8 + 10
+                }
+                else if (skillSelect == 9) {
+                    paragonInt = slotCost9 + 10
+                }
+            }
+            else {
                 paragonInt = 0
             }
-            else if (skillSelect == 1){
-                paragonInt = slotCost1 + 10
-            }
-            else if (skillSelect == 2){
-                paragonInt = slotCost2 + 10
-            }
-            else if (skillSelect == 3){
-                paragonInt = slotCost3 + 10
-            }
-            else if (skillSelect == 4){
-                paragonInt = slotCost4 + 10
-            }
-            else if (skillSelect == 5){
-                paragonInt = slotCost5 + 10
-            }
-            else if (skillSelect == 6){
-                paragonInt = slotCost6 + 10
-            }
-            else if (skillSelect == 7){
-                paragonInt = slotCost7 + 10
-            }
-            else if (skillSelect == 8){
-                paragonInt = slotCost8 + 10
-            }
-            else if (skillSelect == 9){
-                paragonInt = slotCost9 + 10
-            }
-        }
-        else{
-            paragonInt = 0
-        }
-    }
-
-    fun versatilityCalc() {
-
-        val spellVersSlotSpinner1 = findViewById<Spinner>(id.spellVersSlotSpinner1)
-        val spellVersSlotSpinner2 = findViewById<Spinner>(id.spellVersSlotSpinner2)
-        val spellVersSlotSpinner3 = findViewById<Spinner>(id.spellVersSlotSpinner3)
-        val spellVersSlotSpinner4 = findViewById<Spinner>(id.spellVersSlotSpinner4)
-        val spellVersSlotSpinner5 = findViewById<Spinner>(id.spellVersSlotSpinner5)
-        val spellVersSlotSpinner6 = findViewById<Spinner>(id.spellVersSlotSpinner6)
-        val spellVersSlotSpinner7 = findViewById<Spinner>(id.spellVersSlotSpinner7)
-        val spellVersSlotSpinner8 = findViewById<Spinner>(id.spellVersSlotSpinner8)
-        val spellVersSlotSpinner9 = findViewById<Spinner>(id.spellVersSlotSpinner9)
-        val spellVersSlotSpinner10 = findViewById<Spinner>(id.spellVersSlotSpinner10)
-        val slot1CP = findViewById<TextView>(id.slot1CP)
-        val slot2CP = findViewById<TextView>(id.slot2CP)
-        val slot3CP = findViewById<TextView>(id.slot3CP)
-        val slot4CP = findViewById<TextView>(id.slot4CP)
-        val slot5CP = findViewById<TextView>(id.slot5CP)
-        val slot6CP = findViewById<TextView>(id.slot6CP)
-        val slot7CP = findViewById<TextView>(id.slot7CP)
-        val slot8CP = findViewById<TextView>(id.slot8CP)
-        val slot9CP = findViewById<TextView>(id.slot9CP)
-
-        val slotSelect1 = Integer.parseInt(spellVersSlotSpinner1.selectedItem.toString())
-        val slotSelect2 = Integer.parseInt(spellVersSlotSpinner2.selectedItem.toString())
-        val slotSelect3 = Integer.parseInt(spellVersSlotSpinner3.selectedItem.toString())
-        val slotSelect4 = Integer.parseInt(spellVersSlotSpinner4.selectedItem.toString())
-        val slotSelect5 = Integer.parseInt(spellVersSlotSpinner5.selectedItem.toString())
-        val slotSelect6 = Integer.parseInt(spellVersSlotSpinner6.selectedItem.toString())
-        val slotSelect7 = Integer.parseInt(spellVersSlotSpinner7.selectedItem.toString())
-        val slotSelect8 = Integer.parseInt(spellVersSlotSpinner8.selectedItem.toString())
-        val slotSelect9 = Integer.parseInt(spellVersSlotSpinner9.selectedItem.toString())
-        val slotSelect10 = Integer.parseInt(spellVersSlotSpinner10.selectedItem.toString())
-        var slotCost1 = Integer.parseInt(slot1CP.text.toString())
-        var slotCost2 = Integer.parseInt(slot2CP.text.toString())
-        var slotCost3 = Integer.parseInt(slot3CP.text.toString())
-        var slotCost4 = Integer.parseInt(slot4CP.text.toString())
-        var slotCost5 = Integer.parseInt(slot5CP.text.toString())
-        var slotCost6 = Integer.parseInt(slot6CP.text.toString())
-        var slotCost7 = Integer.parseInt(slot7CP.text.toString())
-        var slotCost8 = Integer.parseInt(slot8CP.text.toString())
-        var slotCost9 = Integer.parseInt(slot9CP.text.toString())
-
-        //SLOT 1
-        if (slotSelect1 == 0) {
-            spellVers1Int = 0
-            spellVersFrags1Int = 0
-        }
-        else if (slotSelect1 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers1Int = (slotCost1 / 2) + 5
-            spellVersFrags1Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect1 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers1Int = (slotCost2 / 2) + 5
-            spellVersFrags1Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect1 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers1Int = (slotCost3 / 2) + 5
-            spellVersFrags1Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect1 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers1Int = (slotCost4 / 2) + 5
-            spellVersFrags1Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect1 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers1Int = (slotCost5 / 2) + 5
-            spellVersFrags1Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect1 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers1Int = (slotCost6 / 2) + 5
-            spellVersFrags1Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect1 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers1Int = (slotCost7 / 2) + 5
-            spellVersFrags1Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect1 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers1Int = (slotCost8 / 2) + 5
-            spellVersFrags1Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect1 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers1Int = (slotCost9 / 2) + 5
-            spellVersFrags1Int = (slotCost9 / 2) + 5
         }
 
-        //SLOT 2
-        if (slotSelect2 == 0) {
-            spellVers2Int = 0
-            spellVersFrags2Int = 0
-        }
-        else if (slotSelect2 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers2Int = (slotCost1 / 2) + 5
-            spellVersFrags2Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect2 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers2Int = (slotCost2 / 2) + 5
-            spellVersFrags2Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect2 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers2Int = (slotCost3 / 2) + 5
-            spellVersFrags2Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect2 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers2Int = (slotCost4 / 2) + 5
-            spellVersFrags2Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect2 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers2Int = (slotCost5 / 2) + 5
-            spellVersFrags2Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect2 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers2Int = (slotCost6 / 2) + 5
-            spellVersFrags2Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect2 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers2Int = (slotCost7 / 2) + 5
-            spellVersFrags2Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect2 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers2Int = (slotCost8 / 2) + 5
-            spellVersFrags2Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect2 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers2Int = (slotCost9 / 2) + 5
-            spellVersFrags2Int = (slotCost9 / 2) + 5
-        }
+        fun versatilityCalc() {
 
-        //SLOT 3
-        if (slotSelect3 == 0) {
-            spellVers3Int = 0
-            spellVersFrags3Int = 0
-        }
-        else if (slotSelect3 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers3Int = (slotCost1 / 2) + 5
-            spellVersFrags3Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect3 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers3Int = (slotCost2 / 2) + 5
-            spellVersFrags3Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect3 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers3Int = (slotCost3 / 2) + 5
-            spellVersFrags3Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect3 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers3Int = (slotCost4 / 2) + 5
-            spellVersFrags3Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect3 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers3Int = (slotCost5 / 2) + 5
-            spellVersFrags3Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect3 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers3Int = (slotCost6 / 2) + 5
-            spellVersFrags3Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect3 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers3Int = (slotCost7 / 2) + 5
-            spellVersFrags3Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect3 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers3Int = (slotCost8 / 2) + 5
-            spellVersFrags3Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect3 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers3Int = (slotCost9 / 2) + 5
-            spellVersFrags3Int = (slotCost9 / 2) + 5
-        }
+            val spellVersSlotSpinner1 = findViewById<Spinner>(id.spellVersSlotSpinner1)
+            val spellVersSlotSpinner2 = findViewById<Spinner>(id.spellVersSlotSpinner2)
+            val spellVersSlotSpinner3 = findViewById<Spinner>(id.spellVersSlotSpinner3)
+            val spellVersSlotSpinner4 = findViewById<Spinner>(id.spellVersSlotSpinner4)
+            val spellVersSlotSpinner5 = findViewById<Spinner>(id.spellVersSlotSpinner5)
+            val spellVersSlotSpinner6 = findViewById<Spinner>(id.spellVersSlotSpinner6)
+            val spellVersSlotSpinner7 = findViewById<Spinner>(id.spellVersSlotSpinner7)
+            val spellVersSlotSpinner8 = findViewById<Spinner>(id.spellVersSlotSpinner8)
+            val spellVersSlotSpinner9 = findViewById<Spinner>(id.spellVersSlotSpinner9)
+            val spellVersSlotSpinner10 = findViewById<Spinner>(id.spellVersSlotSpinner10)
+            val slot1CP = findViewById<TextView>(id.slot1CP)
+            val slot2CP = findViewById<TextView>(id.slot2CP)
+            val slot3CP = findViewById<TextView>(id.slot3CP)
+            val slot4CP = findViewById<TextView>(id.slot4CP)
+            val slot5CP = findViewById<TextView>(id.slot5CP)
+            val slot6CP = findViewById<TextView>(id.slot6CP)
+            val slot7CP = findViewById<TextView>(id.slot7CP)
+            val slot8CP = findViewById<TextView>(id.slot8CP)
+            val slot9CP = findViewById<TextView>(id.slot9CP)
 
-        //SLOT 4
-        if (slotSelect4 == 0) {
-            spellVers4Int = 0
-            spellVersFrags4Int = 0
-        }
-        else if (slotSelect4 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers4Int = (slotCost1 / 2) + 5
-            spellVersFrags4Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect4 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers4Int = (slotCost2 / 2) + 5
-            spellVersFrags4Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect4 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers4Int = (slotCost3 / 2) + 5
-            spellVersFrags4Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect4 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers4Int = (slotCost4 / 2) + 5
-            spellVersFrags4Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect4 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers4Int = (slotCost5 / 2) + 5
-            spellVersFrags4Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect4 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers4Int = (slotCost6 / 2) + 5
-            spellVersFrags4Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect4 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers4Int = (slotCost7 / 2) + 5
-            spellVersFrags4Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect4 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers4Int = (slotCost8 / 2) + 5
-            spellVersFrags4Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect4 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers4Int = (slotCost9 / 2) + 5
-            spellVersFrags4Int = (slotCost9 / 2) + 5
-        }
+            val slotSelect1 = Integer.parseInt(spellVersSlotSpinner1.selectedItem.toString())
+            val slotSelect2 = Integer.parseInt(spellVersSlotSpinner2.selectedItem.toString())
+            val slotSelect3 = Integer.parseInt(spellVersSlotSpinner3.selectedItem.toString())
+            val slotSelect4 = Integer.parseInt(spellVersSlotSpinner4.selectedItem.toString())
+            val slotSelect5 = Integer.parseInt(spellVersSlotSpinner5.selectedItem.toString())
+            val slotSelect6 = Integer.parseInt(spellVersSlotSpinner6.selectedItem.toString())
+            val slotSelect7 = Integer.parseInt(spellVersSlotSpinner7.selectedItem.toString())
+            val slotSelect8 = Integer.parseInt(spellVersSlotSpinner8.selectedItem.toString())
+            val slotSelect9 = Integer.parseInt(spellVersSlotSpinner9.selectedItem.toString())
+            val slotSelect10 = Integer.parseInt(spellVersSlotSpinner10.selectedItem.toString())
+            var slotCost1 = Integer.parseInt(slot1CP.text.toString())
+            var slotCost2 = Integer.parseInt(slot2CP.text.toString())
+            var slotCost3 = Integer.parseInt(slot3CP.text.toString())
+            var slotCost4 = Integer.parseInt(slot4CP.text.toString())
+            var slotCost5 = Integer.parseInt(slot5CP.text.toString())
+            var slotCost6 = Integer.parseInt(slot6CP.text.toString())
+            var slotCost7 = Integer.parseInt(slot7CP.text.toString())
+            var slotCost8 = Integer.parseInt(slot8CP.text.toString())
+            var slotCost9 = Integer.parseInt(slot9CP.text.toString())
 
-        //SLOT 5
-        if (slotSelect5 == 0) {
-            spellVers5Int = 0
-            spellVersFrags5Int = 0
-        }
-        else if (slotSelect5 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
+            //SLOT 1
+            if (slotSelect1 == 0) {
+                spellVers1Int = 0
+                spellVersFrags1Int = 0
             }
-            spellVers5Int = (slotCost1 / 2) + 5
-            spellVersFrags5Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect5 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
+            else if (slotSelect1 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers1Int = (slotCost1 / 2) + 5
+                spellVersFrags1Int = (slotCost1 / 2) + 5
             }
-            spellVers5Int = (slotCost2 / 2) + 5
-            spellVersFrags5Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect5 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
+            else if (slotSelect1 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers1Int = (slotCost2 / 2) + 5
+                spellVersFrags1Int = (slotCost2 / 2) + 5
             }
-            spellVers5Int = (slotCost3 / 2) + 5
-            spellVersFrags5Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect5 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
+            else if (slotSelect1 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers1Int = (slotCost3 / 2) + 5
+                spellVersFrags1Int = (slotCost3 / 2) + 5
             }
-            spellVers5Int = (slotCost4 / 2) + 5
-            spellVersFrags5Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect5 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
+            else if (slotSelect1 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers1Int = (slotCost4 / 2) + 5
+                spellVersFrags1Int = (slotCost4 / 2) + 5
             }
-            spellVers5Int = (slotCost5 / 2) + 5
-            spellVersFrags5Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect5 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
+            else if (slotSelect1 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers1Int = (slotCost5 / 2) + 5
+                spellVersFrags1Int = (slotCost5 / 2) + 5
             }
-            spellVers5Int = (slotCost6 / 2) + 5
-            spellVersFrags5Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect5 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
+            else if (slotSelect1 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers1Int = (slotCost6 / 2) + 5
+                spellVersFrags1Int = (slotCost6 / 2) + 5
             }
-            spellVers5Int = (slotCost7 / 2) + 5
-            spellVersFrags5Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect5 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
+            else if (slotSelect1 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers1Int = (slotCost7 / 2) + 5
+                spellVersFrags1Int = (slotCost7 / 2) + 5
             }
-            spellVers5Int = (slotCost8 / 2) + 5
-            spellVersFrags5Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect5 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
+            else if (slotSelect1 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers1Int = (slotCost8 / 2) + 5
+                spellVersFrags1Int = (slotCost8 / 2) + 5
             }
-            spellVers5Int = (slotCost9 / 2) + 5
-            spellVersFrags5Int = (slotCost9 / 2) + 5
-        }
-
-        //SLOT 6
-        if (slotSelect6 == 0) {
-            spellVers6Int = 0
-            spellVersFrags6Int = 0
-        }
-        else if (slotSelect6 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers6Int = (slotCost1 / 2) + 5
-            spellVersFrags6Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect6 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers6Int = (slotCost2 / 2) + 5
-            spellVersFrags6Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect6 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers6Int = (slotCost3 / 2) + 5
-            spellVersFrags6Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect6 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers6Int = (slotCost4 / 2) + 5
-            spellVersFrags6Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect6 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers6Int = (slotCost5 / 2) + 5
-            spellVersFrags6Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect6 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers6Int = (slotCost6 / 2) + 5
-            spellVersFrags6Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect6 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers6Int = (slotCost7 / 2) + 5
-            spellVersFrags6Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect6 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers6Int = (slotCost8 / 2) + 5
-            spellVersFrags6Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect6 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers6Int = (slotCost9 / 2) + 5
-            spellVersFrags6Int = (slotCost9 / 2) + 5
-        }
-
-        //SLOT 7
-        if (slotSelect7 == 0) {
-            spellVers7Int = 0
-            spellVersFrags7Int = 0
-        }
-        else if (slotSelect7 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers7Int = (slotCost1 / 2) + 5
-            spellVersFrags7Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect7 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers7Int = (slotCost2 / 2) + 5
-            spellVersFrags7Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect7 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers7Int = (slotCost3 / 2) + 5
-            spellVersFrags7Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect7 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers7Int = (slotCost4 / 2) + 5
-            spellVersFrags7Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect7 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers7Int = (slotCost5 / 2) + 5
-            spellVersFrags7Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect7 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers7Int = (slotCost6 / 2) + 5
-            spellVersFrags7Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect7 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers7Int = (slotCost7 / 2) + 5
-            spellVersFrags7Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect7 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers7Int = (slotCost8 / 2) + 5
-            spellVersFrags7Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect7 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers7Int = (slotCost9 / 2) + 5
-            spellVersFrags7Int = (slotCost9 / 2) + 5
-        }
-
-        //SLOT 8
-        if (slotSelect8 == 0) {
-            spellVers8Int = 0
-            spellVersFrags8Int = 0
-        }
-        else if (slotSelect8 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers8Int = (slotCost1 / 2) + 5
-            spellVersFrags8Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect8 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers8Int = (slotCost2 / 2) + 5
-            spellVersFrags8Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect8 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers8Int = (slotCost3 / 2) + 5
-            spellVersFrags8Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect8 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers8Int = (slotCost4 / 2) + 5
-            spellVersFrags8Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect8 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers8Int = (slotCost5 / 2) + 5
-            spellVersFrags8Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect8 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers8Int = (slotCost6 / 2) + 5
-            spellVersFrags8Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect8 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers8Int = (slotCost7 / 2) + 5
-            spellVersFrags8Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect8 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers8Int = (slotCost8 / 2) + 5
-            spellVersFrags8Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect8 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers8Int = (slotCost9 / 2) + 5
-            spellVersFrags8Int = (slotCost9 / 2) + 5
-        }
-
-        //SLOT 9
-        if (slotSelect9 == 0) {
-            spellVers9Int = 0
-            spellVersFrags9Int = 0
-        }
-        else if (slotSelect9 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers9Int = (slotCost1 / 2) + 5
-            spellVersFrags9Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect9 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers9Int = (slotCost2 / 2) + 5
-            spellVersFrags9Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect9 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers9Int = (slotCost3 / 2) + 5
-            spellVersFrags9Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect9 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers9Int = (slotCost4 / 2) + 5
-            spellVersFrags9Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect9 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers9Int = (slotCost5 / 2) + 5
-            spellVersFrags9Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect9 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers9Int = (slotCost6 / 2) + 5
-            spellVersFrags9Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect9 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers9Int = (slotCost7 / 2) + 5
-            spellVersFrags9Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect9 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers9Int = (slotCost8 / 2) + 5
-            spellVersFrags9Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect9 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers9Int = (slotCost9 / 2) + 5
-            spellVersFrags9Int = (slotCost9 / 2) + 5
-        }
-
-        //SLOT 10
-        if (slotSelect10 == 0) {
-            spellVers10Int = 0
-            spellVersFrags10Int = 0
-        }
-        else if (slotSelect10 == 1){
-            if (slotCost1 % 2 != 0) {
-                slotCost1 = slotCost1 + 1
-            }
-            spellVers10Int = (slotCost1 / 2) + 5
-            spellVersFrags10Int = (slotCost1 / 2) + 5
-        }
-        else if (slotSelect10 == 2){
-            if (slotCost2 % 2 != 0) {
-                slotCost2 = slotCost2 + 1
-            }
-            spellVers10Int = (slotCost2 / 2) + 5
-            spellVersFrags10Int = (slotCost2 / 2) + 5
-        }
-        else if (slotSelect10 == 3){
-            if (slotCost3 % 2 != 0) {
-                slotCost3 = slotCost3 + 1
-            }
-            spellVers10Int = (slotCost3 / 2) + 5
-            spellVersFrags10Int = (slotCost3 / 2) + 5
-        }
-        else if (slotSelect10 == 4){
-            if (slotCost4 % 2 != 0) {
-                slotCost4 = slotCost4 + 1
-            }
-            spellVers10Int = (slotCost4 / 2) + 5
-            spellVersFrags10Int = (slotCost4 / 2) + 5
-        }
-        else if (slotSelect10 == 5){
-            if (slotCost5 % 2 != 0) {
-                slotCost5 = slotCost5 + 1
-            }
-            spellVers10Int = (slotCost5 / 2) + 5
-            spellVersFrags10Int = (slotCost5 / 2) + 5
-        }
-        else if (slotSelect10 == 6){
-            if (slotCost6 % 2 != 0) {
-                slotCost6 = slotCost6 + 1
-            }
-            spellVers10Int = (slotCost6 / 2) + 5
-            spellVersFrags10Int = (slotCost6 / 2) + 5
-        }
-        else if (slotSelect10 == 7){
-            if (slotCost7 % 2 != 0) {
-                slotCost7 = slotCost7 + 1
-            }
-            spellVers10Int = (slotCost7 / 2) + 5
-            spellVersFrags10Int = (slotCost7 / 2) + 5
-        }
-        else if (slotSelect10 == 8){
-            if (slotCost8 % 2 != 0) {
-                slotCost8 = slotCost8 + 1
-            }
-            spellVers10Int = (slotCost8 / 2) + 5
-            spellVersFrags10Int = (slotCost8 / 2) + 5
-        }
-        else if (slotSelect10 == 9){
-            if (slotCost9 % 2 != 0) {
-                slotCost9 = slotCost9 + 1
-            }
-            spellVers10Int = (slotCost9 / 2) + 5
-            spellVersFrags10Int = (slotCost9 / 2) + 5
-        }
-
-    }
-
-    //Calculate Level
-    fun calculateLevelbyCP (){
-
-        if (cpInt >= 150 && cpInt < 250){
-            levelInt = 1
-        }
-        else if (cpInt >= 250 && cpInt < 350){
-            levelInt = 2
-        }
-        else if (cpInt >= 350 && cpInt < 450){
-            levelInt = 3
-        }
-        else if (cpInt >= 450 && cpInt < 550){
-            levelInt = 4
-        }
-        else if (cpInt >= 550 && cpInt < 650){
-            levelInt = 5
-        }
-        else if (cpInt >= 650 && cpInt < 750){
-            levelInt = 6
-        }
-        else if (cpInt >= 750 && cpInt < 850){
-            levelInt = 7
-        }
-        else if (cpInt >= 850 && cpInt < 950){
-            levelInt = 8
-        }
-        else if (cpInt >= 950 && cpInt < 1050){
-            levelInt = 9
-        }
-        else if (cpInt >= 1050 && cpInt < 1150){
-            levelInt = 10
-        }
-        else if (cpInt >= 1150 && cpInt < 1250){
-            levelInt = 11
-        }
-        else if (cpInt >= 1250 && cpInt < 1350){
-            levelInt = 12
-        }
-        else if (cpInt >= 1350 && cpInt < 1450){
-            levelInt = 13
-        }
-        else if (cpInt >= 1450 && cpInt < 1550){
-            levelInt = 14
-        }
-        else if (cpInt >= 1550 && cpInt < 1650){
-            levelInt = 15
-        }
-        else if (cpInt >= 1650 && cpInt < 1750){
-            levelInt = 16
-        }
-        else if (cpInt >= 1750 && cpInt < 1850){
-            levelInt = 17
-        }
-        else if (cpInt >= 1850 && cpInt < 1950){
-            levelInt = 18
-        }
-        else if (cpInt >= 1950 && cpInt < 2050){
-            levelInt = 19
-        }
-        else if (cpInt >= 2050 && cpInt < 2150){
-            levelInt = 20
-        }
-        else if (cpInt >= 2150 && cpInt < 2250){
-            levelInt = 21
-        }
-        else if (cpInt >= 2250 && cpInt < 2350){
-            levelInt = 22
-        }
-        else if (cpInt >= 2350 && cpInt < 2450){
-            levelInt = 23
-        }
-        else if (cpInt >= 2450 && cpInt < 2550){
-            levelInt = 24
-        }
-        else if (cpInt >= 2550 && cpInt < 2650){
-            levelInt = 25
-        }
-        else if (cpInt >= 2650 && cpInt < 2750){
-            levelInt = 26
-        }
-        else if (cpInt >= 2750 && cpInt < 2850){
-            levelInt = 27
-        }
-        else if (cpInt >= 2850 && cpInt < 2950){
-            levelInt = 28
-        }
-        else if (cpInt >= 2950 && cpInt < 3050){
-            levelInt = 29
-        }
-        else if (cpInt >= 3050 && cpInt < 3150){
-            levelInt = 30
-        }
-        else {
-            levelInt = 1
-        }
-
-    } //End calculate level by CP
-
-    fun calculateLevelbyBlankets (){
-
-        if (blanketsInt >= 0 && blanketsInt < 2){
-            levelInt = 1
-        }
-        else if (blanketsInt >= 2 && blanketsInt < 4){
-            levelInt = 2
-        }
-        else if (blanketsInt >= 4 && blanketsInt < 7){
-            levelInt = 3
-        }
-        else if (blanketsInt >= 7 && blanketsInt < 10){
-            levelInt = 4
-        }
-        else if (blanketsInt >= 10 && blanketsInt < 15){
-            levelInt = 5
-        }
-        else if (blanketsInt >= 15 && blanketsInt < 19){
-            levelInt = 6
-        }
-        else if (blanketsInt >= 19 && blanketsInt < 24){
-            levelInt = 7
-        }
-        else if (blanketsInt >= 24 && blanketsInt <30){
-            levelInt = 8
-        }
-        else if (blanketsInt >= 30 && blanketsInt < 36){
-            levelInt = 9
-        }
-        else if (blanketsInt >= 36 && blanketsInt < 43){
-            levelInt = 10
-        }
-        else if (blanketsInt >= 43 && blanketsInt < 50){
-            levelInt = 11
-        }
-        else if (blanketsInt >= 50 && blanketsInt < 58){
-            levelInt = 12
-        }
-        else if (blanketsInt >= 58 && blanketsInt < 66){
-            levelInt = 13
-        }
-        else if (blanketsInt >= 66 && blanketsInt < 74){
-            levelInt = 14
-        }
-        else if (blanketsInt >= 74 && blanketsInt < 83){
-            levelInt = 15
-        }
-        else if (blanketsInt >= 83 && blanketsInt < 92){
-            levelInt = 16
-        }
-        else if (blanketsInt >= 92 && blanketsInt < 102){
-            levelInt = 17
-        }
-        else if (blanketsInt >= 102 && blanketsInt < 112){
-            levelInt = 18
-        }
-        else if (blanketsInt >= 112 && blanketsInt < 122){
-            levelInt = 19
-        }
-        else if (blanketsInt >= 122 && blanketsInt < 132){
-            levelInt = 20
-        }
-        else if (blanketsInt >= 132 && blanketsInt < 142){
-            levelInt = 21
-        }
-        else if (blanketsInt >= 142 && blanketsInt < 152){
-            levelInt = 22
-        }
-        else if (blanketsInt >= 152 && blanketsInt < 162){
-            levelInt = 23
-        }
-        else if (blanketsInt >= 162 && blanketsInt < 172){
-            levelInt = 24
-        }
-        else if (blanketsInt >= 172 && blanketsInt < 182){
-            levelInt = 25
-        }
-        else if (blanketsInt >= 182 && blanketsInt < 192){
-            levelInt = 26
-        }
-        else if (blanketsInt >= 192 && blanketsInt < 202){
-            levelInt = 27
-        }
-        else if (blanketsInt >= 202 && blanketsInt < 212){
-            levelInt = 28
-        }
-        else if (blanketsInt >= 212 && blanketsInt < 222){
-            levelInt = 29
-        }
-        else if (blanketsInt >= 222 && blanketsInt < 232){
-            levelInt = 29
-        }
-        else {
-            levelInt = 0
-        }
-
-    } //End calculate level by blankets
-
-    // Calculate HP
-
-    fun calculateHP (){
-        val racialSpinner = findViewById<Spinner>(id.racialSpinner)
-        val racialSelect = Integer.parseInt(racialSpinner.selectedItem.toString())
-
-        when (characterClass) {
-
-            //Warrior Classes
-            "Mercenary" -> {
-                hpInt = 6 + ((2 * levelInt) - 2)
-            }
-            "Ranger" -> {
-                hpInt = 6 + ((2 * levelInt) - 2)
-            }
-            "Templar" -> {
-                hpInt = 6 + ((2 * levelInt) - 2)
-            }
-            "Dread Knight" -> {
-                hpInt = 6 + ((2 * levelInt) - 2)
-            }
-            "Paladin" -> {
-                hpInt = 6 + ((2 * levelInt) - 2)
+            else if (slotSelect1 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers1Int = (slotCost9 / 2) + 5
+                spellVersFrags1Int = (slotCost9 / 2) + 5
             }
 
-            //Rogue Classes
-            "Assassin" -> {
-                hpInt = levelInt + 3
+            //SLOT 2
+            if (slotSelect2 == 0) {
+                spellVers2Int = 0
+                spellVersFrags2Int = 0
             }
-            "Nightblade" -> {
-                hpInt = levelInt + 3
+            else if (slotSelect2 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers2Int = (slotCost1 / 2) + 5
+                spellVersFrags2Int = (slotCost1 / 2) + 5
             }
-            "Witch Hunter" -> {
-                hpInt = levelInt + 3
+            else if (slotSelect2 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers2Int = (slotCost2 / 2) + 5
+                spellVersFrags2Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect2 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers2Int = (slotCost3 / 2) + 5
+                spellVersFrags2Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect2 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers2Int = (slotCost4 / 2) + 5
+                spellVersFrags2Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect2 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers2Int = (slotCost5 / 2) + 5
+                spellVersFrags2Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect2 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers2Int = (slotCost6 / 2) + 5
+                spellVersFrags2Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect2 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers2Int = (slotCost7 / 2) + 5
+                spellVersFrags2Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect2 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers2Int = (slotCost8 / 2) + 5
+                spellVersFrags2Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect2 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers2Int = (slotCost9 / 2) + 5
+                spellVersFrags2Int = (slotCost9 / 2) + 5
             }
 
-            //Scholar Classes
-            "Mage" -> {
+            //SLOT 3
+            if (slotSelect3 == 0) {
+                spellVers3Int = 0
+                spellVersFrags3Int = 0
+            }
+            else if (slotSelect3 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers3Int = (slotCost1 / 2) + 5
+                spellVersFrags3Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect3 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers3Int = (slotCost2 / 2) + 5
+                spellVersFrags3Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect3 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers3Int = (slotCost3 / 2) + 5
+                spellVersFrags3Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect3 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers3Int = (slotCost4 / 2) + 5
+                spellVersFrags3Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect3 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers3Int = (slotCost5 / 2) + 5
+                spellVersFrags3Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect3 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers3Int = (slotCost6 / 2) + 5
+                spellVersFrags3Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect3 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers3Int = (slotCost7 / 2) + 5
+                spellVersFrags3Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect3 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers3Int = (slotCost8 / 2) + 5
+                spellVersFrags3Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect3 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers3Int = (slotCost9 / 2) + 5
+                spellVersFrags3Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 4
+            if (slotSelect4 == 0) {
+                spellVers4Int = 0
+                spellVersFrags4Int = 0
+            }
+            else if (slotSelect4 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers4Int = (slotCost1 / 2) + 5
+                spellVersFrags4Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect4 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers4Int = (slotCost2 / 2) + 5
+                spellVersFrags4Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect4 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers4Int = (slotCost3 / 2) + 5
+                spellVersFrags4Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect4 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers4Int = (slotCost4 / 2) + 5
+                spellVersFrags4Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect4 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers4Int = (slotCost5 / 2) + 5
+                spellVersFrags4Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect4 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers4Int = (slotCost6 / 2) + 5
+                spellVersFrags4Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect4 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers4Int = (slotCost7 / 2) + 5
+                spellVersFrags4Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect4 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers4Int = (slotCost8 / 2) + 5
+                spellVersFrags4Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect4 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers4Int = (slotCost9 / 2) + 5
+                spellVersFrags4Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 5
+            if (slotSelect5 == 0) {
+                spellVers5Int = 0
+                spellVersFrags5Int = 0
+            }
+            else if (slotSelect5 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers5Int = (slotCost1 / 2) + 5
+                spellVersFrags5Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect5 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers5Int = (slotCost2 / 2) + 5
+                spellVersFrags5Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect5 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers5Int = (slotCost3 / 2) + 5
+                spellVersFrags5Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect5 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers5Int = (slotCost4 / 2) + 5
+                spellVersFrags5Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect5 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers5Int = (slotCost5 / 2) + 5
+                spellVersFrags5Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect5 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers5Int = (slotCost6 / 2) + 5
+                spellVersFrags5Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect5 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers5Int = (slotCost7 / 2) + 5
+                spellVersFrags5Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect5 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers5Int = (slotCost8 / 2) + 5
+                spellVersFrags5Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect5 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers5Int = (slotCost9 / 2) + 5
+                spellVersFrags5Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 6
+            if (slotSelect6 == 0) {
+                spellVers6Int = 0
+                spellVersFrags6Int = 0
+            }
+            else if (slotSelect6 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers6Int = (slotCost1 / 2) + 5
+                spellVersFrags6Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect6 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers6Int = (slotCost2 / 2) + 5
+                spellVersFrags6Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect6 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers6Int = (slotCost3 / 2) + 5
+                spellVersFrags6Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect6 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers6Int = (slotCost4 / 2) + 5
+                spellVersFrags6Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect6 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers6Int = (slotCost5 / 2) + 5
+                spellVersFrags6Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect6 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers6Int = (slotCost6 / 2) + 5
+                spellVersFrags6Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect6 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers6Int = (slotCost7 / 2) + 5
+                spellVersFrags6Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect6 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers6Int = (slotCost8 / 2) + 5
+                spellVersFrags6Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect6 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers6Int = (slotCost9 / 2) + 5
+                spellVersFrags6Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 7
+            if (slotSelect7 == 0) {
+                spellVers7Int = 0
+                spellVersFrags7Int = 0
+            }
+            else if (slotSelect7 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers7Int = (slotCost1 / 2) + 5
+                spellVersFrags7Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect7 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers7Int = (slotCost2 / 2) + 5
+                spellVersFrags7Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect7 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers7Int = (slotCost3 / 2) + 5
+                spellVersFrags7Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect7 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers7Int = (slotCost4 / 2) + 5
+                spellVersFrags7Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect7 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers7Int = (slotCost5 / 2) + 5
+                spellVersFrags7Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect7 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers7Int = (slotCost6 / 2) + 5
+                spellVersFrags7Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect7 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers7Int = (slotCost7 / 2) + 5
+                spellVersFrags7Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect7 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers7Int = (slotCost8 / 2) + 5
+                spellVersFrags7Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect7 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers7Int = (slotCost9 / 2) + 5
+                spellVersFrags7Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 8
+            if (slotSelect8 == 0) {
+                spellVers8Int = 0
+                spellVersFrags8Int = 0
+            }
+            else if (slotSelect8 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers8Int = (slotCost1 / 2) + 5
+                spellVersFrags8Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect8 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers8Int = (slotCost2 / 2) + 5
+                spellVersFrags8Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect8 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers8Int = (slotCost3 / 2) + 5
+                spellVersFrags8Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect8 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers8Int = (slotCost4 / 2) + 5
+                spellVersFrags8Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect8 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers8Int = (slotCost5 / 2) + 5
+                spellVersFrags8Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect8 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers8Int = (slotCost6 / 2) + 5
+                spellVersFrags8Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect8 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers8Int = (slotCost7 / 2) + 5
+                spellVersFrags8Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect8 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers8Int = (slotCost8 / 2) + 5
+                spellVersFrags8Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect8 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers8Int = (slotCost9 / 2) + 5
+                spellVersFrags8Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 9
+            if (slotSelect9 == 0) {
+                spellVers9Int = 0
+                spellVersFrags9Int = 0
+            }
+            else if (slotSelect9 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers9Int = (slotCost1 / 2) + 5
+                spellVersFrags9Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect9 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers9Int = (slotCost2 / 2) + 5
+                spellVersFrags9Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect9 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers9Int = (slotCost3 / 2) + 5
+                spellVersFrags9Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect9 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers9Int = (slotCost4 / 2) + 5
+                spellVersFrags9Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect9 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers9Int = (slotCost5 / 2) + 5
+                spellVersFrags9Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect9 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers9Int = (slotCost6 / 2) + 5
+                spellVersFrags9Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect9 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers9Int = (slotCost7 / 2) + 5
+                spellVersFrags9Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect9 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers9Int = (slotCost8 / 2) + 5
+                spellVersFrags9Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect9 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers9Int = (slotCost9 / 2) + 5
+                spellVersFrags9Int = (slotCost9 / 2) + 5
+            }
+
+            //SLOT 10
+            if (slotSelect10 == 0) {
+                spellVers10Int = 0
+                spellVersFrags10Int = 0
+            }
+            else if (slotSelect10 == 1) {
+                if (slotCost1 % 2 != 0) {
+                    slotCost1 = slotCost1 + 1
+                }
+                spellVers10Int = (slotCost1 / 2) + 5
+                spellVersFrags10Int = (slotCost1 / 2) + 5
+            }
+            else if (slotSelect10 == 2) {
+                if (slotCost2 % 2 != 0) {
+                    slotCost2 = slotCost2 + 1
+                }
+                spellVers10Int = (slotCost2 / 2) + 5
+                spellVersFrags10Int = (slotCost2 / 2) + 5
+            }
+            else if (slotSelect10 == 3) {
+                if (slotCost3 % 2 != 0) {
+                    slotCost3 = slotCost3 + 1
+                }
+                spellVers10Int = (slotCost3 / 2) + 5
+                spellVersFrags10Int = (slotCost3 / 2) + 5
+            }
+            else if (slotSelect10 == 4) {
+                if (slotCost4 % 2 != 0) {
+                    slotCost4 = slotCost4 + 1
+                }
+                spellVers10Int = (slotCost4 / 2) + 5
+                spellVersFrags10Int = (slotCost4 / 2) + 5
+            }
+            else if (slotSelect10 == 5) {
+                if (slotCost5 % 2 != 0) {
+                    slotCost5 = slotCost5 + 1
+                }
+                spellVers10Int = (slotCost5 / 2) + 5
+                spellVersFrags10Int = (slotCost5 / 2) + 5
+            }
+            else if (slotSelect10 == 6) {
+                if (slotCost6 % 2 != 0) {
+                    slotCost6 = slotCost6 + 1
+                }
+                spellVers10Int = (slotCost6 / 2) + 5
+                spellVersFrags10Int = (slotCost6 / 2) + 5
+            }
+            else if (slotSelect10 == 7) {
+                if (slotCost7 % 2 != 0) {
+                    slotCost7 = slotCost7 + 1
+                }
+                spellVers10Int = (slotCost7 / 2) + 5
+                spellVersFrags10Int = (slotCost7 / 2) + 5
+            }
+            else if (slotSelect10 == 8) {
+                if (slotCost8 % 2 != 0) {
+                    slotCost8 = slotCost8 + 1
+                }
+                spellVers10Int = (slotCost8 / 2) + 5
+                spellVersFrags10Int = (slotCost8 / 2) + 5
+            }
+            else if (slotSelect10 == 9) {
+                if (slotCost9 % 2 != 0) {
+                    slotCost9 = slotCost9 + 1
+                }
+                spellVers10Int = (slotCost9 / 2) + 5
+                spellVersFrags10Int = (slotCost9 / 2) + 5
+            }
+
+        }
+
+        //Calculate Level
+        fun calculateLevelbyCP() {
+
+            if (cpInt >= 150 && cpInt < 250) {
+                levelInt = 1
+            }
+            else if (cpInt >= 250 && cpInt < 350) {
+                levelInt = 2
+            }
+            else if (cpInt >= 350 && cpInt < 450) {
+                levelInt = 3
+            }
+            else if (cpInt >= 450 && cpInt < 550) {
+                levelInt = 4
+            }
+            else if (cpInt >= 550 && cpInt < 650) {
+                levelInt = 5
+            }
+            else if (cpInt >= 650 && cpInt < 750) {
+                levelInt = 6
+            }
+            else if (cpInt >= 750 && cpInt < 850) {
+                levelInt = 7
+            }
+            else if (cpInt >= 850 && cpInt < 950) {
+                levelInt = 8
+            }
+            else if (cpInt >= 950 && cpInt < 1050) {
+                levelInt = 9
+            }
+            else if (cpInt >= 1050 && cpInt < 1150) {
+                levelInt = 10
+            }
+            else if (cpInt >= 1150 && cpInt < 1250) {
+                levelInt = 11
+            }
+            else if (cpInt >= 1250 && cpInt < 1350) {
+                levelInt = 12
+            }
+            else if (cpInt >= 1350 && cpInt < 1450) {
+                levelInt = 13
+            }
+            else if (cpInt >= 1450 && cpInt < 1550) {
+                levelInt = 14
+            }
+            else if (cpInt >= 1550 && cpInt < 1650) {
+                levelInt = 15
+            }
+            else if (cpInt >= 1650 && cpInt < 1750) {
+                levelInt = 16
+            }
+            else if (cpInt >= 1750 && cpInt < 1850) {
+                levelInt = 17
+            }
+            else if (cpInt >= 1850 && cpInt < 1950) {
+                levelInt = 18
+            }
+            else if (cpInt >= 1950 && cpInt < 2050) {
+                levelInt = 19
+            }
+            else if (cpInt >= 2050 && cpInt < 2150) {
+                levelInt = 20
+            }
+            else if (cpInt >= 2150 && cpInt < 2250) {
+                levelInt = 21
+            }
+            else if (cpInt >= 2250 && cpInt < 2350) {
+                levelInt = 22
+            }
+            else if (cpInt >= 2350 && cpInt < 2450) {
+                levelInt = 23
+            }
+            else if (cpInt >= 2450 && cpInt < 2550) {
+                levelInt = 24
+            }
+            else if (cpInt >= 2550 && cpInt < 2650) {
+                levelInt = 25
+            }
+            else if (cpInt >= 2650 && cpInt < 2750) {
+                levelInt = 26
+            }
+            else if (cpInt >= 2750 && cpInt < 2850) {
+                levelInt = 27
+            }
+            else if (cpInt >= 2850 && cpInt < 2950) {
+                levelInt = 28
+            }
+            else if (cpInt >= 2950 && cpInt < 3050) {
+                levelInt = 29
+            }
+            else if (cpInt >= 3050 && cpInt < 3150) {
+                levelInt = 30
+            }
+            else {
+                levelInt = 1
+            }
+
+        } //End calculate level by CP
+
+        fun calculateLevelbyBlankets() {
+
+            if (blanketsInt >= 0 && blanketsInt < 2) {
+                levelInt = 1
+            }
+            else if (blanketsInt >= 2 && blanketsInt < 4) {
+                levelInt = 2
+            }
+            else if (blanketsInt >= 4 && blanketsInt < 7) {
+                levelInt = 3
+            }
+            else if (blanketsInt >= 7 && blanketsInt < 10) {
+                levelInt = 4
+            }
+            else if (blanketsInt >= 10 && blanketsInt < 15) {
+                levelInt = 5
+            }
+            else if (blanketsInt >= 15 && blanketsInt < 19) {
+                levelInt = 6
+            }
+            else if (blanketsInt >= 19 && blanketsInt < 24) {
+                levelInt = 7
+            }
+            else if (blanketsInt >= 24 && blanketsInt < 30) {
+                levelInt = 8
+            }
+            else if (blanketsInt >= 30 && blanketsInt < 36) {
+                levelInt = 9
+            }
+            else if (blanketsInt >= 36 && blanketsInt < 43) {
+                levelInt = 10
+            }
+            else if (blanketsInt >= 43 && blanketsInt < 50) {
+                levelInt = 11
+            }
+            else if (blanketsInt >= 50 && blanketsInt < 58) {
+                levelInt = 12
+            }
+            else if (blanketsInt >= 58 && blanketsInt < 66) {
+                levelInt = 13
+            }
+            else if (blanketsInt >= 66 && blanketsInt < 74) {
+                levelInt = 14
+            }
+            else if (blanketsInt >= 74 && blanketsInt < 83) {
+                levelInt = 15
+            }
+            else if (blanketsInt >= 83 && blanketsInt < 92) {
+                levelInt = 16
+            }
+            else if (blanketsInt >= 92 && blanketsInt < 102) {
+                levelInt = 17
+            }
+            else if (blanketsInt >= 102 && blanketsInt < 112) {
+                levelInt = 18
+            }
+            else if (blanketsInt >= 112 && blanketsInt < 122) {
+                levelInt = 19
+            }
+            else if (blanketsInt >= 122 && blanketsInt < 132) {
+                levelInt = 20
+            }
+            else if (blanketsInt >= 132 && blanketsInt < 142) {
+                levelInt = 21
+            }
+            else if (blanketsInt >= 142 && blanketsInt < 152) {
+                levelInt = 22
+            }
+            else if (blanketsInt >= 152 && blanketsInt < 162) {
+                levelInt = 23
+            }
+            else if (blanketsInt >= 162 && blanketsInt < 172) {
+                levelInt = 24
+            }
+            else if (blanketsInt >= 172 && blanketsInt < 182) {
+                levelInt = 25
+            }
+            else if (blanketsInt >= 182 && blanketsInt < 192) {
+                levelInt = 26
+            }
+            else if (blanketsInt >= 192 && blanketsInt < 202) {
+                levelInt = 27
+            }
+            else if (blanketsInt >= 202 && blanketsInt < 212) {
+                levelInt = 28
+            }
+            else if (blanketsInt >= 212 && blanketsInt < 222) {
+                levelInt = 29
+            }
+            else if (blanketsInt >= 222 && blanketsInt < 232) {
+                levelInt = 29
+            }
+            else {
+                levelInt = 0
+            }
+
+        } //End calculate level by blankets
+
+        // Calculate HP
+
+        fun calculateHP() {
+            val racialSpinner = findViewById<Spinner>(id.racialSpinner)
+            val level3Spinner = findViewById<Spinner>(id.level3Spinner)
+            val racialSelect = Integer.parseInt(racialSpinner.selectedItem.toString())
+            level3Select = Integer.parseInt(level3Spinner.selectedItem.toString())
+
+
+            if (characterVocation == "Dread Knight" || characterVocation == "Paladin") {
+                hpInt = (6 + ((2 * levelInt) - 2)) + (3 * level3Select)
+            }
+            else if (characterVocation == "Darkweaver" || characterVocation == "Lightweaver" || characterVocation == "Dragon Knight") {
                 hpInt = 2 + levelInt - (levelInt / 3)
             }
-            "Druid" -> {
-                hpInt = 2 + levelInt - (levelInt / 3)
+            else {
+                if (characterClass == "Mercenary" || characterClass == "Ranger" || characterClass == "Templar") {
+                    hpInt = 6 + ((2 * levelInt) - 2)
+                }
+                else if (characterClass == "Assassin" || characterClass == "Nightblade" || characterClass == "Witch Hunter") {
+                    hpInt = levelInt + 3
+                }
+                else if (characterClass == "Mage" || characterClass == "Druid" || characterClass == "Bard") {
+                    hpInt = 2 + levelInt - (levelInt / 3)
+                }
+                else {
+                    hpInt = 0
+                }
             }
-            "Bard" -> {
-                hpInt = 2 + levelInt - (levelInt / 3)
+
+            if (characterRace == "Ogre") {
+                hpInt = hpInt + ((levelInt * 2) + 3)
             }
-            "Darkweaver" -> {
-                hpInt = 2 + levelInt - (levelInt / 3)
+            else if (characterRace == "Orc") {
+                hpInt = hpInt + racialSelect
             }
-            "Lightweaver" -> {
-                hpInt = 2 + levelInt - (levelInt / 3)
+            else if (characterRace == "Mountain Dwarf") {
+                hpInt = hpInt + (5 * racialSelect)
             }
-            "Dragon Knight" -> {
-                hpInt = 2 + levelInt - (levelInt / 3)
+
+            hpInt = hpInt + bodyHP
+
+        } //End calculate HP
+
+        // Calculate Blankets
+
+        fun calculateBlanketsbyLevel() {
+
+            if (levelInt == 1) {
+                blanketsInt = 0
             }
-            else -> {
-                hpInt = 0
+            else if (levelInt == 2) {
+                blanketsInt = 2
             }
-        }
-
-        if (characterRace == "Ogre"){
-            hpInt = hpInt + ((levelInt * 2) + 3)
-        }
-        else if (characterRace == "Orc"){
-            hpInt = hpInt + racialSelect
-        }
-        else if (characterRace == "Mountain Dwarf"){
-            hpInt = hpInt + (5 * racialSelect)
-        }
-
-        hpInt = hpInt + bodyHP
-
-    } //End calculate HP
-
-    // Calculate Blankets
-
-    fun calculateBlanketsbyLevel (){
-
-        if (levelInt == 1){
-            blanketsInt = 0
-        }
-        else if (levelInt == 2){
-            blanketsInt = 2
-        }
-        else if (levelInt == 3){
-            blanketsInt = 4
-        }
-        else if (levelInt == 4){
-            blanketsInt = 7
-        }
-        else if (levelInt == 5){
-            blanketsInt = 10
-        }
-        else if (levelInt == 6){
-            blanketsInt = 15
-        }
-        else if (levelInt == 7){
-            blanketsInt = 19
-        }
-        else if (levelInt == 8){
-            blanketsInt = 24
-        }
-        else if (levelInt == 9){
-            blanketsInt = 30
-        }
-        else if (levelInt == 10){
-            blanketsInt = 36
-        }
-        else if (levelInt == 11){
-            blanketsInt = 43
-        }
-        else if (levelInt == 12){
-            blanketsInt = 50
-        }
-        else if (levelInt == 13){
-            blanketsInt = 58
-        }
-        else if (levelInt == 14){
-            blanketsInt = 66
-        }
-        else if (levelInt == 15){
-            blanketsInt = 74
-        }
-        else if (levelInt == 16){
-            blanketsInt = 83
-        }
-        else if (levelInt == 17){
-            blanketsInt = 92
-        }
-        else if (levelInt == 18){
-            blanketsInt = 102
-        }
-        else if (levelInt == 19){
-            blanketsInt = 112
-        }
-        else if (levelInt == 20){
-            blanketsInt = 122
-        }
-        else if (levelInt == 21){
-            blanketsInt = 132
-        }
-        else if (levelInt == 22){
-            blanketsInt = 142
-        }
-        else if (levelInt == 23){
-            blanketsInt = 152
-        }
-        else if (levelInt == 24){
-            blanketsInt = 162
-        }
-        else if (levelInt == 25){
-            blanketsInt = 172
-        }
-        else if (levelInt == 26){
-            blanketsInt = 182
-        }
-        else if (levelInt == 27){
-            blanketsInt = 192
-        }
-        else if (levelInt == 28){
-            blanketsInt = 202
-        }
-        else if (levelInt == 29){
-            blanketsInt = 212
-        }
-        else if (levelInt == 30){
-            blanketsInt = 222
-        }
-        else {
-            blanketsInt = 0
-        }
-
-    } //End calculate blankets by level
-
-    fun calculateBlanketsbyCP (){
-
-        if (cpInt == 150){
-            blanketsInt = 0
-        }
-        else if (cpInt == 215){
-            blanketsInt = 1
-        }
-        else if (cpInt == 280){
-            blanketsInt = 2
-        }
-        else if (cpInt == 323){
-            blanketsInt = 3
-        }
-        else if (cpInt == 366){
-            blanketsInt = 4
-        }
-        else if (cpInt == 400){
-            blanketsInt = 5
-        }
-        else if (cpInt == 434){
-            blanketsInt = 6
-        }
-        else if (cpInt == 468){
-            blanketsInt = 7
-        }
-        else if (cpInt == 496){
-            blanketsInt = 8
-        }
-        else if (cpInt == 524){
-            blanketsInt = 9
-        }
-        else if (cpInt == 552){
-            blanketsInt = 10
-        }
-        else if (cpInt == 576){
-            blanketsInt = 11
-        }
-        else if (cpInt == 600){
-            blanketsInt = 12
-        }
-        else if (cpInt == 624){
-            blanketsInt = 13
-        }
-        else if (cpInt == 648){
-            blanketsInt = 14
-        }
-        else if (cpInt == 672){
-            blanketsInt = 15
-        }
-        else if (cpInt == 694){
-            blanketsInt = 16
-        }
-        else if (cpInt == 716){
-            blanketsInt = 17
-        }
-        else if (cpInt == 738){
-            blanketsInt = 18
-        }
-        else if (cpInt == 760){
-            blanketsInt = 19
-        }
-        else if (cpInt == 779){
-            blanketsInt = 20
-        }
-        else if (cpInt == 798){
-            blanketsInt = 21
-        }
-        else if (cpInt == 817){
-            blanketsInt = 22
-        }
-        else if (cpInt == 836){
-            blanketsInt = 23
-        }
-        else if (cpInt == 855){
-            blanketsInt = 24
-        }
-        else if (cpInt == 872){
-            blanketsInt = 25
-        }
-        else if (cpInt == 889){
-            blanketsInt = 26
-        }
-        else if (cpInt == 906){
-            blanketsInt = 27
-        }
-        else if (cpInt == 923){
-            blanketsInt = 28
-        }
-        else if (cpInt == 940){
-            blanketsInt = 29
-        }
-        else if (cpInt == 957){
-            blanketsInt = 30
-        }
-        else if (cpInt == 973){
-            blanketsInt = 31
-        }
-        else if (cpInt == 989){
-            blanketsInt = 32
-        }
-        else if (cpInt == 1005){
-            blanketsInt = 33
-        }
-        else if (cpInt == 1021){
-            blanketsInt = 34
-        }
-        else if (cpInt == 1037){
-            blanketsInt = 35
-        }
-        else if (cpInt == 1053){
-            blanketsInt = 36
-        }
-        else if (cpInt == 1068){
-            blanketsInt = 37
-        }
-        else if (cpInt == 1083){
-            blanketsInt = 38
-        }
-        else if (cpInt == 1098){
-            blanketsInt = 39
-        }
-        else if (cpInt == 1113){
-            blanketsInt = 40
-        }
-        else if (cpInt == 1128){
-            blanketsInt = 41
-        }
-        else if (cpInt == 1143){
-            blanketsInt = 42
-        }
-        else if (cpInt == 1158){
-            blanketsInt = 43
-        }
-        else if (cpInt == 1172){
-            blanketsInt = 44
-        }
-        else if (cpInt == 1186){
-            blanketsInt = 45
-        }
-        else if (cpInt == 1200){
-            blanketsInt = 46
-        }
-        else if (cpInt == 1214){
-            blanketsInt = 47
-        }
-        else if (cpInt == 1228){
-            blanketsInt = 48
-        }
-        else if (cpInt == 1242){
-            blanketsInt = 49
-        }
-        else if (cpInt == 1256){
-            blanketsInt = 50
-        }
-        else if (cpInt == 1269){
-            blanketsInt = 51
-        }
-        else if (cpInt == 1282){
-            blanketsInt = 52
-        }
-        else if (cpInt == 1295){
-            blanketsInt = 53
-        }
-        else if (cpInt == 1308){
-            blanketsInt = 54
-        }
-        else if (cpInt == 1321){
-            blanketsInt = 55
-        }
-        else if (cpInt == 1334){
-            blanketsInt = 56
-        }
-        else if (cpInt == 1347){
-            blanketsInt = 57
-        }
-        else if (cpInt == 1360){
-            blanketsInt = 58
-        }
-        else if (cpInt == 1372){
-            blanketsInt = 59
-        }
-        else if (cpInt == 1384){
-            blanketsInt = 60
-        }
-        else if (cpInt == 1396){
-            blanketsInt = 61
-        }
-        else if (cpInt == 1408){
-            blanketsInt = 62
-        }
-        else if (cpInt == 1420){
-            blanketsInt = 64
-        }
-        else if (cpInt == 1432){
-            blanketsInt = 65
-        }
-        else if (cpInt == 1444){
-            blanketsInt = 66
-        }
-        else if (cpInt == 1456){
-            blanketsInt = 67
-        }
-        else if (cpInt == 1468){
-            blanketsInt = 68
-        }
-        else if (cpInt == 1480){
-            blanketsInt = 69
-        }
-        else if (cpInt == 1492){
-            blanketsInt = 70
-        }
-        else if (cpInt == 1504){
-            blanketsInt = 71
-        }
-        else if (cpInt == 1516){
-            blanketsInt = 72
-        }
-        else if (cpInt == 1528){
-            blanketsInt = 73
-        }
-        else if (cpInt == 1540){
-            blanketsInt = 74
-        }
-        else if (cpInt == 1552){
-            blanketsInt = 75
-        }
-        else if (cpInt == 1563){
-            blanketsInt = 76
-        }
-        else if (cpInt == 1574){
-            blanketsInt = 77
-        }
-        else if (cpInt == 1585){
-            blanketsInt = 78
-        }
-        else if (cpInt == 1596){
-            blanketsInt = 79
-        }
-        else if (cpInt == 1607){
-            blanketsInt = 80
-        }
-        else if (cpInt == 1618){
-            blanketsInt = 81
-        }
-        else if (cpInt == 1629){
-            blanketsInt = 82
-        }
-        else if (cpInt == 1640){
-            blanketsInt = 83
-        }
-        else if (cpInt == 1651){
-            blanketsInt = 84
-        }
-        else if (cpInt == 1662){
-            blanketsInt = 85
-        }
-        else if (cpInt == 1673){
-            blanketsInt = 86
-        }
-        else if (cpInt == 1684){
-            blanketsInt = 87
-        }
-        else if (cpInt == 1695){
-            blanketsInt = 88
-        }
-        else if (cpInt == 1706){
-            blanketsInt = 89
-        }
-        else if (cpInt == 1717){
-            blanketsInt = 90
-        }
-        else if (cpInt == 1728){
-            blanketsInt = 91
-        }
-        else if (cpInt == 1739){
-            blanketsInt = 92
-        }
-        else if (cpInt == 1750){
-            blanketsInt = 93
-        }
-        else if (cpInt > 1751 && cpInt <= 3150){
-            blanketsInt = ((cpInt - 1750) / 10) + 93
-        }
-        else{
-            blanketsInt = 0
-        }
-
-    } //End calculate blankets by CP
-
-    // Calculate Total CP
-
-    fun calculateTotalCPbyBlankets (){
-
-        if (blanketsInt == 0){
-            cpInt = 150
-        }
-        else if (blanketsInt == 1){
-            cpInt = 215
-        }
-        else if (blanketsInt == 2){
-            cpInt = 280
-        }
-        else if (blanketsInt == 3){
-            cpInt = 323
-        }
-        else if (blanketsInt == 4){
-            cpInt = 366
-        }
-        else if (blanketsInt == 5){
-            cpInt = 400
-        }
-        else if (blanketsInt == 6){
-            cpInt = 434
-        }
-        else if (blanketsInt == 7){
-            cpInt = 468
-        }
-        else if (blanketsInt == 8){
-            cpInt = 496
-        }
-        else if (blanketsInt == 9){
-            cpInt = 524
-        }
-        else if (blanketsInt == 10){
-            cpInt = 552
-        }
-        else if (blanketsInt == 11){
-            cpInt = 576
-        }
-        else if (blanketsInt == 12){
-            cpInt = 600
-        }
-        else if (blanketsInt == 13){
-            cpInt = 624
-        }
-        else if (blanketsInt == 14){
-            cpInt = 648
-        }
-        else if (blanketsInt == 15){
-            cpInt = 672
-        }
-        else if (blanketsInt == 16){
-            cpInt = 694
-        }
-        else if (blanketsInt == 17){
-            cpInt = 716
-        }
-        else if (blanketsInt == 18){
-            cpInt = 738
-        }
-        else if (blanketsInt == 19){
-            cpInt = 760
-        }
-        else if (blanketsInt == 20){
-            cpInt = 779
-        }
-        else if (blanketsInt == 21){
-            cpInt = 798
-        }
-        else if (blanketsInt == 22){
-            cpInt = 817
-        }
-        else if (blanketsInt == 23){
-            cpInt = 836
-        }
-        else if (blanketsInt == 24){
-            cpInt = 855
-        }
-        else if (blanketsInt == 25){
-            cpInt = 872
-        }
-        else if (blanketsInt == 26){
-            cpInt = 889
-        }
-        else if (blanketsInt == 27){
-            cpInt = 906
-        }
-        else if (blanketsInt == 28){
-            cpInt = 923
-        }
-        else if (blanketsInt == 29){
-            cpInt = 940
-        }
-        else if (blanketsInt == 30){
-            cpInt = 957
-        }
-        else if (blanketsInt == 31){
-            cpInt = 973
-        }
-        else if (blanketsInt == 32){
-            cpInt = 989
-        }
-        else if (blanketsInt == 33){
-            cpInt = 1005
-        }
-        else if (blanketsInt == 34){
-            cpInt = 1021
-        }
-        else if (blanketsInt == 35){
-            cpInt = 1037
-        }
-        else if (blanketsInt == 36){
-            cpInt = 1053
-        }
-        else if (blanketsInt == 37){
-            cpInt = 1068
-        }
-        else if (blanketsInt == 38){
-            cpInt = 1083
-        }
-        else if (blanketsInt == 39){
-            cpInt = 1098
-        }
-        else if (blanketsInt == 40){
-            cpInt = 1113
-        }
-        else if (blanketsInt == 41){
-            cpInt = 1128
-        }
-        else if (blanketsInt == 42){
-            cpInt = 1143
-        }
-        else if (blanketsInt == 43){
-            cpInt = 1158
-        }
-        else if (blanketsInt == 44){
-            cpInt = 1172
-        }
-        else if (blanketsInt == 45){
-            cpInt = 1186
-        }
-        else if (blanketsInt == 46){
-            cpInt = 1200
-        }
-        else if (blanketsInt == 47){
-            cpInt = 1214
-        }
-        else if (blanketsInt == 48){
-            cpInt = 1228
-        }
-        else if (blanketsInt == 49){
-            cpInt = 1242
-        }
-        else if (blanketsInt == 50){
-            cpInt = 1256
-        }
-        else if (blanketsInt == 51){
-            cpInt = 1269
-        }
-        else if (blanketsInt == 52){
-            cpInt = 1282
-        }
-        else if (blanketsInt == 53){
-            cpInt = 1295
-        }
-        else if (blanketsInt == 54){
-            cpInt = 1308
-        }
-        else if (blanketsInt == 55){
-            cpInt = 1321
-        }
-        else if (blanketsInt == 56){
-            cpInt = 1334
-        }
-        else if (blanketsInt == 57){
-            cpInt = 1347
-        }
-        else if (blanketsInt == 58){
-            cpInt = 1360
-        }
-        else if (blanketsInt == 59){
-            cpInt = 1372
-        }
-        else if (blanketsInt == 60){
-            cpInt = 1384
-        }
-        else if (blanketsInt == 61){
-            cpInt = 1396
-        }
-        else if (blanketsInt == 62){
-            cpInt = 1408
-        }
-        else if (blanketsInt == 63){
-            cpInt = 1420
-        }
-        else if (blanketsInt == 64){
-            cpInt = 1432
-        }
-        else if (blanketsInt == 65){
-            cpInt = 1444
-        }
-        else if (blanketsInt == 66){
-            cpInt = 1456
-        }
-        else if (blanketsInt == 67){
-            cpInt = 1468
-        }
-        else if (blanketsInt == 68){
-            cpInt = 1480
-        }
-        else if (blanketsInt == 69){
-            cpInt = 1492
-        }
-        else if (blanketsInt == 70){
-            cpInt = 1504
-        }
-        else if (blanketsInt == 71){
-            cpInt = 1516
-        }
-        else if (blanketsInt == 72){
-            cpInt = 1528
-        }
-        else if (blanketsInt == 73){
-            cpInt = 1540
-        }
-        else if (blanketsInt == 74){
-            cpInt = 1552
-        }
-        else if (blanketsInt == 75){
-            cpInt = 1563
-        }
-        else if (blanketsInt == 76){
-            cpInt = 1574
-        }
-        else if (blanketsInt == 77){
-            cpInt = 1585
-        }
-        else if (blanketsInt == 78){
-            cpInt = 1596
-        }
-        else if (blanketsInt == 79){
-            cpInt = 1607
-        }
-        else if (blanketsInt == 80){
-            cpInt = 1618
-        }
-        else if (blanketsInt == 81){
-            cpInt = 1629
-        }
-        else if (blanketsInt == 82){
-            cpInt = 1640
-        }
-        else if (blanketsInt == 83){
-            cpInt = 1651
-        }
-        else if (blanketsInt == 84){
-            cpInt = 1662
-        }
-        else if (blanketsInt == 85){
-            cpInt = 1673
-        }
-        else if (blanketsInt == 86){
-            cpInt = 1684
-        }
-        else if (blanketsInt == 87){
-            cpInt = 1695
-        }
-        else if (blanketsInt == 88){
-            cpInt = 1706
-        }
-        else if (blanketsInt == 89){
-            cpInt = 1717
-        }
-        else if (blanketsInt == 90){
-            cpInt = 1728
-        }
-        else if (blanketsInt == 91){
-            cpInt = 1739
-        }
-        else if (blanketsInt == 92){
-            cpInt = 1750
-        }
-        else {
-            if (blanketsInt >= 93 && blanketsInt <= 231){
-                cpInt = ((blanketsInt - 92) * 10) + 1750
+            else if (levelInt == 3) {
+                blanketsInt = 4
             }
-            else{
+            else if (levelInt == 4) {
+                blanketsInt = 7
+            }
+            else if (levelInt == 5) {
+                blanketsInt = 10
+            }
+            else if (levelInt == 6) {
+                blanketsInt = 15
+            }
+            else if (levelInt == 7) {
+                blanketsInt = 19
+            }
+            else if (levelInt == 8) {
+                blanketsInt = 24
+            }
+            else if (levelInt == 9) {
+                blanketsInt = 30
+            }
+            else if (levelInt == 10) {
+                blanketsInt = 36
+            }
+            else if (levelInt == 11) {
+                blanketsInt = 43
+            }
+            else if (levelInt == 12) {
+                blanketsInt = 50
+            }
+            else if (levelInt == 13) {
+                blanketsInt = 58
+            }
+            else if (levelInt == 14) {
+                blanketsInt = 66
+            }
+            else if (levelInt == 15) {
+                blanketsInt = 74
+            }
+            else if (levelInt == 16) {
+                blanketsInt = 83
+            }
+            else if (levelInt == 17) {
+                blanketsInt = 92
+            }
+            else if (levelInt == 18) {
+                blanketsInt = 102
+            }
+            else if (levelInt == 19) {
+                blanketsInt = 112
+            }
+            else if (levelInt == 20) {
+                blanketsInt = 122
+            }
+            else if (levelInt == 21) {
+                blanketsInt = 132
+            }
+            else if (levelInt == 22) {
+                blanketsInt = 142
+            }
+            else if (levelInt == 23) {
+                blanketsInt = 152
+            }
+            else if (levelInt == 24) {
+                blanketsInt = 162
+            }
+            else if (levelInt == 25) {
+                blanketsInt = 172
+            }
+            else if (levelInt == 26) {
+                blanketsInt = 182
+            }
+            else if (levelInt == 27) {
+                blanketsInt = 192
+            }
+            else if (levelInt == 28) {
+                blanketsInt = 202
+            }
+            else if (levelInt == 29) {
+                blanketsInt = 212
+            }
+            else if (levelInt == 30) {
+                blanketsInt = 222
+            }
+            else {
+                blanketsInt = 0
+            }
+
+        } //End calculate blankets by level
+
+        fun calculateBlanketsbyCP() {
+
+            if (cpInt == 150) {
+                blanketsInt = 0
+            }
+            else if (cpInt == 215) {
+                blanketsInt = 1
+            }
+            else if (cpInt == 280) {
+                blanketsInt = 2
+            }
+            else if (cpInt == 323) {
+                blanketsInt = 3
+            }
+            else if (cpInt == 366) {
+                blanketsInt = 4
+            }
+            else if (cpInt == 400) {
+                blanketsInt = 5
+            }
+            else if (cpInt == 434) {
+                blanketsInt = 6
+            }
+            else if (cpInt == 468) {
+                blanketsInt = 7
+            }
+            else if (cpInt == 496) {
+                blanketsInt = 8
+            }
+            else if (cpInt == 524) {
+                blanketsInt = 9
+            }
+            else if (cpInt == 552) {
+                blanketsInt = 10
+            }
+            else if (cpInt == 576) {
+                blanketsInt = 11
+            }
+            else if (cpInt == 600) {
+                blanketsInt = 12
+            }
+            else if (cpInt == 624) {
+                blanketsInt = 13
+            }
+            else if (cpInt == 648) {
+                blanketsInt = 14
+            }
+            else if (cpInt == 672) {
+                blanketsInt = 15
+            }
+            else if (cpInt == 694) {
+                blanketsInt = 16
+            }
+            else if (cpInt == 716) {
+                blanketsInt = 17
+            }
+            else if (cpInt == 738) {
+                blanketsInt = 18
+            }
+            else if (cpInt == 760) {
+                blanketsInt = 19
+            }
+            else if (cpInt == 779) {
+                blanketsInt = 20
+            }
+            else if (cpInt == 798) {
+                blanketsInt = 21
+            }
+            else if (cpInt == 817) {
+                blanketsInt = 22
+            }
+            else if (cpInt == 836) {
+                blanketsInt = 23
+            }
+            else if (cpInt == 855) {
+                blanketsInt = 24
+            }
+            else if (cpInt == 872) {
+                blanketsInt = 25
+            }
+            else if (cpInt == 889) {
+                blanketsInt = 26
+            }
+            else if (cpInt == 906) {
+                blanketsInt = 27
+            }
+            else if (cpInt == 923) {
+                blanketsInt = 28
+            }
+            else if (cpInt == 940) {
+                blanketsInt = 29
+            }
+            else if (cpInt == 957) {
+                blanketsInt = 30
+            }
+            else if (cpInt == 973) {
+                blanketsInt = 31
+            }
+            else if (cpInt == 989) {
+                blanketsInt = 32
+            }
+            else if (cpInt == 1005) {
+                blanketsInt = 33
+            }
+            else if (cpInt == 1021) {
+                blanketsInt = 34
+            }
+            else if (cpInt == 1037) {
+                blanketsInt = 35
+            }
+            else if (cpInt == 1053) {
+                blanketsInt = 36
+            }
+            else if (cpInt == 1068) {
+                blanketsInt = 37
+            }
+            else if (cpInt == 1083) {
+                blanketsInt = 38
+            }
+            else if (cpInt == 1098) {
+                blanketsInt = 39
+            }
+            else if (cpInt == 1113) {
+                blanketsInt = 40
+            }
+            else if (cpInt == 1128) {
+                blanketsInt = 41
+            }
+            else if (cpInt == 1143) {
+                blanketsInt = 42
+            }
+            else if (cpInt == 1158) {
+                blanketsInt = 43
+            }
+            else if (cpInt == 1172) {
+                blanketsInt = 44
+            }
+            else if (cpInt == 1186) {
+                blanketsInt = 45
+            }
+            else if (cpInt == 1200) {
+                blanketsInt = 46
+            }
+            else if (cpInt == 1214) {
+                blanketsInt = 47
+            }
+            else if (cpInt == 1228) {
+                blanketsInt = 48
+            }
+            else if (cpInt == 1242) {
+                blanketsInt = 49
+            }
+            else if (cpInt == 1256) {
+                blanketsInt = 50
+            }
+            else if (cpInt == 1269) {
+                blanketsInt = 51
+            }
+            else if (cpInt == 1282) {
+                blanketsInt = 52
+            }
+            else if (cpInt == 1295) {
+                blanketsInt = 53
+            }
+            else if (cpInt == 1308) {
+                blanketsInt = 54
+            }
+            else if (cpInt == 1321) {
+                blanketsInt = 55
+            }
+            else if (cpInt == 1334) {
+                blanketsInt = 56
+            }
+            else if (cpInt == 1347) {
+                blanketsInt = 57
+            }
+            else if (cpInt == 1360) {
+                blanketsInt = 58
+            }
+            else if (cpInt == 1372) {
+                blanketsInt = 59
+            }
+            else if (cpInt == 1384) {
+                blanketsInt = 60
+            }
+            else if (cpInt == 1396) {
+                blanketsInt = 61
+            }
+            else if (cpInt == 1408) {
+                blanketsInt = 62
+            }
+            else if (cpInt == 1420) {
+                blanketsInt = 64
+            }
+            else if (cpInt == 1432) {
+                blanketsInt = 65
+            }
+            else if (cpInt == 1444) {
+                blanketsInt = 66
+            }
+            else if (cpInt == 1456) {
+                blanketsInt = 67
+            }
+            else if (cpInt == 1468) {
+                blanketsInt = 68
+            }
+            else if (cpInt == 1480) {
+                blanketsInt = 69
+            }
+            else if (cpInt == 1492) {
+                blanketsInt = 70
+            }
+            else if (cpInt == 1504) {
+                blanketsInt = 71
+            }
+            else if (cpInt == 1516) {
+                blanketsInt = 72
+            }
+            else if (cpInt == 1528) {
+                blanketsInt = 73
+            }
+            else if (cpInt == 1540) {
+                blanketsInt = 74
+            }
+            else if (cpInt == 1552) {
+                blanketsInt = 75
+            }
+            else if (cpInt == 1563) {
+                blanketsInt = 76
+            }
+            else if (cpInt == 1574) {
+                blanketsInt = 77
+            }
+            else if (cpInt == 1585) {
+                blanketsInt = 78
+            }
+            else if (cpInt == 1596) {
+                blanketsInt = 79
+            }
+            else if (cpInt == 1607) {
+                blanketsInt = 80
+            }
+            else if (cpInt == 1618) {
+                blanketsInt = 81
+            }
+            else if (cpInt == 1629) {
+                blanketsInt = 82
+            }
+            else if (cpInt == 1640) {
+                blanketsInt = 83
+            }
+            else if (cpInt == 1651) {
+                blanketsInt = 84
+            }
+            else if (cpInt == 1662) {
+                blanketsInt = 85
+            }
+            else if (cpInt == 1673) {
+                blanketsInt = 86
+            }
+            else if (cpInt == 1684) {
+                blanketsInt = 87
+            }
+            else if (cpInt == 1695) {
+                blanketsInt = 88
+            }
+            else if (cpInt == 1706) {
+                blanketsInt = 89
+            }
+            else if (cpInt == 1717) {
+                blanketsInt = 90
+            }
+            else if (cpInt == 1728) {
+                blanketsInt = 91
+            }
+            else if (cpInt == 1739) {
+                blanketsInt = 92
+            }
+            else if (cpInt == 1750) {
+                blanketsInt = 93
+            }
+            else if (cpInt > 1751 && cpInt <= 3150) {
+                blanketsInt = ((cpInt - 1750) / 10) + 93
+            }
+            else {
+                blanketsInt = 0
+            }
+
+        } //End calculate blankets by CP
+
+        // Calculate Total CP
+
+        fun calculateTotalCPbyBlankets() {
+
+            if (blanketsInt == 0) {
                 cpInt = 150
             }
+            else if (blanketsInt == 1) {
+                cpInt = 215
+            }
+            else if (blanketsInt == 2) {
+                cpInt = 280
+            }
+            else if (blanketsInt == 3) {
+                cpInt = 323
+            }
+            else if (blanketsInt == 4) {
+                cpInt = 366
+            }
+            else if (blanketsInt == 5) {
+                cpInt = 400
+            }
+            else if (blanketsInt == 6) {
+                cpInt = 434
+            }
+            else if (blanketsInt == 7) {
+                cpInt = 468
+            }
+            else if (blanketsInt == 8) {
+                cpInt = 496
+            }
+            else if (blanketsInt == 9) {
+                cpInt = 524
+            }
+            else if (blanketsInt == 10) {
+                cpInt = 552
+            }
+            else if (blanketsInt == 11) {
+                cpInt = 576
+            }
+            else if (blanketsInt == 12) {
+                cpInt = 600
+            }
+            else if (blanketsInt == 13) {
+                cpInt = 624
+            }
+            else if (blanketsInt == 14) {
+                cpInt = 648
+            }
+            else if (blanketsInt == 15) {
+                cpInt = 672
+            }
+            else if (blanketsInt == 16) {
+                cpInt = 694
+            }
+            else if (blanketsInt == 17) {
+                cpInt = 716
+            }
+            else if (blanketsInt == 18) {
+                cpInt = 738
+            }
+            else if (blanketsInt == 19) {
+                cpInt = 760
+            }
+            else if (blanketsInt == 20) {
+                cpInt = 779
+            }
+            else if (blanketsInt == 21) {
+                cpInt = 798
+            }
+            else if (blanketsInt == 22) {
+                cpInt = 817
+            }
+            else if (blanketsInt == 23) {
+                cpInt = 836
+            }
+            else if (blanketsInt == 24) {
+                cpInt = 855
+            }
+            else if (blanketsInt == 25) {
+                cpInt = 872
+            }
+            else if (blanketsInt == 26) {
+                cpInt = 889
+            }
+            else if (blanketsInt == 27) {
+                cpInt = 906
+            }
+            else if (blanketsInt == 28) {
+                cpInt = 923
+            }
+            else if (blanketsInt == 29) {
+                cpInt = 940
+            }
+            else if (blanketsInt == 30) {
+                cpInt = 957
+            }
+            else if (blanketsInt == 31) {
+                cpInt = 973
+            }
+            else if (blanketsInt == 32) {
+                cpInt = 989
+            }
+            else if (blanketsInt == 33) {
+                cpInt = 1005
+            }
+            else if (blanketsInt == 34) {
+                cpInt = 1021
+            }
+            else if (blanketsInt == 35) {
+                cpInt = 1037
+            }
+            else if (blanketsInt == 36) {
+                cpInt = 1053
+            }
+            else if (blanketsInt == 37) {
+                cpInt = 1068
+            }
+            else if (blanketsInt == 38) {
+                cpInt = 1083
+            }
+            else if (blanketsInt == 39) {
+                cpInt = 1098
+            }
+            else if (blanketsInt == 40) {
+                cpInt = 1113
+            }
+            else if (blanketsInt == 41) {
+                cpInt = 1128
+            }
+            else if (blanketsInt == 42) {
+                cpInt = 1143
+            }
+            else if (blanketsInt == 43) {
+                cpInt = 1158
+            }
+            else if (blanketsInt == 44) {
+                cpInt = 1172
+            }
+            else if (blanketsInt == 45) {
+                cpInt = 1186
+            }
+            else if (blanketsInt == 46) {
+                cpInt = 1200
+            }
+            else if (blanketsInt == 47) {
+                cpInt = 1214
+            }
+            else if (blanketsInt == 48) {
+                cpInt = 1228
+            }
+            else if (blanketsInt == 49) {
+                cpInt = 1242
+            }
+            else if (blanketsInt == 50) {
+                cpInt = 1256
+            }
+            else if (blanketsInt == 51) {
+                cpInt = 1269
+            }
+            else if (blanketsInt == 52) {
+                cpInt = 1282
+            }
+            else if (blanketsInt == 53) {
+                cpInt = 1295
+            }
+            else if (blanketsInt == 54) {
+                cpInt = 1308
+            }
+            else if (blanketsInt == 55) {
+                cpInt = 1321
+            }
+            else if (blanketsInt == 56) {
+                cpInt = 1334
+            }
+            else if (blanketsInt == 57) {
+                cpInt = 1347
+            }
+            else if (blanketsInt == 58) {
+                cpInt = 1360
+            }
+            else if (blanketsInt == 59) {
+                cpInt = 1372
+            }
+            else if (blanketsInt == 60) {
+                cpInt = 1384
+            }
+            else if (blanketsInt == 61) {
+                cpInt = 1396
+            }
+            else if (blanketsInt == 62) {
+                cpInt = 1408
+            }
+            else if (blanketsInt == 63) {
+                cpInt = 1420
+            }
+            else if (blanketsInt == 64) {
+                cpInt = 1432
+            }
+            else if (blanketsInt == 65) {
+                cpInt = 1444
+            }
+            else if (blanketsInt == 66) {
+                cpInt = 1456
+            }
+            else if (blanketsInt == 67) {
+                cpInt = 1468
+            }
+            else if (blanketsInt == 68) {
+                cpInt = 1480
+            }
+            else if (blanketsInt == 69) {
+                cpInt = 1492
+            }
+            else if (blanketsInt == 70) {
+                cpInt = 1504
+            }
+            else if (blanketsInt == 71) {
+                cpInt = 1516
+            }
+            else if (blanketsInt == 72) {
+                cpInt = 1528
+            }
+            else if (blanketsInt == 73) {
+                cpInt = 1540
+            }
+            else if (blanketsInt == 74) {
+                cpInt = 1552
+            }
+            else if (blanketsInt == 75) {
+                cpInt = 1563
+            }
+            else if (blanketsInt == 76) {
+                cpInt = 1574
+            }
+            else if (blanketsInt == 77) {
+                cpInt = 1585
+            }
+            else if (blanketsInt == 78) {
+                cpInt = 1596
+            }
+            else if (blanketsInt == 79) {
+                cpInt = 1607
+            }
+            else if (blanketsInt == 80) {
+                cpInt = 1618
+            }
+            else if (blanketsInt == 81) {
+                cpInt = 1629
+            }
+            else if (blanketsInt == 82) {
+                cpInt = 1640
+            }
+            else if (blanketsInt == 83) {
+                cpInt = 1651
+            }
+            else if (blanketsInt == 84) {
+                cpInt = 1662
+            }
+            else if (blanketsInt == 85) {
+                cpInt = 1673
+            }
+            else if (blanketsInt == 86) {
+                cpInt = 1684
+            }
+            else if (blanketsInt == 87) {
+                cpInt = 1695
+            }
+            else if (blanketsInt == 88) {
+                cpInt = 1706
+            }
+            else if (blanketsInt == 89) {
+                cpInt = 1717
+            }
+            else if (blanketsInt == 90) {
+                cpInt = 1728
+            }
+            else if (blanketsInt == 91) {
+                cpInt = 1739
+            }
+            else if (blanketsInt == 92) {
+                cpInt = 1750
+            }
+            else {
+                if (blanketsInt >= 93 && blanketsInt <= 231) {
+                    cpInt = ((blanketsInt - 92) * 10) + 1750
+                }
+                else {
+                    cpInt = 150
+                }
+            }
+
+            if (characterRace == "Human") {
+                cpInt = cpInt + 50
+            }
+
+        } //End calculate total CP by blankets
+
+        fun calculateTotalCPbyLevel() {
+
+            if (levelInt > 30) {
+                levelInt = 1
+            }
+
+            cpInt = (levelInt * 100) + 50
+
+        } // End calculate total CP by level
+
+        fun calculateFreeCP() {
+            freeInt = cpInt - characterSpentInt
+
+        } //End calculate free CP
+
+        // Cost x Spent For All CP
+        fun spentCP() {
+            //Math
+            level3Int = level3Cost * level3Select
+            level6Int = level6Cost * level6Select
+            level9Int = level9Cost * level9Select
+            level12Int = level12Cost * level12Select
+            racialInt = racialCost * racialSelect
+            bodyInt = bodyCost * bodySelect
+            strengthInt = strengthCost * strengthSelect
+            trapsmithInt = trapsmithCost * trapsmithSelect
+            tradesmanInt = tradesmanCost * tradesmanSelect
+            alchemyInt = alchemyCost * alchemySelect
+            chemistryInt = chemistryCost * chemistrySelect
+            blacksmithingInt = blacksmithingCost * blacksmithingSelect
+            artificeInt = artificeCost * artificeSelect
+            scrollcraftingInt = scrollcraftingCost * scrollcraftingSelect
+            coldHandsInt = coldHandsCost * coldHandsSelect
+            createAlcoholInt = createAlcoholCost * createAlcoholSelect
+            heavyDrinkerInt = heavyDrinkerCost * heavyDrinkerSelect
+            hindsightInt = hindsightCost * hindsightSelect
+            intuitionInt = intuitionCost * intuitionSelect
+            lootingInt = lootingCost * lootingSelect
+            paragonCalc()
+            possumInt = possumCost * possumSelect
+            if (teacherSelect == 0) {
+                teacherInt = 0
+            }
+            else {
+                teacherInt = 15
+            }
+            //Warrior Skills
+            ambidexterityInt = ambidexterityCost * ambidexteritySelect
+            florentineInt = florentineCost * florentineSelect
+            flurryInt = flurryCost * flurrySelect
+            heavyArmorInt = heavyArmorCost * heavyArmorSelect
+            selfMutilateInt = selfMutilateCost * selfMutilateSelect
+            shieldInt = shieldCost * shieldSelect
+            weapRefocusInt = weapRefocusCost * weapRefocusSelect
+            groupProfMedInt = groupProfMedCost * groupProfMedSelect
+            groupProfLrgInt = groupProfLrgCost * groupProfLrgSelect
+            profExoticInt = profExoticCost * profExoticSelect
+            groupSpecInt = groupSpecCost * groupSpecSelect
+            specificSpecInt = specificSpecCost * specificSpecSelect
+            slayParryInt = slayParryCost * slayParrySelect
+            slayParryMstrInt = slayParryMstrCost * slayParryMstrSelect
+            battlefieldRepairInt = battlefieldRepairCost * battlefieldRepairSelect
+            crippleInt = crippleCost * crippleSelect
+            decapitateInt = decapitateCost * decapitateSelect
+            dirtEyeInt = dirtEyeCost * dirtEyeSelect
+            tripInt = tripCost * tripSelect
+            whirlBlowsInt = whirlBlowsCost * whirlBlowsSelect
+            //Rogue Skills
+            garroteInt = garroteCost * garroteSelect
+            sapInt = sapCost * sapSelect
+            vitalBlowInt = vitalBlowCost * vitalBlowSelect
+            dodgeInt = dodgeCost * dodgeSelect
+            specificCritInt = specificCritCost * specificCritSelect
+            groupCritInt = groupCritCost * groupCritSelect
+            executeInt = executeCost * executeSelect
+            executeMstrInt = executeMstrCost * executeMstrSelect
+            blindfighterInt = blindfighterCost * blindfighterSelect
+            escapeInt = escapeCost * escapeSelect
+            riposteInt = riposteCost * riposteSelect
+            suckerPunchInt = suckerPunchCost * suckerPunchSelect
+            thievesCantInt = thievesCantCost * thievesCantSelect
+            tumbleInt = tumbleCost * tumbleSelect
+            //Scholar Skills
+            mysticismInt = mysticismCost * mysticismSelect
+            demAngArtsInt = demAngArtsCost * demAngArtsSelect
+            necroArtsInt = necroArtsCost * necroArtsSelect
+            anatomyInt = anatomyCost * anatomySelect
+            firstAidInt = firstAidCost * firstAidSelect
+            physicianInt = physicianCost * physicianSelect
+            readWriteInt = readWriteCost * readWriteSelect
+            readMagicInt = readMagicCost * readMagicSelect
+            rdAdvMagicInt = rdAdvMagicCost * rdAdvMagicSelect
+            rdRitualMagicInt = rdRitualMagicCost * rdRitualMagicSelect
+            advRitualInt = advRitualCost * advRitualSelect
+            eleAttuneInt = eleAttuneCost * eleAttuneSelect
+            combatWizInt = combatWizCost * combatWizSelect
+            harvestInt = harvestCost * harvestSelect
+            morticianInt = morticianCost * morticianSelect
+            refocusInt = refocusCost * refocusSelect
+            spellParryInt = spellParryCost * spellParrySelect
+            spellVersInt = spellVers1Int + spellVers2Int + spellVers3Int + spellVers4Int + spellVers5Int + spellVers6Int + spellVers7Int + spellVers8Int + spellVers9Int + spellVers10Int
+            spellSwitchInt = spellSwitchCost * spellSwitchSelect
+            //Spheres and Slots
+            sphere1Int = sphere1Cost * sphere1Select
+            sphere2Int = sphere2Cost * sphere2Select
+            sphere3Int = sphere3Cost * sphere3Select
+            slot1Int = slot1Cost * slot1Select
+            slot2Int = slot2Cost * slot2Select
+            slot3Int = slot3Cost * slot3Select
+            slot4Int = slot4Cost * slot4Select
+            slot5Int = slot5Cost * slot5Select
+            slot6Int = slot6Cost * slot6Select
+            slot7Int = slot7Cost * slot7Select
+            slot8Int = slot8Cost * slot8Select
+            slot9Int = slot9Cost * slot9Select
+            when (ritualSelect) {
+                1 -> ritualInt = ritualCost
+                2 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost)
+                3 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2)
+                4 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3)
+                5 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4)
+                6 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5)
+                7 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6)
+                8 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6) + (ritualCost * 7)
+                9 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6) + (ritualCost * 7) + (ritualCost * 8)
+                10 -> ritualInt =
+                    (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6) + (ritualCost * 7) + (ritualCost * 8) + (ritualCost * 9)
+            }
+        } //fun spentCP
+
+        fun calculateSpentCP() {
+            spellVersInt =
+                spellVers1Int + spellVers2Int + spellVers3Int + spellVers4Int + spellVers5Int + spellVers6Int + spellVers7Int + spellVers8Int + spellVers9Int + spellVers10Int
+
+            characterSpentInt =
+                favoredInt + level3Int + level6Int + level9Int + level12Int + racialInt + bodyInt + strengthInt + trapsmithInt + tradesmanInt + alchemyInt + chemistryInt + blacksmithingInt + artificeInt + scrollcraftingInt + coldHandsInt + createAlcoholInt + heavyDrinkerInt + hindsightInt + intuitionInt + lootingInt + paragonInt + possumInt + teacherInt + ambidexterityInt + florentineInt + flurryInt + heavyArmorInt + selfMutilateInt + shieldInt + weapRefocusInt + groupProfMedInt + groupProfLrgInt + profExoticInt + groupSpecInt + specificSpecInt + slayParryInt + slayParryMstrInt + battlefieldRepairInt + crippleInt + decapitateInt + dirtEyeInt + tripInt + whirlBlowsInt + garroteInt + sapInt + vitalBlowInt + dodgeInt + specificCritInt + groupCritInt + executeInt + executeMstrInt + blindfighterInt + escapeInt + riposteInt + suckerPunchInt + thievesCantInt + tumbleInt + mysticismInt + demAngArtsInt + necroArtsInt + anatomyInt + firstAidInt + physicianInt + readWriteInt + readMagicInt + rdAdvMagicInt + rdRitualMagicInt + advRitualInt + eleAttuneInt + combatWizInt + harvestInt + morticianInt + refocusInt + spellParryInt + spellSwitchInt + spellVersInt + sphere1Int + sphere2Int + sphere3Int + slot1Int + slot2Int + slot3Int + slot4Int + slot5Int + slot6Int + slot7Int + slot8Int + slot9Int + ritualInt
         }
 
-        if (characterRace == "Human"){
-            cpInt = cpInt + 50
+        // Cost x Spent For All Frags
+        fun spentFrags() {
+
+            coldHandsFragsInt = coldHandsFragCost * coldHandsSelect
+            createAlcoholFragsInt = createAlcoholFragCost * createAlcoholSelect
+            heavyDrinkerFragsInt = heavyDrinkerFragCost * heavyDrinkerSelect
+            hindsightFragsInt = hindsightFragCost * hindsightSelect
+            intuitionFragsInt = intuitionFragCost * intuitionSelect
+            lootingFragsInt = lootingFragCost * lootingSelect
+            paragonFragsInt = paragonFragCost * paragonSelect
+            possumFragsInt = possumFragCost * possumSelect
+            teacherFragsInt = teacherFragCost * teacherSelect
+
+            battlefieldRepairFragsInt = battlefieldRepairFragCost * battlefieldRepairSelect
+            crippleFragsInt = crippleFragCost * crippleSelect
+            decapitateFragsInt = decapitateFragCost * decapitateSelect
+            dirtEyeFragsInt = dirtEyeFragCost * dirtEyeSelect
+            tripFragsInt = tripFragCost * tripSelect
+            whirlBlowsFragsInt = whirlBlowsFragCost * whirlBlowsSelect
+
+            combatWizFragsInt = combatWizFragCost * combatWizSelect
+            harvestFragsInt = harvestFragCost * harvestSelect
+            morticianFragsInt = morticianFragCost * morticianSelect
+            refocusFragsInt = refocusFragCost * refocusSelect
+            spellParryFragsInt = spellParryFragCost * spellParrySelect
+            spellVersFragsInt =
+                spellVersFrags1Int + spellVersFrags2Int + spellVersFrags3Int + spellVersFrags4Int + spellVersFrags5Int + spellVersFrags6Int + spellVersFrags7Int + spellVersFrags8Int + spellVersFrags9Int + spellVersFrags10Int
+            spellSwitchFragsInt = spellSwitchFragCost * spellSwitchSelect
+            sphere1FragsInt = sphere1FragCost * sphere1Select
+            sphere2FragsInt = sphere2FragCost * sphere2Select
+            sphere3FragsInt = sphere3FragCost * sphere3Select
         }
 
-    } //End calculate total CP by blankets
+        fun calculateFragCost() {
+            spellVersFragsInt =
+                spellVersFrags1Int + spellVersFrags2Int + spellVersFrags3Int + spellVersFrags4Int + spellVersFrags5Int + spellVersFrags6Int + spellVersFrags7Int + spellVersFrags8Int + spellVersFrags9Int + spellVersFrags10Int
 
-    fun calculateTotalCPbyLevel(){
-
-        if (levelInt > 30){
-            levelInt = 1
+            characterFragsInt =
+                cultureFragsInt + raceFragsInt + vocationFragsInt + favoredFragsInt + coldHandsFragsInt + createAlcoholFragsInt + heavyDrinkerFragsInt + hindsightFragsInt + intuitionFragsInt + lootingFragsInt + paragonFragsInt + possumFragsInt + teacherFragsInt + battlefieldRepairFragsInt + crippleFragsInt + decapitateFragsInt + dirtEyeFragsInt + tripFragsInt + whirlBlowsFragsInt + blindfighterFragsInt + escapeFragsInt + riposteFragsInt + suckerPunchFragsInt + thievesCantFragsInt + tumbleFragsInt + combatWizFragsInt + harvestFragsInt + morticianFragsInt + refocusFragsInt + spellParryFragsInt + spellSwitchFragsInt + spellVersFragsInt + sphere1FragsInt + sphere2FragsInt + sphere3FragsInt
         }
-
-        cpInt = (levelInt * 100) + 50
-
-    } // End calculate total CP by level
-
-    fun calculateFreeCP (){
-        freeInt = cpInt - characterSpentInt
-
-    } //End calculate free CP
-
-    // Cost x Spent For All CP
-    fun spentCP (){
-        //Math
-        level3Int = level3Cost * level3Select
-        level6Int = level6Cost * level6Select
-        level9Int = level9Cost * level9Select
-        level12Int = level12Cost * level12Select
-        racialInt = racialCost * racialSelect
-        bodyInt = bodyCost * bodySelect
-        strengthInt = strengthCost * strengthSelect
-        trapsmithInt = trapsmithCost * trapsmithSelect
-        tradesmanInt = tradesmanCost * tradesmanSelect
-        alchemyInt = alchemyCost * alchemySelect
-        chemistryInt = chemistryCost * chemistrySelect
-        blacksmithingInt = blacksmithingCost * blacksmithingSelect
-        artificeInt = artificeCost * artificeSelect
-        scrollcraftingInt = scrollcraftingCost * scrollcraftingSelect
-        coldHandsInt = coldHandsCost * coldHandsSelect
-        createAlcoholInt = createAlcoholCost * createAlcoholSelect
-        heavyDrinkerInt = heavyDrinkerCost * heavyDrinkerSelect
-        hindsightInt = hindsightCost * hindsightSelect
-        intuitionInt = intuitionCost * intuitionSelect
-        lootingInt = lootingCost * lootingSelect
-        paragonCalc()
-        possumInt = possumCost * possumSelect
-        teacherInt = teacherCost * teacherSelect
-        //Warrior Skills
-        ambidexterityInt = ambidexterityCost * ambidexteritySelect
-        florentineInt = florentineCost * florentineSelect
-        flurryInt = flurryCost * flurrySelect
-        heavyArmorInt = heavyArmorCost * heavyArmorSelect
-        selfMutilateInt = selfMutilateCost * selfMutilateSelect
-        shieldInt = shieldCost * shieldSelect
-        weapRefocusInt = weapRefocusCost * weapRefocusSelect
-        groupProfMedInt = groupProfMedCost * groupProfMedSelect
-        groupProfLrgInt = groupProfLrgCost * groupProfLrgSelect
-        profExoticInt = profExoticCost * profExoticSelect
-        groupSpecInt = groupSpecCost * groupSpecSelect
-        specificSpecInt = specificSpecCost * specificSpecSelect
-        slayParryInt = slayParryCost * slayParrySelect
-        slayParryMstrInt = slayParryMstrCost * slayParryMstrSelect
-        battlefieldRepairInt = battlefieldRepairCost * battlefieldRepairSelect
-        crippleInt = crippleCost * crippleSelect
-        decapitateInt = decapitateCost * decapitateSelect
-        dirtEyeInt = dirtEyeCost * dirtEyeSelect
-        tripInt = tripCost * tripSelect
-        whirlBlowsInt = whirlBlowsCost * whirlBlowsSelect
-        //Rogue Skills
-        garroteInt = garroteCost * garroteSelect
-        sapInt = sapCost * sapSelect
-        vitalBlowInt = vitalBlowCost * vitalBlowSelect
-        dodgeInt = dodgeCost * dodgeSelect
-        specificCritInt = specificCritCost * specificCritSelect
-        groupCritInt = groupCritCost * groupCritSelect
-        executeInt = executeCost * executeSelect
-        executeMstrInt = executeMstrCost * executeMstrSelect
-        blindfighterInt = blindfighterCost * blindfighterSelect
-        escapeInt = escapeCost * escapeSelect
-        riposteInt = riposteCost * riposteSelect
-        suckerPunchInt = suckerPunchCost * suckerPunchSelect
-        thievesCantInt = thievesCantCost * thievesCantSelect
-        tumbleInt = tumbleCost * tumbleSelect
-        //Scholar Skills
-        mysticismInt = mysticismCost * mysticismSelect
-        demAngArtsInt = demAngArtsCost * demAngArtsSelect
-        necroArtsInt = necroArtsCost * necroArtsSelect
-        anatomyInt = anatomyCost * anatomySelect
-        firstAidInt = firstAidCost * firstAidSelect
-        physicianInt = physicianCost * physicianSelect
-        readWriteInt = readWriteCost * readWriteSelect
-        readMagicInt = readMagicCost * readMagicSelect
-        rdAdvMagicInt = rdAdvMagicCost * rdAdvMagicSelect
-        rdRitualMagicInt = rdRitualMagicCost * rdRitualMagicSelect
-        eleAttuneInt = eleAttuneCost * eleAttuneSelect
-        combatWizInt = combatWizCost * combatWizSelect
-        harvestInt = harvestCost * harvestSelect
-        morticianInt = morticianCost * morticianSelect
-        refocusInt = refocusCost * refocusSelect
-        spellParryInt = spellParryCost * spellParrySelect
-        spellVersInt = spellVers1Int + spellVers2Int + spellVers3Int + spellVers4Int + spellVers5Int + spellVers6Int + spellVers7Int + spellVers8Int + spellVers9Int + spellVers10Int
-        spellSwitchInt = spellSwitchCost * spellSwitchSelect
-        //Spheres and Slots
-        sphere1Int = sphere1Cost * sphere1Select
-        sphere2Int = sphere2Cost * sphere2Select
-        sphere3Int = sphere3Cost * sphere3Select
-        slot1Int = slot1Cost * slot1Select
-        slot2Int = slot2Cost * slot2Select
-        slot3Int = slot3Cost * slot3Select
-        slot4Int = slot4Cost * slot4Select
-        slot5Int = slot5Cost * slot5Select
-        slot6Int = slot6Cost * slot6Select
-        slot7Int = slot7Cost * slot7Select
-        slot8Int = slot8Cost * slot8Select
-        slot9Int = slot9Cost * slot9Select
-        when (ritualSelect) {
-            1 -> ritualInt = ritualCost
-            2 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost)
-            3 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2)
-            4 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3)
-            5 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4)
-            6 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5)
-            7 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6)
-            8 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6) + (ritualCost * 7)
-            9 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6) + (ritualCost * 7) + (ritualCost * 8)
-            10 -> ritualInt = (ritualCost * ritualSelect) + (ritualCost) + (ritualCost * 2) + (ritualCost * 3) + (ritualCost * 4) + (ritualCost * 5) + (ritualCost * 6) + (ritualCost * 7) + (ritualCost * 8) + (ritualCost * 9)
-        }
-    } //fun spentCP
-
-    fun calculateSpentCP() {
-        spellVersInt = spellVers1Int + spellVers2Int + spellVers3Int + spellVers4Int + spellVers5Int + spellVers6Int + spellVers7Int + spellVers8Int + spellVers9Int + spellVers10Int
-
-        characterSpentInt = favoredInt + level3Int + level6Int + level9Int + level12Int + racialInt + bodyInt + strengthInt + trapsmithInt + tradesmanInt + alchemyInt + chemistryInt + blacksmithingInt + artificeInt + scrollcraftingInt + coldHandsInt + createAlcoholInt + heavyDrinkerInt + hindsightInt + intuitionInt + lootingInt + paragonInt + possumInt + teacherInt + ambidexterityInt + florentineInt + flurryInt + heavyArmorInt + selfMutilateInt + shieldInt + weapRefocusInt + groupProfMedInt + groupProfLrgInt + profExoticInt + groupSpecInt + specificSpecInt + slayParryInt + slayParryMstrInt + battlefieldRepairInt + crippleInt + decapitateInt + dirtEyeInt + tripInt + whirlBlowsInt + garroteInt + sapInt + vitalBlowInt + dodgeInt + specificCritInt + groupCritInt + executeInt + executeMstrInt + blindfighterInt + escapeInt + riposteInt + suckerPunchInt + thievesCantInt + tumbleInt + mysticismInt + demAngArtsInt + necroArtsInt + anatomyInt + firstAidInt + physicianInt + readWriteInt + readMagicInt + rdAdvMagicInt + rdRitualMagicInt + eleAttuneInt + combatWizInt + harvestInt + morticianInt + refocusInt + spellParryInt + spellSwitchInt + spellVersInt + sphere1Int + sphere2Int + sphere3Int + slot1Int + slot2Int + slot3Int + slot4Int + slot5Int + slot6Int + slot7Int + slot8Int + slot9Int + ritualInt
-    }
-
-    // Cost x Spent For All Frags
-    fun spentFrags() {
-
-        coldHandsFragsInt = coldHandsFragCost * coldHandsSelect
-        createAlcoholFragsInt = createAlcoholFragCost * createAlcoholSelect
-        heavyDrinkerFragsInt = heavyDrinkerFragCost * heavyDrinkerSelect
-        hindsightFragsInt = hindsightFragCost * hindsightSelect
-        intuitionFragsInt = intuitionFragCost * intuitionSelect
-        lootingFragsInt = lootingFragCost * lootingSelect
-        paragonFragsInt = paragonFragCost * paragonSelect
-        possumFragsInt = possumFragCost * possumSelect
-        teacherFragsInt = teacherFragCost * teacherSelect
-
-        battlefieldRepairFragsInt = battlefieldRepairFragCost * battlefieldRepairSelect
-        crippleFragsInt = crippleFragCost * crippleSelect
-        decapitateFragsInt = decapitateFragCost * decapitateSelect
-        dirtEyeFragsInt = dirtEyeFragCost * dirtEyeSelect
-        tripFragsInt = tripFragCost * tripSelect
-        whirlBlowsFragsInt = whirlBlowsFragCost * whirlBlowsSelect
-
-        combatWizFragsInt = combatWizFragCost * combatWizSelect
-        harvestFragsInt = harvestFragCost * harvestSelect
-        morticianFragsInt = morticianFragCost * morticianSelect
-        refocusFragsInt = refocusFragCost * refocusSelect
-        spellParryFragsInt = spellParryFragCost * spellParrySelect
-        spellVersFragsInt = spellVersFrags1Int + spellVersFrags2Int + spellVersFrags3Int + spellVersFrags4Int + spellVersFrags5Int + spellVersFrags6Int + spellVersFrags7Int + spellVersFrags8Int + spellVersFrags9Int + spellVersFrags10Int
-        spellSwitchFragsInt = spellSwitchFragCost * spellSwitchSelect
-        sphere1FragsInt = sphere1FragCost * sphere1Select
-        sphere2FragsInt = sphere2FragCost * sphere2Select
-        sphere3FragsInt = sphere3FragCost * sphere3Select
-    }
-
-    fun calculateFragCost() {
-        spellVersFragsInt = spellVersFrags1Int + spellVersFrags2Int + spellVersFrags3Int + spellVersFrags4Int + spellVersFrags5Int + spellVersFrags6Int + spellVersFrags7Int + spellVersFrags8Int + spellVersFrags9Int + spellVersFrags10Int
-
-        characterFragsInt = cultureFragsInt + raceFragsInt + vocationFragsInt + favoredFragsInt + coldHandsFragsInt + createAlcoholFragsInt + heavyDrinkerFragsInt + hindsightFragsInt + intuitionFragsInt + lootingFragsInt + paragonFragsInt + possumFragsInt + teacherFragsInt + battlefieldRepairFragsInt + crippleFragsInt + decapitateFragsInt + dirtEyeFragsInt + tripFragsInt + whirlBlowsFragsInt + blindfighterFragsInt + escapeFragsInt + riposteFragsInt + suckerPunchFragsInt + thievesCantFragsInt + tumbleFragsInt + combatWizFragsInt + harvestFragsInt + morticianFragsInt + refocusFragsInt + spellParryFragsInt + spellSwitchFragsInt + spellVersFragsInt + sphere1FragsInt + sphere2FragsInt + sphere3FragsInt
-    }
 
 }// class:MainActivity

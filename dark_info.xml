@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".DarkInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Dark Sphere"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".DarkInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView620"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Focus: Holy symbol.\n\n\t\tContaining only the most horrific and vile of Battle Magic spells, the Sphere of Dark harnesses the power  of the Dark Gods to spread the will of their God throughout the land. The Sphere of Dark is a Renowned-only Sphere of Magic and cannot be purchased without first purchasing the skill Favoured. If an ability  allows a Dark spell to be cast without the incant, such as “Magic Bless”, the call will still have the God’s  name in it, e.g.: “Magic 'God' Bless”."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView623"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Blessing.&quot;\nDuration: 5 days\n\n\t\tDescription: This spell calls down upon the target the blessing of whichever God the caster worships. If  the caster casts Bless on themselves, it will function as a Shield Magic versus the next Divine or Draconic  spell to strike the caster. From time to time a character with a Bless on their spirit may find favour with  the God(dess) that the caster serves. This can sometimes, decided by a Shaper, have a small positive  effect happen to or around them. This could be anything from a small warning of danger to minor healing  or even minor miracles. The caster may not force a Bless upon a person and it may be resisted without  using up a spell-protection, such as Shield Magic. One can only be Blessed if one chooses to be and only  one Bless can be active at a time. A person can choose to allow a new Bless spell to replace an old one if  they wish. They may also end a Bless on themselves any time they choose, but this may offend the god."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView622" />
+
+                        <TextView
+                            android:id="@+id/textView625"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Siphon.&quot;\nDuration: Instant\n\n\t\tDescription: This spell can only be targeted at someone who is currently in their Bleed Count. If  successfully cast, the spell will act as a killing blow and grant the caster 5 Body points in healing or  infliction, by caster’s choice. This cannot exceed the caster’s maximum Body point total nor can it be  thrown or transferred to another."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView624" />
+
+                        <TextView
+                            android:id="@+id/textView628"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to create Divine Ward.&quot;\nDuration: 1 hour\n\n\t\tDescription: Divine Ward requires the caster to plant or otherwise display their holy symbol foci for the  duration of the spell. During this time, the symbol may not be used to cast other Dark spells. The symbol  does not have to remain on the person of the caster and, in fact, may be hung upon a door, placed upon a  tree or otherwise, so long as it remains stationary. Placing the spell tag next to the symbol is encouraged.  While the symbol is being used in this way, creatures possessing a spirit may not approach within 10 feet  of the symbol unless they are wearing a Bless spell of the deity represented by the Divine Ward. When  the spell is cast, anyone not wearing a Bless spell of the appropriate deity will be pushed out of the Ward. If a creature already in the Ward cannot retreat any further, the spell will fail and is lost. This barrier may  be resisted with Shield Magic, Resist Magic or similar anti-magic defenses spell, and it may also be  resisted by expending an active Bless spell from any God or Goddess. Doing so makes the user immune to the effects of this Divine Ward for 10 minutes. If the symbol is physically moved the spell ends. The  caster of Divine Ward is immune to the effects of the spell."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView627" />
+
+                        <TextView
+                            android:id="@+id/textView630"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Soul Whip. 3 Dark Drain!&quot;\nDuration: Instant\n\n\t\tDescription: This spell will summon a black, wispy tendril to strike out at the target, causing 3 Dark  points of damage and mending the caster the same amount. If the target resists the spell or is otherwise  unaffected by the damage, the spell fails."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView629" />
+
+                        <TextView
+                            android:id="@+id/textView633"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Mass Blessing.&quot;\nDuration: Up to 10 minutes\n\n\t\tDescription: This area-of-effect spell requires the caster to give a powerful Mass to their flock, calling on  their God to Bless those the caster touches. To initiate Mass: Blessings the caster must roleplay a sermon  to their God, speaking to those present about their deity’s tenets, beliefs and how they relate to the  situation at hand for at least one minute. After that minute has passed they may then, while continuing  their sermon, touch the foreheads of any who have heard it. One person may be touched in this manner  every 10 seconds so long as the sermon continues or the maximum duration of 10 minutes is reached.  Each person who is touched by the caster in this manner will take the effect of a Bless spell. A maximum  of 10 Blessings may be granted. The caster may not “force” the effects of this mass to take place upon  anyone, including the unconscious, dying, or otherwise incapacitated."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView632" />
+
+                        <TextView
+                            android:id="@+id/textView635"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Death Aura.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell will hide the target’s spirit in an aura of Undeath. While Death Aura is active the  target will not be detectable via Sense Life."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView634" />
+
+                        <TextView
+                            android:id="@+id/textView638"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to create Banner of the Faithful.&quot;\nDuration: 1 hour\n\n\t\tDescription: This spell creates a magic “flag” or banner which lasts one hour’s time. During that time, any character that has a Bless spell of the same God on their spirit may gain access to the Banner’s full abilities. The Blessed character must touch the Banner and speak the God’s name. Once done, they may attack for +0 Magic damage so long as the Banner stays within their line of sight. This bonus includes ranged weapons. The flag is considered a non-spirited item with 1 Body and may be destroyed by any weapon damage, Acid, or Elemental damage. Anyone holding the Banner will take whatever damage it takes. If the banner leaves the target’s line of sight for more than 10 seconds, the effect is lost until the Banner is back in their line of sight. The banner must be visible as well, which means that it may be necessary to illuminate a banner used in the dark. A Banner may be any shape so long as it is a minimum 2.5’ x 1’ and no greater than 4’x 6’ and must be mounted on a pole with a minimum length of 4’ and a maximum of 6’. The holy symbol of the God worshipped must be represented on the Banner. When the banner is first created, the caster must state “Banner up - <God’s name>!”. When the banner ends for any reason, the caster must then state “Banner down - <God’s name>!”. The caster of Banner of the Faithful is always under the Banner’s effect while it exists."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView637" />
+
+                        <TextView
+                            android:id="@+id/textView640"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Control Mindless.&quot;\nDuration: 1 minute / 10 minutes\n\n\t\tDescription: This spell grants the caster control over one non-sentient creature. Non-sentient creatures are  limited to lesser Undead, lesser mindless constructs, natural animals and victims of Feeblemind. This  spell will not work on a target with an active Bless or Dragon Mark but will work on children too young  to resurrect, though this is considered abhorrent by most. This control will allow the caster to command  the target to do anything, including suicidal actions. Control will last for 1 minute, unless the target is  undead in which case it will last 10 minutes. If Control Mindless is used on a living target it will leave a  scar of the Cleric’s God’s holy symbol somewhere on its body. The scar will fade after one year or may  be removed early through divine intervention."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView639" />
+
+                        <TextView
+                            android:id="@+id/textView642"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Wave of Pain, Wave of Pain, Wave of Pain.&quot;\nDuration: Instant\n\n\t\tDescription: Before this spell is cast, the caster must plant both feet and then incant. They may then do 5 Dark via packet, touch cast, or a combination, up to five times. Each damage call must be preceded by the phrase “Wave of Pain”. If the caster moves either foot or is struck for damage to Body, any remaining waves are lost and the spell ends."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView643" />
+
+                        <TextView
+                            android:id="@+id/textView645"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Relic.&quot;\nDuration: Until mass ends / item 24 hours\n\n\t\tDescription: This 10 minute mass magically enhances an item, typically a weapon, in the name of the  God of the caster. Once the mass is complete, the object or weapon is made rendered as per the spell and  is given a Magic aura. The weapon or object will become attuned to the first creature bearing the Bless of  the caster’s God that touches it after the mass is completed. If the item is dropped by the attuned creature or passed off to another creature, the spell ends and the item will revert back to its normal form. The  effects on the object last for 24 hour, starting at the completion of the mass."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView644" />
+
+                        <TextView
+                            android:id="@+id/textView648"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Dark Lore.&quot;\nDuration: Varies\n\n\t\tDescription: This spell allows the caster to beseech a lost spirit who served their God in life and ask a  series of questions. Sprits summoned in this manner will arrive as soon as they possibly can but no later  than 12 hours after casting. During this waiting time, the caster should attempt to find a Shaper at their earliest convenience.\n\n\t\tThe first few questions are set and must be spoken verbatim after the spirit arrives. These questions are:\n\n“Spirit before me, I ask that you identify yourself.”\n“I bring you no ill will; do you wish my spirit harm?”\n“I seek the knowledge in death regarding 'Subject'.”\n“I release you of your binding, you are free to go. Will you leave peacefully?” OR “I release you of your  binding but request additional information if it pleases you. Will you stay?”\n\n\t\tIf the caster fails or incorrectly speaks these questions, the spirit may not arrive or may arrive hostile. If  they succeed, the spirit is bound to answer truthfully, to the best of its knowledge, those four questions.  After this point the caster may continue asking questions of the spirit if the spirit is willing. The limit of  questions is random, generally depending on the demeanor and sensitivity of the caster toward the spirit.  Some spirits are simply uninterested in speaking to the living and will leave after the required questions  are answered. The quality of answers will greatly depend upon the spirit called which, in general terms, is  beyond the ability of the caster’s control. The use of Dark Lore is not considered Necromantic in nature."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView647" />
+
+                        <TextView
+                            android:id="@+id/textView650"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Unholy Armour.&quot;\nDuration: 5 days or until used\n\n\t\tDescription: This spell gives the target 25 points of Magical amour. This armour is Magical in nature and  may not be Refit. Magical armour is removed before physical armour. This spell cannot be stacked with  itself. While the Unholy Armour is active, the target will Sense as Demonic, Undead, Wytchcraft,  Necromancy and Dark, though they will not be changed into any of those things."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView649" />
+
+                        <TextView
+                            android:id="@+id/textView653"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Corruption.”\nDuration: 10 minutes\n\n\t\tDescription: This spell will cause its target to take double numeric damage from all physical weapon attacks for 10 minutes. Additionally, any spell thrown by the caster of Corruption at the target will receive  an Echo effect for each spell. This Echo effect will allow the caster to strike the target an additional time  with the same spell if the first spell was successfully defended against in any way. This is done by calling  “Echo!” immediately after the spell was defended against."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView652" />
+
+                        <TextView
+                            android:id="@+id/textView655"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Dark Bolt. 20 Dark&quot;\nDuration: Instant\n\n\t\tDescription: This spell causes a bolt of darkness to spring from the caster’s fingers towards the target. The  spell will take full effect on Undead creatures and living creatures alike. The bolt does 20 points of Dark  damage straight to Body. This damage will be halved if the target has any active Bless spell on their  person."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView654" />
+
+                        <TextView
+                            android:id="@+id/textView658"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to summon an Unholy Warrior.&quot;\nDuration: Up to 12 hours\n\n\t\tDescription: This powerful spell will allow the Cleric to call upon their God to send forth an Unholy  Warrior to strike down one who has wronged them. The Cleric must offer up a sacrifice of a catalyst or an  object worth at least 1 gold in value appropriate to the Cleric’s god. Once cast, the offering is consumed  and a being of pure shadow and darkness will manifest before the Cleric within the next 12 hours. When  the Unholy Warrior has arrived the Cleric then needs to speak the name of the target as they know it,  visualize the target’s identity for one minute and finally state how the target has wronged the Cleric or  their God. During this count, the Unholy Warrior cannot be the target of spells or effects, nor will they  defend the Cleric or themselves until the spell prerequisites are completed. If the Cleric does not complete  these requirements within two minutes of their arrival, the Unholy Warrior will leave. If the requirements  are met, the Unholy Warrior will then dissipate, becoming undetectable to even the most powerful of  magic. For the next hour the Unholy Warrior will hunt the target, searching tirelessly and with the innate  ability to sense that target’s spirit at will. When the target is found, the Unholy Warrior will phase in  nearby with a 3-count. It will state to the target that they have wronged a Cleric of 'God' and that their  life is forfeit. The Unholy Warrior will attack that target to the best of its ability and will not cease until it  is destroyed or the target has ended its Death Count.\n\n\t\tAn Unholy Warrior will be equal to the level and power of the Cleric who is summoning it. Should the  Cleric speak the True Name of the target to the Unholy Warrior or use a Discord catalyst as the offering,  that level will increase to the Cleric’s level +5. The Unholy Warrior’s Occupation is determined randomly  by the God of the Cleric. Once the target has been destroyed the Unholy Warrior will return to the Cleric  and announce its success. Should the Cleric decide after successfully casting the spell that they made a  mistake and wish to cancel the Unholy Warrior’s summoned duty, they may do so by expending their  own bless spell. Ending the spell in this manner will incur a very harsh repercussion. As punishment for  wasting the Dark God’s power, the Cleric will find themselves the target of their own Unholy Warrior.  No creature may be the target of this spell by the Cleric more than once per month, nor will the Unholy  Warrior attack any creature that carries a Bless of the Clerics God. The Unholy Warrior is Celestial in nature."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView657" />
+
+                        <TextView
+                            android:id="@+id/textView666"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to grant Avatar.&quot;\nDuration: 10 minutes\n\n\t\tDescription: This spell turns the Cleric into an “Avatar” of their deity, morphing their body into a shadowy dark form. After the spell is cast, the Cleric’s shape will change over the course of a 3- count as  they grow two feet in height; their physical features become shadowy black and their eyes glow blood  red. This spell will also summon into existence either a two-handed Dark sword or a one-handed Dark  sword and Dark onyx shield. The two-handed Dark sword has a base damage of 10 Magic, while the one-handed sword’s base damage is 5 Magic. The shield has a 60 Magic threshold. The spell also grants the  proficiency in Exotic Weapon: Dark Sword and the Shield skill, as long as they are holding the  summoned weapons. The Cleric can choose which weapon combination they would like at the time of  casting. In Avatar form, the Cleric also has the ability to Spellstrike 10 Dark through their summoned  weapon of choice a total of three times. They also gain a temporary health boost of 50 Body. Any Body  Damage the Cleric receives is removed from the bonus 50 Body points first and this Body cannot be  healed. The swords and/or shield will instantly dissipate if the Cleric drops them, is rendered  unconscious, or incapacitated. These items may be used with natural weaponry, like a Savar’s Claws. The  Cleric may not cast any spells while in Avatar form. When the Avatar ends, the Cleric will perform a 3- count to exit the form."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView662" />
+
+                        <TextView
+                            android:id="@+id/textView668"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Death.&quot;\nDuration: Instant\n\n\t\tDescription: Death causes the spirit of the target to be ripped forcibly from the Body, effectively  delivering a killing blow and putting the target into their Death Count, dropping their Body points to -1  and bypassing their Bleed Count completely."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView667" />
+
+                        <TextView
+                            android:id="@+id/textView660"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: &quot;I channel 'God' to inflict Chains and Bonds.&quot;\nDuration: Line of sight, up to 10 minutes maximum\n\n\t\tDescription: This spell creates magical chains, hooks and locks that wrap around the target. These chains  will Silence their victim. Their legs are bound together and their arms forced against the sides of their body, making actions impossible. Creatures with a Strength of 6 may break free from the chains. Doing  so takes 3 seconds and causes the victim to take 6 Body in the process. Creatures bound in this way can  be picked up and moved."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView659" />
+
+                        <TextView
+                            android:id="@+id/textView621"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView620" />
+
+                        <TextView
+                            android:id="@+id/textView626"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView625" />
+
+                        <TextView
+                            android:id="@+id/textView631"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView630" />
+
+                        <TextView
+                            android:id="@+id/textView636"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView635" />
+
+                        <TextView
+                            android:id="@+id/textView641"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView640" />
+
+                        <TextView
+                            android:id="@+id/textView646"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView645" />
+
+                        <TextView
+                            android:id="@+id/textView651"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView650" />
+
+                        <TextView
+                            android:id="@+id/textView656"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView655" />
+
+                        <TextView
+                            android:id="@+id/textView661"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView660" />
+
+                        <TextView
+                            android:id="@+id/textView622"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Bless *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView621" />
+
+                        <TextView
+                            android:id="@+id/textView624"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Siphon"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView623" />
+
+                        <TextView
+                            android:id="@+id/textView627"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Divine Ward"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView626" />
+
+                        <TextView
+                            android:id="@+id/textView629"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Pin Evil"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView628" />
+
+                        <TextView
+                            android:id="@+id/textView632"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Mass: Blessing"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView631" />
+
+                        <TextView
+                            android:id="@+id/textView634"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Death Aura"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView633" />
+
+                        <TextView
+                            android:id="@+id/textView637"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Banner of the Faithful"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView636" />
+
+                        <TextView
+                            android:id="@+id/textView639"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Control Mindless"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView638" />
+
+                        <TextView
+                            android:id="@+id/textView643"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Wave of Pain"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView641" />
+
+                        <TextView
+                            android:id="@+id/textView644"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Mass: Relic"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView642" />
+
+                        <TextView
+                            android:id="@+id/textView647"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Lore"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView646" />
+
+                        <TextView
+                            android:id="@+id/textView649"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Unholy Armour *"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView648" />
+
+                        <TextView
+                            android:id="@+id/textView652"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Corruption"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView651" />
+
+                        <TextView
+                            android:id="@+id/textView654"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Dark Bolt"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView653" />
+
+                        <TextView
+                            android:id="@+id/textView657"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Unholy Warrior"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView656" />
+
+                        <TextView
+                            android:id="@+id/textView659"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Chains and Bonds"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView658" />
+
+                        <TextView
+                            android:id="@+id/textView662"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Avatar"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView661" />
+
+                        <TextView
+                            android:id="@+id/textView667"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Death"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView666" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

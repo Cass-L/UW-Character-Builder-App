@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".RogueSkillsInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Rogue Skills"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".RogueSkillsInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+                        <TextView
+                            android:id="@+id/autoRacialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Garrote"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/autoRacialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows a player to kill a target by simulating the use of a Garrotte or razor wire around the target’s neck.  To use a Garrotte attack, the attacker must place both hands on the shoulders of the victim from behind and call  “Surprise Garrotte”. This is a Surprise Attack. If the Surprise aspect of the attack is negated, the Garrotte fails. If  the attack succeeds, the victim is silenced and they drop anything they were holding in their hands. They may use  their hands and feet only to kick or hit anything nearby in an effort to make noise to alert others to their dilemma. A bystander may interrupt the Garrotte by touching the target and stating “Interrupt”.\n\n\t\tGarroting takes 20 seconds to take effect, as the target is slowly strangled. The call for this is “Garrotte 1, Garrotte  2, etc.”, which the attacker must state out loud. After 20 seconds, the victim falls into their Death Count. The  player must have a tagged Garrotte phys-rep held in one hand for the duration of the attack or the Garrotte will  fail. A Garrotte phys-rep is made of wire or chain and has a handle at either end. Rope cannot be used instead of  wire or chain. The phys-rep must be at least 16 inches long. Once per event, a player with the Garrotte skill can  make a Garrotte tag for 35 Blacksmithing RM, even if they do not have the Blacksmith skill. Garrottes are  considered tools, not weapons, and cannot be enchanted, augmented, made of silver, etc. Garrottes may only be  created at Logistics and will expire after 1 year.\n\n\t\tIf the victim is wearing a gorget, the defender calls “No Effect” and the Garrotte fails. A gorget will not stop a  Garrotte if all the target’s armour is breached. A defending player may resist a Garrotte if the defender alone has  at least +2 more Strength than the attacker. If the defender uses the skill Head Butt, this will also allow them to  break free. A successful resist forces the attacker’s arms away from the defender, but does not harm the attacker  or their Garrotte. If the Garrotte is defended against, the attacker may not Garrotte the same victim for the next 10  minutes.\n\n\t\tA Garrotte will breach any Normal threshold but be stopped by anything higher. No actual damage is done, but  any action that is interrupted by taking Body damage is impossible for the duration of the Garrotte. If the victim is  wearing Magic Armour, it will immediately go off, but will in no way protect the victim from the attack. An  Advanced Magic Armour will go off if the defender wishes, but will not protect the victim in any way. This skill is usable at will."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/racialInfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Sap"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/autoRacialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/autoRacialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/autoRacialInfo" />
+
+                        <TextView
+                            android:id="@+id/racialInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tSap is a Surprise Attack which allows a character to knock out a victim by touching them in the Upper Back (25)  armour location with a coreless, red hand to hand weapon. This represents a hard strike with a blunt object to the  back of the head. The attacker must be holding the weapon they are Sapping with, but does not physically strike  the target with it. Sap must be done from behind the target. Upon a successful strike, the victim loses 1 Body  point and is knocked unconscious for 10 minutes. The base damage for Sap is 1, but may be increased by  standards means other than weapon specialisations, such as Strength and magic. The call for Sap is “'damage' 'type' Sap”, eg: “2 Silver Sap”. A Sapped character will awaken only once the Sap Body point damage is healed  or 10 minutes have passed. A given target can only be Sapped once per minute. No skills or abilities may be used  in conjunction with Sap. A Sap will be stopped by a helmet of any kind, standard spell defenses, or a threshold  above the Sap’s damage. A helmet will not stop a Sap if all the target’s armour is breached. Sap does not affect  Undead or creatures with alien physiology. This skill is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to deliver a devastating blow to a target’s vital organs. A Vital Blow will damage the  target for half their total Body, not their current Body, rounded up. This damage cannot be altered in any way. Two successful Vital Blows within 1 hour will immediately drop the target to 0 Body. A Vital Blow must strike  the target’s torso and directly damage their Body points, rather than armour, to be successful. If the weapon’s  damage type is not normal, the damage type precedes “Vital Blow”. If the Vital Blow is used from behind and  strikes between the target’s shoulder blades, it will count as a Surprise Attack, and the call will be “Surprise Vital  Blow”. There is no numerical value for this attack, so when determining if the attack is stopped by a threshold,  only the damage threshold type is taken into account. For example, a “Silver Vital Blow” will breach a +2 Silver threshold, but not a Magic one. Vital Blow will not affect Undead or creatures which are non-biological in nature.  This skill is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView23"
+                            app:layout_constraintStart_toStartOf="@+id/textView23"
+                            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Vital Blow"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/racialInfo"
+                            app:layout_constraintStart_toStartOf="@+id/racialInfo"
+                            app:layout_constraintTop_toBottomOf="@+id/racialInfo" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to dodge any attack except a Surprise Attack, Gaze Attack, Power Word, Area of  Effect, Massive damage attack or other unreasonable damage-causing incident, such as falling off a cliff. Dodge is a Conscious defense."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView34"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView833" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Dodge"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/textView25"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/level3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill allows the player to swing for +2 damage when striking a target from behind and +½ damage from the  front, with a single weapon that the character is proficient in, chosen at purchase. A Critical represents a powerful  strike by an attacker who has trained in targeting a victim’s weak points. The attack must hit the target on the  back of their body to grant the +2 damage. That means they must hit one of the Upper Back (25), Mid Back (26)  or Lower Back (27) armour locations. The damage call is “'damage' Critical” when striking from behind. Strikes  to the front are called the same way they would be normally. The damage type for a Critical is the same as it  would be normally for that weapon. This skill will not increase damage against the back side of creatures without  a definitive backside (for example: slimes, mushrooms, and elementals), but the front bonus will still be active. A  player can never call half damage, and must always round down. This means that a player will receive a +1 to  their frontal swings only if they purchase two Critical Specs. This skill is always active."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3InfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/level3InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level3InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level3InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Specific Critical +2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView106"
+                            app:layout_constraintStart_toStartOf="@+id/textView106"
+                            app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+                        <TextView
+                            android:id="@+id/level6Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill is the same as Critical, except that it is purchased for an entire Weapon Group rather than a specific  weapon. The Critical may be used with any of the weapons within that Weapon Group."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6InfoTitle"
+                            app:layout_constraintStart_toStartOf="@+id/level6InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/level6InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/level6InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Group Critical +2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level3Info"
+                            app:layout_constraintStart_toStartOf="@+id/level3Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level3Info" />
+
+                        <TextView
+                            android:id="@+id/level9Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill will strike the victim’s vital organs, mortally wounding them, with a single weapon that the character is  proficient in, chosen at purchase. Each additional purchase of Execute requires an additional purchase of an  appropriate Critical skill. An Execute must strike the target’s torso and directly damage their Body points, rather  than armour, to be successful. A successful Execute will instantly reduce a victim’s Body points to -1 and drop  them into their Bleed Count. This skill will not stay active if the initial hit fails. The call for this skill is “Execute”.  If the weapon’s damage type is not normal, the damage type precedes “Execute”. If the Execute strikes between  the target’s shoulder blades, it will count as a Surprise Attack, and the call will be “Surprise Execute”. The victim  is permitted to scream before dropping, but may not say any words in or out of game. Execute may only be used  in combination with the skills Shiv, Silent Strike, and Penetration. It will not affect Undead or creatures which are  non-biological in nature. There is no numerical value for this attack, so when determining if the attack is stopped  by a threshold, only the threshold type is taken into account. For example, a “Silver Execute” will breach a +2  Silver threshold, but not a Magic one. This skill is usable once per day per purchase."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9InfoTitle"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/level9InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView835" />
+
+                        <TextView
+                            android:id="@+id/level9InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Execute"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level6Info"
+                            app:layout_constraintStart_toStartOf="@+id/level6Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level6Info" />
+
+                        <TextView
+                            android:id="@+id/level12Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="\t\tThis skill is the same as Execute, except that it is purchased for an entire Weapon Group rather than a specific  weapon. The Execute may be used with any of the weapons within that Weapon Group."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level12InfoTitle"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/level12InfoTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/textView836" />
+
+                        <TextView
+                            android:id="@+id/level12InfoTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Execute Master"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/level9Info"
+                            app:layout_constraintStart_toStartOf="@+id/level9Info"
+                            app:layout_constraintTop_toBottomOf="@+id/level9Info" />
+
+                        <TextView
+                            android:id="@+id/textView833"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Critical +2 (Specific or Group) or Feint"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <TextView
+                            android:id="@+id/textView835"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Critical +2 (Specific or Group)"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/level9InfoTitle" />
+
+                        <TextView
+                            android:id="@+id/textView836"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requires Critical +2 Group"
+                            android:textColor="#8C0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/level12InfoTitle" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".MoreScrollcraft">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Scrollcrafting"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".MoreScrollcraft"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView577"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tThis skill allows a character with some basics in Magic to create Magical Scrolls based  on the spells they possess. To make a Magical Scroll, a character needs to be able to cast  that specific spell from memory. Because of the lengthy process required to create  scrolls, scrolls cannot be made using magic items or other scrolls.\n\n\t\tScrolls created with Glowing Ink cost an additional 50% of the base Raw Material cost.  Scrolls created with Scroll Mastery cost an additional 100% of the base Raw Material  cost. Creating a Tome costs 100 RM."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView601"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tThis allows the scrollcrafter to create scrolls which can be cast in  darkness. The tags for these scrolls are marked ‘Glow’."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView600" />
+
+                        <TextView
+                            android:id="@+id/textView603"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tThe scribe may carefully salvage the scrollcrafting materials of an  existing scroll to turn it into something new. Scavenging will destroy the scroll but  return to the scrollcrafter half its Raw Material value. This can only be done at Logistics"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView602" />
+
+                        <TextView
+                            android:id="@+id/textView605"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tThe scrollcrafter has learned to create powerful Tomes of magic. This Tome may  contain one of each Battle Magic scroll in a single sphere. If one of the scrolls is destroyed or removed, it can be  replaced. The Tome, once created, is spirit linked to the first person who memorises from it. The spirit link lasts  until the user resurrects or suffers a final death, after which point the Tome becomes a regular Spellbook, with one  exception. When a Tome’s owner resurrects, the Tome, and any scrolls it contains, will immediately appear in the  resurrection circle and act as a spell focus for the appropriate sphere for 10 minutes. Because Tomes are not  created using a sphere of magic, effects like Counter Magic and Dispel Magic do not affect them. When Tomes  are first created, they contain no scrolls."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView604" />
+
+                        <TextView
+                            android:id="@+id/textView607"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="\t\tThe scrollcrafter has now mastered all they need to create any scroll from the core rulebook, even  if they cannot cast the sphere that scroll is from, although they will still need to be able to cast a spell of that level. Scrolls created using this ability do not need to have the spell cast to create the scroll."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView606" />
+
+                        <TextView
+                            android:id="@+id/textView578"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="Level"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toStartOf="@+id/textView579"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView577" />
+
+                        <TextView
+                            android:id="@+id/textView579"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="160dp"
+                            android:text="Unlocks"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView578"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView578" />
+
+                        <View
+                            android:id="@+id/view103"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView578" />
+
+                        <View
+                            android:id="@+id/view104"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView580" />
+
+                        <View
+                            android:id="@+id/view105"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView582" />
+
+                        <View
+                            android:id="@+id/view106"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView584" />
+
+                        <View
+                            android:id="@+id/view107"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView586" />
+
+                        <View
+                            android:id="@+id/view108"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView588" />
+
+                        <View
+                            android:id="@+id/view109"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView590" />
+
+                        <View
+                            android:id="@+id/view110"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView592" />
+
+                        <View
+                            android:id="@+id/view111"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView594" />
+
+                        <View
+                            android:id="@+id/view112"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView596" />
+
+                        <View
+                            android:id="@+id/view113"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@android:color/darker_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView598" />
+
+                        <TextView
+                            android:id="@+id/textView580"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Level 1-2 Scrolls (4 RM)"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view103" />
+
+                        <TextView
+                            android:id="@+id/textView582"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Glowing Ink"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view104" />
+
+                        <TextView
+                            android:id="@+id/textView584"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Level 3-4 Scrolls (8 RM)"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view105" />
+
+                        <TextView
+                            android:id="@+id/textView586"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Scavenge Scroll"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view106" />
+
+                        <TextView
+                            android:id="@+id/textView588"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Level 5-6 Scrolls (16 RM)"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view107" />
+
+                        <TextView
+                            android:id="@+id/textView590"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Create Tome"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view108" />
+
+                        <TextView
+                            android:id="@+id/textView592"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Level 7 Scrolls (32 RM)"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view109" />
+
+                        <TextView
+                            android:id="@+id/textView594"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Level 8 Scrolls (32 RM)"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view110" />
+
+                        <TextView
+                            android:id="@+id/textView596"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Level 9 Scrolls (64 RM)"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view111" />
+
+                        <TextView
+                            android:id="@+id/textView598"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="- Scroll Mastery"
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView579"
+                            app:layout_constraintTop_toBottomOf="@+id/view112" />
+
+                        <TextView
+                            android:id="@+id/textView581"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView580"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView580" />
+
+                        <TextView
+                            android:id="@+id/textView583"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView582"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView582" />
+
+                        <TextView
+                            android:id="@+id/textView585"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView584"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView584" />
+
+                        <TextView
+                            android:id="@+id/textView587"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView586"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView586" />
+
+                        <TextView
+                            android:id="@+id/textView589"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView588"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView588" />
+
+                        <TextView
+                            android:id="@+id/textView591"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView590"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView590" />
+
+                        <TextView
+                            android:id="@+id/textView593"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView592"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView592" />
+
+                        <TextView
+                            android:id="@+id/textView595"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView594"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView594" />
+
+                        <TextView
+                            android:id="@+id/textView597"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView596"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView596" />
+
+                        <TextView
+                            android:id="@+id/textView599"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView598"
+                            app:layout_constraintEnd_toEndOf="@+id/textView578"
+                            app:layout_constraintStart_toStartOf="@+id/textView578"
+                            app:layout_constraintTop_toTopOf="@+id/textView598" />
+
+                        <TextView
+                            android:id="@+id/textView600"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Glowing Ink"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view113" />
+
+                        <TextView
+                            android:id="@+id/textView602"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Scavenge Scroll"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView601" />
+
+                        <TextView
+                            android:id="@+id/textView604"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Create Tome"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView603" />
+
+                        <TextView
+                            android:id="@+id/textView606"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Scroll Mastery"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView605" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

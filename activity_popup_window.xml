@@ -1,0 +1,1451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".PopupWindow">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Character Summary"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".PopupWindow"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/centerGuideline5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.33" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/centerGuideline6"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".63" />
+
+                        <TextView
+                            android:id="@+id/popupLevel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Level"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/popupHP"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:text="HP"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/popupLevel" />
+
+                        <TextView
+                            android:id="@+id/popupRace"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Race"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLevel" />
+
+                        <TextView
+                            android:id="@+id/popupClass"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Class"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupRace" />
+
+                        <TextView
+                            android:id="@+id/popupVocation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Vocation"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/popupClass"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupCulture"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Culture"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/popupRace"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupBlankets"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Blankets"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupClass" />
+
+                        <TextView
+                            android:id="@+id/popupSpent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:text="Spent CP"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/popupFree" />
+
+                        <TextView
+                            android:id="@+id/popupFree"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="Free CP"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupBlankets" />
+
+                        <TextView
+                            android:id="@+id/popupFrags"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spent Frags"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintTop_toTopOf="@+id/popupSpent" />
+
+                        <TextView
+                            android:id="@+id/popupLevel3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Level 3 Skill"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupStrengthBonus"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupLevel6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Level 6 Skill"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLevel3"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupLevel9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Level 9 Skill"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLevel6"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupLevel12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Level 12 Skill"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLevel9"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupAutoRacial"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Automatic Racial"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupFree"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupRacial"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Purchased Racial"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupAutoRacial"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupBodyBonus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Body Point Bonus"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupRacial"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupStrengthBonus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Strength Bonus"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupBodyBonus"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupTrapsmith"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Trapsmithing"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLevel12"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupTradesman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Tradesman"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupTrapsmith"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupAlchemy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Alchemy"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupTradesman"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupChemistry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Chemistry"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupAlchemy"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupBlacksmithing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Blacksmithing"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupChemistry"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupArtifice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Artifice"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupBlacksmithing"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupScrollcrafting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Scrollcrafting"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupArtifice"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupColdHands"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Cold Dead Hands"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupScrollcrafting"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupCreateAlcohol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Create Alcohol"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupColdHands"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupHeavyDrinker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Heavy Drinker"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupCreateAlcohol"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupHindsight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Hindsight"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupHeavyDrinker"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupIntuition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Intuition"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupHindsight"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupLooting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Looting"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupIntuition"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupTeacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Teacher"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupLooting"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupPossum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Possum"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupTeacher"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupParagon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Paragon"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupPossum"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupAmbidexterity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Ambidexterity"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupParagon"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupFlorentine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Florentine"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupAmbidexterity"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupFlurry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Flurry of Blows"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupFlorentine"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupHeavyArmor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Heavy Armor "
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupFlurry"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSelfMutilate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Self Mutilate"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupHeavyArmor"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupShield"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Shield"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSelfMutilate"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupWeapRefocus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Weapon Refocus"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupShield"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/textView132"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="1 x Simple Group Proficiency"
+                            android:textColor="#2E0000"
+                            android:visibility="visible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupWeapRefocus"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupGroupProfMed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Medium Group Proficiency"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView132"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupGroupProfLrg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Large Group Proficiency"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupGroupProfMed"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupProfExotic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Exotic Weapon Proficiency"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupGroupProfLrg"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSpecificSpec"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Specific Specialisation +1"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupProfExotic"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupGroupSpec"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Group Specialisation +1"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSpecificSpec"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlayParry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Slay / Parry"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupGroupSpec"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlayParryMstr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Slay / Parry Master"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlayParry"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupBattleRepair"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Battlefield Repair"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlayParryMstr"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupCripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Cripple"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupBattleRepair"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupDecapitate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Decapitate"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupCripple"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupDirtEye"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Dirt in the Eye"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupDecapitate"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupTrip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Trip"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupDirtEye"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupWhirlBlows"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Whirlwind of Blows"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupTrip"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupGarrote"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Garrote"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupWhirlBlows"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Sap"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupGarrote"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupVitalBlow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Vital Blow"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSap"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupDodge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Dodge"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupVitalBlow"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSpecificCrit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Specific Critical +2"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupDodge"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupGroupCrit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Group Critical +2"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSpecificCrit"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupExecute"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Execute"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupGroupCrit"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupExecuteMstr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Execute Master"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupExecute"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupBlindfighter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Blindfighter"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupExecuteMstr"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupEscape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Escape"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupBlindfighter"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupRiposte"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Riposte"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupEscape"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSuckerPunch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Sucker Punch"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupRiposte"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupThievesCant"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Thieves' Cant"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSuckerPunch"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupTumble"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Tumble"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupThievesCant"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupMysticism"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Mysticism"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupTumble"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupDemAngArts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Demonic / Angelic Arts"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupMysticism"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupNecroArts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Necromantic Arts"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupDemAngArts"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupAnatomy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Anatomy"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupNecroArts"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupFirstAid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="First Aid"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupAnatomy"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupPhysician"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Physician"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupFirstAid"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupReadWrite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Read and Write"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupPhysician"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupReadMagic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Read Magic"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupReadWrite"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupRdAdvMagic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Read Advanced Magic"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupReadMagic"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupRdRitualMagic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Read Ritual Magic"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupRdAdvMagic"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupAdvRitual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Adv. Ritual Casting"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupRdRitualMagic"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupEleAttune"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Elemental Attunement"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupAdvRitual"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupCombatWiz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Combat Wizardry"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupEleAttune"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupHarvest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Harvest"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupCombatWiz"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupMortician"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Mortician"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupHarvest"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupRefocus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Refocus"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupMortician"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSpellParry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Spell Parry"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupRefocus"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSpellVers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Spell Versatility"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSpellParry"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSpellSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Spell Switch"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSpellVers"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSphere1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="1st Sphere"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSpellSwitch"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSphere2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="2nd Sphere"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSphere1"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSphere3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="3rd Sphere"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSphere2"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="1st Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSphere3"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="2nd Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot1"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="3rd Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot2"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="4th Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot3"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="5th Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot4"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="6th Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot5"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="7th Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot6"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="8th Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot7"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupSlot9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="9th Circle"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot8"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupRitual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Ritual Slots"
+                            android:textColor="#2E0000"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/popupSlot9"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/popupCP"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:text="Total CP"
+                            android:textColor="#2E0000"
+                            app:layout_constraintEnd_toStartOf="@+id/centerGuideline6"
+                            app:layout_constraintStart_toStartOf="@+id/centerGuideline5"
+                            app:layout_constraintTop_toTopOf="@+id/popupBlankets" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

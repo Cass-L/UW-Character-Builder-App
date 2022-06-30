@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_window_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:backgroundTint="#7A2E0101"
+    tools:context=".NecromancyInfo">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_window_view_with_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/popup_window_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="#E6E6E6"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/popup_window_background_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#E6E6E6"
+                android:minHeight="170dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/popup_window_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="#AF0101"
+                    android:gravity="center"
+                    android:text="Necromancy Sphere"
+                    android:textAlignment="center"
+                    android:textColor="#E6E6E6"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="24dp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="#DC9C9C"
+                    android:clickable="true"
+                    android:fillViewport="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintBottom_toTopOf="@+id/closePopup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popup_window_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="DuplicateClickableBoundsCheck">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E6E6E6"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingBottom="50dp"
+                        tools:context=".NecromancyInfo"
+                        tools:ignore="HardcodedText,Autofill,contentDescription,LabelFor,TooManyViews,SpeakableTextPresentCheck">
+
+
+                        <TextView
+                            android:id="@+id/textView620"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Spell Focus: A bone wrapped in hair.\n\n\t\tThis sphere harnesses its power from the plane of death itself. This sphere cannot be self-taught. It must  be taught by an NPC or PC teacher who can cast it. Necromancers do not need a Spellbook to memorise  their Necromancy Battle Magic spells; they memorise from the whispers of the dead. To teach  Necromancy, the teacher must purchase the Teacher skill.\n\n\t\tUndead must be raised from fresh corpses in their Death Counts whose spirits are still present. This ensures that there is a person capable of NPCing the Undead being raised. The duration of Undead raised through Battle Magic is one hour. Undead created via Necromancy rituals have different durations and restrictions.\n\n\t\tSpells in this sphere refer to “Undead State”. This Undead State is different than that of other Undead. These are powers that all Undead share and include the following:\n\n- Magic Threshold.\n- Immune to:\n\t\t- All spells in the Psionics sphere except damage from Psionic weapons.\n\t\t- Mind altering effects.\n\t\t- Effects that target organs.\n\t\t- Effects that require Body damage to activate. Undead will still take the numerical damage  from those attacks if it breaches their defenses.\n\t\t- Alchemy, except for Acid.\n\t\t- Non-magical diseases.\n- Can be stunned.\n- Undead are affected by Death spells and other Death effects.\n- Quadruple damage from Healing magic, Healed by Infliction magic.\n- All Undead can &quot;Sense Life&quot; at will.\n- Daytime Vulnerability: Undead take 1 Arcane damage per second if uncovered between 6 AM  and 6 PM. To be considered covered, an Undead must wear clothing covering 90% of their  body and this must include both the head and hands. This is a racial vulnerability.\n- During the day, all Undead, regardless of covering, will lose any thresholds or Strength  bonuses they may possess and cannot receive the benefits of effects that grant either during that time."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView623"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to inflict Black Plague.”\nDuration: 5 days or until cured\n\n\t\tDescription: The spell will inflict the victim with a magic plague. The target cannot run, is sickened with  disease, and should role-play accordingly. The target can only heal up to 1 Body, no matter the source of  healing, until the disease is cured. If the target is over 1 Body when plagued, any additional healing  attempted will have no effect. The duration of this effect is 5 days. While active, the victim will slowly  bleed from the eyes, nose, ears and mouth."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView622" />
+
+                        <TextView
+                            android:id="@+id/textView625"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to grant Feign Death.”\nDuration: Up to 1 hour\n\n\t\tDescription: This spell makes the caster appear to be dead (final death). The spell will fool all skills,  abilities and spells that relate to determining the health status of the target or detecting the living. The  caster may choose to end the spell at any time during the duration. This spell is caster only."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView624" />
+
+                        <TextView
+                            android:id="@+id/textView628"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to inflict Control Lesser Undead.”\nDuration: 1 hour\n\n\t\tDescription: This spell will temporarily over-ride any existing control over a lesser Undead. For one hour,  that Undead will obey all commands of the necromancer, including suicide. Commands must be simple,  such as “Defend me!”, “Kill them!” or “Don’t allow anyone to pass”. At the end of the hour the control fades."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView627" />
+
+                        <TextView
+                            android:id="@+id/textView630"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to inflict Leech. 10 Body Drain!”\nDuration: Instant\n\n\t\tDescription: This spell will transfer 10 Body from any lesser Undead to the caster. The caster does not  need to be in control of the Undead for it to function. Lesser Undead will not notice its casting and will  not respond as if it had been the target of a hostile spell, however Leech will still activate defenses on the  target such as Resist Magic and Shield Magic. If a defense is activated, the Undead will respond as if the caster attacked them."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView629" />
+
+                        <TextView
+                            android:id="@+id/textView633"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to inflict Necrotic Bolt. 5 Infliction!”\nDuration: Instant\n\n\t\tDescription: This purple and black bolt of raw infliction energy does 5 points of Infliction damage to the  target. This bolt will heal Undead by 5 points, but not past their current maximum Body point total. The  Bolt will deal double damage (10) directly to the Body of any living target it strikes."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView632" />
+
+                        <TextView
+                            android:id="@+id/textView635"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to Raise a Zombie.”\nDuration: 1 hour\n\n\t\tDescription: This spell must be cast on a target still within its Death Count. If successful, it will raise a  lesser rotten zombie under the control of the caster. The corpse’s spirit will not resurrect until the Undead  is destroyed or the duration expires. The control over the Undead is absolute, including suicidal orders,  and must be simple one sentence commands given by the necromancer. Any new commands will over-ride the last. A rotten zombie is little more than an animated body, moving slowly and fighting poorly.  Unable to move at more than a walking pace, a rotten zombie has the following stats: 20 Body, claws (or  weapons given to it) that swing for 2 Magic base damage, +1 Strength, and Undead state. After one hour  the rotten zombie will turn to dust and the spirit will depart to resurrect. While someone is raised as a zombie, their Death Count will continue. If their Body is reduced to 0 while in their Death Count, they  may be Lifed and will return to normal. Otherwise, they must resurrect as normal."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView634" />
+
+                        <TextView
+                            android:id="@+id/textView638"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to inflict Carnivorous Worms.”\nDuration: Until cured\n\n\t\tDescription: This spell shoots forth a wriggling mass of necrotic worms at the target. The magic worms  immediately dig themselves into the skin of the target, chewing and eating as they go. The spell can be  resisted by effects that resist diseases. The worms eat the target from the outside, dealing 1 Magic Body  damage per minute. Damage begins 1 minute after the target is struck by the spell. The target will suffer  from -2 Strength immediately. The only way to remove the worms is by removing the disease via magic  or a Physician, Dispel Magic or entering one’s Death Count. A Physician cannot pause the damage while  removing the disease. This spell can be stacked. If the target enters their Death Count while this spell is  active, the caster can eat the worms to mend themselves 5 Body. The worms can be consumed up to 1  minute after the target’s body dissipates. If the target dissipates to resurrect, the worms will still infest the  clothing and belongings they left behind for 1 minute. Should anyone besides the caster touch the worms  after the original target enters their Death Count, they too will be infected with Carnivorous Worms. The  target should stay there, out of game, for this minute to marshal any possible infections. If the spell was  stacked, anyone else who is infected receives the stacked version. If the target receives a Life effect  during their Death Count, the worms will be killed."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView637" />
+
+                        <TextView
+                            android:id="@+id/textView640"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I Invoke Necromancy to create a Vampiric Blade.”\nDuration: 1 hour\n\n\t\tDescription: This spell summons a magic dagger (purple) that gleams with Necrotic energy. The weapon  deals “1 Magic Body Drain” and heals the caster for the equivalent amount of damage dealt. In order to  heal the wielder, Body damage must be done with the strike. This damage cannot be increased or  augmented by any means and no skills may be used with the blade. The dagger, if wielded by someone  other than the caster, or if it’s dropped, disarmed, or dispelled will dissipate. The caster is responsible for  bringing their own purple dagger phys-rep; the spell will fail without the proper weapon rep."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView639" />
+
+                        <TextView
+                            android:id="@+id/textView642"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to Fracture your 'limb'”\nDuration: Instant\n\n\t\tDescription: Fracture will cause a limb of the caster's choice (arm or leg) to break and become useless. If  the caster does not specify which limb is to be broken, then the victim is free to choose. The broken limb  may be used for nothing, not even locomotion. On humanoids, arms or legs count as limbs although  pincers, tentacles etc. qualify as limbs on many other creatures. This spell can be countered by Restore  Limb, but not Dispel Magic, or may be treated with non-magical means such as medical skills."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView643" />
+
+                        <TextView
+                            android:id="@+id/textView645"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to Raise a Skeleton”\nDuration: 1 hour\n\n\t\tDescription: This spell must be cast on a target still within its Death Count. If successful, it will raise a  lesser skeleton under the control of the caster. The corpse’s spirit will not resurrect until the Undead is  destroyed or the duration expires. The control over the Undead is absolute, including suicidal orders, and  must be simple one sentence commands given by the necromancer. Any new commands will over-ride the  last. Lesser Skeletons are more effective than zombies, moving at normal speed and fighting effectively.  They can be given weapons or armour to augment their fighting abilities but their damage will remain “2  magic”. A Lesser Skeleton has 30 Body, swings with claws or a weapon for 2 Magic base damage, has +1  Strength, an Undead state, a magic threshold and takes half damage from piercing weapons. After one hour the Lesser Skeleton will turn to dust and the spirit will depart to resurrect. While someone is raised  as a skeleton, their Death Count will continue. If their Body is reduced to 0 while in their Death Count,  they may be Lifed and will return to normal. Otherwise, they must resurrect as normal."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView644" />
+
+                        <TextView
+                            android:id="@+id/textView648"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to grant Enhance Undead.”\nDuration: Permanent\n\n\t\tDescription: This spell, when cast on an Undead, will grant it +4 Strength and one Lesser Resist Magic. It  will mend the Undead up to 50 Body. It will have no effect on targets that are not lesser Undead. This  enhancement will last as long as the Undead does."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView647" />
+
+                        <TextView
+                            android:id="@+id/textView650"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to inflict Necrotic Blast. 10 Infliction!”\nDuration: Instant\n\n\t\tDescription: This purple and black bolt of raw infliction magic does 10 points of Infliction damage to the target. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView649" />
+
+                        <TextView
+                            android:id="@+id/textView653"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I Invoke Necromancy to inflict Death’s Grasp.”\nDuration: 20 seconds of concentration\n\n\t\tDescription: After casting this spell and successfully striking, the Necromancer must hold his arm toward  the target, make a fist and concentrate on maintaining the spell. The target struck is immediately affected  by a Garrotte attack that can only be countered by interrupting the caster by dealing Body damage, casting  a Dispel Magic on the necromancer or target, or the target breaking out of the spell with +2 or greater  Strength. The caster must keep his arm forward for the entire duration (20 seconds) and count the Garrotte  attack as if they were using the skill (Garrotte 1, Garrotte 2 …). If 20 seconds pass, the target has been  killing-blowed and enters their Death Count. If the target is wearing a gorget, the spell will fail."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView652" />
+
+                        <TextView
+                            android:id="@+id/textView655"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to Raise a Lesser Ghoul.”\nDuration: 1 hour\n\n\t\tDescription: This spell must be cast on a target still within its Death Count. If successful, it will raise a  Lesser Ghoul under the control of the caster. The corpse’s spirit will not resurrect until the Undead is  destroyed or the duration expires. The control over the Undead is absolute, including suicidal orders, and  must be simple one sentence commands given by the necromancer. Any new commands will over-ride the  last. Lesser Ghouls are dangerous and chaotic opponents, constantly hungering for living flesh. A Lesser Ghoul has 50 Body, +3 Strength, swings with claws for “4 Magic Paralyse” base damage and has a bite  that does “3 Magic Body Nausea”, can consume a corpse (10 second count on a dying body or corpse,  heals 25 Body), an Undead state and a magic threshold. After one hour the Lesser Ghoul will turn to dust  and the spirit will depart to resurrect. While someone is raised as a ghoul, their Death Count will  continue. If their Body is reduced to 0 while in their Death Count, they may be Lifed and will return to  normal. Otherwise, they must resurrect as normal."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView654" />
+
+                        <TextView
+                            android:id="@+id/textView658"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to grant Unlife.”\nDuration: 1 hour\n\n\t\tDescription: This spell will temporarily grant Undead abilities to the caster. The caster does not become  genuinely Undead. The caster becomes damaged by healing spells and healed by infliction. They will  detect as Undead, but will not detect for detect life. They can perform all skills and actions as they could  before the spell was cast, and gain the effects of Undead State and a magic threshold. Control Lesser  Undead will have no effect upon them but Control Greater Undead will act like a Charm spell. The caster  will be recognizable as an Undead version of themselves and can end the spell at any time. For all  purposes they are considered Greater Undead."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView657" />
+
+                        <TextView
+                            android:id="@+id/textView666"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to grant Requiem.”\nDuration: 1 hour\n\n\t\tDescription: In order to prepare this spell, the Necromancer must do 1 Body point of damage to  themselves and spill their blood on the ground in a small circle. The spell is then cast with one foot inside  that circle and remains on the necromancer for one hour. During that hour, if the Necromancer’s spirit  leaves their body through death via any means, their body will explode into maggots and worms. Instead  of resurrecting they will appear at the circle of blood without having taken a death. For 10 minutes the  Necromancer will remain unconscious and vulnerable with 1 Body point. If the Necromancer is moved  away from the circle of blood, they will enter their Death Count and only a Life effect will revive them.  At the end of the 10 minutes they will awaken with 2 Body. Items will not travel with the necromancer;  they remain behind as if they had been slain. The player must write the time that the Requiem was cast on  its spell tag. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView662" />
+
+                        <TextView
+                            android:id="@+id/textView668"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I Invoke Necromancy to inflict Wasting Death.”\nDuration: 60 seconds\n\n\t\tDescription: This powerful necromantic spell causes the spirit of the target to be slowly flayed from the  body, causing it to enter its Death Count after a period of 60 seconds. During those 60 seconds it is  obvious to both the target and observers that the body is being quickly consumed by necromantic energy.  A Dispel Magic cast or a Life spell (or effect) cast on the target during the 60 seconds will end the spell.  If not, the target will die and immediately enter their Death Count, bypassing their Bleed Count. The  target may receive a Life spell during those five minutes like normal, however if the Death Count expires  (or if the target chooses to end their Death Count at any time) the body will raise as a Lesser Skeleton,  under the control of the caster of Wasting Death, copying the stats and effects of the Raise Skeleton spell. "
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView667" />
+
+                        <TextView
+                            android:id="@+id/textView660"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Incant: “I invoke Necromancy to grant Walk the Deadlands.”\nDuration: 5 minutes\n\n\t\tDescription: In order for this spell to function the Necromancer must killing blow themselves and enter a five minute Death Count. During those five minutes, the Necromancer gains the Mysticism skill “Manifest” with one single exception – they are not anchored to their corpse. Able to walk freely in the Deadlands, the player must use an orange glowstick to represent their altered status. They are invisible to mortal eyes while in this state unless seen by a Mystic with the Dead Sight ability. While in the Deadlands the necromancer’s corpse remains in the mortal plane, slowly dying. Everything in the mortal plane will be visible to them and they can hear sounds as well. No physical or magical barriers may stop them unless that barrier is specifically designed to stop ghosts or Undead. However, while in the Deadlands, nothing on the mortal plane can be manipulated and all sounds the Necromancer makes will not be heard by the living. If the necromancer returns to their corpse’s location and ends the spell before the five minutes expire, the body will gasp and shudder, returning to life with 2 Body points but suffering no other ill effect. If for whatever reason the necromancer does not or cannot return to their corpse before the spell ends their spirit becomes lost in the Deadlands and they must resurrect. The Death Count during this ability will last for five minutes regardless of race and nothing will extend it or stop the Necromancer from resurrecting if they do not return in time."
+                            android:textColor="#2E0000"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView659" />
+
+                        <TextView
+                            android:id="@+id/textView621"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 1"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView620" />
+
+                        <TextView
+                            android:id="@+id/textView626"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 2"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView625" />
+
+                        <TextView
+                            android:id="@+id/textView631"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 3"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView630" />
+
+                        <TextView
+                            android:id="@+id/textView636"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 4"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView635" />
+
+                        <TextView
+                            android:id="@+id/textView641"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 5"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView640" />
+
+                        <TextView
+                            android:id="@+id/textView646"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 6"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView645" />
+
+                        <TextView
+                            android:id="@+id/textView651"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 7"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView650" />
+
+                        <TextView
+                            android:id="@+id/textView656"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 8"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView655" />
+
+                        <TextView
+                            android:id="@+id/textView661"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Level 9"
+                            android:textColor="#2E0000"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView660" />
+
+                        <TextView
+                            android:id="@+id/textView622"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Black Plague"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView621" />
+
+                        <TextView
+                            android:id="@+id/textView624"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Feign Death"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView623" />
+
+                        <TextView
+                            android:id="@+id/textView627"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Control Lesser Undead"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView626" />
+
+                        <TextView
+                            android:id="@+id/textView629"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Leech"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView628" />
+
+                        <TextView
+                            android:id="@+id/textView632"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Necrotic Bolt"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView631" />
+
+                        <TextView
+                            android:id="@+id/textView634"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Raise Zombie"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView633" />
+
+                        <TextView
+                            android:id="@+id/textView637"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Carnivorous Worms"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView636" />
+
+                        <TextView
+                            android:id="@+id/textView639"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Vampiric Blade"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView638" />
+
+                        <TextView
+                            android:id="@+id/textView643"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Fracture"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView641" />
+
+                        <TextView
+                            android:id="@+id/textView644"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Raise Skeleton"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView642" />
+
+                        <TextView
+                            android:id="@+id/textView647"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Enhance Undead"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView646" />
+
+                        <TextView
+                            android:id="@+id/textView649"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Necrotic Blast"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView648" />
+
+                        <TextView
+                            android:id="@+id/textView652"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Death's Grasp"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView651" />
+
+                        <TextView
+                            android:id="@+id/textView654"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Raise Lesser Ghoul"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView653" />
+
+                        <TextView
+                            android:id="@+id/textView657"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Unlife"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView656" />
+
+                        <TextView
+                            android:id="@+id/textView659"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Walk the Deadlands"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView658" />
+
+                        <TextView
+                            android:id="@+id/textView662"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Requiem"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView661" />
+
+                        <TextView
+                            android:id="@+id/textView667"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Wasting Death"
+                            android:textColor="#2E0000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView666" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/closePopup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#AF0101"
+                    android:text="Close"
+                    android:textColor="#E6E6E6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
